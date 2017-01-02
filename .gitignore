@@ -1,0 +1,12 @@
+.idea/
+
+*class
+
+*.jar
+*.war
+*.ear
+/crmsystem_backend/target/
+/crmsystem_frontend/target/
+
+*/target/*
+*/target/**
