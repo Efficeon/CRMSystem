@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * Generic DAO interface. Used as a base interface for all DAO classes.
  *
- * @author Eugene Suelimanov
+ * @author Eugene Suleimanov
  */
 public interface GenericDAO<T, ID> {
 
