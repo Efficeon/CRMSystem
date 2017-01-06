@@ -45,6 +45,6 @@ public class CompanyController {
     @RequestMapping("removecompany/{id}")
     public String removeCompany(@PathVariable("id") Long id){
         this.companyService.remove(companyService.getById(id));
-        return "redirect:company/companies";
+        return "redirect:/company";
     }
 }

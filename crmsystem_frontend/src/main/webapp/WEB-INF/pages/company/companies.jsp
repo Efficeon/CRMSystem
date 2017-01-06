@@ -18,9 +18,9 @@
             <th width="120">Name</th>
             <th width="80">Email</th>
             <th width="80">Web site</th>
-            <th width="100">Address</th>
-            <th width="130">Created</th>
-            <th width="50">Updated</th>
+            <th width="60">Address</th>
+            <th width="40">Created</th>
+            <th width="40">Updated</th>
             <th width="50">Delete</th>
         </tr>
         <c:forEach items="${listCompanies}" var="company">
