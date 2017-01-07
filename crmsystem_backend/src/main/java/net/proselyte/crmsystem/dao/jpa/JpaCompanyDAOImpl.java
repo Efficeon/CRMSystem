@@ -67,4 +67,6 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         this.entityManager.remove(this.entityManager.getReference(Company.class, company.getId()));
         logger.info("Company successfully removed. Company details: " + company);
     }
+
+
 }

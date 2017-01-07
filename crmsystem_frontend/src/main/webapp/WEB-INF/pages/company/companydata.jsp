@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Company</title>
+    <title>Company details</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>

@@ -36,6 +36,11 @@ public class Company extends NamedEntity{
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private Set<User> responsibleUser;
 
+    public Company() {
+        this.created = new Date();
+        this.updated = new Date();
+    }
+
     public String getEmail() {
         return email;
     }

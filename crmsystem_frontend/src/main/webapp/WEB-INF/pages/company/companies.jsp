@@ -10,7 +10,10 @@
 </head>
 <body>
 <h1>Companies</h1>
-
+<br>
+<button><a href="<c:url value='/company/add' />">Company add</a></button>
+</br>
+</br>
 <c:if test="${!empty listCompanies}">
     <table class="table table-striped">
         <tr>
@@ -36,11 +39,12 @@
             </tr>
         </c:forEach>
     </table>
+</c:if>
 
     <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
-</c:if>
+
 </body>
 </html>

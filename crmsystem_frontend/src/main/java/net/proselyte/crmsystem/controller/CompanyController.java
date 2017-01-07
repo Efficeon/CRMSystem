@@ -1,5 +1,6 @@
 package net.proselyte.crmsystem.controller;
 
+import net.bytebuddy.jar.asm.commons.Method;
 import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.service.CompanyService;
 import org.hibernate.annotations.Parameter;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,5 +48,17 @@ public class CompanyController {
     public String removeCompany(@PathVariable("id") Long id){
         this.companyService.remove(companyService.getById(id));
         return "redirect:/company";
+    }
+
+    @RequestMapping(value = "/company/add", method = RequestMethod.POST)
+    public String companySubmit(@ModelAttribute Company company){
+        this.companyService.save(company);
+        return "redirect:/company";
+    }
+
+    @RequestMapping(value = "/company/add", method = RequestMethod.GET)
+    public String addCompany(Model model) {
+        model.addAttribute("company", new Company());
+        return "company/companyadd";
     }
 }
