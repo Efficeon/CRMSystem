@@ -24,12 +24,8 @@ import javax.inject.Inject;
 @Controller
 public class CompanyController {
 
+    @Autowired
     private CompanyService companyService;
-
-    @Autowired(required = true)
-    public void setCompanyService(CompanyService companyService){
-        this.companyService = companyService;
-    }
 
     @RequestMapping(value = "company", method = RequestMethod.GET)
     public String listCompanies(Model model) {
