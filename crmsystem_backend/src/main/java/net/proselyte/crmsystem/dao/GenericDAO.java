@@ -1,5 +1,7 @@
 package net.proselyte.crmsystem.dao;
 
+import net.proselyte.crmsystem.model.Role;
+
 import java.util.Collection;
 
 /**

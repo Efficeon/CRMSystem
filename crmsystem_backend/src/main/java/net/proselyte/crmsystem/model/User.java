@@ -48,6 +48,10 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "responsibleUser")
+    private Set<Task> tasks;
+
+
     @PrePersist
     public void getDate() {
         registrationDate = new Date();
@@ -131,5 +135,13 @@ public class User extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 }
