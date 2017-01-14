@@ -28,7 +28,7 @@
         <td>${task.responsibleUser}</td>
         <td>${task.created}</td>
         <td>${task.updated}</td>
-        <td><a href="<c:url value='/removetask/${task.id}' />">Delete</a></td>
+        <td><a href="<c:url value='/removetask/${task.id}'/>">Delete</a></td>
     </tr>
 </table>
 
