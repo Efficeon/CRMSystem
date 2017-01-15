@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.service;
 
 import net.proselyte.crmsystem.model.Company;
+import net.proselyte.crmsystem.model.User;
 
 import java.util.Collection;
 

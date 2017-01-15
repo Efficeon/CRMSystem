@@ -17,17 +17,6 @@ CREATE TABLE IF NOT EXISTS roles (
   name VARCHAR(50) NOT NULL
 );
 
--- companies
-CREATE TABLE IF NOT EXISTS companies (
-  id        SERIAL       NOT NULL PRIMARY KEY,
-  name      VARCHAR(50)  NOT NULL,
-  email     VARCHAR(255) NOT NULL,
-  website   VARCHAR(255) ,
-  address   VARCHAR(255) NOT NULL,
-  created   TIMESTAMP    NOT NULL,
-  updated   TIMESTAMP    NOT NULL
-);
-
 -- user_roles
 CREATE TABLE IF NOT EXISTS user_roles (
   user_id SERIAL NOT NULL,
@@ -37,6 +26,17 @@ CREATE TABLE IF NOT EXISTS user_roles (
   FOREIGN KEY (role_id) REFERENCES roles (id),
 
   UNIQUE (user_id, role_id)
+);
+
+-- companies
+CREATE TABLE IF NOT EXISTS companies (
+  id        SERIAL       NOT NULL PRIMARY KEY,
+  name      VARCHAR(50)  NOT NULL,
+  email     VARCHAR(255) NOT NULL,
+  website   VARCHAR(255) ,
+  address   VARCHAR(255) NOT NULL,
+  created   TIMESTAMP    NOT NULL,
+  updated   TIMESTAMP    NOT NULL
 );
 
 -- companies_users

@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
+import java.util.*;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -39,11 +40,18 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
 
     @Override
     public Collection<Company> getAll() {
-        Collection<Company> result;
+        List<Company> result;
+
         Query query = entityManager.createQuery(
-                "SELECT company FROM Company company LEFT JOIN FETCH company.responsibleUser");
+                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser");
 
         result = query.getResultList();
+
+        Collections.sort(result, new Comparator<Company>() {
+            public int compare(Company o1, Company o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
 
         for (Company company : result) {
             logger.info("Company list: " + company);
@@ -54,9 +62,12 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     @Override
     public void save(Company company) {
         if (company.getId() == null) {
+            company.setCreated(new Date());
             this.entityManager.persist(company);
             logger.info("Company successfully saved. Company details: " + company);
         } else {
+            company.setCreated(getById(company.getId()).getCreated());
+            company.setUpdated(new Date());
             this.entityManager.merge(company);
             logger.info("Company successfully updated. Company details: " + company);
         }
@@ -67,6 +78,4 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         this.entityManager.remove(this.entityManager.getReference(Company.class, company.getId()));
         logger.info("Company successfully removed. Company details: " + company);
     }
-
-
 }

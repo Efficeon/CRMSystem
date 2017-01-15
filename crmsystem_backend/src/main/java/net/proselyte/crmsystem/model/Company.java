@@ -38,7 +38,6 @@ public class Company extends NamedEntity{
 
     public Company() {
         this.created = new Date();
-        this.updated = new Date();
     }
 
     public String getEmail() {
@@ -87,5 +86,35 @@ public class Company extends NamedEntity{
 
     public void setResponsibleUser(Set<User> responsibleUser) {
         this.responsibleUser = responsibleUser;
+    }
+
+    public void setResponsibleUser(User user) {
+        this.responsibleUser.add(user);
+    }
+
+    public void removeResponsibleUser(User user) {
+        this.responsibleUser.remove(user);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = (int) (prime * result + this.getId());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Company other = (Company) obj;
+        if (getId() != other.getId())
+            return false;
+        return true;
     }
 }
