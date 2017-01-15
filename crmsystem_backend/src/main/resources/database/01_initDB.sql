@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS companies (
   website   VARCHAR(255) ,
   address   VARCHAR(255) NOT NULL,
   created   TIMESTAMP    NOT NULL,
-  updated   TIMESTAMP    NOT NULL
+  updated   TIMESTAMP
 );
 
 -- companies_users
