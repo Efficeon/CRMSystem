@@ -48,6 +48,9 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
+    @ManyToMany(mappedBy = "responsibleUser")
+    private Set<Company> associatedСompany;
+
     @PrePersist
     public void getDate() {
         registrationDate = new Date();
@@ -131,5 +134,35 @@ public class User extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Company> getAssociatedСompany() {
+        return associatedСompany;
+    }
+
+    public void setAssociatedСompany(Set<Company> associatedСompany) {
+        this.associatedСompany = associatedСompany;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = (int) (prime * result + this.getId());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (getId() != other.getId())
+            return false;
+        return true;
     }
 }

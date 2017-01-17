@@ -27,3 +27,25 @@ CREATE TABLE IF NOT EXISTS user_roles (
 
   UNIQUE (user_id, role_id)
 );
+
+-- companies
+CREATE TABLE IF NOT EXISTS companies (
+  id        SERIAL       NOT NULL PRIMARY KEY,
+  name      VARCHAR(50)  NOT NULL,
+  email     VARCHAR(255) NOT NULL,
+  website   VARCHAR(255) ,
+  address   VARCHAR(255) NOT NULL,
+  created   TIMESTAMP    NOT NULL,
+  updated   TIMESTAMP
+);
+
+-- companies_users
+CREATE TABLE IF NOT EXISTS companies_users (
+  company_id SERIAL NOT NULL,
+  user_id SERIAL NOT NULL,
+
+  FOREIGN KEY (company_id) REFERENCES companies (id),
+  FOREIGN KEY (user_id) REFERENCES users (id),
+
+  UNIQUE (company_id, user_id)
+);
