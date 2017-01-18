@@ -12,6 +12,11 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
 </head>
 <br>
 <h1>Company add</h1>
@@ -83,6 +88,23 @@
     </c:if>
     </div>
 
+    <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+    <c:if test="${!empty listTags}">
+        <c:forEach items="${listTags}" var="tag">
+            <table class="table table-hover table-condensed">
+                <td>${tag}</div></td>
+            </table>
+        </c:forEach>
+    </c:if>
+    </div>
+
+    <select class="selectpicker" multiple data-max-options="3" data-live-search="true">
+        <c:forEach items="${listTags}" var="tag">
+                    <option value ="${tag.name}">${tag.name}</option>
+        </c:forEach>
+    </select>
+
+    </br>
     <button type="button">
         <a href="<c:url value='/company/' />">Complete</a>
     </button>

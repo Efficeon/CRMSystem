@@ -49,3 +49,20 @@ CREATE TABLE IF NOT EXISTS companies_users (
 
   UNIQUE (company_id, user_id)
 );
+
+-- tags
+CREATE TABLE IF NOT EXISTS tags (
+  id                SERIAL       NOT NULL PRIMARY KEY,
+  name              VARCHAR(50)  NOT NULL
+);
+
+-- companies_tags
+CREATE TABLE IF NOT EXISTS companies_tags (
+  company_id SERIAL NOT NULL,
+  tag_id SERIAL NOT NULL,
+
+  FOREIGN KEY (company_id) REFERENCES companies (id),
+  FOREIGN KEY (tag_id) REFERENCES tags (id),
+
+  UNIQUE (company_id, tag_id)
+);

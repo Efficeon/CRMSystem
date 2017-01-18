@@ -3,8 +3,11 @@ package net.proselyte.crmsystem.controller;
 import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.CompanyService;
+import net.proselyte.crmsystem.service.TagService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +29,9 @@ public class CompanyController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TagService tagService;
 
     @RequestMapping(value = "company", method = RequestMethod.GET)
     public String listCompanies(Model model) {
@@ -56,6 +62,7 @@ public class CompanyController {
     public String addCompany(Model model) {
         model.addAttribute("company", new Company());
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("user", new User());
         return "company/companyadd";
     }
@@ -64,6 +71,7 @@ public class CompanyController {
     public String editCompany(@PathVariable("id") Long id, Model model){
         model.addAttribute("company", this.companyService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listTags", this.tagService.getAll());
         //model.addAttribute("user", new User());
         return "company/companyadd";
     }
@@ -101,6 +109,28 @@ public class CompanyController {
                                            @ModelAttribute Company company){
         company.setId(companyId);
         company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
+        this.companyService.save(company);
+        return "redirect:/company/";
+    }
+
+    @RequestMapping(value = "/addtag/{tagId}/{companyId}", method = RequestMethod.GET)
+    public String addTagSubmit(@PathVariable("tagId") Long tagId,
+                               @PathVariable("companyId") Long companyId,
+                               @ModelAttribute Company company,
+                               Model model){
+        company = this.companyService.getById(companyId);
+        company.setTags(this.tagService.getById(tagId));
+        this.companyService.save(company);
+        model.addAttribute("listTags", this.tagService.getAll());
+        model.addAttribute("company", this.companyService.getById(companyId));
+        return "company/companyadd";
+    }
+
+    @RequestMapping(value = "/addtag/{tagId}/{companyId}", method = RequestMethod.POST)
+    public String addTagSubmit(@PathVariable("companyId") Long companyId,
+                               @ModelAttribute Company company){
+        company.setId(companyId);
+        company.setTags(this.companyService.getById(companyId).getTags());
         this.companyService.save(company);
         return "redirect:/company/";
     }

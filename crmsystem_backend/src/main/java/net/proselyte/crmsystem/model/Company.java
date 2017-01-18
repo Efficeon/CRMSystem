@@ -36,6 +36,11 @@ public class Company extends NamedEntity{
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private Set<User> responsibleUser;
 
+    @ManyToMany
+    @JoinTable(name = "companies_tags", joinColumns = {@JoinColumn(name = "company_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
+    private Set<Tag> tags;
+
     public Company() {
         this.created = new Date();
     }
@@ -94,6 +99,18 @@ public class Company extends NamedEntity{
 
     public void removeResponsibleUser(User user) {
         this.responsibleUser.remove(user);
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void setTags(Tag tag){
+        this.tags.add(tag);
     }
 
     @Override
