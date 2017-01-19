@@ -2,6 +2,7 @@ package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.Task;
 import net.proselyte.crmsystem.service.TaskService;
+import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "task", method = RequestMethod.GET)
     public String listTasks(Model model) {
