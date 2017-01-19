@@ -4,6 +4,7 @@ import net.proselyte.crmsystem.dao.TaskDAO;
 import net.proselyte.crmsystem.model.Task;
 import net.proselyte.crmsystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -13,7 +14,7 @@ import java.util.Collection;
  *
  * @author Vladimir Vitlickij
  */
-
+@Service
 public class TaskServiceImpl implements TaskService{
 
     @Autowired
