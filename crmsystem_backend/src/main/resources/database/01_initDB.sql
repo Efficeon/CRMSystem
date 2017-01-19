@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name         VARCHAR(50)  NOT NULL,
   password          VARCHAR(255) NOT NULL,
   registration_date TIMESTAMP    NOT NULL,
-  birth_date        TIMESTAMP
+  birth_date        TIMESTAMP    NOT NULL
 );
 
 -- roles
@@ -49,3 +49,16 @@ CREATE TABLE IF NOT EXISTS companies_users (
 
   UNIQUE (company_id, user_id)
 );
+
+CREATE TABLE IF NOT EXISTS contact
+(
+  id              SERIAL       NOT NULL PRIMARY KEY,
+  company         VARCHAR(255) NOT NULL,
+  responsibleuser VARCHAR(255) NOT NULL,
+  name            VARCHAR(255) NOT NULL,
+  website         VARCHAR(255) NOT NULL,
+  skype           VARCHAR(255) NOT NULL,
+  phone_number    VARCHAR(11) NOT NULL,
+  create_date     TIMESTAMP    NOT NULL,
+  update_date     TIMESTAMP    NOT NULL,
+)
