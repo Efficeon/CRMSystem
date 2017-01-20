@@ -12,6 +12,8 @@ import java.util.Collection;
 public interface TagService {
     Tag getById(Long id);
 
+    Tag getByName(String name);
+
     Collection<Tag> getAll();
 
     void save(Tag tag);

@@ -139,13 +139,19 @@
 </form:form>
 
 <h5>Tags</h5>
+<form:form method="POST" modelAttribute="tag" action="/tagAdd/${company.id}/">
 <form>
-    <select class="selectpicker" multiple data-max-options="3" data-live-search="true">
+    <select class="selectpicker" multiple data-max-options="1" data-live-search="true" name="name">
         <c:forEach items="${listTags}" var="tag">
             <option value ="${tag.name}">${tag.name}</option>
         </c:forEach>
     </select>
+    <button type="submit">
+        <spring:message text="Add"/>
+    </button>
+    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </form>
+</form:form>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

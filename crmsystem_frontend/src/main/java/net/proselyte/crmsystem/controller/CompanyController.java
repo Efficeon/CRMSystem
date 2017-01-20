@@ -126,6 +126,15 @@ public class CompanyController {
         return "company/companyadd";
     }
 
+    @RequestMapping(value = "/removeresponsible/{userId}/{companyId}/", method = RequestMethod.POST)
+    public String removeResponsibleUserSubmit(@PathVariable("companyId") Long companyId,
+                                              @ModelAttribute Company company){
+        company.setId(companyId);
+        company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
+        this.companyService.save(company);
+        return "redirect:/company/";
+    }
+
     @RequestMapping(value = "removetag/{tagId}/{companyId}/", method = RequestMethod.POST)
     public String removeLinkedTag(@PathVariable("tagId") Long tagId,
                                   @PathVariable("companyId") Long companyId,
@@ -149,14 +158,5 @@ public class CompanyController {
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
         return "company/companyadd";
-    }
-
-    @RequestMapping(value = "/removeresponsible/{userId}/{companyId}/", method = RequestMethod.POST)
-    public String removeResponsibleUserSubmit(@PathVariable("companyId") Long companyId,
-                                              @ModelAttribute Company company){
-        company.setId(companyId);
-        company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
-        this.companyService.save(company);
-        return "redirect:/company/";
     }
 }

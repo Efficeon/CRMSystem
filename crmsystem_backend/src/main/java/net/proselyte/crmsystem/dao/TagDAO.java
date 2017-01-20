@@ -8,4 +8,5 @@ import net.proselyte.crmsystem.model.Tag;
  * @author Leonid Dubravsky
  */
 public interface TagDAO extends GenericDAO<Tag, Long>{
+    Tag getByName(String name);
 }

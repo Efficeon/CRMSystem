@@ -42,6 +42,19 @@ public class JpaTagDAOImpl implements TagDAO{
     }
 
     @Override
+    public Tag getByName(String name) {
+        Query query = entityManager.createQuery(
+                "SELECT DISTINCT tag FROM Tag tag LEFT JOIN FETCH tag.linkedCompanies WHERE tag.name =:name");
+
+        query.setParameter("name", name);
+        Tag tag = (Tag) query.getSingleResult();
+
+        logger.info("Company successfully loaded. Company details: " + tag);
+
+        return tag;
+    }
+
+    @Override
     public Collection<Tag> getAll() {
         List<Tag> result;
 
