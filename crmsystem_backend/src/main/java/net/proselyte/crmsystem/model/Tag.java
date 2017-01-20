@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "tags")
 public class Tag extends NamedEntity{
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tags")
     private Set<Company> linkedCompanies;
 
     public Set<Company> getLinkedCompanies() {

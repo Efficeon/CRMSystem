@@ -36,7 +36,7 @@ public class Company extends NamedEntity{
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private Set<User> responsibleUser;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "companies_tags", joinColumns = {@JoinColumn(name = "company_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
@@ -99,6 +99,10 @@ public class Company extends NamedEntity{
 
     public void removeResponsibleUser(User user) {
         this.responsibleUser.remove(user);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
     }
 
     public Set<Tag> getTags() {

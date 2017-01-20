@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.Company;
+import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.TagService;
@@ -64,6 +65,7 @@ public class CompanyController {
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("user", new User());
+        model.addAttribute("tag", new Tag());
         return "company/companyadd";
     }
 
@@ -72,7 +74,7 @@ public class CompanyController {
         model.addAttribute("company", this.companyService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
-        //model.addAttribute("user", new User());
+        model.addAttribute("tag", new Tag());
         return "company/companyadd";
     }
 
@@ -91,16 +93,12 @@ public class CompanyController {
                                      @ModelAttribute Company company,
                                      Model model){
         company = this.companyService.getById(companyId);
-        /*ArrayList<User> usersTemp = (ArrayList<User>) this.userService.getAll();
-        for (User user : usersTemp){
-            if (company.getResponsibleUser().contains(user)){
-                usersTemp.remove(user);
-            }
-        }*/
         company.setResponsibleUser(this.userService.getById(userId));
         this.companyService.save(company);
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
+        model.addAttribute("tag", new Tag());
         return "company/companyadd";
     }
 
@@ -113,28 +111,6 @@ public class CompanyController {
         return "redirect:/company/";
     }
 
-    @RequestMapping(value = "/addtag/{tagId}/{companyId}", method = RequestMethod.GET)
-    public String addTagSubmit(@PathVariable("tagId") Long tagId,
-                               @PathVariable("companyId") Long companyId,
-                               @ModelAttribute Company company,
-                               Model model){
-        company = this.companyService.getById(companyId);
-        company.setTags(this.tagService.getById(tagId));
-        this.companyService.save(company);
-        model.addAttribute("listTags", this.tagService.getAll());
-        model.addAttribute("company", this.companyService.getById(companyId));
-        return "company/companyadd";
-    }
-
-    @RequestMapping(value = "/addtag/{tagId}/{companyId}", method = RequestMethod.POST)
-    public String addTagSubmit(@PathVariable("companyId") Long companyId,
-                               @ModelAttribute Company company){
-        company.setId(companyId);
-        company.setTags(this.companyService.getById(companyId).getTags());
-        this.companyService.save(company);
-        return "redirect:/company/";
-    }
-
     @RequestMapping(value = "/removeresponsible/{userId}/{companyId}/", method = RequestMethod.GET)
     public String removeResponsibleUser(@PathVariable("userId") Long userId,
                                      @PathVariable("companyId") Long companyId,
@@ -143,6 +119,33 @@ public class CompanyController {
         company = this.companyService.getById(companyId);
         company.removeResponsibleUser(this.userService.getById(userId));
         this.companyService.save(company);
+        model.addAttribute("tag", new Tag());
+        model.addAttribute("listTags", this.tagService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("company", this.companyService.getById(companyId));
+        return "company/companyadd";
+    }
+
+    @RequestMapping(value = "removetag/{tagId}/{companyId}/", method = RequestMethod.POST)
+    public String removeLinkedTag(@PathVariable("tagId") Long tagId,
+                                  @PathVariable("companyId") Long companyId,
+                                  @ModelAttribute Company company){
+        company.setId(companyId);
+        company.setTags(this.companyService.getById(companyId).getTags());
+        this.companyService.save(company);
+        return "redirect:/company/";
+    }
+
+    @RequestMapping(value = "/removetag/{tagId}/{companyId}/", method = RequestMethod.GET)
+    public String removeLinkedTag(@PathVariable("tagId") Long tagId,
+                                  @PathVariable("companyId") Long companyId,
+                                  @ModelAttribute Company company,
+                                  Model model){
+        company = this.companyService.getById(companyId);
+        company.removeTag(this.tagService.getById(tagId));
+        this.companyService.save(company);
+        model.addAttribute("tag", new Tag());
+        model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
         return "company/companyadd";
@@ -150,7 +153,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/removeresponsible/{userId}/{companyId}/", method = RequestMethod.POST)
     public String removeResponsibleUserSubmit(@PathVariable("companyId") Long companyId,
-                                           @ModelAttribute Company company){
+                                              @ModelAttribute Company company){
         company.setId(companyId);
         company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
         this.companyService.save(company);
