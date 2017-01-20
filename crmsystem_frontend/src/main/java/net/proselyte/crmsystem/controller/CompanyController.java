@@ -11,10 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller for {@link Company}'s pages
@@ -157,6 +154,24 @@ public class CompanyController {
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
+        return "company/companyadd";
+    }
+
+    @RequestMapping(value = "/tagAdd/{companyId}/", method = RequestMethod.POST)
+    public String tagAdd(@PathVariable("companyId") Long companyId,
+                         @RequestParam("name")String name,
+                         @ModelAttribute Tag tag,
+                         @ModelAttribute Company company,
+                         Model model) {
+        company = this.companyService.getById(companyId);
+        company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
+        company.setTags(this.tagService.getByName(name));
+        this.companyService.save(company);
+        model.addAttribute("user", new User());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listTags", this.tagService.getAll());
+        model.addAttribute("company", this.companyService.getById(companyId));
+        model.addAttribute("tag", new Tag());
         return "company/companyadd";
     }
 }
