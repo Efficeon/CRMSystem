@@ -141,7 +141,7 @@
 <h5>Tags</h5>
 <form:form method="POST" modelAttribute="tag" action="/tagAdd/${company.id}/">
 <form>
-    <select class="selectpicker" multiple data-max-options="1" data-live-search="true" name="name">
+    <select class="selectpicker" multiple data-live-search="true" name="name">
         <c:forEach items="${listTags}" var="tag">
             <option value ="${tag.name}">${tag.name}</option>
         </c:forEach>
