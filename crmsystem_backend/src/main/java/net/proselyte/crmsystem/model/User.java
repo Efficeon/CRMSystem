@@ -48,7 +48,7 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "responsibleUser")
+    @OneToMany(mappedBy = "responsibleUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Task> tasks;
 
 

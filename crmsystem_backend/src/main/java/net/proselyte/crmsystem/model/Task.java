@@ -18,7 +18,7 @@ public class Task extends NamedEntity{
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "responsible_user")
+//    @JoinColumn(name = "responsible_user")
     private User responsibleUser;
 
     @Temporal(TemporalType.DATE)
