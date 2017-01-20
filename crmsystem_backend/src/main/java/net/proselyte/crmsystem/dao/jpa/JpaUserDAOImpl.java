@@ -40,7 +40,7 @@ public class JpaUserDAOImpl implements UserDAO {
     public Collection<User> getAll() {
         Collection<User> result;
 
-        Query query = this.entityManager.createQuery("SELECT user FROM User user LEFT JOIN FETCH user.roles");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
         result = query.getResultList();
 
         for (User user : result) {
