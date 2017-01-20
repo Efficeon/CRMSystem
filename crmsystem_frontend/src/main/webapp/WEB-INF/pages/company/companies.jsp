@@ -20,6 +20,7 @@
 
 </br>
 </br>
+
 <c:if test="${!empty listCompanies}">
     <table class="table table-striped table-condensed">
         <tr>
