@@ -23,15 +23,15 @@
 <br>
 
 <c:if test="${!empty listTasks}">
-    <table class="table table-striped">
+    <table class="table table-striped table-condensed">
         <tr>
-            <th width="25">ID</th>
-            <th width="120">Name</th>
-            <th width="200">Description</th>
-            <th width="80">Responsible user</th>
-            <th width="50">Created</th>
-            <th width="50">Updated</th>
-            <th width="50">Delete</th>
+            <th class="text-center" width="25">ID</th>
+            <th class="text-center" width="120">Name</th>
+            <th class="text-center" width="200">Description</th>
+            <th class="text-center" width="80">Responsible user</th>
+            <th class="text-center" width="50">Created</th>
+            <th class="text-center" width="50">Updated</th>
+            <th class="text-center" width="50">Delete</th>
         </tr>
         <c:forEach items="${listTasks}" var="task">
             <tr>
@@ -42,6 +42,21 @@
                 <td>${task.created}</td>
                 <td>${task.updated}</td>
                 <td><a href="<c:url value='removecompany/${task.id}' />">Delete</a></td>
+
+
+                <td>${task.id}</td>
+                <td>${task.name}</td>
+                <td>${task.description}</td>
+                <td>${task.responsibleUser}</td>
+                <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/' />"
+                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue" /></td>
+                <td class="text-center"><a href="<c:url value='/edittask/${task.id}/' />"
+                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>
+                <td class="text-center"><a href="<c:url value='/removetask/${task.id}/' />"
+                                           span class="glyphicon glyphicon-remove" style="color: red" /></td>
+            </tr>
             </tr>
         </c:forEach>
     </table>
@@ -50,7 +65,6 @@
     <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
 
 </body>
 </html>
