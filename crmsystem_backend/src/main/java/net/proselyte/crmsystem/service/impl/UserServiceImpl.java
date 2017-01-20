@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,5 +49,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User findByUserName(String username) {
         return userDao.findByUserName(username);
+    }
+
+
+    @Override
+    @Transactional
+    public User getById(Long id) {
+        return userDao.getById(id);
+    }
+
+    @Override
+    public Collection getAll() {
+        return userDao.getAll();
     }
 }
