@@ -24,6 +24,7 @@
         <th width="100">Address</th>
         <th width="130">Created</th>
         <th width="50">Updated</th>
+        <th width="60">Tags</th>
         <th width="60">Responsible User</th>
         <th width="50">Edit</th>
         <th width="50">Delete</th>
@@ -36,6 +37,11 @@
         <td>${company.address}</td>
         <td>${company.created}</td>
         <td>${company.updated}</td>
+        <td><c:forEach items="${company.tags}" var="tag">
+            <table>
+                <td>${tag.name}</td>
+            </table>
+        </c:forEach></td>
         <td><c:forEach items="${company.responsibleUser}" var="user">
             <table>
                 <td>${user.username}</td>
