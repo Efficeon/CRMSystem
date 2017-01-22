@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name         VARCHAR(50)  NOT NULL,
   password          VARCHAR(255) NOT NULL,
   registration_date TIMESTAMP    NOT NULL,
-  birth_date        TIMESTAMP
+  birth_date        TIMESTAMP    NOT NULL
 );
 
 -- roles
@@ -50,7 +50,10 @@ CREATE TABLE IF NOT EXISTS companies_users (
   UNIQUE (company_id, user_id)
 );
 
+<<<<<<< HEAD
 -- contact
+=======
+>>>>>>> ac7d3c7f76aa92c998fad8dd26bc6e7f67b96256
 CREATE TABLE IF NOT EXISTS contact
 (
   id              SERIAL       NOT NULL PRIMARY KEY,
@@ -63,6 +66,7 @@ CREATE TABLE IF NOT EXISTS contact
   create_date     TIMESTAMP    NOT NULL,
   update_date     TIMESTAMP    NOT NULL,
 )
+<<<<<<< HEAD
 
 -- tags
 CREATE TABLE IF NOT EXISTS tags (
@@ -80,3 +84,5 @@ CREATE TABLE IF NOT EXISTS companies_tags (
 
   UNIQUE (company_id, tag_id)
 );
+=======
+>>>>>>> ac7d3c7f76aa92c998fad8dd26bc6e7f67b96256
