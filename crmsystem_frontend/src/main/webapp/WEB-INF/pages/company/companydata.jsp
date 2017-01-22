@@ -24,7 +24,7 @@
         <th width="100">Address</th>
         <th width="130">Created</th>
         <th width="50">Updated</th>
-        <th width="60">Tags</th>
+        <th width="50">Tags</th>
         <th width="60">Responsible User</th>
         <th width="50">Edit</th>
         <th width="50">Delete</th>

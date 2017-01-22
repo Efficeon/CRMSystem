@@ -12,19 +12,26 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-    <script src="${contextPath}/resources/dist/bloodhound.js"></script>
-    <script src="${contextPath}/resources/dist/typeahead.jquery.js"></script-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript">
+         $(function() {
+            $('#acInput').autocomplete({
+                source: function (request, response) {
+                    $.getJSON("/tags/", {
+                        term: request.term
+                    }, response);
+                }
+            });
+        });
+    </script>
 </head>
 <br>
 <h1>Company add</h1>
 <body>
+
+
 <form:form id="companyform" method="POST" modelAttribute="company">
 <form class="form-inline">
     <div class="form-group">
@@ -90,6 +97,8 @@
         </c:forEach>
     </c:if>
     </div>
+
+    <!--linked Tag -->
     <h5>Tags</h5>
     <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
     <c:if test="${!empty company.tags}">
@@ -101,34 +110,22 @@
         </c:forEach>
     </c:if>
     </div>
-
+    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </form:form>
 
+<!--add Tag -->
 <form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">
     <form class="form-inline">
-        <h5>Tags</h5>
-        <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
-            <c:if test="${!empty company.id}">
-            <c:if test="${!empty listTags}">
-                <c:forEach items="${listTags}" var="tag">
-                    <table class="table table-hover table-condensed">
-                        <td>${tag.name}</td>
-                    </table>
-                </c:forEach>
-            </c:if>
-            </c:if>
-        </div>
-
         <h5>Tags</h5>
         <div class="form-group">
             <spring:bind path="name" >
                 <c:if test="${empty company.id}">
-                <form:input  disabled="true" type="text" path="name" class="form-inline"
-                             placeholder='Name${name}' autofocus="true"></form:input>
+                <form:input id="acInput" disabled="true" type="text" path="name" class="form-inline"
+                             placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
                 <c:if test="${!empty company.id}">
-                    <form:input  type="text" path="name" class="form-inline"
-                                 placeholder='Name${name}' autofocus="true"></form:input>
+                    <form:input  id="acInput" type="text" path="name" class="form-inline"
+                                 placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
             </spring:bind>
             <button type="submit">
@@ -138,28 +135,8 @@
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
 </form:form>
 
-<h5>Tags</h5>
-<form:form method="POST" modelAttribute="tag" action="/tagAdd/${company.id}/">
-<form>
-    <select class="selectpicker" multiple data-live-search="true" name="name">
-        <c:forEach items="${listTags}" var="tag">
-            <option value ="${tag.name}">${tag.name}</option>
-        </c:forEach>
-    </select>
-    <button type="submit">
-        <spring:message text="Add"/>
-    </button>
-    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-</form>
-</form:form>
-
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-<!--script src="${contextPath}/resources/js/bootstrap-typeahead.js"></scrip>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script-->
 
 </body>
 </html>
