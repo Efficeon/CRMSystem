@@ -36,6 +36,9 @@
         <td>${company.address}</td>
         <td>${company.created}</td>
         <td>${company.updated}</td>
+
+        <%--встроенная в ячейку таблица для вывода нескольких Responsible user--%>
+
         <td><c:forEach items="${company.responsibleUser}" var="user">
             <table>
                 <td>${user.username}</td>

@@ -36,15 +36,6 @@
         <c:forEach items="${listTasks}" var="task">
             <tr>
                 <td>${task.id}</td>
-                <td><a href="<c:url value='/taskdata/${task.id}' />" target="_blank">${task.name}</a></td>
-                <td>${task.description}</td>
-                <td>${task.responsibleUser}</td>
-                <td>${task.created}</td>
-                <td>${task.updated}</td>
-                <td><a href="<c:url value='removecompany/${task.id}' />">Delete</a></td>
-
-
-                <td>${task.id}</td>
                 <td>${task.name}</td>
                 <td>${task.description}</td>
                 <td>${task.responsibleUser}</td>
