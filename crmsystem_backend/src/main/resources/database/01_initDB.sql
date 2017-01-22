@@ -50,7 +50,21 @@ CREATE TABLE IF NOT EXISTS companies_users (
   UNIQUE (company_id, user_id)
 );
 
--- tags --
+-- contact
+CREATE TABLE IF NOT EXISTS contact
+(
+  id              SERIAL       NOT NULL PRIMARY KEY,
+  company         VARCHAR(255) NOT NULL,
+  responsibleuser VARCHAR(255) NOT NULL,
+  name            VARCHAR(255) NOT NULL,
+  website         VARCHAR(255) NOT NULL,
+  skype           VARCHAR(255) NOT NULL,
+  phone_number    VARCHAR(11) NOT NULL,
+  create_date     TIMESTAMP    NOT NULL,
+  update_date     TIMESTAMP    NOT NULL,
+)
+
+-- tags
 CREATE TABLE IF NOT EXISTS tags (
   id                SERIAL       NOT NULL PRIMARY KEY,
   name              VARCHAR(50)  NOT NULL
