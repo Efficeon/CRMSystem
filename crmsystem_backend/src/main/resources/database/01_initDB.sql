@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS companies_users (
   UNIQUE (company_id, user_id)
 );
 
--- tags
+-- tags --
 CREATE TABLE IF NOT EXISTS tags (
   id                SERIAL       NOT NULL PRIMARY KEY,
   name              VARCHAR(50)  NOT NULL
