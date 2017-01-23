@@ -21,6 +21,13 @@
   <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<br>
+<a href="<c:url value='pages/deal/dealadd.jsp/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
+
+</br>
+
+
+
 <h1>Deal list</h1>
 
 <c:if test="${!empty listDeals}">
@@ -46,8 +53,9 @@
   </table>
 </c:if>
 
+<br>
 <h1>Add a Deal</h1>
-
+<br>
 <c:url var="addAction" value="/deals/addDeal"/>
 
   <form:form action="${addAction}" commandName="deal">
