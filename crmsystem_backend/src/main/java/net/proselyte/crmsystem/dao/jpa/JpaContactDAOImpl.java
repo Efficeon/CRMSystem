@@ -23,7 +23,7 @@ public class JpaContactDAOImpl implements ContactDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static Logger logger = Logger.getLogger(JpaRoleDAOImpl.class);
+    private final static Logger logger = Logger.getLogger(JpaContactDAOImpl.class);
 
     @Override
     public Contact getById(Long id) {
