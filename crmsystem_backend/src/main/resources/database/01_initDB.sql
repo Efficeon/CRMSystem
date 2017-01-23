@@ -50,6 +50,10 @@ CREATE TABLE IF NOT EXISTS companies_users (
   UNIQUE (company_id, user_id)
 );
 
+<<<<<<< HEAD
+-- contact
+=======
+>>>>>>> ac7d3c7f76aa92c998fad8dd26bc6e7f67b96256
 CREATE TABLE IF NOT EXISTS contact
 (
   id              SERIAL       NOT NULL PRIMARY KEY,
@@ -62,3 +66,23 @@ CREATE TABLE IF NOT EXISTS contact
   create_date     TIMESTAMP    NOT NULL,
   update_date     TIMESTAMP    NOT NULL,
 )
+<<<<<<< HEAD
+
+-- tags
+CREATE TABLE IF NOT EXISTS tags (
+  id                SERIAL       NOT NULL PRIMARY KEY,
+  name              VARCHAR(50)  NOT NULL
+);
+
+-- companies_tags
+CREATE TABLE IF NOT EXISTS companies_tags (
+  company_id SERIAL NOT NULL,
+  tag_id SERIAL NOT NULL,
+
+  FOREIGN KEY (company_id) REFERENCES companies (id),
+  FOREIGN KEY (tag_id) REFERENCES tags (id),
+
+  UNIQUE (company_id, tag_id)
+);
+=======
+>>>>>>> ac7d3c7f76aa92c998fad8dd26bc6e7f67b96256
