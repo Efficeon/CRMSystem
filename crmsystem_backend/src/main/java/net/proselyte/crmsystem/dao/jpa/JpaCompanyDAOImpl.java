@@ -26,7 +26,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     private final static Logger logger = Logger.getLogger(JpaCompanyDAOImpl.class);
 
     @Override
-    public Company getById(Long id) {
+    public Company getById(UUID id) {
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
 

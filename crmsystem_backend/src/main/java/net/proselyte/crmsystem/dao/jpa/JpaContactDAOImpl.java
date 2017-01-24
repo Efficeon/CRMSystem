@@ -10,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * JPA implmentation of {@link ContactDAO} interface.
@@ -26,7 +27,7 @@ public class JpaContactDAOImpl implements ContactDAO {
     private final static Logger logger = Logger.getLogger(JpaContactDAOImpl.class);
 
     @Override
-    public Contact getById(Long id) {
+    public Contact getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM  Contact contact WHERE contact.id =:id");
         query.setParameter("id", id);
         Contact contact = (Contact) query.getSingleResult();

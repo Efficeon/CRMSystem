@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * JPA implementation of {@link RoleDAO} interface.
@@ -26,7 +27,7 @@ public class JpaRoleDAOImpl implements RoleDAO {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Role getById(Long id) {
+    public Role getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT  role FROM  Role role LEFT JOIN FETCH  role.users WHERE role.id =:id");
         query.setParameter("id", id);
 

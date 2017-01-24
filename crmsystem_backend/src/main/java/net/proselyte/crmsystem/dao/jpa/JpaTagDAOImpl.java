@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * JPA implementation of {@link TagDAO} interface.
@@ -25,18 +22,18 @@ public class JpaTagDAOImpl implements TagDAO{
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static Logger logger = Logger.getLogger(JpaCompanyDAOImpl.class);
+    private final static Logger logger = Logger.getLogger(JpaTagDAOImpl.class);
 
 
     @Override
-    public Tag getById(Long id) {
+    public Tag getById(UUID id) {
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT tag FROM Tag tag LEFT JOIN FETCH tag.linkedCompanies WHERE tag.id =:id");
 
         query.setParameter("id", id);
         Tag tag = (Tag) query.getSingleResult();
 
-        logger.info("Company successfully loaded. Company details: " + tag);
+        logger.info("Tag successfully loaded. Tag details: " + tag);
 
         return tag;
     }
@@ -49,7 +46,7 @@ public class JpaTagDAOImpl implements TagDAO{
         query.setParameter("name", name);
         Tag tag = (Tag) query.getSingleResult();
 
-        logger.info("Company successfully loaded. Company details: " + tag);
+        logger.info("Tag successfully loaded. Tag details: " + tag);
 
         return tag;
     }

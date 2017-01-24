@@ -1,9 +1,10 @@
 package net.proselyte.crmsystem.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.UUID;
 
 /**
  * Base class that contains property 'id'.
@@ -16,14 +17,17 @@ import javax.persistence.MappedSuperclass;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GenericGenerator(name = "uuid-gen", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid-gen")
+    @Type(type="pg-uuid")
 
-    public Long getId() {
+    private UUID id;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

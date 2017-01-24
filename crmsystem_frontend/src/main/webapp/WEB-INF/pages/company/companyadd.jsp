@@ -120,17 +120,19 @@
         <div class="form-group">
             <spring:bind path="name" >
                 <c:if test="${empty company.id}">
-                <form:input id="acInput" disabled="true" type="text" path="name" class="form-inline"
+                    <form:input id="acInput" disabled="true" type="text" path="name" class="form-inline"
                              placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
                 <c:if test="${!empty company.id}">
                     <form:input  id="acInput" type="text" path="name" class="form-inline"
-                                 placeholder='Tags${name}' autofocus="true"></form:input>
+                             placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
             </spring:bind>
+                <c:if test="${!empty company.id}">
             <button type="submit">
                 <spring:message text="Add"/>
             </button>
+                </c:if>
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
 </form:form>

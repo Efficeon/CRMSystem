@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Implementation of {@link UserService }interface
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.getById(1L));
+        //roles.add(roleDao.getById();
         user.setRoles(roles);
         userDao.save(user);
     }
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getById(Long id) {
+    public User getById(UUID id) {
         return userDao.getById(id);
     }
 

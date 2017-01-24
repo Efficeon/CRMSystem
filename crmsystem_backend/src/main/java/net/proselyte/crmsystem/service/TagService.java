@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.service;
 import net.proselyte.crmsystem.model.Tag;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Service interface for class {@link Tag}.
@@ -10,7 +11,7 @@ import java.util.Collection;
  * @author Leonid Dubravsky
  */
 public interface TagService {
-    Tag getById(Long id);
+    Tag getById(UUID id);
 
     Tag getByName(String name);
 

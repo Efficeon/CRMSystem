@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Implementation of {@link ContactService }interface
@@ -35,7 +36,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Transactional
-    public Contact getById(Long id) {
+    public Contact getById(UUID id) {
         return contactDAO.getById(id);
     }
 

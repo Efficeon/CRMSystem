@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.dao;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Generic DAO interface. Used as a base interface for all DAO classes.
@@ -9,7 +10,7 @@ import java.util.Collection;
  */
 public interface GenericDAO<T, ID> {
 
-    T getById(ID id);
+    T getById(UUID id);
 
     Collection<T> getAll();
 

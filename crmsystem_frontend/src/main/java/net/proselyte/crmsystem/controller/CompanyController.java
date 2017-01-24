@@ -7,11 +7,12 @@ import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.TagService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Controller for {@link Company}'s pages
@@ -39,13 +40,13 @@ public class CompanyController {
     }
 
     @RequestMapping(value="companydata/{id}/", method = RequestMethod.GET)
-    public String companyData(@PathVariable("id") Long id, Model model){
+    public String companyData(@PathVariable("id") UUID id, Model model){
         model.addAttribute("company", this.companyService.getById(id));
         return "company/companydata";
     }
 
     @RequestMapping("removecompany/{id}/")
-    public String removeCompany(@PathVariable("id") Long id){
+    public String removeCompany(@PathVariable("id") UUID id){
         this.companyService.remove(companyService.getById(id));
         return "redirect:/company/";
     }
@@ -67,7 +68,7 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/editcompany/{id}")
-    public String editCompany(@PathVariable("id") Long id, Model model){
+    public String editCompany(@PathVariable("id") UUID id, Model model){
         model.addAttribute("company", this.companyService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
@@ -76,7 +77,7 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/editcompany/{id}", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") Long id,
+    public String editSubmit(@PathVariable("id") UUID id,
                              @ModelAttribute Company company){
         company.setId(id);
         company.setResponsibleUser(this.companyService.getById(id).getResponsibleUser());
@@ -85,8 +86,8 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/addresponsible/{userId}/{companyId}/", method = RequestMethod.GET)
-    public String addResponsibleUser(@PathVariable("userId") Long userId,
-                                     @PathVariable("companyId") Long companyId,
+    public String addResponsibleUser(@PathVariable("userId") UUID userId,
+                                     @PathVariable("companyId") UUID companyId,
                                      @ModelAttribute Company company,
                                      Model model){
         company = this.companyService.getById(companyId);
@@ -100,7 +101,7 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/addresponsible/{userId}/{companyId}/", method = RequestMethod.POST)
-    public String addResponsibleUserSubmit(@PathVariable("companyId") Long companyId,
+    public String addResponsibleUserSubmit(@PathVariable("companyId") UUID companyId,
                                            @ModelAttribute Company company){
         company.setId(companyId);
         company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
@@ -109,10 +110,10 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/removeresponsible/{userId}/{companyId}/", method = RequestMethod.GET)
-    public String removeResponsibleUser(@PathVariable("userId") Long userId,
-                                     @PathVariable("companyId") Long companyId,
-                                     @ModelAttribute Company company,
-                                     Model model){
+    public String removeResponsibleUser(@PathVariable("userId") UUID userId,
+                                        @PathVariable("companyId") UUID companyId,
+                                        @ModelAttribute Company company,
+                                        Model model){
         company = this.companyService.getById(companyId);
         company.removeResponsibleUser(this.userService.getById(userId));
         this.companyService.save(company);
@@ -124,7 +125,7 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/removeresponsible/{userId}/{companyId}/", method = RequestMethod.POST)
-    public String removeResponsibleUserSubmit(@PathVariable("companyId") Long companyId,
+    public String removeResponsibleUserSubmit(@PathVariable("companyId") UUID companyId,
                                               @ModelAttribute Company company){
         company.setId(companyId);
         company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
@@ -134,7 +135,7 @@ public class CompanyController {
 
     @RequestMapping(value = "removetag/{tagId}/{companyId}/", method = RequestMethod.POST)
     public String removeLinkedTag(@PathVariable("tagId") Long tagId,
-                                  @PathVariable("companyId") Long companyId,
+                                  @PathVariable("companyId") UUID companyId,
                                   @ModelAttribute Company company){
         company.setId(companyId);
         company.setTags(this.companyService.getById(companyId).getTags());
@@ -142,9 +143,26 @@ public class CompanyController {
         return "redirect:/company/";
     }
 
+    @RequestMapping(value = "/tagCreate/{companyId}/", method = RequestMethod.POST)
+    public String addTag(@PathVariable("companyId") UUID companyId,
+                         @ModelAttribute Tag tag,
+                         @ModelAttribute Company company) {
+        List<Tag> allTag = (List<Tag>) this.tagService.getAll();
+        for (Tag tempTag : allTag){
+            if (tempTag.getName().equals(tag.getName())){
+                tag = tempTag;
+            }
+        }
+        this.tagService.save(tag);
+        company = this.companyService.getById(companyId);
+        company.setTags(tag);
+        this.companyService.save(company);
+        return "redirect:/editcompany/"+company.getId()+"/";
+    }
+
     @RequestMapping(value = "/removetag/{tagId}/{companyId}/", method = RequestMethod.GET)
-    public String removeLinkedTag(@PathVariable("tagId") Long tagId,
-                                  @PathVariable("companyId") Long companyId,
+    public String removeLinkedTag(@PathVariable("tagId") UUID tagId,
+                                  @PathVariable("companyId") UUID companyId,
                                   @ModelAttribute Company company,
                                   Model model){
         company = this.companyService.getById(companyId);

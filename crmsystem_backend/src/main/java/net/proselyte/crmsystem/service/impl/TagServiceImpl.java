@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Implementation of {@link TagService} interface.
@@ -23,7 +24,7 @@ public class TagServiceImpl implements TagService{
 
     @Override
     @Transactional
-    public Tag getById(Long id) {
+    public Tag getById(UUID id) {
         return tagDAO.getById(id);
     }
 
