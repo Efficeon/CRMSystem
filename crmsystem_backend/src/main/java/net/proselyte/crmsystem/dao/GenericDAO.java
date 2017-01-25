@@ -1,5 +1,7 @@
 package net.proselyte.crmsystem.dao;
 
+import net.proselyte.crmsystem.model.BaseEntity;
+
 import java.util.Collection;
 import java.util.UUID;
 
@@ -8,9 +10,9 @@ import java.util.UUID;
  *
  * @author Eugene Suleimanov
  */
-public interface GenericDAO<T, ID> {
+public interface GenericDAO<T extends BaseEntity, ID> {
 
-    T getById(UUID id);
+    T getById(ID id);
 
     Collection<T> getAll();
 

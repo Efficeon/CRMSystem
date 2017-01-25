@@ -133,16 +133,6 @@ public class CompanyController {
         return "redirect:/company/";
     }
 
-    @RequestMapping(value = "removetag/{tagId}/{companyId}/", method = RequestMethod.POST)
-    public String removeLinkedTag(@PathVariable("tagId") Long tagId,
-                                  @PathVariable("companyId") UUID companyId,
-                                  @ModelAttribute Company company){
-        company.setId(companyId);
-        company.setTags(this.companyService.getById(companyId).getTags());
-        this.companyService.save(company);
-        return "redirect:/company/";
-    }
-
     @RequestMapping(value = "/tagCreate/{companyId}/", method = RequestMethod.POST)
     public String addTag(@PathVariable("companyId") UUID companyId,
                          @ModelAttribute Tag tag,
@@ -160,14 +150,30 @@ public class CompanyController {
         return "redirect:/editcompany/"+company.getId()+"/";
     }
 
+    @RequestMapping(value = "removetag/{tagId}/{companyId}/", method = RequestMethod.POST)
+    public String removeLinkedTag(@PathVariable("tagId") UUID tagId,
+                                  @PathVariable("companyId") UUID companyId,
+                                  @ModelAttribute Company company){
+        company.setId(companyId);
+        company.setTags(this.companyService.getById(companyId).getTags());
+        this.companyService.save(company);
+        return "redirect:/company/";
+    }
+
     @RequestMapping(value = "/removetag/{tagId}/{companyId}/", method = RequestMethod.GET)
     public String removeLinkedTag(@PathVariable("tagId") UUID tagId,
                                   @PathVariable("companyId") UUID companyId,
                                   @ModelAttribute Company company,
                                   Model model){
+                      System.out.println(company.getTags());
         company = this.companyService.getById(companyId);
+                      System.out.println(company.getTags());
+                      System.out.println(this.tagService.getById(tagId).getId());
+                      System.out.println(company.getTags());
+                      System.out.println(this.tagService.getById(tagId).getId());
         company.removeTag(this.tagService.getById(tagId));
         this.companyService.save(company);
+                      System.out.println(company.getTags());
         model.addAttribute("tag", new Tag());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());

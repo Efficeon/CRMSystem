@@ -102,7 +102,7 @@ public class Company extends NamedEntity{
     }
 
     public void removeTag(Tag tag) {
-        this.tags.remove(tag);
+       this.tags.remove(tag);
     }
 
     public Set<Tag> getTags() {
@@ -115,27 +115,5 @@ public class Company extends NamedEntity{
 
     public void setTags(Tag tag){
         this.tags.add(tag);
-    }
-
-    /*@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (int) (prime * result + this.getId());
-        return result;
-    }*/
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Company other = (Company) obj;
-        if (getId() != other.getId())
-            return false;
-        return true;
     }
 }

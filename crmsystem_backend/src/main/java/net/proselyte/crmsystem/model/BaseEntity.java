@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+
 import java.util.UUID;
 
 /**
@@ -20,7 +21,6 @@ public class BaseEntity {
     @GenericGenerator(name = "uuid-gen", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "uuid-gen")
     @Type(type="pg-uuid")
-
     private UUID id;
 
     public UUID getId() {

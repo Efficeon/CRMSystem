@@ -10,4 +10,5 @@ import java.util.UUID;
  * @author Eugene Suleimanov
  */
 public interface RoleDAO extends GenericDAO<Role, UUID> {
+    Role findByName(String name);
 }

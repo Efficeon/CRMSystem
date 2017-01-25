@@ -30,6 +30,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
+    public Role findByRoleName(String name){
+        return roleDAO.findByName(name);
+    }
+
+    @Override
+    @Transactional
     public Collection<Role> getAll() {
         return roleDAO.getAll();
     }
@@ -44,5 +50,11 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public void remove(Role role) {
         roleDAO.remove(role);
+    }
+
+    @Override
+    @Transactional
+    public Role findByName(String name){
+        return roleDAO.findByName(name);
     }
 }

@@ -1,6 +1,6 @@
 -- users
 CREATE TABLE IF NOT EXISTS users (
-  id                UUID       NOT NULL PRIMARY KEY,
+  id                UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   email             VARCHAR(255) NOT NULL,
   usertype          VARCHAR(50)  NOT NULL,
   username          VARCHAR(50)  NOT NULL,
@@ -8,12 +8,12 @@ CREATE TABLE IF NOT EXISTS users (
   last_name         VARCHAR(50)  NOT NULL,
   password          VARCHAR(255) NOT NULL,
   registration_date TIMESTAMP    NOT NULL,
-  birth_date        TIMESTAMP    NOT NULL
+  birth_date        TIMESTAMP
 );
 
 -- roles
 CREATE TABLE IF NOT EXISTS roles (
-  id   UUID      NOT NULL PRIMARY KEY,
+  id   UUID      NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   name VARCHAR(50) NOT NULL
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS user_roles (
 
 -- companies
 CREATE TABLE IF NOT EXISTS companies (
-  id        UUID       NOT NULL PRIMARY KEY,
+  id        UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   name      VARCHAR(50)  NOT NULL,
   email     VARCHAR(255) NOT NULL,
   website   VARCHAR(255) ,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS companies_users (
 
 CREATE TABLE IF NOT EXISTS contact
 (
-  id              UUID       NOT NULL PRIMARY KEY,
+  id              UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   company         VARCHAR(255) NOT NULL,
   responsibleuser VARCHAR(255) NOT NULL,
   name            VARCHAR(255) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS contact
 
 -- tags
 CREATE TABLE IF NOT EXISTS tags (
-  id                UUID       NOT NULL PRIMARY KEY,
+  id                UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   name              VARCHAR(50)  NOT NULL
 );
 

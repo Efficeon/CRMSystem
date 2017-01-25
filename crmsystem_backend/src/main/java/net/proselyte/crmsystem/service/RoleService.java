@@ -13,9 +13,13 @@ import java.util.UUID;
 public interface RoleService {
     Role getById(UUID id);
 
+    Role findByRoleName(String name);
+
     Collection<Role> getAll();
 
     void save(Role role);
 
     void remove(Role role);
+
+    Role findByName(String name);
 }
