@@ -16,9 +16,7 @@ import java.util.List;
 @Table(name = "DealStatus")
 public class DealStatus extends NamedEntity{
 
-    @OneToMany
-    @JoinTable(name = "dealSatus_deal", joinColumns = {@JoinColumn(name = "dealStatus_id", referencedColumnName="id")},
-            inverseJoinColumns = {@JoinColumn(name="deal_id", referencedColumnName="id")})
+    @OneToMany(mappedBy = "dealStatus")
     private List<Deal> dealList;
 
     @Override

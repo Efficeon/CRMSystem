@@ -3,6 +3,8 @@ package net.proselyte.crmsystem.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+
 import org.hibernate.*;
 
 @Entity
@@ -22,6 +24,10 @@ public class Deal extends BaseEntity {
     @JoinTable(name="deal_user", joinColumns = @JoinColumn(name="deal_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName="id"))
     private User responsibleUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dealStatusId")
+    private DealStatus dealStatus;
 
     public double getBudget() {
         return budget;
@@ -53,5 +59,13 @@ public class Deal extends BaseEntity {
 
     public void setResponsibleUser(User responsibleUser) {
         this.responsibleUser = responsibleUser;
+    }
+
+    public DealStatus getDealStatus() {
+        return dealStatus;
+    }
+
+    public void setDealStatus(DealStatus dealStatus) {
+        this.dealStatus = dealStatus;
     }
 }

@@ -38,6 +38,7 @@
       <th width="120">CREATED</th>
       <th width="120">UPDATED</th>
       <th width="120">USER ID</th>
+      <th width="120">DEAL STATUS</th>
       <th width="120">Delete></th>
     </tr>
     <c:forEach items="listDeals" var="deal">
@@ -47,7 +48,8 @@
         <td>${deal.created}</td>
         <td>${deal.updated}</td>
         <td>${deal.responsibleUser.id}</td>
-        <td><a href="<c:url value='/remove/${deal}'/>">Delete</a></td>
+        <td>${deal.dealStatus.id}</td>
+        <td><a href="<c:url value='deals/remove/${deal}'/>">Delete</a></td>
       </tr>
     </c:forEach>
   </table>
@@ -56,7 +58,7 @@
 <br>
 <h1>Add a Deal</h1>
 <br>
-<c:url var="addAction" value="/deals/addDeal"/>
+<c:url var="addAction" value="/deal/addDeal"/>
 
   <form:form action="${addAction}" commandName="deal">
     <table>
@@ -68,7 +70,7 @@
           </td>
           <td>
             <form:input path="id" readonly="true" size="8" disabled="true"/>
-            <form:hidden path="id"/>
+            <form:hidden path="deal.id"/>
           </td>
         </tr>
 
@@ -79,7 +81,7 @@
           </form:label>
         </td>
         <td>
-          <form:input path="budget"/>
+          <form:input path="deal.budget"/>
         </td>
       </tr>
 
@@ -90,7 +92,18 @@
           </form:label>
         </td>
         <td>
-          <form:input path="userId"/>
+          <form:input path="deal.responsibleUser"/>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <form:label path="dealStatusId">
+            <spring:message text="dealStatusId"/>
+          </form:label>
+        </td>
+        <td>
+          <form:input path="deal.dealStatus"/>
         </td>
       </tr>
 

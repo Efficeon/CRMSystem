@@ -5,6 +5,11 @@ import net.proselyte.crmsystem.model.User;
 
 import java.util.Collection;
 
+/**
+ * Service interface for class {@link Deal}
+ * Created by Serhiy Zamikhovskyy on 25.01.2017.
+ */
+
 
 public interface DealService {
     Deal getById(Long id);
