@@ -13,14 +13,16 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
-<br>
+
+<body>
 <h1>Task add</h1>
-body>
+<br>
+<br>
 <form:form method="POST" modelAttribute="task">
     <form class="form-inline">
         <div class="form-group">
             <c:if test="${!empty task.name}">
-                <spring:bind path="name">
+                <spring:bind path="id">
                     <form:input  type="text" path="id" class="form-group" readonly="true"
                                  disabled="true" placeholder='ID${id}'></form:input>
                 </spring:bind>
@@ -30,66 +32,79 @@ body>
                              placeholder='Name${name}' autofocus="true"></form:input>
             </spring:bind>
 
-            <spring:bind path="email">
+            <spring:bind path="description">
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${description}' autofocus="true"></form:input>
             </spring:bind>
 
-            <spring:bind path="website">
-                <form:input  type="text" path="website" class="form-group"
-                             placeholder='Web site${website}' autofocus="true"></form:input>
+<%--???????????--%>
+            <spring:bind path="responsibleUser">        <%--Model task--%>
+                <form:select path="responsibleUser">
+                    <form:option value="0" label="Select only one"/>
+                    <form:options items="${listUsers}" itemValue="user" itemLabel="responsibleUser" />
+                </form:select>
             </spring:bind>
 
-            <spring:bind path="address">
-                <form:input  type="text" path="address" class="form-group"
-                             placeholder='Address${address}' autofocus="true"></form:input>
-            </spring:bind>
 
             <button type="submit">
                 <spring:message text="Add"/>
             </button>
         </div>
+
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
-    <!--add ResponsibleUser -->
-    <c:if test="${empty company.id}">
-        <h4 style="color: red">Add a responsible user after adding Company</h4>
-    </c:if>
-    <h5>Users</h5>
-    <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
-        <c:if test="${!empty listUsers}">
-            <c:forEach items="${listUsers}" var="user">
-                <table class="table table-hover table-condensed">
-                    <c:if test="${!empty company.id}">
-                        <c:if test="${!company.responsibleUser.contains(user)}"></c:if>
-                        <td disabled="true"><a href="<c:url value='/addresponsible/${user.id}/${company.id}/' />"
-                                               style="text-decoration: none" />${user.username}</td>
-                    </c:if>
-                </table>
-            </c:forEach>
-        </c:if>
-    </div>
 
-    <!--remove ResponsibleUser -->
-    <h5>Responsible users</h5>
-    <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
-    <c:if test="${!empty company.responsibleUser}">
-        <c:forEach items="${company.responsibleUser}" var="user">
-            <table class="table table-hover table-condensed">
-                <td><a href="<c:url value='/removeresponsible/${user.id}/${company.id}/' />"
-                       style="text-decoration: none"/>${user.username}</div> </td>
-            </table>
-        </c:forEach>
-    </c:if>
-    </div>
+    <%--<!--add ResponsibleUser -->--%>
+
+    <%--<c:if test="${empty task.id}">--%>
+        <%--<h4 style="color: red">Add a responsible user after adding Task</h4>--%>
+    <%--</c:if>--%>
+
+    <%--<h5>Add responsible user</h5>--%>
+
+    <%--<div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">--%>
+
+        <%--<c:if test="${!empty responsibleUser}">--%>
+
+            <%--<table class="table table-hover table-condensed">--%>
+                <%--<td><a href="<c:url value='/removeresponsible/${user.id}/${task.id}/' />"--%>
+                       <%--style="text-decoration: none"/>${user.username}</div> </td>--%>
+            <%--</table>--%>
+
+            <%--<c:forEach items="${listUsers}" var="user">--%>
+                <%--<table class="table table-hover table-condensed">--%>
+                    <%--<c:if test="${!empty company.id}">--%>
+                        <%--<c:if test="${!company.responsibleUser.contains(user)}"></c:if>--%>
+                        <%--<td disabled="true"><a href="<c:url value='/addresponsible/${user.id}/${company.id}/' />"--%>
+                                               <%--style="text-decoration: none" />${user.username}</td>--%>
+                    <%--</c:if>--%>
+                <%--</table>--%>
+            <%--</c:forEach>--%>
+        <%--</c:if>--%>
+    <%--</div>--%>
+
+    <%--<!--remove ResponsibleUser -->--%>
+
+    <%--<h5>Responsible user</h5>--%>
+
+    <%--<div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">--%>
+    <%--<c:if test="${!empty task.responsibleUser}">--%>
+            <%--<table class="table table-hover table-condensed">--%>
+                <%--<td><a href="<c:url value='/removeresponsible/${user.id}/${task.id}/' />"--%>
+                       <%--style="text-decoration: none"/>${user.username}</div> </td>--%>
+            <%--</table>--%>
+    <%--</c:if>--%>
+    <%--</div>--%>
 
     <button type="button">
-        <a href="<c:url value='/company/' />">Complete</a>
+        <a href="<c:url value='/task/' />">Complete</a>
     </button>
 </form:form>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+
+</br>
 
 </body>
 </html>

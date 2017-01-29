@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -32,12 +32,15 @@
     <table class="table table-striped table-condensed">
         <tr>
             <th class="text-center" width="25">ID</th>
-            <th class="text-center" width="120">Name</th>
-            <th class="text-center" width="200">Description</th>
-            <th class="text-center" width="80">Responsible user</th>
-            <th class="text-center" width="50">Created</th>
-            <th class="text-center" width="50">Updated</th>
-            <th class="text-center" width="50">Details</th>
+            <th class="text-center" width="120">E-mail</th>
+            <th class="text-center" width="200">User type</th>
+            <th class="text-center" width="80">username</th>
+            <th class="text-center" width="50">First name</th>
+            <th class="text-center" width="50">Last name</th>
+            <th class="text-center" width="50">Registration date</th>
+            <th class="text-center" width="50">Birth date</th>
+            <th class="text-center" width="50">User's roles</th>
+            <th class="text-center" width="50">Bindet tasks</th>
             <th class="text-center" width="50">Edit</th>
             <th class="text-center" width="50">Delete</th>
         </tr>
@@ -61,9 +64,9 @@
     </table>
 </c:if>
 
-    <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

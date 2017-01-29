@@ -27,6 +27,7 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping(value = "task", method = RequestMethod.GET)
     public String listTasks(Model model) {
         model.addAttribute("task", new Task());
@@ -52,11 +53,13 @@ public class TaskController {
         return "redirect:/edittask/"+task.getId()+"/";
     }
 
+//    +++
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
     public String addTask(Model model) {
         model.addAttribute("task", new Task());
-        model.addAttribute("listtasks", this.userService.getAll());
-        model.addAttribute("user", new User());
+//        model.addAttribute("user", new User());
+        model.addAttribute("listtasks", this.taskService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
         return "task/taskadd";
     }
 
@@ -115,6 +118,7 @@ public class TaskController {
         this.taskService.save(task);
         model.addAttribute("listTasks", this.userService.getAll());
         model.addAttribute("task", this.taskService.getById(taskId));
+
         return "task/taskadd";
     }
 
