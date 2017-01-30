@@ -67,5 +67,8 @@ public class Deal extends BaseEntity {
 
     public void setDealStatus(DealStatus dealStatus) {
         this.dealStatus = dealStatus;
+        if(!dealStatus.getDeals().contains(this)){
+            dealStatus.addDeal(this);
+        }
     }
 }
