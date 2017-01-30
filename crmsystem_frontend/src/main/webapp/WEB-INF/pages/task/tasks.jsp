@@ -27,6 +27,8 @@
     <a href="<c:url value='/task/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create task</a>
 </button>
 <br>
+
+<%--???? Где происходит "подключение" модели "task"--%>
 <br>
 <%--проверка: если список задач не пуст, выводим данные в таблицу--%>
 <c:if test="${!empty listTasks}">
