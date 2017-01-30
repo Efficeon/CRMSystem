@@ -16,9 +16,13 @@
 <br>
 <h1>Company add</h1>
 <body>
+<%--объявление формы. В данном случае "company" - либо вновь создаваемая, либо получаемая по id компания--%>
 <form:form method="POST" modelAttribute="company">
     <form class="form-inline">
         <div class="form-group">
+
+            <%--Проверка: поле НЕ пустое--%>
+            <%--Если такая компания существует(есть поле с именем)? - то --%>
             <c:if test="${!empty company.name}">
                 <spring:bind path="name">
                     <form:input  type="text" path="id" class="form-group" readonly="true"

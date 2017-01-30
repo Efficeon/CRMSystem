@@ -27,6 +27,7 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
+//    загружаем в Model все задачи и выводим через view "tasks.jsp"
 
     @RequestMapping(value = "task", method = RequestMethod.GET)
     public String listTasks(Model model) {
@@ -35,11 +36,17 @@ public class TaskController {
         return "task/tasks";
     }
 
+//    получаем по id конкретный объект, помещаем его в Model,
+//    передаем для отображения во view taskdata.jsp (Task details)
+
     @RequestMapping(value="taskdata/{id}/", method = RequestMethod.GET)
     public String taskData(@PathVariable("id") Long id, Model model){
         model.addAttribute("task", this.taskService.getById(id));
         return "task/taskdata";
     }
+
+//    удаление task с заднным id (получаем - удаляем)
+//    переадресация на "tasks.jsp", отображающую список всех задач
 
     @RequestMapping("removetask/{id}/")
     public String removeTask(@PathVariable("id") Long id){
@@ -47,13 +54,17 @@ public class TaskController {
         return "redirect:/task/";
     }
 
+
+//    "отработка" кнопки submit в "taskadd.jsp" ???
+//
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task){
         this.taskService.save(task);
         return "redirect:/edittask/"+task.getId()+"/";
     }
 
-//    +++
+//    в Model помещаем исходные данные для создания и сохранения в DB новой задачии
+//    new Task(),
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
     public String addTask(Model model) {
         model.addAttribute("task", new Task());
@@ -62,6 +73,12 @@ public class TaskController {
         model.addAttribute("listUsers", this.userService.getAll());
         return "task/taskadd";
     }
+
+
+
+//    получаем по id объект task, добавляем в Model,
+//    получаем Collection всех users - listUsers, добавляем в Model,
+//    передаем для отображения во view taskadd.jsp (Task add)
 
     @RequestMapping(value = "/edittask/{id}")
     public String editTask(@PathVariable("id") Long id, Model model){
@@ -80,6 +97,8 @@ public class TaskController {
         return "redirect:/task/";
     }
 
+
+
     @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
     public String addResponsibleUser(@PathVariable("userId") Long userId,
                                      @PathVariable("taskId") Long taskId,
@@ -88,7 +107,7 @@ public class TaskController {
         task = this.taskService.getById(taskId);
         /*ArrayList<User> usersTemp = (ArrayList<User>) this.userService.getAll();
         for (User user : usersTemp){
-            if (company.getResponsibleUser().contains(user)){
+            if (task.getResponsibleUser().contains(user)){
                 usersTemp.remove(user);
             }
         }*/
@@ -108,6 +127,9 @@ public class TaskController {
         return "redirect:/task/";
     }
 
+
+
+
     @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
     public String removeResponsibleUser(@PathVariable("userId") Long userId,
                                         @PathVariable("taskId") Long taskId,
@@ -121,6 +143,7 @@ public class TaskController {
 
         return "task/taskadd";
     }
+
 
     @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
     public String removeResponsibleUserSubmit(@PathVariable("taskId") Long taskId,

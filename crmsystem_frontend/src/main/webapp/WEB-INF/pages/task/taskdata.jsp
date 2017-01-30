@@ -11,6 +11,7 @@
 <body>
 <h1>Task details</h1>
 
+<%--Почему нигде нет указания на связь с Model???--%>
 <table class="table table-striped">
     <tr>
         <th width="25">ID</th>
