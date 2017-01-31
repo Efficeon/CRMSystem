@@ -31,33 +31,35 @@
 
                 <%--в текстовых полях формы мы выводим, как placeholder, находящиеся в DB значения--%>
                 <%--все поля можно заполнять/изменять--%>
-                <spring:bind path="id">
-                    <form:input  type="text" path="id" class="form-group" readonly="true"
-                                 disabled="true" placeholder='ID${id}'></form:input>
-                </spring:bind>
+<%--<spring:bind path="id">--%>
+
+                <%--ЗАЧЕМ заполнение поля ID ???--%>
+                    <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
+                                 <%--disabled="true" placeholder='ID${id}'></form:input>--%>
+<%--</spring:bind>--%>
             </c:if>
-            <spring:bind path="name">
+            <%--<spring:bind path="name">--%>
                 <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${name}' autofocus="true"></form:input>
-            </spring:bind>
+            <%--</spring:bind>--%>
 
-            <spring:bind path="description">
+            <%--<spring:bind path="description">--%>
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${description}' autofocus="true"></form:input>
-            </spring:bind>
+            <%--</spring:bind>--%>
 
 
                 <%--поле Model, связанное с полем формы, которое будет подвергнуто изменениям вследствие отработки данного элемента формы--%>
     <%--не уверен, что spring bind path верно указан--%>
-            <spring:bind path="responsibleUser">
+            <%--<spring:bind path="responsUser">--%>
                 <%--элемент select будет брать все выводимые значения именно из этого поля модели--%>
-                <form:select path="responsibleUser">
+                <form:select path="responsUser">
                     <%--надпись-подсказка для элемента select "по умолчанию"--%>
                     <form:option value="0" label="Select only one"/>
                     <%--в выпадающем списке помещаем всех users для назначения на задачу одного из них--%>
-                    <form:options items="${listUsers}" itemValue="user" itemLabel="responsibleUser" />
+                    <form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />
                 </form:select>
-            </spring:bind>
+            <%--</spring:bind>--%>
 
                 <%--кнопка подтверждения команды на внесение/изменение данных по задаче--%>
             <button type="submit">
