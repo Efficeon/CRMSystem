@@ -4,6 +4,7 @@ import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.User;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Service interface for class {@link Company}.
@@ -12,7 +13,7 @@ import java.util.Collection;
  */
 public interface CompanyService {
 
-    Company getById(Long id);
+    Company getById(UUID id);
 
     Collection<Company> getAll();
 

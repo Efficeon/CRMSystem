@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.service;
 import net.proselyte.crmsystem.model.Contact;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * service class for {@link Contact}
@@ -16,7 +17,7 @@ public interface ContactService {
 
     Contact findByCompanyName(String companyName);
 
-    Contact getById(Long id);
+    Contact getById(UUID id);
 
     Collection getAll();
 }

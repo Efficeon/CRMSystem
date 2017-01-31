@@ -42,7 +42,6 @@ public class AuthenticationController {
                                BindingResult bindingResult) {
 
         userValidator.validate(userForm, bindingResult);
-
         if (bindingResult.hasErrors()) {
             return "authentication/signUp";
         }

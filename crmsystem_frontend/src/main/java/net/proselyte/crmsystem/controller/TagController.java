@@ -1,7 +1,6 @@
 package net.proselyte.crmsystem.controller;
 
 import com.google.gson.Gson;
-import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.TagService;
@@ -30,29 +29,11 @@ public class TagController {
     @Autowired
     private CompanyService userService;
 
-
     @RequestMapping(value = "tag", method = RequestMethod.GET)
     public String listTags(Model model){
         model.addAttribute("tag", new Tag());
         model.addAttribute("listTags", this.tagService.getAll());
         return "tag/tags";
-    }
-
-    @RequestMapping(value = "/tagCreate/{companyId}/", method = RequestMethod.POST)
-    public String tagCreate(@PathVariable("companyId") Long companyId,
-                            @ModelAttribute Tag tag,
-                            @ModelAttribute Company company) {
-        List<Tag> allTag = (List<Tag>) this.tagService.getAll();
-        for (Tag tempTag : allTag){
-            if (tempTag.getName().equals(tag.getName())){
-                tag = tempTag;
-            }
-        }
-        this.tagService.save(tag);
-        company = this.companyService.getById(companyId);
-        company.setTags(tag);
-        this.companyService.save(company);
-        return "redirect:/editcompany/"+company.getId()+"/";
     }
 
     @RequestMapping(value = "/tags/", method = RequestMethod.GET)

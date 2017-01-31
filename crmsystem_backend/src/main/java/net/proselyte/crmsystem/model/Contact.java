@@ -3,7 +3,6 @@ package net.proselyte.crmsystem.model;
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
 @Table(name="contact")
 public class Contact extends BaseEntity {
@@ -116,7 +115,7 @@ public class Contact extends BaseEntity {
         return updateDate != null ? updateDate.equals(contact.updateDate) : contact.updateDate == null;
     }
 
-    @Override
+    /*@Override
     public int hashCode() {
         int result = company != null ? company.hashCode() : 0;
         result = 31 * result + (responsibleUsery != null ? responsibleUsery.hashCode() : 0);
@@ -141,5 +140,5 @@ public class Contact extends BaseEntity {
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 '}';
-    }
+    }*/
 }

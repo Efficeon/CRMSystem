@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.service;
 import net.proselyte.crmsystem.model.User;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * service class for {@link User}
@@ -16,7 +17,7 @@ public interface UserService {
 
     User findByUserName(String username);
 
-    User getById(Long id);
+    User getById(UUID id);
 
     Collection getAll();
 }

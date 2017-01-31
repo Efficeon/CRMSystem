@@ -10,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * JPA implmentation of {@link UserDAO} interface.
@@ -26,7 +27,7 @@ public class JpaUserDAOImpl implements UserDAO {
     private final static Logger logger = Logger.getLogger(JpaRoleDAOImpl.class);
 
     @Override
-    public User getById(Long id) {
+    public User getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
