@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS companies_tags (
 
 CREATE TABLE IF NOT EXISTS deals
 (
-  id              SERIAL       NOT NULL PRIMARY KEY,
+  id              UUID       NOT NULL PRIMARY KEY,
   name            VARCHAR(255) NOT NULL,
   budget          INTEGER NOT NULL,
   created         TIMESTAMP    NOT NULL,
@@ -92,14 +92,14 @@ CREATE TABLE IF NOT EXISTS deals
 
 CREATE TABLE IF NOT EXISTS dealstatus
 (
-  id              SERIAL       NOT NULL PRIMARY KEY,
-  name            VARCHAR(255) NOT NULL,
+  id              UUID       NOT NULL PRIMARY KEY,
+  name            VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS deals_users
 (
-  deal_id         INTEGER       NOT NULL PRIMARY KEY,
-  user_id         INTEGER       NOT NULL PRIMARY KEY,
+  deal_id         UUID       NOT NULL,
+  user_id         UUID       NOT NULL,
 
   FOREIGN KEY (deal_id) REFERENCES deals (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
