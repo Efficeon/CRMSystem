@@ -52,7 +52,7 @@ public class UserValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "key.required");
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userType", "key.required");
+        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userType", "key.required");
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "key.required");
 

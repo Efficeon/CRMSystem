@@ -6,9 +6,11 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * JPA implementation of {@link RoleDAO} interface.
@@ -26,7 +28,7 @@ public class JpaRoleDAOImpl implements RoleDAO {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Role getById(Long id) {
+    public Role getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT  role FROM  Role role LEFT JOIN FETCH  role.users WHERE role.id =:id");
         query.setParameter("id", id);
 
@@ -34,6 +36,18 @@ public class JpaRoleDAOImpl implements RoleDAO {
         logger.info("Role successfully loaded. Role details: " + role);
 
         return role;
+    }
+
+    @Override
+    public Role findByName(String name) {
+        try {
+            Query query = this.entityManager.createQuery("FROM Role role WHERE role.name=:name", Role.class);
+            query.setParameter("name", name);
+            Role role = (Role) query.getSingleResult();
+            return role;
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Implementation of {@link RoleService} interface.
@@ -23,8 +24,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public Role getById(Long id) {
+    public Role getById(UUID id) {
         return roleDAO.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public Role findByRoleName(String name){
+        return roleDAO.findByName(name);
     }
 
     @Override
@@ -43,5 +50,11 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public void remove(Role role) {
         roleDAO.remove(role);
+    }
+
+    @Override
+    @Transactional
+    public Role findByName(String name){
+        return roleDAO.findByName(name);
     }
 }

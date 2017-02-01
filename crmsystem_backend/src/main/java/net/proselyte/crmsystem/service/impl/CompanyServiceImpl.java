@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Implementation of {@link CompanyService} interface.
@@ -23,7 +24,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     @Transactional
-    public Company getById(Long id) {
+    public Company getById(UUID id) {
         return companyDAO.getById(id);
     }
 
