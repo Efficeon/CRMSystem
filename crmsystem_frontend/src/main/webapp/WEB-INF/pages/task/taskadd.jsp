@@ -19,49 +19,28 @@
 <br>
 <br>
 
-<%--объявляем форму и Model, с которой работаем--%>
 <form:form method="POST" modelAttribute="task">
     <form class="form-inline">
         <div class="form-group">
 
-           <%--проверка: заполнено ли поле "имя" у конкретной задачи--%>
-    <%--ЗАЧЕМ эта проверка ???--%>
-           <%--Заменил на проверку ID. То же поле ID прописал в связывании--%>
             <c:if test="${!empty task.id}">
 
-                <%--в текстовых полях формы мы выводим, как placeholder, находящиеся в DB значения--%>
-                <%--все поля можно заполнять/изменять--%>
-<%--<spring:bind path="id">--%>
-
-                <%--ЗАЧЕМ заполнение поля ID ???--%>
-                    <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
-                                 <%--disabled="true" placeholder='ID${id}'></form:input>--%>
-<%--</spring:bind>--%>
+                    <form:input  type="text" path="id" class="form-group" readonly="true"
+                                 disabled="true" placeholder='ID${id}'></form:input>
             </c:if>
-            <%--<spring:bind path="name">--%>
                 <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${name}' autofocus="true"></form:input>
-            <%--</spring:bind>--%>
 
-            <%--<spring:bind path="description">--%>
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${description}' autofocus="true"></form:input>
-            <%--</spring:bind>--%>
 
-
-                <%--поле Model, связанное с полем формы, которое будет подвергнуто изменениям вследствие отработки данного элемента формы--%>
-    <%--не уверен, что spring bind path верно указан--%>
-            <%--<spring:bind path="responsUser">--%>
-                <%--элемент select будет брать все выводимые значения именно из этого поля модели--%>
                 <form:select path="responsUser">
-                    <%--надпись-подсказка для элемента select "по умолчанию"--%>
                     <form:option value="0" label="Select only one"/>
-                    <%--в выпадающем списке помещаем всех users для назначения на задачу одного из них--%>
+<%--server получит user.id, client увидит username--%>
                     <form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />
                 </form:select>
-            <%--</spring:bind>--%>
 
-                <%--кнопка подтверждения команды на внесение/изменение данных по задаче--%>
+<%--кнопка подтверждения команды на внесение/изменение данных по задаче--%>
             <button type="submit">
                 <spring:message text="Add"/>
             </button>
@@ -70,7 +49,7 @@
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
 
-    <%--кнопка перехода на страницу "tasks.jsp" - отображение актуального списка всех задач  --%>
+<%--кнопка перехода на страницу "tasks.jsp" - отображение актуального списка всех задач  --%>
     <button type="button">
         <a href="<c:url value='/task/' />">Complete</a>
     </button>
