@@ -4,6 +4,7 @@ import net.proselyte.crmsystem.model.Deal;
 import net.proselyte.crmsystem.model.User;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Service interface for class {@link Deal}
@@ -12,7 +13,7 @@ import java.util.Collection;
 
 
 public interface DealService {
-    Deal getById(Long id);
+    Deal getById(UUID id);
 
     Collection<Deal> getAll();
 
@@ -20,7 +21,7 @@ public interface DealService {
 
     void remove(Deal deal);
 
-    public Deal findByResponsibleUser(long id);
+    public Deal findByResponsibleUser(UUID id);
 
 
 }

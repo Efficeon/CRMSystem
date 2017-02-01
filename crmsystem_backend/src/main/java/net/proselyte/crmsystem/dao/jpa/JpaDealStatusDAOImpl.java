@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * JPA implementation of {@link net.proselyte.crmsystem.dao.DealStatusDAO} interface.
@@ -29,7 +30,7 @@ public class JpaDealStatusDAOImpl implements DealStatusDAO{
 
 
     @Override
-    public DealStatus getById(Long id) {
+    public DealStatus getById(UUID id) {
         Query query = this.entityManager.createQuery(
                 "SELECT DISTINCT dealStatus FROM DealStatus dealStatus WHERE dealStatus.id =:id");
 

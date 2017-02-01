@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Controller for class {@link net.proselyte.crmsystem\service\DealService.java}
@@ -35,21 +36,21 @@ public class DealController {
     }
 
     @RequestMapping(value = "dealData/{id}", method = RequestMethod.GET)
-    public String dealData(@PathVariable("id") Long id, Model model){
+    public String dealData(@PathVariable("id") UUID id, Model model){
         Deal deal = this.dealService.getById(id);
         model.addAttribute("deal", deal);
         return "deal/dealData";
     }
 
     @RequestMapping(value = "deal/remove", method = RequestMethod.GET)
-    public String removeDeal(@PathVariable("id") Long id, Model model){
+    public String removeDeal(@PathVariable("id") UUID id, Model model){
         this.dealService.remove(this.dealService.getById(id));
         return "redirect:/deal";
     }
 
     @RequestMapping(value = "deal/addDeal", method = RequestMethod.POST)
     public String addDeal(@PathVariable("budget") Double budget, @PathVariable("responsibleUser")
-            Long responsibleUserId){
+        UUID responsibleUserId){
         Deal tempdeal = new Deal();
         tempdeal.setBudget(budget);
         tempdeal.setResponsibleUser(this.userService.getById(responsibleUserId));

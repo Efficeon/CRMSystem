@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.lang.Override;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * JPA implementation of {@link net.proselyte.crmsystem.dao.DealDAO} interface.
@@ -28,7 +29,7 @@ public class JpaDealDAOImpl implements DealDAO {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Deal getById(Long id) {
+    public Deal getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal WHERE deal.id =:id");
         query.setParameter("id", id);
 
@@ -69,7 +70,7 @@ public class JpaDealDAOImpl implements DealDAO {
     }
 
     @Override
-    public Deal findByResponsibleUser(long id){
+    public Deal findByResponsibleUser(UUID id){
         Query query = this.entityManager.createQuery("SELECT deal FROM  Deal deal WHERE deal.responsibleUser.id =:id");
         query.setParameter("id", id);
 

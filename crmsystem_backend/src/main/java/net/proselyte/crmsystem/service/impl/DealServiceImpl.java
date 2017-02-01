@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -18,7 +19,7 @@ public class DealServiceImpl implements DealService {
 
     @Override
     @Transactional
-    public Deal getById(Long id) {
+    public Deal getById(UUID id) {
         Deal tempDeal = this.dealDAO.getById(id);
         logger.info("Getting deal. Details:" + tempDeal);
         return tempDeal;
@@ -50,7 +51,7 @@ public class DealServiceImpl implements DealService {
 
     @Override
     @Transactional
-    public Deal findByResponsibleUser(long id) {
+    public Deal findByResponsibleUser(UUID id) {
         Deal tempDeal = this.dealDAO.findByResponsibleUser(id);
         logger.info("Deal is found. Details: " + tempDeal);
         return tempDeal;

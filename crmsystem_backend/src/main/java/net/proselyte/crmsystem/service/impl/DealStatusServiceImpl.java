@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Implementation of interface of {@link net.proselyte.crmsystem.service.DealStatusService}.
@@ -24,7 +25,7 @@ public class DealStatusServiceImpl implements DealStatusService{
 
     @Override
     @Transactional
-    public DealStatus getById(Long id) {
+    public DealStatus getById(UUID id) {
         return jpaDealStatusDAO.getById(id);
 
     }
