@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.model;
 
 import javax.persistence.*;
 import java.util.List;
+import net.proselyte.crmsystem.model.Deal;
 
 /**
  * Model class {@link net.proselyte.crmsystem.model.DealStatus}.
@@ -16,7 +17,7 @@ import java.util.List;
 @Table(name = "dealstatus")
 public class DealStatus extends NamedEntity{
 
-    @OneToMany(mappedBy = "dealstatusid")
+    @OneToMany(mappedBy = "dealStatus")
     private List<Deal> dealList;
 
     void addDeal(Deal deal){
