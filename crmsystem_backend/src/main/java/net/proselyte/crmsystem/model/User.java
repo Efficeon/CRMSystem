@@ -145,6 +145,7 @@ public class User extends BaseEntity {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
 
     public Set<Company> getAssociatedСompany() {
         return associatedСompany;
