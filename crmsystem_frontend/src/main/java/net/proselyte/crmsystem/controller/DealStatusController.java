@@ -25,13 +25,13 @@ public class DealStatusController {
     @Autowired
     DealService dealService;
 
-    @RequestMapping(name = "/dealStatuses", method = RequestMethod.GET)
+    @RequestMapping(value = "/dealStatuses", method = RequestMethod.GET)
     public String listDealStatus(Model model){
         model.addAttribute("listDealStatuses", this.dealStatusService.getAll());
         return "dealStatuses";
     }
 
-    @RequestMapping(name = "dealStatuses/add", method = RequestMethod.GET)
+    @RequestMapping(value = "dealStatuses/add", method = RequestMethod.GET)
     public String addDealStatus(Model model){
         DealStatus tempDealStatus  = new DealStatus();
         model.addAttribute("dealstatus", tempDealStatus);
@@ -39,25 +39,25 @@ public class DealStatusController {
         return "dealStatusesAdd";
     }
 
-    @RequestMapping(name = "dealStatuses/add", method = RequestMethod.POST)
+    @RequestMapping(value = "dealStatuses/add", method = RequestMethod.POST)
     public String addDealStatusData(@ModelAttribute DealStatus dealStatus){
         this.dealStatusService.save(dealStatus);
         return "redirect:/dealStatus/";
     }
 
-    @RequestMapping(name = "removedealstatus/{id}/", method = RequestMethod.GET)
+    @RequestMapping(value = "removedealstatus/{id}/", method = RequestMethod.GET)
     public String removeDealStatus(@PathVariable Long id){
         this.dealStatusService.remove(this.dealStatusService.getById(id));
         return "redirect:/dealStatus/";
     }
 
-    @RequestMapping(name = "/editDealStatus/{id}")
+    @RequestMapping(value = "/editDealStatus/{id}")
     public String editDealStatus(@PathVariable("id") Long id, Model model){
         model.addAttribute("dealStatus", this.dealStatusService.getById(id));
         return "dealstatus/dealStatusesAdd";
     }
 
-    @RequestMapping(name = "editDealStatus/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "editDealStatus/{id}", method = RequestMethod.POST)
     public String editSubmit(@PathVariable("id") Long id, @ModelAttribute DealStatus dealStatus){
         dealStatus.setId(id);
 

@@ -27,27 +27,27 @@ public class DealController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(name = "deal", method = RequestMethod.GET)
+    @RequestMapping(value = "deal", method = RequestMethod.GET)
     public String deals(Model model){
         Collection<Deal> listDeals = this.dealService.getAll();
         model.addAttribute("listDeals", listDeals);
         return "deal/deals";
     }
 
-    @RequestMapping(name = "dealData/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "dealData/{id}", method = RequestMethod.GET)
     public String dealData(@PathVariable("id") Long id, Model model){
         Deal deal = this.dealService.getById(id);
         model.addAttribute("deal", deal);
         return "deal/dealData";
     }
 
-    @RequestMapping(name = "deal/remove", method = RequestMethod.GET)
+    @RequestMapping(value = "deal/remove", method = RequestMethod.GET)
     public String removeDeal(@PathVariable("id") Long id, Model model){
         this.dealService.remove(this.dealService.getById(id));
         return "redirect:/deal";
     }
 
-    @RequestMapping(name = "deal/addDeal", method = RequestMethod.POST)
+    @RequestMapping(value = "deal/addDeal", method = RequestMethod.POST)
     public String addDeal(@PathVariable("budget") Double budget, @PathVariable("responsibleUser")
             Long responsibleUserId){
         Deal tempdeal = new Deal();

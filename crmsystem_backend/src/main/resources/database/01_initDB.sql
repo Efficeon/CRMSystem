@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS contact
   skype           VARCHAR(255) NOT NULL,
   phone_number    VARCHAR(11) NOT NULL,
   create_date     TIMESTAMP    NOT NULL,
-  update_date     TIMESTAMP    NOT NULL,
+  update_date     TIMESTAMP    NOT NULL
 )
 <<<<<<< HEAD
 
@@ -86,3 +86,32 @@ CREATE TABLE IF NOT EXISTS companies_tags (
 );
 =======
 >>>>>>> ac7d3c7f76aa92c998fad8dd26bc6e7f67b96256
+
+CREATE TABLE IF NOT EXISTS deals
+(
+  id              SERIAL       NOT NULL PRIMARY KEY,
+  name            VARCHAR(255) NOT NULL,
+  budget          INTEGER NOT NULL,
+  created         TIMESTAMP    NOT NULL,
+  updated         TIMESTAMP    NOT NULL,
+  dealstatusid    INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS dealstatus
+(
+  id              SERIAL       NOT NULL PRIMARY KEY,
+  name            VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS deals_users
+(
+  deal_id         INTEGER       NOT NULL PRIMARY KEY,
+  user_id         INTEGER       NOT NULL PRIMARY KEY,
+
+  FOREIGN KEY (deal_id) REFERENCES deals (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+
+
+

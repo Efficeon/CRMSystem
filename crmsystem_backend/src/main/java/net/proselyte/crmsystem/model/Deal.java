@@ -8,7 +8,7 @@ import java.util.Set;
 import org.hibernate.*;
 
 @Entity
-@Table(name = "Deals")
+@Table(name = "deals")
 public class Deal extends BaseEntity {
 
     @Column(name = "budget")
@@ -21,12 +21,12 @@ public class Deal extends BaseEntity {
     private Date updated;
 
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinTable(name="deal_user", joinColumns = @JoinColumn(name="deal_id", referencedColumnName="id"),
+    @JoinTable(name="deals_users", joinColumns = @JoinColumn(name="deal_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName="id"))
     private User responsibleUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dealStatusId")
+    @JoinColumn(name = "dealstatusid")
     private DealStatus dealStatus;
 
     public double getBudget() {

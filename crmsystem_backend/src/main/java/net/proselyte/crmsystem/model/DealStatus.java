@@ -13,10 +13,10 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "DealStatus")
+@Table(name = "dealstatus")
 public class DealStatus extends NamedEntity{
 
-    @OneToMany(mappedBy = "dealStatus")
+    @OneToMany(mappedBy = "dealstatusid")
     private List<Deal> dealList;
 
     void addDeal(Deal deal){
