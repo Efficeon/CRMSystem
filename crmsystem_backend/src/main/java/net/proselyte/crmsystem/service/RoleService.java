@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.service;
 import net.proselyte.crmsystem.model.Role;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Service interface for class {@link Role}.
@@ -10,11 +11,15 @@ import java.util.Collection;
  * @author Eugene Suleimanov
  */
 public interface RoleService {
-    Role getById(Long id);
+    Role getById(UUID id);
+
+    Role findByRoleName(String name);
 
     Collection<Role> getAll();
 
     void save(Role role);
 
     void remove(Role role);
+
+    Role findByName(String name);
 }

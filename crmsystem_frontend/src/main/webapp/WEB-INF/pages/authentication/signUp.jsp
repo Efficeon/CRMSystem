@@ -18,7 +18,6 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
-
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
@@ -78,15 +77,6 @@
                 <form:input type="password" path="confirmPassword" class="form-control"
                             placeholder='${confirmPassword}'></form:input>
                 <form:errors path="confirmPassword"></form:errors>
-            </div>
-        </spring:bind>
-
-        <spring:bind path="userType">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <spring:message code="registration.placeholder.usertype" var="Usertype"/>
-                <form:input type="text" path="userType" class="form-control" placeholder='${Usertype}'
-                            autofocus="true"></form:input>
-                <form:errors path="userType"></form:errors>
             </div>
         </spring:bind>
 
