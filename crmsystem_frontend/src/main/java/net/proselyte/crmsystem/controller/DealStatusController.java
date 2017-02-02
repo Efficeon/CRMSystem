@@ -44,7 +44,7 @@ public class DealStatusController {
     @RequestMapping(value = "dealStatuses/add", method = RequestMethod.POST)
     public String addDealStatusData(@ModelAttribute DealStatus dealStatus){
         this.dealStatusService.save(dealStatus);
-        return "redirect:/dealStatus/";
+        return "redirect:/dealStatuses/";
     }
 
     @RequestMapping(value = "removedealstatus/{id}/", method = RequestMethod.GET)
