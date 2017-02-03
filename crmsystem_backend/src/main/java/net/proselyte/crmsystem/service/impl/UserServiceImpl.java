@@ -49,10 +49,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public void remove(User user) {
+        userDao.remove(user);
+    }
+
+    @Override
+    @Transactional
     public User findByUserName(String username) {
         return userDao.findByUserName(username);
     }
-
 
     @Override
     @Transactional

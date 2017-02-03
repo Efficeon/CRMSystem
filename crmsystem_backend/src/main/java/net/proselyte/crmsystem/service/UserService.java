@@ -15,6 +15,8 @@ public interface UserService {
 
     void save(User user);
 
+    void remove(User user);
+
     User findByUserName(String username);
 
     User getById(UUID id);
