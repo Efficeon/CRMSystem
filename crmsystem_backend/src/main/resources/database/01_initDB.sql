@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS tasks(
   id SERIAL NOT NULL PRIMARY KEY ,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  responsible_user SERIAL NOT NULL,
+  responsible_person SERIAL NOT NULL,
   created TIMESTAMP NOT NULL,
   updated TIMESTAMP NOT NULL,
 
-  FOREIGN KEY (responsible_user) REFERENCES users (id)
+  FOREIGN KEY (responsible_person) REFERENCES users (id)
 );
 
 -- companies

@@ -11,13 +11,12 @@
 <body>
 <h1>Task details</h1>
 
-<%--Почему нигде нет указания на связь с Model???--%>
 <table class="table table-striped">
     <tr>
         <th width="25">ID</th>
         <th width="120">Name</th>
         <th width="200">Description</th>
-        <th width="80">Responsible user</th>
+        <th width="80">Responsible person</th>
         <th width="50">Created</th>
         <th width="50">Updated</th>
         <th width="50">Delete</th>
@@ -26,7 +25,7 @@
         <td>${task.id}</td>
         <td>${task.name}</td>
         <td>${task.description}</td>
-        <td>${task.responsUser}</td>
+        <td>${task.responsiblePerson}</td>
         <td>${task.created}</td>
         <td>${task.updated}</td>
         <td><a href="<c:url value='/removetask/${task.id}'/>">Delete</a></td>

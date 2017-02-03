@@ -38,7 +38,7 @@
             <th class="text-center" width="25">ID</th>
             <th class="text-center" width="120">Name</th>
             <th class="text-center" width="200">Description</th>
-            <th class="text-center" width="80">Responsible user</th>
+            <th class="text-center" width="80">Responsible person</th>
             <th class="text-center" width="50">Created</th>
             <th class="text-center" width="50">Updated</th>
             <%--предусматриваем возможность следующих действий отдельным запросом по линку --%>
@@ -53,8 +53,7 @@
                 <td>${task.id}</td>
                 <td>${task.name}</td>
                 <td>${task.description}</td>
-                <%--т.к. исполнитель назначается только 1 на задачу, то просто выводим значение поля "responsibleUser"--%>
-                <td>${task.responsibleUser}</td>
+                <td>${task.responsiblePerson}</td>
                 <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <%--ячейки заполняются значениями из заголовков - "по умолчанию"--%>

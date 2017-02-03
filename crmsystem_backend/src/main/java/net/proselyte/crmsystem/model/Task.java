@@ -18,8 +18,8 @@ public class Task extends NamedEntity{
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "responsible_user")
-    private User responsUser;
+    @JoinColumn(name = "implementer")
+    private User implementer;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "created")
@@ -42,12 +42,12 @@ public class Task extends NamedEntity{
         this.description = description;
     }
 
-    public User getResponsibleUser() {
-        return responsUser;
+    public User getImplementer() {
+        return implementer;
     }
 
-    public void setResponsibleUser(User responsUser) {
-        this.responsUser = responsUser;
+    public void setResponsiblePerson(User implementer) {
+        this.implementer = implementer;
     }
 
     public Date getCreated() {
@@ -69,10 +69,10 @@ public class Task extends NamedEntity{
     @Override
     public String toString() {
         return "Task{" +
-                "description='" + description + '\'' +
-                ", responsibleUser=" + responsUser +
-                ", created=" + created +
-                ", updated=" + updated +
+                "description ='" + description + '\'' +
+                ", implementer =" + implementer +
+                ", created =" + created +
+                ", updated =" + updated +
                 '}';
     }
 }

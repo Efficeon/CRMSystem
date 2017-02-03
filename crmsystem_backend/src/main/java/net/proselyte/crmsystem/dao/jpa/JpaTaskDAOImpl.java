@@ -27,7 +27,7 @@ public class JpaTaskDAOImpl implements TaskDAO{
     @Override
     public Task getById(Long id) {
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.responsibleUser WHERE task.id =:id");
+                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
 
         query.setParameter("id", id);
         Task task = (Task) query.getSingleResult();
@@ -41,7 +41,7 @@ public class JpaTaskDAOImpl implements TaskDAO{
     public Collection<Task> getAll() {
         Collection<Task> result;
         Query query = entityManager.createQuery(
-                "SELECT task FROM Task task LEFT JOIN FETCH task.responsibleUser");
+                "SELECT task FROM Task task LEFT JOIN FETCH task.implementer");
 
         result = query.getResultList();
 

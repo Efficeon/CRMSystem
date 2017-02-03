@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.UUID;
+
 /**
  * Controller for {@link Task}'s pages.
  *
@@ -40,7 +42,7 @@ public class TaskController {
 //    передаем для отображения во view taskdata.jsp (Task details)
 
     @RequestMapping(value="taskdata/{id}/", method = RequestMethod.GET)
-    public String taskData(@PathVariable("id") Long id, Model model){
+    public String taskData(@PathVariable("id") UUID id, Model model){
         model.addAttribute("task", this.taskService.getById(id));
         return "task/taskdata";
     }
@@ -49,7 +51,7 @@ public class TaskController {
 //    переадресация на "tasks.jsp", отображающую список всех задач
 
     @RequestMapping("removetask/{id}/")
-    public String removeTask(@PathVariable("id") Long id){
+    public String removeTask(@PathVariable("id") UUID id){
         this.taskService.remove(taskService.getById(id));
         return "redirect:/task/";
     }
@@ -81,7 +83,7 @@ public class TaskController {
 //    передаем для отображения во view taskadd.jsp (Task add)
 
     @RequestMapping(value = "/edittask/{id}")
-    public String editTask(@PathVariable("id") Long id, Model model){
+    public String editTask(@PathVariable("id") UUID id, Model model){
         model.addAttribute("task", this.taskService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
         //model.addAttribute("user", new User());
@@ -89,10 +91,10 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/edittask/{id}", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") Long id,
+    public String editSubmit(@PathVariable("id") UUID id,
                              @ModelAttribute Task task){
         task.setId(id);
-        task.setResponsibleUser(this.taskService.getById(id).getResponsibleUser());
+        task.setResponsiblePerson(this.taskService.getById(id).getResponsiblePerson());
         this.taskService.save(task);
         return "redirect:/task/";
     }
@@ -100,8 +102,8 @@ public class TaskController {
 
 
     @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
-    public String addResponsibleUser(@PathVariable("userId") Long userId,
-                                     @PathVariable("taskId") Long taskId,
+    public String addResponsibleUser(@PathVariable("userId") UUID userId,
+                                     @PathVariable("taskId") UUID taskId,
                                      @ModelAttribute Task task,
                                      Model model){
         task = this.taskService.getById(taskId);
@@ -131,8 +133,8 @@ public class TaskController {
 
 
     @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
-    public String removeResponsibleUser(@PathVariable("userId") Long userId,
-                                        @PathVariable("taskId") Long taskId,
+    public String removeResponsibleUser(@PathVariable("userId") UUID userId,
+                                        @PathVariable("taskId") UUID taskId,
                                         @ModelAttribute Task task,
                                         Model model){
         task = this.taskService.getById(taskId);
