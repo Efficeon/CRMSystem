@@ -46,7 +46,7 @@ public class Task extends NamedEntity{
         return implementer;
     }
 
-    public void setResponsiblePerson(User implementer) {
+    public void setImplementer(User implementer) {
         this.implementer = implementer;
     }
 
@@ -67,12 +67,37 @@ public class Task extends NamedEntity{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Task task = (Task) o;
+
+        if (!description.equals(task.description)) return false;
+        if (!implementer.equals(task.implementer)) return false;
+        if (!created.equals(task.created)) return false;
+        return updated.equals(task.updated);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + implementer.hashCode();
+        result = 31 * result + created.hashCode();
+        result = 31 * result + updated.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Task{" +
-                "description ='" + description + '\'' +
-                ", implementer =" + implementer +
-                ", created =" + created +
-                ", updated =" + updated +
+                "description='" + description + '\'' +
+                ", implementer=" + implementer +
+                ", created=" + created +
+                ", updated=" + updated +
                 '}';
     }
 }

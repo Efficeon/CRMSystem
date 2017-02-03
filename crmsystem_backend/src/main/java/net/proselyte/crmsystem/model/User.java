@@ -48,16 +48,11 @@ public class User extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "responsiblePerson", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Task> tasks;
-
     @ManyToMany(mappedBy = "responsibleUser")
     private Set<Company> associatedСompany;
 
-    @PrePersist
-    public void getDate() {
-        registrationDate = new Date();
-    }
+    @OneToMany(mappedBy = "implementer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Task> tasks;
 
     public String getEmail() {
         return email;
@@ -139,20 +134,20 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     public Set<Company> getAssociatedСompany() {
         return associatedСompany;
     }
 
     public void setAssociatedСompany(Set<Company> associatedСompany) {
         this.associatedСompany = associatedСompany;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
@@ -174,5 +169,20 @@ public class User extends BaseEntity {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", userType='" + userType + '\'' +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
