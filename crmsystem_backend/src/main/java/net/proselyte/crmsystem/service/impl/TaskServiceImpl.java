@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Implementation of {@link TaskService}.
@@ -22,7 +23,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     @Transactional
-    public Task getById(Long id) {
+    public Task getById(UUID id) {
         return taskDAO.getById(id);
     }
 

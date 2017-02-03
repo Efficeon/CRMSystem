@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.service;
 import net.proselyte.crmsystem.model.Task;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Service interface for class {@link Task}
@@ -12,7 +13,7 @@ import java.util.Collection;
 
 public interface TaskService {
 
-    Task getById(Long id);
+    Task getById(UUID id);
 
     Collection<Task> getAll();
 

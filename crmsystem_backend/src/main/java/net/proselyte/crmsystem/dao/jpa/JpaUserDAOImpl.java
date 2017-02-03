@@ -28,7 +28,7 @@ public class JpaUserDAOImpl implements UserDAO {
 
     @Override
     public User getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles, user.tasks WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
@@ -41,7 +41,7 @@ public class JpaUserDAOImpl implements UserDAO {
     public Collection<User> getAll() {
         Collection<User> result;
 
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles, user.tasks");
         result = query.getResultList();
 
         for (User user : result) {
@@ -72,7 +72,7 @@ public class JpaUserDAOImpl implements UserDAO {
     public User findByUserName(String username) {
 
         try {
-            Query query = this.entityManager.createQuery("FROM User user WHERE user.username=:name", User.class);
+            Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
             return user;
