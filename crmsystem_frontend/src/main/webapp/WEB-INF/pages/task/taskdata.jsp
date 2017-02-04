@@ -25,7 +25,7 @@
         <td>${task.id}</td>
         <td>${task.name}</td>
         <td>${task.description}</td>
-        <td>${task.responsiblePerson}</td>
+        <td>${task.implementer}</td>
         <td>${task.created}</td>
         <td>${task.updated}</td>
         <td><a href="<c:url value='/removetask/${task.id}'/>">Delete</a></td>

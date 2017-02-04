@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 
 <html>
@@ -32,7 +33,7 @@
     <table class="table table-striped table-condensed">
         <tr>
             <th class="text-center" width="25">ID</th>
-            <th class="text-center" width="120">E-mail</th>
+            <th class="text-center" width="120">User e-mail</th>
             <th class="text-center" width="200">User type</th>
             <th class="text-center" width="80">username</th>
             <th class="text-center" width="50">First name</th>
@@ -44,7 +45,7 @@
             <th class="text-center" width="50">Edit</th>
             <th class="text-center" width="50">Delete</th>
         </tr>
-        <c:forEach items="${listTasks}" var="task">
+        <c:forEach items="${listUsers}" var="task">
             <tr>
                 <td>${task.id}</td>
                 <td>${task.name}</td>
