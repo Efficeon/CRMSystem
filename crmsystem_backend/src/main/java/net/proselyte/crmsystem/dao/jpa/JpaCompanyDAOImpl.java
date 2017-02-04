@@ -25,7 +25,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
 
     private final static Logger logger = Logger.getLogger(JpaCompanyDAOImpl.class);
 
-    //@Override
+    @Override
     public Company getById(UUID id) {
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
@@ -38,7 +38,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         return company;
     }
 
-    //@Override
+    @Override
     public Collection<Company> getAll() {
         List<Company> result;
 
@@ -59,7 +59,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         return result;
     }
 
-    //@Override
+    @Override
     public void save(Company company) {
         if (company.getId() == null) {
             company.setCreated(new Date());
@@ -74,7 +74,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         }
     }
 
-    //@Override
+    @Override
     public void remove(Company company) {
         this.entityManager.remove(this.entityManager.getReference(Company.class, company.getId()));
         logger.info("Company successfully removed. Company details: " + company);

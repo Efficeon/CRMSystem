@@ -28,7 +28,7 @@
 <br>
 <br>
 
-<c:if test="${!empty listTasks}">
+<c:if test="${!empty }">
     <table class="table table-striped table-condensed">
         <tr>
             <th class="text-center" width="25">ID</th>

@@ -94,7 +94,7 @@ public class TaskController {
     public String editSubmit(@PathVariable("id") UUID id,
                              @ModelAttribute Task task){
         task.setId(id);
-        task.setResponsiblePerson(this.taskService.getById(id).getResponsiblePerson());
+        task.setImplementer(this.taskService.getById(id).getImplementer());
         this.taskService.save(task);
         return "redirect:/task/";
     }
@@ -113,7 +113,7 @@ public class TaskController {
                 usersTemp.remove(user);
             }
         }*/
-        task.setResponsibleUser(this.userService.getById(userId));
+        task.setImplementer(this.userService.getById(userId));
         this.taskService.save(task);
         model.addAttribute("listTasks", this.userService.getAll());
         model.addAttribute("task", this.taskService.getById(taskId));
@@ -121,10 +121,10 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
-    public String addResponsibleUserSubmit(@PathVariable("taskId") Long taskId,
+    public String addResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
                                            @ModelAttribute Task task){
         task.setId(taskId);
-        task.setResponsibleUser(this.taskService.getById(taskId).getResponsibleUser());
+        task.setImplementer(this.taskService.getById(taskId).getResponsibleUser());
         this.taskService.save(task);
         return "redirect:/task/";
     }
@@ -148,7 +148,7 @@ public class TaskController {
 
 
     @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
-    public String removeResponsibleUserSubmit(@PathVariable("taskId") Long taskId,
+    public String removeResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
                                               @ModelAttribute Task task){
         task.setId(taskId);
         task.setResponsibleUser(this.taskService.getById(taskId).getResponsibleUser());
