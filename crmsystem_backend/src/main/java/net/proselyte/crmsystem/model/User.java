@@ -54,6 +54,11 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "implementer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Task> tasks;
 
+    @PrePersist
+    public void getDate() {
+        registrationDate = new Date();
+    }
+
     public String getEmail() {
         return email;
     }
