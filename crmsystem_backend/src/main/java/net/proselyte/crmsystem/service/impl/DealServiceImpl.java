@@ -7,6 +7,8 @@ import net.proselyte.crmsystem.service.DealService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -28,11 +30,27 @@ public class DealServiceImpl implements DealService {
     @Override
     @Transactional
     public Collection<Deal> getAll() {
-        Collection<Deal> listDeals = this.dealDAO.getAll();
-        for(Deal deal: listDeals){
-            logger.info("List deals: " + deal);
+        try {
+            Writer fileWriter = new BufferedWriter(new FileWriter(new File("D:\\crmsystem.txt")));
+            fileWriter.write("inside dealserviceImpl.getAll()..");
+            fileWriter.flush();
+//            fileWriter.close();
+
+            Collection<Deal> listDeals = new ArrayList<>();//this.dealDAO.getAll();
+            fileWriter.write("inside dealserviceImpl.getAll()...list Deals: " + listDeals);
+            fileWriter.flush();
+            fileWriter.close();
+
+            for (Deal deal : listDeals) {
+                logger.info("List deals: " + deal);
+            }
+
+            return listDeals;
+        } catch (IOException ioexc){
+            ioexc.printStackTrace();
+            return null;
         }
-        return listDeals;
+
     }
 
     @Override

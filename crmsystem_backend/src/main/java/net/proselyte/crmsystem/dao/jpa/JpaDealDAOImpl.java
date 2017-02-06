@@ -2,16 +2,14 @@ package net.proselyte.crmsystem.dao.jpa;
 
 import net.proselyte.crmsystem.dao.DealDAO;
 import net.proselyte.crmsystem.model.Deal;
-import net.proselyte.crmsystem.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.*;
 import java.lang.Override;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * JPA implementation of {@link net.proselyte.crmsystem.dao.DealDAO} interface.
@@ -39,17 +37,36 @@ public class JpaDealDAOImpl implements DealDAO {
         return deal;
     }
 
-    @Override
-    public Collection<Deal> getAll() {
-        Collection<Deal> result;
-        Query query = this.entityManager.createQuery("SELECT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
-        result = query.getResultList();
 
-        for (Deal deal : result) {
-            logger.info("deal list: " + deal);
+    public Collection<Deal> getAll() {
+        try{
+            Writer fileWriter = new BufferedWriter(new FileWriter(new File("D:\\crmsystem2.txt")));
+            fileWriter.write("inside JPADealDAOImpl.getAll()..");
+            fileWriter.flush();
+            List<Deal> result = new ArrayList<>() ;
+            Query query = this.entityManager.createQuery("SELECT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
+            result = query.getResultList();
+            if(result == null) {
+                System.out.println("RESULT == NULL!!");
+                logger.info("RESULT == NULL!!");
+                fileWriter.write("inside JPADealDAOImpl.getAll()..RESULT == NULL!!");
+                fileWriter.flush();
+                fileWriter.close();
+            }
+            for (Deal deal : result) {
+                logger.info("deal list: " + deal);
+                fileWriter.write(deal.toString());
+            }
+            fileWriter.close();
+            return result;
+
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+            return null;
         }
 
-        return result;
+
     }
 
     @Override

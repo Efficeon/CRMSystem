@@ -22,7 +22,8 @@
 </head>
 <body>
 <br>
-<a href="<c:url value='pages/deal/dealadd.jsp/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
+Add deal
+<a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
 
 </br>
 
@@ -54,69 +55,6 @@
     </c:forEach>
   </table>
 </c:if>
-
-<br>
-<h1>Add a Deal</h1>
-<br>
-<c:url var="addAction" value="/deal/addDeal"/>
-
-  <form:form action="${addAction}" commandName="deal">
-    <table>
-        <tr>
-          <td>
-            <form:label path="id">
-              <spring:message text="ID"/>
-            </form:label>
-          </td>
-          <td>
-            <form:input path="id" readonly="true" size="8" disabled="true"/>
-            <form:hidden path="deal.id"/>
-          </td>
-        </tr>
-
-      <tr>
-        <td>
-          <form:label path="budget">
-            <spring:message text="Budget"/>
-          </form:label>
-        </td>
-        <td>
-          <form:input path="deal.budget"/>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <form:label path="responsibleUser">
-            <spring:message text="responsibleUser"/>
-          </form:label>
-        </td>
-        <td>
-          <form:input path="deal.responsibleUser"/>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <form:label path="dealStatusId">
-            <spring:message text="dealStatusId"/>
-          </form:label>
-        </td>
-        <td>
-          <form:input path="deal.dealStatus"/>
-        </td>
-      </tr>
-
-      <tr>
-        <td colspan="2">
-          <c:if test="${!empty deal.budget}">
-            <input type="submit"
-                   value="<spring:message text="addDeal"/>"/>
-          </c:if>
-        </td>
-      </tr>
-    </table>
-  </form:form>
 
 </body>
 </html>
