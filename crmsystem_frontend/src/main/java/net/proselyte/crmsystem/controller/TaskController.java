@@ -1,7 +1,6 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.Task;
-import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.TaskService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +55,9 @@ public class TaskController {
         return "redirect:/task/";
     }
 
-
-//    "отработка" кнопки submit в "taskadd.jsp" ???
-//
+//    сохранение, передаваемого через Model, объекта task
+//    по факту, "отработка" кнопки submit в "taskadd.jsp" ???
+//    переадресация результата на edittask/${task.id}/
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task){
         this.taskService.save(task);
@@ -76,12 +75,9 @@ public class TaskController {
         return "task/taskadd";
     }
 
-
-
 //    получаем по id объект task, добавляем в Model,
 //    получаем Collection всех users - listUsers, добавляем в Model,
 //    передаем для отображения во view taskadd.jsp (Task add)
-
     @RequestMapping(value = "/edittask/{id}")
     public String editTask(@PathVariable("id") UUID id, Model model){
         model.addAttribute("task", this.taskService.getById(id));
@@ -90,6 +86,8 @@ public class TaskController {
         return "task/taskadd";
     }
 
+//    устанавливаем id для задачи
+//    ???  не очень понял
     @RequestMapping(value = "/edittask/{id}", method = RequestMethod.POST)
     public String editSubmit(@PathVariable("id") UUID id,
                              @ModelAttribute Task task){
@@ -100,59 +98,58 @@ public class TaskController {
     }
 
 
+//    поскольку один исполнитель на одну задачу, никакой особо работы с ним не предусмотрено
 
-    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
-    public String addResponsibleUser(@PathVariable("userId") UUID userId,
-                                     @PathVariable("taskId") UUID taskId,
-                                     @ModelAttribute Task task,
-                                     Model model){
-        task = this.taskService.getById(taskId);
-        /*ArrayList<User> usersTemp = (ArrayList<User>) this.userService.getAll();
-        for (User user : usersTemp){
-            if (task.getResponsibleUser().contains(user)){
-                usersTemp.remove(user);
-            }
-        }*/
-        task.setImplementer(this.userService.getById(userId));
-        this.taskService.save(task);
-        model.addAttribute("listTasks", this.userService.getAll());
-        model.addAttribute("task", this.taskService.getById(taskId));
-        return "task/taskadd";
-    }
+//    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
+//    public String addResponsibleUser(@PathVariable("userId") UUID userId,
+//                                     @PathVariable("taskId") UUID taskId,
+//                                     @ModelAttribute Task task,
+//                                     Model model){
+//        task = this.taskService.getById(taskId);
+//        /*ArrayList<User> usersTemp = (ArrayList<User>) this.userService.getAll();
+//        for (User user : usersTemp){
+//            if (task.getResponsibleUser().contains(user)){
+//                usersTemp.remove(user);
+//            }
+//        }*/
+//        task.setImplementer(this.userService.getById(userId));
+//        this.taskService.save(task);
+//        model.addAttribute("listTasks", this.userService.getAll());
+//        model.addAttribute("task", this.taskService.getById(taskId));
+//        return "task/taskadd";
+//    }
 
-    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
-    public String addResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
-                                           @ModelAttribute Task task){
-        task.setId(taskId);
-        task.setImplementer(this.taskService.getById(taskId).getResponsibleUser());
-        this.taskService.save(task);
-        return "redirect:/task/";
-    }
-
-
-
-
-    @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
-    public String removeResponsibleUser(@PathVariable("userId") UUID userId,
-                                        @PathVariable("taskId") UUID taskId,
-                                        @ModelAttribute Task task,
-                                        Model model){
-        task = this.taskService.getById(taskId);
-        task.removeResponsibleUser(this.userService.getById(userId));
-        this.taskService.save(task);
-        model.addAttribute("listTasks", this.userService.getAll());
-        model.addAttribute("task", this.taskService.getById(taskId));
-
-        return "task/taskadd";
-    }
+//    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
+//    public String addResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
+//                                           @ModelAttribute Task task){
+//        task.setId(taskId);
+//        task.setImplementer(this.taskService.getById(taskId).getResponsibleUser());
+//        this.taskService.save(task);
+//        return "redirect:/task/";
+//    }
 
 
-    @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
-    public String removeResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
-                                              @ModelAttribute Task task){
-        task.setId(taskId);
-        task.setResponsibleUser(this.taskService.getById(taskId).getResponsibleUser());
-        this.taskService.save(task);
-        return "redirect:/task/";
-    }
+//    @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
+//    public String removeResponsibleUser(@PathVariable("userId") UUID userId,
+//                                        @PathVariable("taskId") UUID taskId,
+//                                        @ModelAttribute Task task,
+//                                        Model model){
+//        task = this.taskService.getById(taskId);
+//        task.removeResponsibleUser(this.userService.getById(userId));
+//        this.taskService.save(task);
+//        model.addAttribute("listTasks", this.userService.getAll());
+//        model.addAttribute("task", this.taskService.getById(taskId));
+//
+//        return "task/taskadd";
+//    }
+//
+//
+//    @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
+//    public String removeResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
+//                                              @ModelAttribute Task task){
+//        task.setId(taskId);
+//        task.setResponsibleUser(this.taskService.getById(taskId).getResponsibleUser());
+//        this.taskService.save(task);
+//        return "redirect:/task/";
+//    }
 }

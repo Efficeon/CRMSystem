@@ -34,7 +34,7 @@
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${description}' autofocus="true"></form:input>
 
-                <form:select path="responsiblePerson">
+                <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
 <%--server получит user.id, client увидит username--%>
                     <form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />
