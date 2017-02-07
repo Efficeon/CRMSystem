@@ -23,43 +23,41 @@
 <body>
 <h1>Tasks</h1>
 <br>
+
 <button>
     <a href="<c:url value='/task/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create task</a>
 </button>
 <br>
 <br>
 
-<c:if test="${!empty }">
+<c:if test="${!empty userList}">
     <table class="table table-striped table-condensed">
         <tr>
             <th class="text-center" width="25">ID</th>
-            <th class="text-center" width="120">User e-mail</th>
-            <th class="text-center" width="200">User type</th>
-            <th class="text-center" width="80">username</th>
-            <th class="text-center" width="50">First name</th>
-            <th class="text-center" width="50">Last name</th>
+            <th class="text-center" width="50">username</th>
+            <th class="text-center" width="50">E-mail</th>
+            <th class="text-center" width="50">User type</th>
             <th class="text-center" width="50">Registration date</th>
-            <th class="text-center" width="50">Birth date</th>
-            <th class="text-center" width="50">User's roles</th>
-            <th class="text-center" width="50">Bindet tasks</th>
-            <th class="text-center" width="50">Edit</th>
-            <th class="text-center" width="50">Delete</th>
+            <th class="text-center" width="50">User details</th>
+
+            <%--<th class="text-center" width="50">First name</th>--%>
+            <%--<th class="text-center" width="50">Last name</th>--%>
+            <%--<th class="text-center" width="50">Birth date</th>--%>
+            <%--<th class="text-center" width="50">Companies</th>--%>
+            <%--<th class="text-center" width="50">Roles</th>--%>
+            <%--<th class="text-center" width="50">Bindet tasks</th>--%>
+            <%--<th class="text-center" width="50">Edit</th>--%>
+            <%--<th class="text-center" width="50">Delete</th>--%>
         </tr>
-        <c:forEach items="${listUsers}" var="task">
+        <c:forEach items="${userList}" var="user">
             <tr>
-                <td>${task.id}</td>
-                <td>${task.name}</td>
-                <td>${task.description}</td>
-                <td>${task.responsibleUser}</td>
-                <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                <td>${user.id}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.userType}</td>
+                <td><fmt:formatDate value="${user.registrationdate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/' />"
                                            span class="glyphicon glyphicon glyphicon-file " style="color: darkblue" /></td>
-                <td class="text-center"><a href="<c:url value='/edittask/${task.id}/' />"
-                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>
-                <td class="text-center"><a href="<c:url value='/removetask/${task.id}/' />"
-                                           span class="glyphicon glyphicon-remove" style="color: red" /></td>
-            </tr>
             </tr>
         </c:forEach>
     </table>

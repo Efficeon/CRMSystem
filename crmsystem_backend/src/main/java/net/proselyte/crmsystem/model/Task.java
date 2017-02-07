@@ -2,7 +2,6 @@ package net.proselyte.crmsystem.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * Simple JavaBean domain object that represents a Task.
@@ -21,17 +20,24 @@ public class Task extends NamedEntity{
     @JoinColumn(name = "implementer")
     private User implementer;
 
-    @Temporal(TemporalType.DATE)
+//    переименовать!!!  creationDate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created")
     private Date created;
 
-    @Temporal(TemporalType.DATE)
+//    переименовать!!! dateOfUpdate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated")
     private Date updated;
 
     public Task() {
         this.created = new Date();
         this.updated = new Date();
+    }
+
+    @PrePersist
+    public void getDate() {
+        created = new Date();
     }
 
     public String getDescription() {

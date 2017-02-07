@@ -54,6 +54,7 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "implementer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Task> tasks;
 
+//    автогенерация registrationDate, при создании нового объекта
     @PrePersist
     public void getDate() {
         registrationDate = new Date();
