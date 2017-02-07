@@ -1,11 +1,16 @@
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
+
+<!DOCTYPE HTML>
+
 <html>
 <head>
-    <a href="<c:url value='/user/' />" class="btn btn-lg" style="color: green">
+    <a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: green">
         <i class="glyphicon glyphicon-arrow-left"></i> All company</a>
     <title>Company details</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +36,7 @@
         <th class="text-center" width="50">Associated companies</th>
         <th class="text-center" width="50">Related tasks</th>
 
-        <th class="text-center" width="40">Edit</th>
+        <%--<th class="text-center" width="40">Edit</th>--%>
         <th class="text-center" width="40">Delete</th>
     </tr>
     <tr>
@@ -46,26 +51,33 @@
 
         <td><c:forEach items="${user.roles}" var="role">
             <table>
-                <td>${role.name}</td>
+                <tr>
+                    <td>${role.name}</td>
+                </tr>
             </table>
         </c:forEach></td>
 
         <td><c:forEach items="${user.associatedCompany}" var="company">
             <table>
-                <td>${company.name}</td>
+                <tr>
+                    <td><a href="<c:url value='/companydata/${id}/'/>" target="_blank"> ${company.name}</a></td>
+                </tr>
             </table>
         </c:forEach></td>
 
         <td><c:forEach items="${user.tasks}" var="task">
             <table>
-                <td>${task.name}</td>
+                <tr>
+                    <td><a href="<c:url value='/taskdata/${id}/'/>" target="_blank"> ${task.name}</a></td>
+                </tr>
             </table>
         </c:forEach></td>
 
         <%--<td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"--%>
                                    <%--span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>--%>
-        <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/' />"
-                                   span class="glyphicon glyphicon-remove" style="color: red" /></td>
+        <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/'/>"
+                                   span class="glyphicon glyphicon-remove" style="color: red">Delete</a>
+        </td>
 
         </c:forEach>
     </tr>
