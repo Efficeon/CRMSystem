@@ -5,40 +5,69 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>User details</title>
+    <a href="<c:url value='/user/' />" class="btn btn-lg" style="color: green">
+        <i class="glyphicon glyphicon-arrow-left"></i> All company</a>
+    <title>Company details</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
-<body>
-<h1>User ${user.username} details</h1>
 
-<table class="table table-striped">
+<body>
+<h1>User details</h1>
+
+<table class="table table-striped table-condensed">
     <tr>
-        <th width="25">ID</th>
-        <%--<th width="50">User type</th>--%>
-        <th width="50">Registered username"</th>
-        <th width="50">User e-mail</th>
-        <th width="100">First name</th>
-        <th width="100">Last name</th>
-        <th width="50">Birth date</th>
-        <th width="50">Registration date </th>
-        <th width="80">Roles</th>
-        <th width="80">Associated company</th>
-        <th width="80">Implementing tasks</th>
-        <th width="50">Delete</th>
+        <th class="text-center" width="25">ID</th>
+        <th class="text-center" width="50">username</th>
+        <th class="text-center" width="50">e-mail</th>
+        <th class="text-center" width="50">First Name</th>
+        <th class="text-center" width="50">Last Name</th>
+        <th class="text-center" width="50">Birth date</th>
+        <th class="text-center" width="50">User type</th>
+        <th class="text-center" width="50">Registration date</th>
+
+        <th class="text-center" width="50">Roles</th>
+        <th class="text-center" width="50">Associated companies</th>
+        <th class="text-center" width="50">Related tasks</th>
+
+        <th class="text-center" width="40">Edit</th>
+        <th class="text-center" width="40">Delete</th>
     </tr>
     <tr>
+        <c:forEach items="${userList}" var="user">
         <td>${user.id}</td>
-        <%--<td>${user.userType}</td>--%>
         <td>${user.username}</td>
         <td>${user.email}</td>
         <td>${user.firstName}</td>
         <td>${user.lastName}</td>
         <td>${user.birthDate}</td>
         <td>${user.registrationDate}</td>
-        <td>${user.roles}</td>
-        <td>${user.associatedCompany}</td>
-        <td>${user.tasks}</td>
-        <td><a href="<c:url value='/remove_user/${user.id}'/>">Delete</a></td>
+
+        <td><c:forEach items="${user.roles}" var="role">
+            <table>
+                <td>${role.name}</td>
+            </table>
+        </c:forEach></td>
+
+        <td><c:forEach items="${user.associatedCompany}" var="company">
+            <table>
+                <td>${company.name}</td>
+            </table>
+        </c:forEach></td>
+
+        <td><c:forEach items="${user.tasks}" var="task">
+            <table>
+                <td>${task.name}</td>
+            </table>
+        </c:forEach></td>
+
+        <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
+                                   span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>
+        <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/' />"
+                                   span class="glyphicon glyphicon-remove" style="color: red" /></td>
+
+        </c:forEach>
     </tr>
 </table>
 

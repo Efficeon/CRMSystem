@@ -21,13 +21,13 @@
 <%--Отображает список всех задач с детальной информацией и возможностью редактирования--%>
 
 <body>
-<h1>Tasks</h1>
+<h1>List of Users</h1>
 <br>
 
-<button>
-    <a href="<c:url value='/task/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create task</a>
-</button>
-<br>
+<%--<button>--%>
+    <%--<a href="<c:url value='/user/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create task</a>--%>
+<%--</button>--%>
+<%--<br>--%>
 <br>
 
 <c:if test="${!empty userList}">
@@ -55,13 +55,18 @@
                 <td>${user.username}</td>
                 <td>${user.email}</td>
                 <td>${user.userType}</td>
-                <td><fmt:formatDate value="${user.registrationdate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/' />"
+                <td><fmt:formatDate value="${user.registrationDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                <td class="text-center"><a href="<c:url value='/userdata/${user.id}/' />"
                                            span class="glyphicon glyphicon glyphicon-file " style="color: darkblue" /></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
+
+<br>
+<%--<div class="well">--%>
+    <%--<a href="<c:url value='userform' />">Add New User</a>--%>
+<%--</div>--%>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
