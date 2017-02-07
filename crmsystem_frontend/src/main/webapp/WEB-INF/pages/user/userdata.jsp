@@ -62,8 +62,8 @@
             </table>
         </c:forEach></td>
 
-        <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
-                                   span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>
+        <%--<td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"--%>
+                                   <%--span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>--%>
         <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/' />"
                                    span class="glyphicon glyphicon-remove" style="color: red" /></td>
 

@@ -15,10 +15,9 @@
 </head>
 
 <body>
-<h1>Add or Edit Task</h1>
+<h1>Add or Edit User</h1>
 <br>
 <br>
-
 <form:form method="POST" modelAttribute="task">
     <form class="form-inline">
         <div class="form-group">

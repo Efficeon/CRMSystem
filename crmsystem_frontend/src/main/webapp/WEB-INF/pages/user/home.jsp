@@ -16,12 +16,12 @@
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
 <div class="container">
 
     <a href="<%=request.getContextPath()%>?languageVar=en"><spring:message code="general.EN"/></a>
     <a href="<%=request.getContextPath()%>?languageVar=ru"><spring:message code="general.RU"/></a>
-
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">

@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <title>Tasks</title>
+    <title>Users</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
