@@ -57,7 +57,7 @@
                 <td>${user.userType}</td>
                 <td><fmt:formatDate value="${user.registrationDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td class="text-center"><a href="<c:url value='/userdata/${user.id}/' />"
-                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue" /></td>
+                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue">Details</a></td>
             </tr>
         </c:forEach>
     </table>

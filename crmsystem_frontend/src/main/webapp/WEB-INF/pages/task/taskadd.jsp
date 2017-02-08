@@ -6,7 +6,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <a href="<c:url value='/task/' />" class="btn btn-lg" style="color: green">
+    <a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: green">
         <i class="glyphicon glyphicon-arrow-left"></i> All tasks</a>
     <title>Create company</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +26,13 @@
             <c:if test="${!empty task.id}">
 
                     <form:input  type="text" path="id" class="form-group" readonly="true"
-                                 disabled="true" placeholder='ID${id}'></form:input>
+                                 disabled="true" placeholder='ID${id}'/>
             </c:if>
                 <form:input  type="text" path="name" class="form-group"
-                             placeholder='Name${name}' autofocus="true"></form:input>
+                             placeholder='Name${name}' autofocus="true"/>
 
                 <form:input  type="text" path="description" class="form-group"
-                             placeholder='Description${description}' autofocus="true"></form:input>
+                             placeholder='Description${description}' autofocus="true"/>
 
                 <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
@@ -57,7 +57,7 @@
 
 <%--кнопка перехода на страницу "tasks.jsp" - отображение актуального списка всех задач  --%>
     <button type="button">
-        <a href="<c:url value='/task/' />">Complete</a>
+        <a href="<c:url value='/task/'/>">Complete</a>
     </button>
 </form:form>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>

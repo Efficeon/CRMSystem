@@ -24,7 +24,8 @@
 <br>
 <%--кнопка "Создать задачу". Линк на запрос к TaskController--%>
 <button>
-    <a href="<c:url value='/task/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create task</a>
+    <a href="<c:url value='/task/add/'/>" class="btn btn-lg" style="color: green">
+        <i class="fa fa-plus"></i> Create task</a>
 </button>
 <br>
 
@@ -58,13 +59,12 @@
                 <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <%--ячейки заполняются значениями из заголовков - "по умолчанию"--%>
                 <%----%>
-                <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/' />"
-                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue" /></td>
-                <td class="text-center"><a href="<c:url value='/edittask/${task.id}/' />"
-                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>
+                <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>"
+                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue">Details </a></td>
+                <td class="text-center"><a href="<c:url value='/edittask/${task.id}/'/>"
+                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a></td>
                 <td class="text-center"><a href="<c:url value='/removetask/${task.id}/' />"
-                                           span class="glyphicon glyphicon-remove" style="color: red" /></td>
-            </tr>
+                                           span class="glyphicon glyphicon-remove" style="color: red">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -25,13 +25,13 @@
             <c:if test="${!empty task.id}">
 
                 <form:input  type="text" path="id" class="form-group" readonly="true"
-                             disabled="true" placeholder='ID${id}'></form:input>
+                             disabled="true" placeholder='ID${id}'/>
             </c:if>
             <form:input  type="text" path="name" class="form-group"
-                         placeholder='Name${name}' autofocus="true"></form:input>
+                         placeholder='Name${name}' autofocus="true"/>
 
             <form:input  type="text" path="description" class="form-group"
-                         placeholder='Description${description}' autofocus="true"></form:input>
+                         placeholder='Description${description}' autofocus="true"/>
 
             <form:select path="responsiblePerson">
                 <form:option value="0" label="Select only one"/>
