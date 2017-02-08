@@ -30,27 +30,13 @@ public class DealServiceImpl implements DealService {
     @Override
     @Transactional
     public Collection<Deal> getAll() {
-        try {
-            Writer fileWriter = new BufferedWriter(new FileWriter(new File("D:\\crmsystem.txt")));
-            fileWriter.write("inside dealserviceImpl.getAll()..");
-            fileWriter.flush();
-//            fileWriter.close();
 
             Collection<Deal> listDeals = new ArrayList<>();//this.dealDAO.getAll();
-            fileWriter.write("inside dealserviceImpl.getAll()...list Deals: " + listDeals);
-            fileWriter.flush();
-            fileWriter.close();
 
             for (Deal deal : listDeals) {
                 logger.info("List deals: " + deal);
             }
-
             return listDeals;
-        } catch (IOException ioexc){
-            ioexc.printStackTrace();
-            return null;
-        }
-
     }
 
     @Override

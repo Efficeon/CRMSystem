@@ -57,6 +57,9 @@
         <spring:message text="Add"/>
       </button>
     </div>
+
+      <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
   </form>
     </form:form>
 
