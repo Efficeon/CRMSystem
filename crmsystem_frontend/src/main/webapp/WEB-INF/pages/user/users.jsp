@@ -39,15 +39,6 @@
             <th class="text-center" width="50">User type</th>
             <th class="text-center" width="50">Registration date</th>
             <th class="text-center" width="50">User details</th>
-
-            <%--<th class="text-center" width="50">First name</th>--%>
-            <%--<th class="text-center" width="50">Last name</th>--%>
-            <%--<th class="text-center" width="50">Birth date</th>--%>
-            <%--<th class="text-center" width="50">Companies</th>--%>
-            <%--<th class="text-center" width="50">Roles</th>--%>
-            <%--<th class="text-center" width="50">Bindet tasks</th>--%>
-            <%--<th class="text-center" width="50">Edit</th>--%>
-            <%--<th class="text-center" width="50">Delete</th>--%>
         </tr>
         <c:forEach items="${userList}" var="user">
             <tr>

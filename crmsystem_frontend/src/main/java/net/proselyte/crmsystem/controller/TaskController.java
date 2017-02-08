@@ -16,7 +16,7 @@ import java.util.UUID;
 /**
  * Controller for {@link Task}'s pages.
  *
- * @author Vladimir Vitlickij.
+ * @author Vladimir Vitlitskiy.
  */
 
 @Controller
@@ -96,60 +96,4 @@ public class TaskController {
         this.taskService.save(task);
         return "redirect:/task/";
     }
-
-
-//    поскольку один исполнитель на одну задачу, никакой особо работы с ним не предусмотрено
-
-//    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
-//    public String addResponsibleUser(@PathVariable("userId") UUID userId,
-//                                     @PathVariable("taskId") UUID taskId,
-//                                     @ModelAttribute Task task,
-//                                     Model model){
-//        task = this.taskService.getById(taskId);
-//        /*ArrayList<User> usersTemp = (ArrayList<User>) this.userService.getAll();
-//        for (User user : usersTemp){
-//            if (task.getResponsibleUser().contains(user)){
-//                usersTemp.remove(user);
-//            }
-//        }*/
-//        task.setImplementer(this.userService.getById(userId));
-//        this.taskService.save(task);
-//        model.addAttribute("listTasks", this.userService.getAll());
-//        model.addAttribute("task", this.taskService.getById(taskId));
-//        return "task/taskadd";
-//    }
-
-//    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
-//    public String addResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
-//                                           @ModelAttribute Task task){
-//        task.setId(taskId);
-//        task.setImplementer(this.taskService.getById(taskId).getResponsibleUser());
-//        this.taskService.save(task);
-//        return "redirect:/task/";
-//    }
-
-
-//    @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
-//    public String removeResponsibleUser(@PathVariable("userId") UUID userId,
-//                                        @PathVariable("taskId") UUID taskId,
-//                                        @ModelAttribute Task task,
-//                                        Model model){
-//        task = this.taskService.getById(taskId);
-//        task.removeResponsibleUser(this.userService.getById(userId));
-//        this.taskService.save(task);
-//        model.addAttribute("listTasks", this.userService.getAll());
-//        model.addAttribute("task", this.taskService.getById(taskId));
-//
-//        return "task/taskadd";
-//    }
-//
-//
-//    @RequestMapping(value = "/removeresponsible/{userId}/{taskId}/", method = RequestMethod.POST)
-//    public String removeResponsibleUserSubmit(@PathVariable("taskId") UUID taskId,
-//                                              @ModelAttribute Task task){
-//        task.setId(taskId);
-//        task.setResponsibleUser(this.taskService.getById(taskId).getResponsibleUser());
-//        this.taskService.save(task);
-//        return "redirect:/task/";
-//    }
 }

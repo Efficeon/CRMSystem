@@ -35,10 +35,10 @@ public class UserController {
     @Autowired
     RoleService roleService;
 
-//    @RequestMapping(value = {"home"}, method = RequestMethod.GET)
-//    public String welcome() {
-//        return "user/home";
-//    }
+    @RequestMapping(value = {"home"}, method = RequestMethod.GET)
+    public String welcome() {
+        return "user/home";
+    }
 
 //    отработка users.jsp --- "List of Users"
 
