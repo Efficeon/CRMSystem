@@ -19,7 +19,7 @@
 <br>
 <br>
 
-<form:form method="POST" modelAttribute="task">
+<form:form method="POST" modelAttribute="task" action="/task/add/">
     <form class="form-inline">
         <div class="form-group">
 
@@ -30,23 +30,20 @@
             </c:if>
                 <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${name}' autofocus="true"/>
+            <br>
 
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${description}' autofocus="true"/>
+            <br>
 
                 <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
-<%--server получит user.id, client увидит username--%>
-                    <form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />
+                    <form:options items="${listUsers}" itemValue="id" itemLabel="username" />
                 </form:select>
+            <br>
+            <br>
 
-<%--кнопка подтверждения команды на внесение/изменение данных по задаче--%>
-            <%--можно заменить следующим кодом:
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Save Changes"/>
-                </td>
-            </tr>--%>
+
             <button type="submit">
                 <spring:message text="Add"/>
             </button>
@@ -55,7 +52,8 @@
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
 
-<%--кнопка перехода на страницу "tasks.jsp" - отображение актуального списка всех задач  --%>
+    <br>
+    <br>
     <button type="button">
         <a href="<c:url value='/task/'/>">Complete</a>
     </button>

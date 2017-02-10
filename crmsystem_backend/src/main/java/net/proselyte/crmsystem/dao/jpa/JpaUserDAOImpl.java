@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,7 +28,7 @@ public class JpaUserDAOImpl implements UserDAO {
 
     @Override
     public User getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles, user.tasks WHERE user.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
@@ -38,10 +38,10 @@ public class JpaUserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Collection<User> getAll() {
-        Collection<User> result;
+    public List<User> getAll() {
+        List<User> result;
 
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles, user.tasks");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
         result = query.getResultList();
 
         for (User user : result) {

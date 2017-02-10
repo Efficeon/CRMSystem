@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -42,8 +42,8 @@ public class JpaTaskDAOImpl implements TaskDAO{
     }
 
     @Override
-    public Collection<Task> getAll() {
-        Collection<Task> result;
+    public List<Task> getAll() {
+        List<Task> result;
         Query query = entityManager.createQuery(
                 "SELECT task FROM Task task LEFT JOIN FETCH task.implementer");
 
