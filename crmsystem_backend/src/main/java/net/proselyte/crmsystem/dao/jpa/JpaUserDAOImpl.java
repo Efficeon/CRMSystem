@@ -33,7 +33,7 @@ public class JpaUserDAOImpl implements UserDAO {
                 "LEFT JOIN FETCH user.roles " +
                 "LEFT JOIN FETCH user.associatedCompany " +
                 "LEFT JOIN FETCH user.tasks " +
-                "WHERE user.id =:id");          // не дописан запрос !!!
+                "WHERE user.id =:id");                                          // не дописан запрос !!!
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
