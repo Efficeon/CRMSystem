@@ -15,10 +15,6 @@
 
 </head>
 
-
-<%--Displays the list of all tasks with detailed information and editing capability--%>
-<%--Отображает список всех задач с детальной информацией и возможностью редактирования--%>
-
 <body>
 <h1>Tasks</h1>
 <br>
@@ -29,12 +25,9 @@
 </button>
 <br>
 
-<%--???? Где происходит "подключение" модели "task"--%>
 <br>
-<%--проверка: если список задач не пуст, выводим данные в таблицу--%>
 <c:if test="${!empty listTasks}">
     <table class="table table-striped table-condensed">
-        <%--1-я строка таблицы - заголовки--%>
         <tr>
             <th class="text-center" width="25">ID</th>
             <th class="text-center" width="120">Name</th>
@@ -42,13 +35,12 @@
             <th class="text-center" width="80">Responsible person</th>
             <th class="text-center" width="50">Created</th>
             <th class="text-center" width="50">Updated</th>
-            <%--предусматриваем возможность следующих действий отдельным запросом по линку --%>
+
             <th class="text-center" width="50">Details</th>
             <th class="text-center" width="50">Edit</th>
             <th class="text-center" width="50">Delete</th>
         </tr>
-            <%--перебираем "непустой" список задач--%>
-            <%--выводим в отдельную строку каждый полученный объект Task task--%>
+
         <c:forEach items="${listTasks}" var="task">
             <tr>
                 <td>${task.id}</td>

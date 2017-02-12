@@ -58,7 +58,6 @@ public class JpaTaskDAOImpl implements TaskDAO{
 
     @Override
     public void save(Task task) {
-
         if (task.getId() == null) {
             task.setCreated(new Date());
             task.setUpdated(new Date());

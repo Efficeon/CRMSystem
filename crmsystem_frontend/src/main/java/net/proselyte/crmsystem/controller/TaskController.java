@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.Task;
+import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.TaskService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,18 +49,23 @@ public class TaskController {
         return "redirect:/task/";
     }
 
+//
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task){
         this.taskService.save(task);
         return "redirect:/edittask/"+task.getId()+"/";
     }
 
+//  подразумевается, что Model уже существует, т.к. был переход "task"
+//  в Model.attribute уже находятся task и listTasks
+//  теперь: task, listTasks и listUsers
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
     public String addTask(Model model) {
         model.addAttribute("task", new Task());
-//        model.addAttribute("user", new User());
+        model.addAttribute("user", new User());
         model.addAttribute("listtasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
+
         return "task/taskadd";
     }
 

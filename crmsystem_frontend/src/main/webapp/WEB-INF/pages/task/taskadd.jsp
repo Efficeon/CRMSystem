@@ -19,32 +19,36 @@
 <br>
 <br>
 
-<form:form method="POST" modelAttribute="task" action="/task/add/">
+<form:form id="taskform" method="POST" modelAttribute="task">
     <form class="form-inline">
         <div class="form-group">
 
             <c:if test="${!empty task.id}">
-
-                    <form:input  type="text" path="id" class="form-group" readonly="true"
-                                 disabled="true" placeholder='ID${id}'/>
+                <%--<spring:bind path="id">--%>
+                    <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
+                                 <%--disabled="true" placeholder='ID${id}'/>--%>
+                <%--</spring:bind>--%>
             </c:if>
-                <form:input  type="text" path="name" class="form-group"
+                <spring:bind path="name">
+            <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${name}' autofocus="true"/>
+                </spring:bind>
             <br>
-
+                <spring:bind path="description">
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${description}' autofocus="true"/>
+                </spring:bind>
             <br>
 
+                <spring:bind path="implementer">
                 <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
                     <form:options items="${listUsers}" itemValue="id" itemLabel="username" />
                 </form:select>
+                </spring:bind>
             <br>
             <br>
-
-
-            <button type="submit">
+            <button type="submit" id="taskform">
                 <spring:message text="Add"/>
             </button>
         </div>

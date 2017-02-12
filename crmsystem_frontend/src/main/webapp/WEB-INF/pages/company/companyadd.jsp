@@ -29,12 +29,14 @@
 </head>
 <br>
 <h1>Company add</h1>
+
 <body>
 
 
 <form:form id="companyform" method="POST" modelAttribute="company">
 <form class="form-inline">
     <div class="form-group">
+
         <c:if test="${!empty company.name}">
             <spring:bind path="id">
                 <form:input  type="text" path="id" class="form-group" readonly="true"
