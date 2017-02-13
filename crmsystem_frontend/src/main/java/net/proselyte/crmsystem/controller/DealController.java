@@ -1,7 +1,10 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.Deal;
+import net.proselyte.crmsystem.model.DealStatus;
+import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.DealService;
+import net.proselyte.crmsystem.service.DealStatusService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.*;
 
 /**
  * Controller for class {@link net.proselyte.crmsystem\service\DealService.java}
@@ -28,6 +31,9 @@ public class DealController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DealStatusService dealStatusService;
 
     @RequestMapping(value = "deal", method = RequestMethod.GET)
     public String listDeals(Model model){
@@ -50,23 +56,42 @@ public class DealController {
     }
 
     @RequestMapping(value = "/deal/add/", method = RequestMethod.GET)
-    public String addCompany(Model model) {
-        model.addAttribute("deal", new Deal());
-//        model.addAttribute("budget", new Company());
-//        model.addAttribute("listUsers", this.userService.getAll());
-//        model.addAttribute("listTags", this.tagService.getAll());
-//        model.addAttribute("user", new User());
-//        model.addAttribute("tag", new Tag());
+    public String addDeal(Model model) {
+        Deal tempdeal = new Deal();
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date now = calendar.getTime();
+//        tempdeal.setCreated(new java.util.Date().getTime());//java.sql.Timestamp(now.getTime()));
+        tempdeal.setDealStatus(new DealStatus());
+
+        model.addAttribute("deal", tempdeal);
+        model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("dealStatus", this.dealStatusService.getAll());
+        model.addAttribute("selectedUser", new User());
+        model.addAttribute("selectedDealStatus", new DealStatus());
         return "deal/dealadd";
     }
 
-    @RequestMapping(value = "deal/addDeal", method = RequestMethod.POST)
-    public String addDeal(@PathVariable("budget") Double budget, @PathVariable("responsibleUser")
-        UUID responsibleUserId){
-        Deal tempdeal = new Deal();
-        tempdeal.setBudget(budget);
-        tempdeal.setResponsibleUser(this.userService.getById(responsibleUserId));
-        this.dealService.save(tempdeal);
+    @RequestMapping(value = "/deal/addDealUser/", method = RequestMethod.POST)
+    public String addDealUser(@ModelAttribute ("selectedUser") User selectedUser,
+                          @ModelAttribute ("selectedDealStatus") DealStatus dealStatus) {
+        try {
+
+            Writer writer = new FileWriter(new File("D:\\DealController.txt"));
+            writer.write("inside dealController addUser..\r\n" + selectedUser);
+            writer.flush();
+            writer.close();
+            return "deals";//dealadd";
+        } catch (Exception e){
+            e.printStackTrace();
+            return "deals";
+        }
+    }
+
+
+    @RequestMapping(value = "deal/add/", method = RequestMethod.POST)
+    public String addDeal(@ModelAttribute Deal deal, Model model){
+
+        this.dealService.save(deal);
         return "redirect:/deal";
     }
 }

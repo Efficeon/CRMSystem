@@ -4,6 +4,7 @@ import net.proselyte.crmsystem.dao.DealDAO;
 import net.proselyte.crmsystem.model.Deal;
 import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.DealService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,9 @@ import java.util.logging.Logger;
 @Service
 public class DealServiceImpl implements DealService {
 
+    @Autowired
     DealDAO dealDAO;
+
     Logger logger;
 
     @Override
@@ -31,19 +34,37 @@ public class DealServiceImpl implements DealService {
     @Transactional
     public Collection<Deal> getAll() {
 
-            Collection<Deal> listDeals = new ArrayList<>();//this.dealDAO.getAll();
+//        try {
+//
+//            Writer writer = new FileWriter(new File("D:\\DealServiceImpl.txt"));
+//            writer.write("inside dealServiceImpl..\r\n");
+//            writer.flush();
+            Collection<Deal> listDeals = this.dealDAO.getAll();//new ArrayList<>();
+
+
+//            if (listDeals == null) {
+//                writer.write("listDeals = null!\r\n");
+//                listDeals = new ArrayList<>();
+//                writer.flush();
+//                writer.close();
+//            }
 
             for (Deal deal : listDeals) {
                 logger.info("List deals: " + deal);
             }
             return listDeals;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+
     }
 
     @Override
     @Transactional
     public void save(Deal deal) {
         this.dealDAO.save(deal);
-        logger.info("Deal saved. Details: " + deal);
+//        logger.info("Deal saved. Details: " + deal);
     }
 
     @Override

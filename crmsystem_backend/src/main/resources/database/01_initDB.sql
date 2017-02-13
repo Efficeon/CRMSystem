@@ -88,11 +88,10 @@ CREATE TABLE IF NOT EXISTS companies_tags (
 CREATE TABLE IF NOT EXISTS deals
 (
   id              UUID       NOT NULL PRIMARY KEY,
-  name            VARCHAR(255) NOT NULL,
   budget          INTEGER NOT NULL,
-  created         TIMESTAMP    NOT NULL,
-  updated         TIMESTAMP    NOT NULL,
-  dealstatusid    INTEGER NOT NULL
+  created         TIMESTAMP    NOT NULL DEFAULT (current_timestamp),
+  updated         TIMESTAMP,
+  dealstatusid    UUID
 );
 
 CREATE TABLE IF NOT EXISTS dealstatus

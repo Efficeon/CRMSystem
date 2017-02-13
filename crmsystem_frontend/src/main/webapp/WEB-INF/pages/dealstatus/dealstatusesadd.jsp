@@ -10,13 +10,13 @@
 <html>
 <head>
 
-  <a href="<c:url value='/dealStatus/' />" class="btn btn-lg" style="color: green">
+  <a href="<c:url value='/dealstatus/' />" class="btn btn-lg" style="color: green">
     <i class="glyphicon glyphicon-arrow-left"></i> All Deal Statuses</a>
   <title>Create Deal Status</title>
 </head>
 
 <body>
-  <form:form id="dealStatusForm" method="POST" modelAttribute="dealStatus">
+  <form:form id="dealStatusForm" method="POST" modelAttribute="dealstatus">
   <form class="form-inline">
     <div class="form-group">
       <c:if test="${!empty dealStatus.name}">
@@ -25,7 +25,7 @@
                        disabled="true" placeholder='ID${id}'></form:input>
         </spring:bind>
       </c:if>
-      <spring:bind path="name">
+      <spring:bind path="id">
         <form:input  type="text" path="name" class="form-group"
                      placeholder='Name${name}' autofocus="true"></form:input>
       </spring:bind>
@@ -38,5 +38,8 @@
     <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 
   </form>
+  </form:form>
+
+
 </body>
 </html>
