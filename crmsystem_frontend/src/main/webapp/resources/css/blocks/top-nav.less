@@ -1,0 +1,38 @@
+.left-navigation li ul {
+  background-color: #12212c;
+  //display: none;
+  margin: 0;
+  padding: 4px 0 0;
+}
+.left-navigation .parent ul li {
+  list-style: outside none none;
+}
+.left-navigation .parent ul li a:first-child {
+  border-top: 0 none;
+}
+.left-navigation .parent ul li a {
+  background-image: none;
+  font-size: 12px;
+  padding: 7px 18px 7px 42px;
+}
+.left-navigation .parent ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+.parent .sub-menu {
+  padding: 4px 0;
+}
+
+.left-navigation > .parent > a::before {
+  content: "\f105";
+  font-family: 'FontAwesome';
+  display: inline-block;
+  float: right;
+  -webkit-transition: rotate 250ms ease;
+  -moz-transition: rotate 250ms ease;
+  -o-transition: rotate 250ms ease;
+  transition: transform 250ms ease;
+}
+.left-navigation > .parent.open > a:before {
+  transform: rotate(90deg);
+}
