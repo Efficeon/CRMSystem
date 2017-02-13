@@ -50,11 +50,11 @@ public class DealStatusController {
         this.dealStatusService.save(dealstatus);
         return "redirect:/dealstatus/";
     }
-
+//--------------Removing deal status-----------------------------------
     @RequestMapping(value = "removedealstatus/{id}/", method = RequestMethod.GET)
     public String removeDealStatus(@PathVariable UUID id){
         this.dealStatusService.remove(this.dealStatusService.getById(id));
-        return "redirect:/dealStatus/";
+        return "redirect:/dealstatus/";
     }
 //--------------Editing deal status------------------------------------
     @RequestMapping(value = "/editdealstatus/{dealstatus.id}", method = RequestMethod.GET)
@@ -66,11 +66,8 @@ public class DealStatusController {
     @RequestMapping(value = "editdealstatus/{id}", method = RequestMethod.POST)
     public String editSubmit(@PathVariable("id") UUID id,
                              @ModelAttribute ("dealstatus") DealStatus dealstatus){
-//        dealStatus.setId(id);
         this.dealStatusService.save(dealstatus);
         return "redirect:/dealstatus/";
     }
-
-
 
 }
