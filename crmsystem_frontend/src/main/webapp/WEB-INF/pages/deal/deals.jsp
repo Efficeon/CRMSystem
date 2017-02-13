@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 
 
 <html>
@@ -18,13 +18,12 @@
 
     <title>Deals</title>
 
-  <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
+
 <body>
 <br>
-Add deal
 <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
-
 </br>
 
 
@@ -55,6 +54,8 @@ Add deal
     </c:forEach>
   </table>
 </c:if>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 </body>
 </html>

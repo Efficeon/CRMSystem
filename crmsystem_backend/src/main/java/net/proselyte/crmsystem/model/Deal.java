@@ -14,9 +14,11 @@ public class Deal extends BaseEntity {
     @Column(name = "budget")
     private  double budget;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created")
     private Date created;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated")
     private Date updated;
 
@@ -67,8 +69,8 @@ public class Deal extends BaseEntity {
 
     public void setDealStatus(DealStatus dealStatus) {
         this.dealStatus = dealStatus;
-        if(!dealStatus.getDeals().contains(this)){
-            dealStatus.addDeal(this);
-        }
+//        if(!dealStatus.getDeals().contains(this)){
+//            dealStatus.addDeal(this);
+//        }
     }
 }

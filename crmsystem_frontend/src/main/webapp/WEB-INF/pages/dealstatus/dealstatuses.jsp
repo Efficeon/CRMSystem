@@ -51,7 +51,7 @@
 <h1>List of Deal Statuses</h1>
 
 <br>
-<a href="<c:url value='/dealStatuses/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create dealStatus</a>
+<a href="<c:url value='/dealstatus/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create dealStatus</a>
 
 </br>
 
@@ -68,15 +68,12 @@
       <tr>
         <td class="text-center">${dealStatus.id}</td>
         <td class="text-center">${dealStatus.name}</td>
-        <td class="text-center"><a href="<c:url value='/editdealstatus/${dealStatus.id}/' />"/></td>
-        <td class="text-center"><a href="<c:url value='/removedealstatus/${dealStatus.id}/' />"/></td>
+        <td class="text-center"><a href='<c:url value="/editdealstatus/${dealStatus.id}/" />'/>Edit</td>
+        <td class="text-center"><a href="<c:url value='/removedealstatus/${dealStatus.id}/' />"/>Remove</td>
       </tr>
     </c:forEach>
   </table>
 </c:if>
-
-
-
 
 </body>
 </html>

@@ -45,7 +45,8 @@ public class JpaDealStatusDAOImpl implements DealStatusDAO{
     @Override
     public Collection<DealStatus> getAll() {
         Query query = this.entityManager.createQuery(
-                "SELECT FROM DealStatus");
+                "SELECT distinct dealStatus From DealStatus dealStatus");
+
         List<DealStatus> dealStatusList = query.getResultList();
         logger.info("DealStatus list successfully loaded. DealStatus list details: " + dealStatusList);
         return dealStatusList;
@@ -60,8 +61,6 @@ public class JpaDealStatusDAOImpl implements DealStatusDAO{
             this.entityManager.merge(entity);
             logger.info("DealStatus entity succesfully updated. Dealstatus details:" + entity);
         }
-
-
     }
 
     @Override

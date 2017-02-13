@@ -26,7 +26,7 @@ public class JpaDealDAOImpl implements DealDAO {
     private final static Logger logger = Logger.getLogger(JpaDealDAOImpl.class);
 
     @SuppressWarnings("unchecked")
-    @Override
+//    @Override
     public Deal getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal WHERE deal.id =:id");
         query.setParameter("id", id);
@@ -39,34 +39,20 @@ public class JpaDealDAOImpl implements DealDAO {
 
 
     public Collection<Deal> getAll() {
-        try{
-            Writer fileWriter = new BufferedWriter(new FileWriter(new File("D:\\crmsystem2.txt")));
-            fileWriter.write("inside JPADealDAOImpl.getAll()..");
-            fileWriter.flush();
-            List<Deal> result = new ArrayList<>() ;
-            Query query = this.entityManager.createQuery("SELECT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
+            List<Deal> result = new ArrayList<>();
+            Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
             result = query.getResultList();
             if(result == null) {
                 System.out.println("RESULT == NULL!!");
                 logger.info("RESULT == NULL!!");
-                fileWriter.write("inside JPADealDAOImpl.getAll()..RESULT == NULL!!");
-                fileWriter.flush();
-                fileWriter.close();
+
             }
             for (Deal deal : result) {
                 logger.info("deal list: " + deal);
-                fileWriter.write(deal.toString());
+
             }
-            fileWriter.close();
+
             return result;
-
-        }
-        catch(IOException ex){
-            ex.printStackTrace();
-            return null;
-        }
-
-
     }
 
     @Override
