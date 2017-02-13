@@ -45,7 +45,7 @@ public class JpaTaskDAOImpl implements TaskDAO{
     public List<Task> getAll() {
         List<Task> result;
         Query query = entityManager.createQuery(
-                "SELECT task FROM Task task LEFT JOIN FETCH task.implementer");
+                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
 
         result = query.getResultList();
 

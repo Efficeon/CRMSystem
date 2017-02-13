@@ -17,7 +17,7 @@ public class Task extends NamedEntity{
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "implementer")
+    @JoinColumn(name = "user_id")
     private User implementer;
 
 //    переименовать!!!  creationDate
