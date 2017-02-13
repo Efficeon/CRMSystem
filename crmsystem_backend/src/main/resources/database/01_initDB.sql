@@ -1,3 +1,6 @@
+--uuid_generate_v4()
+CREATE EXTENSION "uuid-ossp";
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- users
@@ -82,3 +85,27 @@ CREATE TABLE IF NOT EXISTS companies_tags (
   UNIQUE (company_id, tag_id)
 );
 
+CREATE TABLE IF NOT EXISTS deals
+(
+  id              UUID       NOT NULL PRIMARY KEY,
+  name            VARCHAR(255) NOT NULL,
+  budget          INTEGER NOT NULL,
+  created         TIMESTAMP    NOT NULL,
+  updated         TIMESTAMP    NOT NULL,
+  dealstatusid    INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS dealstatus
+(
+  id              UUID       NOT NULL PRIMARY KEY,
+  name            VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS deals_users
+(
+  deal_id         UUID       NOT NULL,
+  user_id         UUID       NOT NULL,
+
+  FOREIGN KEY (deal_id) REFERENCES deals (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
