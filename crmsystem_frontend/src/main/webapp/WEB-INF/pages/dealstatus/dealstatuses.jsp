@@ -68,14 +68,16 @@
       <tr>
         <td class="text-center">${dealStatus.id}</td>
         <td class="text-center">${dealStatus.name}</td>
-        <td class="text-center"><a href="<c:url value='/editdealstatus/${dealStatus.id}/' />"/></td>
-        <td class="text-center"><a href="<c:url value='/removedealstatus/${dealStatus.id}/' />"/></td>
+        <td class="text-center"><a href='<c:url value="/editdealstatus/${dealStatus.id}/" />'/>Edit</td>
+        <td class="text-center"><a href="<c:url value='/removedealstatus/${dealStatus.id}/' />"/>Remove</td>
       </tr>
     </c:forEach>
   </table>
 </c:if>
 
-
+<%--<script src="/WEB-INF/pages/js/bootstrap.min.js"></script>--%>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>--%>
+<%--<script src="${contextPath}/resources/js/bootstrap.min.js"></script>--%>
 
 
 </body>

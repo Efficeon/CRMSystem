@@ -87,16 +87,16 @@ CREATE TABLE IF NOT EXISTS companies_tags (
 
 CREATE TABLE IF NOT EXISTS deals
 (
-  id              UUID       NOT NULL PRIMARY KEY,
+  id              UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   budget          INTEGER NOT NULL,
-  created         TIMESTAMP    NOT NULL DEFAULT (current_timestamp),
+  created         TIMESTAMP  NOT NULL DEFAULT (current_timestamp),
   updated         TIMESTAMP,
   dealstatusid    UUID
 );
 
 CREATE TABLE IF NOT EXISTS dealstatus
 (
-  id              UUID       NOT NULL PRIMARY KEY,
+  id              UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   name            VARCHAR(255) NOT NULL
 );
 

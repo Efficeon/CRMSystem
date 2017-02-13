@@ -45,7 +45,6 @@ public class DealStatusController {
 
     @RequestMapping(value = "dealstatus/add", method = RequestMethod.POST)
     public String addDealStatusData(@ModelAttribute ("dealstatus") DealStatus dealstatus,
-//                                    @ModelAttribute ("deallist") List<Deal> deallist,
                                     Model model){
 
         this.dealStatusService.save(dealstatus);
@@ -57,19 +56,19 @@ public class DealStatusController {
         this.dealStatusService.remove(this.dealStatusService.getById(id));
         return "redirect:/dealStatus/";
     }
-
-    @RequestMapping(value = "/editDealStatus/{id}")
-    public String editDealStatus(@PathVariable("id") UUID id, Model model){
-        model.addAttribute("dealStatus", this.dealStatusService.getById(id));
-        return "dealstatus/dealStatusesAdd";
+//--------------Editing deal status------------------------------------
+    @RequestMapping(value = "/editdealstatus/{dealstatus.id}", method = RequestMethod.GET)
+    public String editDealStatus(@PathVariable("dealstatus.id") UUID id, Model model){
+        model.addAttribute("dealstatus", this.dealStatusService.getById(id));
+        return "dealstatus/dealstatusesadd";
     }
 
-    @RequestMapping(value = "editDealStatus/{id}", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") UUID id, @ModelAttribute DealStatus dealStatus){
-        dealStatus.setId(id);
-
-        this.dealStatusService.save(dealStatus);
-        return "redirect:/dealStatus/";
+    @RequestMapping(value = "editdealstatus/{id}", method = RequestMethod.POST)
+    public String editSubmit(@PathVariable("id") UUID id,
+                             @ModelAttribute ("dealstatus") DealStatus dealstatus){
+//        dealStatus.setId(id);
+        this.dealStatusService.save(dealstatus);
+        return "redirect:/dealstatus/";
     }
 
 
