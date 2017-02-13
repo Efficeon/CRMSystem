@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS tasks(
   id          UUID      NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   name        VARCHAR(50) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  implementer UUID NOT NULL,
+  responsibleuser UUID NOT NULL,
   created     TIMESTAMP NOT NULL,
   updated     TIMESTAMP NOT NULL,
 
