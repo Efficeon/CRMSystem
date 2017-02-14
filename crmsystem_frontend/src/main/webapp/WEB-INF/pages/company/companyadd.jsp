@@ -6,9 +6,10 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <a href="<c:url value='/company/' />" class="btn btn-lg" style="color: green">
-        <i class="glyphicon glyphicon-arrow-left"></i> All company</a>
-    <title>Create company</title>
+    <link href="/resources/css/style.less" rel="stylesheet/less" type="text/css"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -26,16 +27,22 @@
             });
         });
     </script>
+
 </head>
-<br>
-<h1>Company add</h1>
+
 <body>
-
-
+<jsp:include page="../menuPices/navbarLeft.jsp"/>
+<div style="margin: 10px 10px 10px 10px;">
+<c:if test="${empty company.id}">
+ <h1>Company add</h1>
+</c:if>
+<c:if test="${!empty company.id}">
+    <h1>Company edit</h1>
+</c:if>
 <form:form id="companyform" method="POST" modelAttribute="company">
 <form class="form-inline">
     <div class="form-group">
-        <c:if test="${!empty company.name}">
+        <c:if test="${!empty company.id}">
             <spring:bind path="id">
                 <form:input  type="text" path="id" class="form-group" readonly="true"
                              disabled="true" placeholder='ID${id}'></form:input>
@@ -136,7 +143,7 @@
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
 </form:form>
-
+</div>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 

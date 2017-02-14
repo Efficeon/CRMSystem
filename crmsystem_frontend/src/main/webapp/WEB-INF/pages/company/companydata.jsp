@@ -5,14 +5,17 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <a href="<c:url value='/company/' />" class="btn btn-lg" style="color: green">
-        <i class="glyphicon glyphicon-arrow-left"></i> All company</a>
     <title>Company details</title>
+    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="../menuPices/navbarLeft.jsp"/>
 <h1>Company details</h1>
 
 <table class="table table-striped table-condensed">
@@ -57,6 +60,6 @@
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
+<script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>
