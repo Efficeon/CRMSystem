@@ -32,6 +32,7 @@ public class JpaUserDAOImpl implements UserDAO {
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
+
         logger.info("User successfully loaded. User details: " + user);
 
         return user;
