@@ -69,6 +69,7 @@
     </div>
     <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </form>
+
     <!--add ResponsibleUser -->
     <c:if test="${empty company.id}">
 <h4 style="color: red">Add a responsible users and tags after adding Company</h4>

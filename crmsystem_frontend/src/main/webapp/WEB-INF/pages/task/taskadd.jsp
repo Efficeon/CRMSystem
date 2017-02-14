@@ -6,16 +6,17 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: green">
-        <i class="glyphicon glyphicon-arrow-left"></i> All tasks</a>
-    <title>Create company</title>
+    <%--<a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: green">--%>
+        <%--<i class="glyphicon glyphicon-arrow-left"></i>--%>
+        <%--</a>--%>
+    <title>Create task</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 
 <body>
-<h1>Add or Edit Task</h1>
+<h2>Add or edit Task</h2>
 <br>
 <br>
 
@@ -24,44 +25,43 @@
         <div class="form-group">
 
             <c:if test="${!empty task.id}">
-                <%--<spring:bind path="id">--%>
-                    <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
-                                 <%--disabled="true" placeholder='ID${id}'/>--%>
-                <%--</spring:bind>--%>
+                <spring:bind path="id">
+                    <form:input  type="text" path="id" class="form-group" readonly="true"
+                                 disabled="true" placeholder='ID${task.id}'/>
+                </spring:bind>
             </c:if>
-                <spring:bind path="name">
+
             <form:input  type="text" path="name" class="form-group"
-                             placeholder='Name${name}' autofocus="true"/>
-                </spring:bind>
+                             placeholder='Name${task.name}' autofocus="true"/>
             <br>
-                <spring:bind path="description">
                 <form:input  type="text" path="description" class="form-group"
-                             placeholder='Description${description}' autofocus="true"/>
-                </spring:bind>
+                             placeholder='Description${task.description}' autofocus="true"/>
             <br>
 
-                <spring:bind path="implementer">
                 <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
-                    <form:options items="${listUsers}" itemValue="id" itemLabel="username" />
+                    <form:options items="${listUsers}" itemValue="id" itemLabel="firstName" />
                 </form:select>
-                </spring:bind>
+
+                <%--<form:input  type="text" path="implementer" class="form-group"--%>
+                <%--placeholder='Implementer${task.implementer}' autofocus="true"/>--%>
             <br>
             <br>
             <button type="submit" id="taskform">
-                <spring:message text="Add"/>
+                <spring:message text="Add task"/>
             </button>
         </div>
 
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
-
     <br>
     <br>
     <button type="button">
-        <a href="<c:url value='/task/'/>">Complete</a>
+    <a href="<c:url value='/task/'/>">All tasks list</a>
     </button>
+
 </form:form>
+
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

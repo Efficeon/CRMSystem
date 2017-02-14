@@ -53,12 +53,9 @@ public class TaskController {
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task){
         this.taskService.save(task);
-        return "redirect:/edittask/"+task.getId()+"/";
+        return "redirect:/edittask/"+ task.getId()+"/";
     }
 
-//  подразумевается, что Model уже существует, т.к. был переход "task"
-//  в Model.attribute уже находятся task и listTasks
-//  теперь: task, listTasks и listUsers
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
     public String addTask(Model model) {
         model.addAttribute("task", new Task());

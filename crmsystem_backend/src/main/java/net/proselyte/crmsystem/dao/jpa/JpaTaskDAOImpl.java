@@ -29,10 +29,8 @@ public class JpaTaskDAOImpl implements TaskDAO{
     @Override
     public Task getById(UUID id) {
         Query query = entityManager.createQuery(
-//                выборка всей информации по задаче, на основании id
-//                + параллельное подтягивание данных о связанном исполнителе
-                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
-
+//                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
+                "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
         query.setParameter("id", id);
         Task task = (Task) query.getSingleResult();
 
@@ -45,8 +43,8 @@ public class JpaTaskDAOImpl implements TaskDAO{
     public List<Task> getAll() {
         List<Task> result;
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
-
+//                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
+                "SELECT task FROM Task as task LEFT JOIN task.implementer as implementer", Task.class);
         result = query.getResultList();
 
         for (Task task : result) {
@@ -58,7 +56,7 @@ public class JpaTaskDAOImpl implements TaskDAO{
 
     @Override
     public void save(Task task) {
-        if (task.getId() == null) {
+            if (task.getId() == null) {
             task.setCreated(new Date());
             task.setUpdated(new Date());
             this.entityManager.persist(task);
@@ -69,14 +67,6 @@ public class JpaTaskDAOImpl implements TaskDAO{
             this.entityManager.merge(task);
             logger.info("Task successfully updated. Task details: " + task);
         }
-//       примитивная реализация
-//        if (task.getId() == null) {
-//            this.entityManager.persist(task);
-//            logger.info("Task successfully saved. Task details: " + task);
-//        } else {
-//            this.entityManager.merge(task);
-//            logger.info("Task successfully updated. Task details: " + task);
-//        }
     }
 
     @Override

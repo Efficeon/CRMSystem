@@ -43,15 +43,15 @@ public class User extends BaseEntity {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    @ManyToMany(mappedBy = "responsibleUser")
+    @ManyToMany(mappedBy = "responsibleUser", fetch=FetchType.LAZY)
     private Set<Company> associatedСompany;
 
-    @OneToMany(mappedBy = "implementer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "implementer", fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Task> tasks;
 
 //    автогенерация registrationDate, при создании нового объекта

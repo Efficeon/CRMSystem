@@ -28,17 +28,12 @@ public class JpaUserDAOImpl implements UserDAO {
 
     @Override
     public User getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user " +
-                "FROM  User user " +
-                "LEFT JOIN FETCH user.roles " +
-                "LEFT JOIN FETCH user.associatedCompany " +
-                "LEFT JOIN FETCH user.tasks " +
-                "WHERE user.id =:id");                                          // не дописан запрос !!!
+        Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.id =:id", User.class);
+//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles, user.associatedСompany, user.tasks WHERE user.id=:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
         logger.info("User successfully loaded. User details: " + user);
-
         return user;
     }
 
@@ -46,17 +41,12 @@ public class JpaUserDAOImpl implements UserDAO {
     public List<User> getAll() {
         List<User> result;
 
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user " +
-                "FROM User user " +
-                "LEFT JOIN FETCH user.roles " +
-                "LEFT JOIN FETCH user.associatedCompany " +
-                "LEFT JOIN FETCH user.tasks");
+        Query query = this.entityManager.createQuery("SELECT user FROM User user", User.class);
         result = query.getResultList();
 
         for (User user : result) {
             logger.info("User list: " + user);
         }
-
         return result;
     }
 
