@@ -15,62 +15,61 @@
   <br>
 
 </head>
-
 <h1>Deal add</h1>
 <br>
 <br>
+
+
+
+<form:form id="dealform" method="POST" modelAttribute="deal" >
+
 <table>
-  <tr>
-    <td>
-<%--<form:form>--%>
-<form:form id="dealform" method="POST" modelAttribute="deal">
+    <tr>
+        <td>
+            <c:if test="${!empty deal.budget}">
+              <spring:bind path="id">
+                  <form:input  type="text" path="id" class="form-group" readonly="true"
+                               disabled="true" placeholder='ID${id}'></form:input>
+              </spring:bind>
+            </c:if>
+              Budget
+              <spring:bind path="budget">
+                <form:input  type="text" path="budget" class="form-group"
+                             placeholder='Budget${budget}' autofocus="true"></form:input>
+              </spring:bind>
 
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </td>
+    </tr>
 
-      <c:if test="${!empty deal.budget}">
-        <spring:bind path="id">
-          <form:input  type="text" path="id" class="form-group" readonly="true"
-                       disabled="true" placeholder='ID${id}'></form:input>
-        </spring:bind>
-      </c:if>
-      Budget
-      <spring:bind path="budget">
-        <form:input  type="text" path="budget" class="form-group"
-                     placeholder='Budget${budget}' autofocus="true"></form:input>
-      </spring:bind>
+    <tr>
+        <td>
+            <form:select path="responsibleUser"> <!-- action="/deal/add/{selectedUser.id}/"><!--modelAttribute="selectedUser"-->
+                <form:option value="NONE" label="Select responsible user"/>
+              <c:forEach var="selectedUser" items="${userList}">
+                <form:option value="${selectedUser.id}"><c:out value="${selectedUser.username}"/> </form:option>
+              </c:forEach>
+            </form:select>
+        </td>
+    </tr>
+</table>
 
-
-      <button type="submit" id="dealform">
+    <button type="submit" id="dealform">
         <spring:message text="Add"/>
-      </button>
+    </button>
 
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-  </form:form>
-
-<br>
-Please select responsible user
-<form:form modelAttribute="selectedUser" method="post" action="/deal/addUser/">
-<form:select path="username">
-  <form:option value="NONE" label="--- Select ---"/>
-  <c:forEach var="theUser" items="${userList}">
-    <form:option value="${theUser}"><c:out value="${theUser.username}"/> </form:option>
-  </c:forEach>
-  <input type="submit" value="addUser">
-  <%--<form:options items="${userList}" itemLabel="username" itemValue="username" />--%>
-</form:select>
 </form:form>
 
-    <br>
-Please select deal status
-<form:form modelAttribute="selectedDealStatus" method="post" action="/deal/addUser/">
-  <%--<input type="submit" value="addDealStatus">--%>
-<form:select path="name">
-  <form:option value="NONE" label="--- Select ---"/>
-  <c:forEach var="theDealStatus" items="${dealStatus}">
-    <form:option value="${theDealStatus}"><c:out value="${theDealStatus.name}"/> </form:option>
-  </c:forEach>
-  <input type="submit" value="Submit">
-</form:select>
-</form:form>
+
 
 </body>
 </html>
+
+<%--<td>--%>
+<%--<form:select  path="dealStatus"><!-- action="/{selectedDealStatusId}/"><!--modelAttribute="selectedDealStatus"-->--%>
+<%--<form:option value="NONE" label="Select deal status"/>--%>
+<%--<c:forEach var="selectedDealStatus" items="${dealStatus}">--%>
+<%--<form:option value="${selectedDealStatus.id}"><c:out value="${selectedDealStatus.name}"/> </form:option>--%>
+<%--</c:forEach>--%>
+<%--</form:select>--%>
+<%--</td>--%>

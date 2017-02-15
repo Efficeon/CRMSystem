@@ -49,8 +49,8 @@ public class DealController {
         return "deal/dealData";
     }
 
-    @RequestMapping(value = "deal/remove", method = RequestMethod.GET)
-    public String removeDeal(@PathVariable("id") UUID id, Model model){
+    @RequestMapping(value = "removedeal/{id}/")
+    public String removeDeal(@PathVariable("id") UUID id){
         this.dealService.remove(this.dealService.getById(id));
         return "redirect:/deal";
     }
@@ -58,40 +58,28 @@ public class DealController {
     @RequestMapping(value = "/deal/add/", method = RequestMethod.GET)
     public String addDeal(Model model) {
         Deal tempdeal = new Deal();
-        Calendar calendar = Calendar.getInstance();
-        java.util.Date now = calendar.getTime();
-//        tempdeal.setCreated(new java.util.Date().getTime());//java.sql.Timestamp(now.getTime()));
-        tempdeal.setDealStatus(new DealStatus());
+        tempdeal.setDealStatus(this.dealStatusService.getById(java.util.UUID.fromString("10f940ce-dc2f-4f44-8723-264345da0d0d")));//new DealStatus());
 
         model.addAttribute("deal", tempdeal);
         model.addAttribute("userList", this.userService.getAll());
-        model.addAttribute("dealStatus", this.dealStatusService.getAll());
         model.addAttribute("selectedUser", new User());
-        model.addAttribute("selectedDealStatus", new DealStatus());
+//        model.addAttribute("dealStatus", this.dealStatusService.getAll());
+//        model.addAttribute("selectedDealStatus", new DealStatus());
         return "deal/dealadd";
     }
 
-    @RequestMapping(value = "/deal/addDealUser/", method = RequestMethod.POST)
-    public String addDealUser(@ModelAttribute ("selectedUser") User selectedUser,
-                          @ModelAttribute ("selectedDealStatus") DealStatus dealStatus) {
-        try {
 
-            Writer writer = new FileWriter(new File("D:\\DealController.txt"));
-            writer.write("inside dealController addUser..\r\n" + selectedUser);
-            writer.flush();
-            writer.close();
-            return "deals";//dealadd";
-        } catch (Exception e){
-            e.printStackTrace();
-            return "deals";
-        }
-    }
+    @RequestMapping(value = "deal/add/{selectedUser.id}/", method = RequestMethod.POST)
+    public String addDeal(@ModelAttribute Deal deal, @PathVariable ("{selectedUser.id}") UUID userId,
+                          Model model){
 
-
-    @RequestMapping(value = "deal/add/", method = RequestMethod.POST)
-    public String addDeal(@ModelAttribute Deal deal, Model model){
-
+//        UUID uuid = java.util.UUID.fromString(dealStatusId);
+//
+//        DealStatus tempDealStatus = this.dealStatusService.getById(uuid);
+//        deal.setDealStatus(tempDealStatus);
         this.dealService.save(deal);
         return "redirect:/deal";
     }
 }
+
+

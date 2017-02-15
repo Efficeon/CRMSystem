@@ -22,13 +22,15 @@
 </head>
 
 <body>
-<br>
-<a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
-</br>
+
 
 
 
 <h1>Deal list</h1>
+
+<br>
+<a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
+</br>
 
 <c:if test="${!empty listDeals}">
   <table>
@@ -39,17 +41,20 @@
       <th width="120">UPDATED</th>
       <th width="120">USER ID</th>
       <th width="120">DEAL STATUS</th>
-      <th width="120">Delete></th>
+      <th width="120">DELETE</th>
+      <th width="120">EDIT</th>
     </tr>
-    <c:forEach items="listDeals" var="deal">
+    <c:forEach items="${listDeals}" var="deal">
       <tr>
         <td>${deal.id}</td>
-        <td>${deal.budget/100}${deal.budget%100}</td>
+        <td>${deal.budget}${deal.budget%100}</td>
         <td>${deal.created}</td>
         <td>${deal.updated}</td>
         <td>${deal.responsibleUser.id}</td>
         <td>${deal.dealStatus.id}</td>
-        <td><a href="<c:url value='deals/remove/${deal}'/>">Delete</a></td>
+        <td align="center"><a href="<c:url value='/removedeal/${deal.id}/'/>">Delete</a></td>
+
+        <td align="center"><a href="<c:url value='/editdeal/${deal.id}/'/>">Edit</a></td>
       </tr>
     </c:forEach>
   </table>

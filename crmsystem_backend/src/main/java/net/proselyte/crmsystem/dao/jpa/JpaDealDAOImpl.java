@@ -9,7 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.*;
 import java.lang.Override;
+import java.sql.*;
+//import java.sql.Date;
 import java.util.*;
+import java.util.Date;
 
 /**
  * JPA implementation of {@link net.proselyte.crmsystem.dao.DealDAO} interface.
@@ -25,10 +28,10 @@ public class JpaDealDAOImpl implements DealDAO {
 
     private final static Logger logger = Logger.getLogger(JpaDealDAOImpl.class);
 
-    @SuppressWarnings("unchecked")
-//    @Override
+
     public Deal getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal WHERE deal.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.id =:id");
+        //"SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
         query.setParameter("id", id);
 
         Deal deal = (Deal) query.getSingleResult();
@@ -42,15 +45,6 @@ public class JpaDealDAOImpl implements DealDAO {
             List<Deal> result = new ArrayList<>();
             Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
             result = query.getResultList();
-            if(result == null) {
-                System.out.println("RESULT == NULL!!");
-                logger.info("RESULT == NULL!!");
-
-            }
-            for (Deal deal : result) {
-                logger.info("deal list: " + deal);
-
-            }
 
             return result;
     }
@@ -58,9 +52,12 @@ public class JpaDealDAOImpl implements DealDAO {
     @Override
     public void save(Deal deal) {
         if (deal.getId() == null) {
+            deal.setCreated(new Date());
             this.entityManager.persist(deal);
             logger.info("Deal successfully saved. Deal details: " + deal);
         } else {
+            deal.setCreated(getById(deal.getId()).getCreated());
+            deal.setUpdated(new Date());
             this.entityManager.merge(deal);
             logger.info("Deal successfully updated. Deal details: " + deal);
         }
@@ -68,7 +65,8 @@ public class JpaDealDAOImpl implements DealDAO {
 
     @Override
     public void remove(Deal deal) {
-        this.entityManager.remove(deal);
+        this.entityManager.remove(this.entityManager.getReference(Deal.class, deal.getId()));
+//        this.entityManager.remove(this.entityManager.getReference(DealStatus.class, entity.getId()));
         logger.info("Deal successfully removed. Deal details: " + deal);
     }
 
