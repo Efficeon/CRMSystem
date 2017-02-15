@@ -1,5 +1,5 @@
 .left-navigation li ul {
-  background-color: #12212c;
+  background-color: #1e3443;
   //display: none;
   margin: 0;
   padding: 4px 0 0;
@@ -35,4 +35,32 @@
 }
 .left-navigation > .parent.open > a:before {
   transform: rotate(90deg);
+}
+
+* {
+  font-family: sans-serif;
+}
+.toggle-menu a {
+  display: block;
+  float: right;
+  padding: 5px 20px;
+  text-align: center;
+  background: none #1e3443;
+  cursor: pointer;
+}
+#menu-main {
+  background: none #1e3443;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: none;
+}
+#menu-main a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+#menu-main a:hover,
+#menu-main a:focus {
+  background: none #12212c;
 }
