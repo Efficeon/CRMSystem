@@ -34,16 +34,15 @@
 
 <nav class="nav" style="background-color: #203745">
     <div class="container-fluid">
-        <form class="navbar-form navbar-left">
-    <form:form method="GET" id="search1" action="/search/${name}">
+
+    <form:form class="navbar-form navbar-left" method="GET" id="search1" action="/search/${name}">
             <div class="form-group">
-                <input type="text" name="name" id="acInput" class="form-control" placeholder="search..." size="60" maxlength="90" style="width: 400px; height: 30px;"/>
+                <input name="name" id="acInput" class="form-control" placeholder="search..." size="60" maxlength="90" style="width: 400px; height: 30px;"/>
                 <button class="button" type="submit" id="search1">
                     <spring:message text="Add"/>
                 </button>
             </div>
     </form:form>
-        </form>
 
         <form class="navbar-form navbar-right">
             <div class style="color: #66afe9">

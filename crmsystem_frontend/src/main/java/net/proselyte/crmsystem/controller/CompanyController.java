@@ -205,8 +205,8 @@ public class CompanyController {
         return "company/companyadd";
     }
 
-    @RequestMapping(value="/search/{name}", method=RequestMethod.GET)
-    public String Search(Model model, @PathVariable(value = "name") String name) {
+    @RequestMapping(value="/search/")
+    public String Search(Model model, @RequestParam(value = "name", required = false) String name) {
         System.out.println(name);
         List<Company> companies = (List<Company>) companyService.getAll();
         List<Company> searchCompanies = new LinkedList<>();
