@@ -11,6 +11,14 @@
 
 <div>
     <h1>WELCOME</h1>
+    <br>
+    <br>
+    <a href="<c:url value='/task/'/>">All tasks</a>
+    <br>
+    <a href="<c:url value='/company/'/>">All companies</a>
+    <br>
+    <a href="<c:url value='/user/'/>">All users</a>
+    <br>
 </div>
 </body>
 </html>

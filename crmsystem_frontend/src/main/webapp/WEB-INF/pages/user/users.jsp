@@ -37,6 +37,7 @@
             <th class="text-center" width="50">E-mail</th>
             <th class="text-center" width="50">User type</th>
             <th class="text-center" width="50">Registration date</th>
+            <th class="text-center" width="50">Edit user</th>
             <th class="text-center" width="50">User details</th>
         </tr>
         <c:forEach items="${userList}" var="user">
@@ -46,6 +47,8 @@
                 <td>${user.email}</td>
                 <td>${user.userType}</td>
                 <td><fmt:formatDate value="${user.registrationDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
+                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a></td>
                 <td class="text-center"><a href="<c:url value='/userdata/${user.id}/' />"
                                            span class="glyphicon glyphicon glyphicon-file " style="color: darkblue">Details</a></td>
             </tr>

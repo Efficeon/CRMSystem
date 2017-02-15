@@ -7,7 +7,7 @@ package net.proselyte.crmsystem.dao;
 /**
  * Extension of {@link GenericDAO} interface for class {@link Task}.
  *
- * @author Vladimir Vitlickij
+ * @author Vladimir Vitlitski
  */
 public interface TaskDAO extends GenericDAO<Task, UUID> {
 }

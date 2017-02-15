@@ -56,6 +56,10 @@
     </table>
 </c:if>
 
+<br>
+<a href="<c:url value='/'/>">Back to start page</a>
+<br>
+
 <body>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -80,7 +80,23 @@ public class UserController {
 //    Tasks
 
 
-
+    @RequestMapping(value = "/edituser/{id}")
+    public String editUser(@PathVariable("id") UUID id, Model model){
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("task", this.taskService.getById(id));
+        model.addAttribute("listCompanies", this.companyService.getById(id));
+        model.addAttribute("listRoles", this.roleService.getById(id));
+        model.addAttribute("user", new User());
+        return "task/taskadd";
+    }
+//
+//    @RequestMapping(value = "/edituser/{id}", method = RequestMethod.POST)
+//    public String editSubmit(@PathVariable("id") UUID id, User user){
+//        user.setId(id);
+//        user.setImplementer(this.taskService.getById(id).getImplementer());
+//        this.taskService.save(task);
+//        return "redirect:/task/";
+//    }
 
 
 //    @RequestMapping(value = "/addresponsible/{userId}/{taskId}/", method = RequestMethod.GET)
@@ -149,20 +165,5 @@ public class UserController {
 ////    получаем Collection всех users - listUsers, добавляем в Model,
 ////    передаем для отображения во view useradd.jsp (User add)
 //
-//    @RequestMapping(value = "/edituser/{id}")
-//    public String editUser(@PathVariable("id") UUID id, Model model){
-//        model.addAttribute("task", this.taskService.getById(id));
-//        model.addAttribute("listUsers", this.userService.getAll());
-//        //model.addAttribute("user", new User());
-//        return "task/taskadd";
-//    }
 //
-//    @RequestMapping(value = "/edituser/{id}", method = RequestMethod.POST)
-//    public String editSubmit(@PathVariable("id") UUID id,
-//                             @ModelAttribute User user){
-//        user.setId(id);
-//        user.setImplementer(this.taskService.getById(id).getImplementer());
-//        this.taskService.save(task);
-//        return "redirect:/task/";
-//    }
 }

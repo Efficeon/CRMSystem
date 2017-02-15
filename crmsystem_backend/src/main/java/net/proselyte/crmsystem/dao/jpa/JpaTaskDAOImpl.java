@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +16,7 @@ import java.util.UUID;
 /**
  * JPA implementation {@link TaskDAO}.
  *
- * @author Vladimir Vitlickij
+ * @author Vladimir Vitlitski
  */
 
 @Repository
@@ -29,8 +30,9 @@ public class JpaTaskDAOImpl implements TaskDAO{
     @Override
     public Task getById(UUID id) {
         Query query = entityManager.createQuery(
-//                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
-                "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
+                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
+//                "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
+
         query.setParameter("id", id);
         Task task = (Task) query.getSingleResult();
 
@@ -43,9 +45,11 @@ public class JpaTaskDAOImpl implements TaskDAO{
     public List<Task> getAll() {
         List<Task> result;
         Query query = entityManager.createQuery(
-//                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
-                "SELECT task FROM Task as task LEFT JOIN task.implementer as implementer", Task.class);
+                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
+//                "SELECT task FROM Task as task LEFT JOIN task.implementer as implementer", Task.class);
         result = query.getResultList();
+
+        Collections.sort(result, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
         for (Task task : result) {
             int i = 0;

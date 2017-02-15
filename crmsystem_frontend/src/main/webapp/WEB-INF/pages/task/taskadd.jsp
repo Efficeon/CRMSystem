@@ -37,12 +37,12 @@
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${task.description}' autofocus="true"/>
             <br>
-
                 <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
                     <form:options items="${listUsers}" itemValue="id" itemLabel="firstName" />
                 </form:select>
 
+            <%----%>
                 <%--<form:input  type="text" path="implementer" class="form-group"--%>
                 <%--placeholder='Implementer${task.implementer}' autofocus="true"/>--%>
             <br>
@@ -66,7 +66,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
-</br>
+<br>
+<a href="<c:url value='/'/>">Back to start page</a>
+<br>
 
 </body>
 </html>

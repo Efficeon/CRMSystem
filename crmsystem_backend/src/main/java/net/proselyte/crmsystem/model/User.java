@@ -51,7 +51,7 @@ public class User extends BaseEntity {
     @ManyToMany(mappedBy = "responsibleUser", fetch=FetchType.LAZY)
     private Set<Company> associatedСompany;
 
-    @OneToMany(mappedBy = "implementer", fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "implementer", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)      // cascade, orphanremove
     private Set<Task> tasks;
 
 //    автогенерация registrationDate, при создании нового объекта

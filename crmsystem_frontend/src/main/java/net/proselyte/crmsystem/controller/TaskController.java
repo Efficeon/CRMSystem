@@ -17,7 +17,7 @@ import java.util.UUID;
 /**
  * Controller for {@link Task}'s pages.
  *
- * @author Vladimir Vitlitskiy.
+ * @author Vladimir Vitlitski
  */
 
 @Controller
@@ -52,6 +52,13 @@ public class TaskController {
 //
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task){
+
+//   перед сохранением task, нужно подтянуть id пользователя, который был выбран в GET form select
+//   и установить этот id в task.implementer (колонка user_id в таблице tasks)
+//   необходимо разобраться с userService.getById()
+        task.setImplementer(this.userService.getById(task.getImplementer().getId()));
+
+//        task.setImplementer(this.userService.getById());
         this.taskService.save(task);
         return "redirect:/edittask/"+ task.getId()+"/";
     }
@@ -63,6 +70,7 @@ public class TaskController {
         model.addAttribute("listtasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
 
+//        return "task/add/""/"
         return "task/taskadd";
     }
 

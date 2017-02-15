@@ -85,14 +85,21 @@ public class CompanyController {
         return "redirect:/company/";
     }
 
+
+//  вносим определенного respUser (по id) в Set<User> определенной компании (по id)
+//  помещаем эти данные в Model
     @RequestMapping(value = "/addresponsible/{userId}/{companyId}/", method = RequestMethod.GET)
     public String addResponsibleUser(@PathVariable("userId") UUID userId,
                                      @PathVariable("companyId") UUID companyId,
                                      @ModelAttribute Company company,
                                      Model model){
+//  получили company по введенному ${company.id}
         company = this.companyService.getById(companyId);
+//  получили user по переданному на вход id и добавили в Set<User> responsibleUser у company
         company.setResponsibleUser(this.userService.getById(userId));
+//  сохранили company с ввенденными данными
         this.companyService.save(company);
+//  в Model поместили следующие данные: listUsers + компанию по нашему id
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));

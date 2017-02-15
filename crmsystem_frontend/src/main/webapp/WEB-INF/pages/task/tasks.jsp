@@ -46,7 +46,8 @@
                 <td>${task.id}</td>
                 <td>${task.name}</td>
                 <td>${task.description}</td>
-                <td>${task.responsiblePerson}</td>
+                <td>${task.implementer}</td>
+                <%--task.responsiblePerson !!! was replaced by task.implementer--%>
                 <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <%--ячейки заполняются значениями из заголовков - "по умолчанию"--%>
@@ -61,6 +62,10 @@
         </c:forEach>
     </table>
 </c:if>
+
+<br>
+<a href="<c:url value='/'/>">Back to start page</a>
+<br>
 
     <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

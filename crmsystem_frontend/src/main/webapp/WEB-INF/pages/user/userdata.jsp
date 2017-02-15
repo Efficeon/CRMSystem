@@ -36,7 +36,7 @@
         <th class="text-center" width="50">Associated companies</th>
         <th class="text-center" width="50">Related tasks</th>
 
-        <%--<th class="text-center" width="40">Edit</th>--%>
+        <th class="text-center" width="40">Edit</th>
         <th class="text-center" width="40">Delete</th>
     </tr>
     <tr>
@@ -49,32 +49,35 @@
         <td>${user.birthDate}</td>
         <td>${user.registrationDate}</td>
 
-        <td><c:forEach items="${user.roles}" var="role">
-            <table>
+        <td>
+            <c:forEach items="${user.roles}" var="role">
+            <%--<table>--%>
                 <tr>
                     <td>${role.name}</td>
                 </tr>
-            </table>
-        </c:forEach></td>
+            <%--</table>--%>
+            </c:forEach>
+        </td>
 
         <td><c:forEach items="${user.associatedCompany}" var="company">
-            <table>
+            <%--<table>--%>
                 <tr>
                     <td><a href="<c:url value='/companydata/${id}/'/>" target="_blank"> ${company.name}</a></td>
                 </tr>
-            </table>
+            <%--</table>--%>
         </c:forEach></td>
 
         <td><c:forEach items="${user.tasks}" var="task">
-            <table>
+            <%--<table>--%>
                 <tr>
                     <td><a href="<c:url value='/taskdata/${id}/'/>" target="_blank"> ${task.name}</a></td>
                 </tr>
-            </table>
+            <%--</table>--%>
         </c:forEach></td>
 
-        <%--<td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"--%>
-                                   <%--span class="glyphicon glyphicon glyphicon-edit" style="color: orange" /></td>--%>
+        <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
+                                   span class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a>
+        </td>
         <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/'/>"
                                    span class="glyphicon glyphicon-remove" style="color: red">Delete</a>
         </td>
