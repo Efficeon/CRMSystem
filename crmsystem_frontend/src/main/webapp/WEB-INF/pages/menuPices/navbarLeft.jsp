@@ -52,7 +52,7 @@
             <div class="col-lg-6">
                 <div class="input-group">
                     <div class="input-group-btn">
-                    <input type="text" name="name" id="acInput" placeholder="search..." class="form-control" size="60" maxlength="90" style="width: 400px; height: 30px;">
+                    <input type="text" path="name" name="name" id="acInput" placeholder="search..." class="form-control" size="60" maxlength="90" style="width: 400px; height: 30px;">
 
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 30px;">Search <span class="glyphicon glyphicon-search"></span></button>
                         <ul class="dropdown-menu pull-right">

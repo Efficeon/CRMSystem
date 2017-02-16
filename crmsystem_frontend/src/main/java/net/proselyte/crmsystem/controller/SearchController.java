@@ -33,7 +33,7 @@ public class SearchController {
     @Autowired
     private DealService dealService;
 
-    @RequestMapping(value="/search/company/{searchTerm}")
+    @RequestMapping(value="/search/{name}")
     public String Search(Model model, @PathVariable("name") String name) {
         System.out.println(name);
         List<Company> companies = (List<Company>) companyService.getAll();
