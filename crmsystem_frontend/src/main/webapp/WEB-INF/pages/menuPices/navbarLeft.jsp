@@ -52,11 +52,18 @@
             <div class="col-lg-6">
                 <div class="input-group">
                     <div class="input-group-btn">
-                    <input type="text" path="name" name="name" id="acInput" placeholder="search..." class="form-control" size="60" maxlength="90" style="width: 400px; height: 30px;">
+                    <input type="search" path="name" name="name" id="acInput" placeholder="search..." class="form-control" size="60" maxlength="90" style="width: 400px; height: 30px;">
 
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 30px;">Search <span class="glyphicon glyphicon-search"></span></button>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="/search/${name}"><i class="glyphicon glyphicon-briefcase" style="color: darkblue"></i><span> Search companies</span></a></li>
+                            <script type='text/javascript'>
+                                function a(){
+                                    var d = document.getElementById('acInput').value;
+                                    alert(d);
+                                    window.location='/search/?name='+d;
+                                }
+                            </script>
+                            <li><a onClick="javascript:a()"><i class="glyphicon glyphicon-briefcase" style="color: darkblue"></i><span> Search companies</span></a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-user" style="color: darkgreen"></i><span> Search users</span></a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-pencil" style="color: darkred"></i><span> Search deals</span></a></li>
                             <li class="divider"></li>
