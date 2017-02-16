@@ -20,16 +20,18 @@
 <br>
 <br>
 
+
 <form:form id="taskform" method="POST" modelAttribute="task">
     <form class="form-inline">
         <div class="form-group">
 
-            <c:if test="${!empty task.id}">
-                <spring:bind path="id">
-                    <form:input  type="text" path="id" class="form-group" readonly="true"
-                                 disabled="true" placeholder='ID${task.id}'/>
-                </spring:bind>
-            </c:if>
+            <%--<c:if test="${!empty task.id}">--%>
+                    <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
+                                 <%--disabled="true" placeholder='ID${task.id}'/>--%>
+            <%--</c:if>--%>
+
+            <form:input type="hidden" path="id" id="id"/>
+
 
             <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${task.name}' autofocus="true"/>
@@ -54,6 +56,7 @@
 
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
+
     <br>
     <br>
     <button type="button">

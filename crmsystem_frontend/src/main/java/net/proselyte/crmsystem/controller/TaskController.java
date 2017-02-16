@@ -49,18 +49,15 @@ public class TaskController {
         return "redirect:/task/";
     }
 
-//
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
-    public String taskSubmit(@ModelAttribute Task task){
-
-//   перед сохранением task, нужно подтянуть id пользователя, который был выбран в GET form select
-//   и установить этот id в task.implementer (колонка user_id в таблице tasks)
-//   необходимо разобраться с userService.getById()
-        task.setImplementer(this.userService.getById(task.getImplementer().getId()));
-
-//        task.setImplementer(this.userService.getById());
+    public String taskSubmit(@ModelAttribute("task") Task task){
         this.taskService.save(task);
-        return "redirect:/edittask/"+ task.getId()+"/";
+
+
+        return "task/tasks";
+
+
+//        return "redirect:/edittask/"+ task.getId()+"/";
     }
 
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
@@ -69,8 +66,6 @@ public class TaskController {
         model.addAttribute("user", new User());
         model.addAttribute("listtasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
-
-//        return "task/add/""/"
         return "task/taskadd";
     }
 
@@ -78,7 +73,7 @@ public class TaskController {
     public String editTask(@PathVariable("id") UUID id, Model model){
         model.addAttribute("task", this.taskService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
-        //model.addAttribute("user", new User());
+        model.addAttribute("user", new User());
         return "task/taskadd";
     }
 
