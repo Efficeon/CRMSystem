@@ -198,13 +198,6 @@ public class CompanyController {
         return new Gson().toJson(companyName);
     }
 
-    @RequestMapping(value = "/company/?name={name}", method = RequestMethod.GET)
-    public String listSortedCompanies(@PathVariable("name") String name, Model model) {
-        model.addAttribute("company", new Company());
-        model.addAttribute("listCompanies", this.companyService.getSortedCompanies(name));
-        return "company/companyadd";
-    }
-
     @RequestMapping(value="/search/")
     public String Search(Model model, @RequestParam(value = "name", required = false) String name) {
         System.out.println(name);

@@ -16,7 +16,7 @@
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function() {
-            $('#acInput').autocomplete({
+            $('#tagInput').autocomplete({
                 source: function (request, response) {
                     $.getJSON("/tags/", {
                         term: request.term
@@ -26,15 +26,19 @@
         });
     </script>
 </head>
-<br>
-<h1>Company add</h1>
+
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
-
+<c:if test="${empty company.id}">
+        <h1>Company add</h1>
+</c:if>
+<c:if test="${!empty company.id}">
+    <h1>Company edit</h1>
+</c:if>
 <form:form id="companyform" method="POST" modelAttribute="company">
     <form class="form-inline">
         <div class="form-group">
-            <c:if test="${!empty company.name}">
+            <c:if test="${!empty company.id}">
                 <spring:bind path="id">
                     <form:input  type="text" path="id" class="form-group" readonly="true"
                                  disabled="true" placeholder='ID${id}'></form:input>
@@ -120,11 +124,11 @@
         <div class="form-group">
             <spring:bind path="name" >
                 <c:if test="${empty company.id}">
-                    <form:input id="acInput" disabled="true" type="text" path="name" class="form-inline"
+                    <form:input id="tagInput" disabled="true" type="text" path="name" class="form-inline"
                                 placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
                 <c:if test="${!empty company.id}">
-                    <form:input  id="acInput" type="text" path="name" class="form-inline"
+                    <form:input  id="tagInput" type="text" path="name" class="form-inline"
                                  placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
             </spring:bind>
