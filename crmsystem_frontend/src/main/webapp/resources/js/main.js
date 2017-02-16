@@ -8,7 +8,13 @@ $(".left-navigation li ul li.active").each(function(){
     $(this).parent().css({'display':'block'});
     $(this).parent().parent().addClass("open");
 });
+$(document).click(function(){
+    $("#hello").hide('slow');
+});
 
+$("#hello").click(function(e){
+    e.stopPropagation();
+});
 // При клике на меню у которого есть подменю (класс parent) - плавно закрываем меню
 $(".left-navigation").delegate(".parent > a","click",function(e){
     $(".left-navigation .parent.open > ul").not($(this).parent().find("ul")).slideUp(300, 'swing',function(){
@@ -28,3 +34,10 @@ $(".left-navigation").delegate(".parent > a","click",function(e){
     });
     e.preventDefault();
 });
+
+$('[data-toggle]').on('click', function(e){
+    e.preventDefault;
+    var thisLink = $(this);
+    var toToggle = $( thisLink.data('toggle') );
+    toToggle.slideToggle(200);
+})

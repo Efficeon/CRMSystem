@@ -1,5 +1,6 @@
 package net.proselyte.crmsystem.controller;
 
+import com.google.gson.Gson;
 import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.model.User;
@@ -10,7 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -179,5 +185,32 @@ public class CompanyController {
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
         return "company/companyadd";
+    }
+    @RequestMapping(value = "/companySearch/", method = RequestMethod.GET)
+    public @ResponseBody String getTags(@RequestParam("term") String term)  {
+        List<Company> companies = (List<Company>) companyService.getAll();
+        List<String> companyName = new ArrayList<String>();
+        for (Company company: companies){
+            if(company.getName().contains(term)) {
+                companyName.add(company.getName());
+            }
+        }
+        return new Gson().toJson(companyName);
+    }
+
+    @RequestMapping(value="/search/")
+    public String Search(Model model, @RequestParam(value = "name", required = false) String name) {
+        System.out.println(name);
+        List<Company> companies = (List<Company>) companyService.getAll();
+        List<Company> searchCompanies = new LinkedList<>();
+        for (Company company: companies){
+            if(company.getName().contains(name)) {
+                searchCompanies.add(company);
+            }
+        }
+        model.addAttribute("company", new Company());
+        model.addAttribute("listCompanies", searchCompanies);
+
+        return "company/companies";
     }
 }
