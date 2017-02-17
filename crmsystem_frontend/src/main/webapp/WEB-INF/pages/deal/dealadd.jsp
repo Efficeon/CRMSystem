@@ -39,15 +39,14 @@
               </spring:bind>
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </td>
-    </tr>
 
-    <tr>
-        <td>
-            <form:select path="responsibleUser"> <!-- action="/deal/add/{selectedUser.id}/"><!--modelAttribute="selectedUser"-->
+<br>
+
+            <form:select path="responsibleUser">
                 <form:option value="NONE" label="Select responsible user"/>
               <c:forEach var="selectedUser" items="${userList}">
-                <form:option value="${selectedUser.id}"><c:out value="${selectedUser.username}"/> </form:option>
+
+                <form:option value="${deal.responsibleUser}"><c:out value="${selectedUser.username}"/> </form:option>
               </c:forEach>
             </form:select>
         </td>

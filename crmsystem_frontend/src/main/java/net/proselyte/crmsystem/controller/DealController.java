@@ -9,10 +9,7 @@ import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -63,21 +60,16 @@ public class DealController {
         model.addAttribute("deal", tempdeal);
         model.addAttribute("userList", this.userService.getAll());
         model.addAttribute("selectedUser", new User());
-//        model.addAttribute("dealStatus", this.dealStatusService.getAll());
-//        model.addAttribute("selectedDealStatus", new DealStatus());
+       // model.addAttribute("dealStatus", this.dealStatusService.getAll());
+        //model.addAttribute("selectedDealStatus", new DealStatus());
         return "deal/dealadd";
     }
 
 
-    @RequestMapping(value = "deal/add/{selectedUser.id}/", method = RequestMethod.POST)
-    public String addDeal(@ModelAttribute Deal deal, @PathVariable ("{selectedUser.id}") UUID userId,
-                          Model model){
-
-//        UUID uuid = java.util.UUID.fromString(dealStatusId);
-//
-//        DealStatus tempDealStatus = this.dealStatusService.getById(uuid);
-//        deal.setDealStatus(tempDealStatus);
+    @RequestMapping(value = "deal/add/", method = RequestMethod.POST)
+    public String addDeal(@ModelAttribute Deal deal, @RequestParam("id") UUID id, Model model){
         this.dealService.save(deal);
+        model.addAttribute("deal", deal);
         return "redirect:/deal";
     }
 }
