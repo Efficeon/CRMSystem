@@ -11,5 +11,5 @@ import java.util.UUID;
  * @author Leonid Dubravsky
  */
 public interface CompanyDAO extends GenericDAO<Company, UUID>{
-    public Collection<Company> getSortedCompanies(String name);
+    public Collection<Company> getSortedCompanies(String searchLine);
 }

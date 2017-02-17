@@ -45,13 +45,10 @@ public class JpaDealDAOImpl implements DealDAO {
             if(result == null) {
                 System.out.println("RESULT == NULL!!");
                 logger.info("RESULT == NULL!!");
-
             }
             for (Deal deal : result) {
                 logger.info("deal list: " + deal);
-
             }
-
             return result;
     }
 
@@ -83,5 +80,19 @@ public class JpaDealDAOImpl implements DealDAO {
         return deal;
     }
 
+    @Override
+    public Collection<Deal> getSortedDeals(String searchLine) {
+        List<Deal> resultSearch;
+        Query query = entityManager.createQuery(
+                "SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.name LIKE ? " +
+                        "OR deal.budget LIKE ?");
+        query.setParameter(0, "%"+searchLine+"%");
+        query.setParameter(1, "%"+searchLine+"%");
 
+        resultSearch=query.getResultList();
+        for (Deal deal : resultSearch) {
+            logger.info("Search deals list: " + deal);
+        }
+        return resultSearch;
+    }
 }
