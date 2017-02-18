@@ -34,6 +34,7 @@ public class TaskController {
     public String listTasks(Model model) {
         model.addAttribute("task", new Task());
         model.addAttribute("listTasks", this.taskService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
         return "task/tasks";
     }
 
@@ -51,13 +52,11 @@ public class TaskController {
 
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute("task") Task task){
+
         this.taskService.save(task);
+        return "welcome";
 
-
-        return "task/tasks";
-
-
-//        return "redirect:/edittask/"+ task.getId()+"/";
+//        return "redirect:/edittask/${task.getId()}/";
     }
 
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
@@ -66,7 +65,8 @@ public class TaskController {
         model.addAttribute("user", new User());
         model.addAttribute("listtasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
-        return "task/taskadd";
+        return "welcome";
+//        return "task/taskadd";
     }
 
     @RequestMapping(value = "/edittask/{id}")

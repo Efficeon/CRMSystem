@@ -16,7 +16,7 @@ public class Task extends NamedEntity{
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)      //  targetEntity = User.class
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)      //  targetEntity = User.class
 //    @JoinTable(name="tasks_users", joinColumns = {@JoinColumn (name="task_id", referencedColumnName ="id")},
 //    inverseJoinColumns = {@JoinColumn (name="user_id", referencedColumnName = "id")})
     @JoinColumn(name = "user_id")

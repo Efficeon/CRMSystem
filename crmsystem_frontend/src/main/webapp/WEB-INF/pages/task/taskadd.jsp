@@ -39,11 +39,15 @@
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${task.description}' autofocus="true"/>
             <br>
+                <%--<form:select path="${task.implementer.id}">--%>
+                    <%--<form:option value="0" label="Select only one"/>--%>
+                    <%--<form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>--%>
+                <%--</form:select>--%>
+
                 <form:select path="implementer">
                     <form:option value="0" label="Select only one"/>
-                    <form:options items="${listUsers}" itemValue="id" itemLabel="firstName" />
+                    <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
                 </form:select>
-
             <%----%>
                 <%--<form:input  type="text" path="implementer" class="form-group"--%>
                 <%--placeholder='Implementer${task.implementer}' autofocus="true"/>--%>
