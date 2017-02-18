@@ -46,14 +46,22 @@
       background-color: #f9f9f9
     }
   </style>
+
+  <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
+
 </head>
 <body>
+<jsp:include page="../menuPices/navbarLeft.jsp"/>
+
+
+
 <h1>List of Deal Statuses</h1>
 
 <br>
 <a href="<c:url value='/dealstatus/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create dealStatus</a>
-
-</br>
+<br>
+<br>
 
 <c:if test="${!empty listDealStatuses}">
   <table class="tg">
@@ -75,5 +83,6 @@
   </table>
 </c:if>
 
+<script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>

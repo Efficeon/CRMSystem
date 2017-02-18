@@ -1,12 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-
 
 <html>
 <head>
@@ -16,21 +12,22 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-    <title>Deals</title>
+  <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
 
+    <title>Deals</title>
 
 </head>
 
 <body>
 
-
-
+<jsp:include page="../menuPices/navbarLeft.jsp"/>
 
 <h1>Deal list</h1>
 
 <br>
 <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
-</br>
+<br>
 
 <c:if test="${!empty listDeals}">
   <table>
@@ -47,7 +44,7 @@
     <c:forEach items="${listDeals}" var="deal">
       <tr align="center">
         <td>${deal.id}</td>
-        <td>${deal.budget}</td><!--{deal.budget%100}</td>-->
+        <td>${deal.budget}</td>
         <td>${deal.created}</td>
         <td>${deal.updated}</td>
         <td>${deal.responsibleUser.firstName}</td>
@@ -62,5 +59,6 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+<script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>

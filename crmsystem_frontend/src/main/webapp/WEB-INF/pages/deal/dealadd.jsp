@@ -10,6 +10,9 @@
 
 <html>
 <head>
+    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
+
     <title>Create deal</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
   <br>
@@ -19,7 +22,9 @@
 <br>
 <br>
 
+<body>
 
+<jsp:include page="../menuPices/navbarLeft.jsp"/>
 
 <form:form id="dealform" method="POST" modelAttribute="deal" >
 
@@ -40,8 +45,6 @@
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-<br>
-
             <form:select path="responsibleUser.id">
                 <form:option value="NONE" label="Select responsible user"/>
                 <form:options items="${userList}" itemValue="id" itemLabel="firstName"/>
@@ -61,16 +64,8 @@
 
 </form:form>
 
-
+<script src="${contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>
 
-<%--<td>--%>
-<%--<form:select  path="dealStatus"><!-- action="/{selectedDealStatusId}/"><!--modelAttribute="selectedDealStatus"-->--%>
-<%--<form:option value="NONE" label="Select deal status"/>--%>
-<%--<c:forEach var="selectedDealStatus" items="${dealStatus}">--%>
-<%--<form:option value="${selectedDealStatus.id}"><c:out value="${selectedDealStatus.name}"/> </form:option>--%>
-<%--</c:forEach>--%>
-<%--</form:select>--%>
-<%--</td>--%>
