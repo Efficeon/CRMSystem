@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
     public Collection getAll() {
         return userDao.getAll();
     }
+
+    @Override
+    public Collection<User> getSearchedUsers(String searchLine) {
+        return userDao.getSortedUsers(searchLine);
+    }
 }

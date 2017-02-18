@@ -14,21 +14,11 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('#tagInput').autocomplete({
-                source: function (request, response) {
-                    $.getJSON("/tags/", {
-                        term: request.term
-                    }, response);
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
+<div style="margin: 10px 10px 10px 10px;">
 <c:if test="${empty company.id}">
         <h1>Company add</h1>
 </c:if>
@@ -140,7 +130,7 @@
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
 </form:form>
-
+</div>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>

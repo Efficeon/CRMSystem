@@ -17,7 +17,7 @@ public interface CompanyService {
 
     Collection<Company> getAll();
 
-    Collection<Company> getSortedCompanies(String name);
+    Collection<Company> getSearchedCompanies(String searchLine);
 
     void save(Company company);
 
