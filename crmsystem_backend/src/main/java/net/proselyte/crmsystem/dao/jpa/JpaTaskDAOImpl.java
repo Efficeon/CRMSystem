@@ -30,8 +30,8 @@ public class JpaTaskDAOImpl implements TaskDAO{
     @Override
     public Task getById(UUID id) {
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
-//                "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
+//                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer WHERE task.id =:id");
+                "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
 
         query.setParameter("id", id);
         Task task = (Task) query.getSingleResult();
@@ -45,8 +45,8 @@ public class JpaTaskDAOImpl implements TaskDAO{
     public List<Task> getAll() {
         List<Task> result;
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
-//                "SELECT task FROM Task as task LEFT JOIN task.implementer as implementer", Task.class);
+//                "SELECT DISTINCT task FROM Task task LEFT JOIN FETCH task.implementer");
+                "SELECT task FROM Task as task LEFT JOIN task.implementer as implementer", Task.class);
         result = query.getResultList();
 
         Collections.sort(result, (o1, o2) -> o1.getName().compareTo(o2.getName()));
@@ -60,17 +60,17 @@ public class JpaTaskDAOImpl implements TaskDAO{
 
     @Override
     public void save(Task task) {
-            if (task.getId() == null) {
+//            if (task.getId() == null) {
             task.setCreated(new Date());
             task.setUpdated(new Date());
             this.entityManager.persist(task);
             logger.info("Task successfully saved. Task details: " + task);
-        } else {
-            task.setCreated(getById(task.getId()).getCreated());
-            task.setUpdated(new Date());
-            this.entityManager.merge(task);
-            logger.info("Task successfully updated. Task details: " + task);
-        }
+//        } else {
+//            task.setCreated(getById(task.getId()).getCreated());
+//            task.setUpdated(new Date());
+//            this.entityManager.merge(task);
+//            logger.info("Task successfully updated. Task details: " + task);
+//        }
     }
 
     @Override

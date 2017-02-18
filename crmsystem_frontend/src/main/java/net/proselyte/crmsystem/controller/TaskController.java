@@ -7,10 +7,7 @@ import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -51,11 +48,12 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
-    public String taskSubmit(@ModelAttribute("task") Task task){
-
+    public String taskSubmit(@RequestParam(name = "implementer.id") UUID userId,
+                             @ModelAttribute("task") Task task) {
+        task.setImplementer(this.userService.getById(userId));
         this.taskService.save(task);
-        return "welcome";
-
+//        return "welcome";
+        return "/task/tasks";
 //        return "redirect:/edittask/${task.getId()}/";
     }
 
@@ -65,8 +63,8 @@ public class TaskController {
         model.addAttribute("user", new User());
         model.addAttribute("listtasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
-        return "welcome";
-//        return "task/taskadd";
+//        return "welcome";
+        return "task/taskadd";
     }
 
     @RequestMapping(value = "/edittask/{id}")

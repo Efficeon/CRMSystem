@@ -26,11 +26,11 @@
         <div class="form-group">
 
             <%--<c:if test="${!empty task.id}">--%>
-                    <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
-                                 <%--disabled="true" placeholder='ID${task.id}'/>--%>
+                    <%--<form:input  path="id" class="form-group" readonly="true"--%>
+                                 <%--disabled="true" placeholder='ID${null}'/>--%>
             <%--</c:if>--%>
 
-            <form:input type="hidden" path="id" id="id"/>
+            <%--<form:input type="hidden" path="id" id=""/>--%>
 
 
             <form:input  type="text" path="name" class="form-group"
@@ -44,7 +44,7 @@
                     <%--<form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>--%>
                 <%--</form:select>--%>
 
-                <form:select path="implementer">
+                <form:select path="implementer.id">
                     <form:option value="0" label="Select only one"/>
                     <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
                 </form:select>
@@ -69,9 +69,9 @@
 
 </form:form>
 
-<script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<%--<script src="/WEB-INF/pages/js/bootstrap.min.js"></script>--%>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>--%>
+<%--<script src="${contextPath}/resources/js/bootstrap.min.js"></script>--%>
 
 <br>
 <a href="<c:url value='/'/>">Back to start page</a>
