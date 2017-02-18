@@ -42,12 +42,9 @@
 
 <br>
 
-            <form:select path="responsibleUser">
+            <form:select path="responsibleUser.id">
                 <form:option value="NONE" label="Select responsible user"/>
-              <c:forEach var="selectedUser" items="${userList}">
-
-                <form:option value="${deal.responsibleUser}"><c:out value="${selectedUser.username}"/> </form:option>
-              </c:forEach>
+                <form:options items="${userList}" itemValue="id" itemLabel="firstName"/>
             </form:select>
         </td>
     </tr>

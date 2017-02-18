@@ -6,6 +6,7 @@ import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.DealService;
 import net.proselyte.crmsystem.service.DealStatusService;
 import net.proselyte.crmsystem.service.UserService;
+import net.proselyte.crmsystem.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,20 +57,19 @@ public class DealController {
     public String addDeal(Model model) {
         Deal tempdeal = new Deal();
         tempdeal.setDealStatus(this.dealStatusService.getById(java.util.UUID.fromString("10f940ce-dc2f-4f44-8723-264345da0d0d")));//new DealStatus());
-
         model.addAttribute("deal", tempdeal);
         model.addAttribute("userList", this.userService.getAll());
-        model.addAttribute("selectedUser", new User());
-       // model.addAttribute("dealStatus", this.dealStatusService.getAll());
+        model.addAttribute("user", new User());
+        //model.addAttribute("dealStatus", this.dealStatusService.getAll());
         //model.addAttribute("selectedDealStatus", new DealStatus());
         return "deal/dealadd";
     }
 
 
     @RequestMapping(value = "deal/add/", method = RequestMethod.POST)
-    public String addDeal(@ModelAttribute Deal deal, @RequestParam("id") UUID id, Model model){
+    public String submitDeal(@ModelAttribute("deal") Deal deal){//, @RequestParam("id") UUID id){
+        //deal.setResponsibleUser(this.userService.getById(id));
         this.dealService.save(deal);
-        model.addAttribute("deal", deal);
         return "redirect:/deal";
     }
 }

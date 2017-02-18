@@ -76,8 +76,10 @@ public class JpaUserDAOImpl implements UserDAO {
             Query query = this.entityManager.createQuery("FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
+            System.out.println("--------------get User: " + user);
             return user;
         } catch (NoResultException e) {
+            System.out.println("------------No result exception inside JpaUserDAOimpl");
             return null;
         }
     }
