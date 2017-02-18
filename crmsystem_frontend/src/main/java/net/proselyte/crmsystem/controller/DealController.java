@@ -56,12 +56,12 @@ public class DealController {
     @RequestMapping(value = "/deal/add/", method = RequestMethod.GET)
     public String addDeal(Model model) {
         Deal tempdeal = new Deal();
-        tempdeal.setDealStatus(this.dealStatusService.getById(java.util.UUID.fromString("10f940ce-dc2f-4f44-8723-264345da0d0d")));//new DealStatus());
+        //tempdeal.setDealStatus(this.dealStatusService.getById(java.util.UUID.fromString("10f940ce-dc2f-4f44-8723-264345da0d0d")));//new DealStatus());
         model.addAttribute("deal", tempdeal);
         model.addAttribute("userList", this.userService.getAll());
         model.addAttribute("user", new User());
-        //model.addAttribute("dealStatus", this.dealStatusService.getAll());
-        //model.addAttribute("selectedDealStatus", new DealStatus());
+        model.addAttribute("dealStatusList", this.dealStatusService.getAll());
+        model.addAttribute("selectedDealStatus", new DealStatus());
         return "deal/dealadd";
     }
 

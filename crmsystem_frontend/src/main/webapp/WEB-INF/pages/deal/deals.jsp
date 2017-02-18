@@ -45,16 +45,16 @@
       <th width="120">EDIT</th>
     </tr>
     <c:forEach items="${listDeals}" var="deal">
-      <tr>
+      <tr align="center">
         <td>${deal.id}</td>
-        <td>${deal.budget}${deal.budget%100}</td>
+        <td>${deal.budget}</td><!--{deal.budget%100}</td>-->
         <td>${deal.created}</td>
         <td>${deal.updated}</td>
-        <td>${deal.responsibleUser.id}</td>
-        <td>${deal.dealStatus.id}</td>
-        <td align="center"><a href="<c:url value='/removedeal/${deal.id}/'/>">Delete</a></td>
+        <td>${deal.responsibleUser.firstName}</td>
+        <td>${deal.dealStatus.name}</td>
+        <td><a href="<c:url value='/removedeal/${deal.id}/'/>">Delete</a></td>
 
-        <td align="center"><a href="<c:url value='/editdeal/${deal.id}/'/>">Edit</a></td>
+        <td><a href="<c:url value='/editdeal/${deal.id}/'/>">Edit</a></td>
       </tr>
     </c:forEach>
   </table>
