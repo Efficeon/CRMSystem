@@ -9,7 +9,7 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Task details</h1>
+<h2>Task details</h2>
 
 <table class="table table-striped">
     <tr>
@@ -25,10 +25,10 @@
         <td>${task.id}</td>
         <td>${task.name}</td>
         <td>${task.description}</td>
-        <td>${task.implementer}</td>
+        <td>${task.implementer.firstName}</td>
         <td>${task.created}</td>
         <td>${task.updated}</td>
-        <td><a href="<c:url value='/removetask/${task.id}'/>">Delete</a></td>
+        <td><a href="<c:url value='/removetask/${task.id}/'/>">Delete</a></td>
     </tr>
 </table>
 

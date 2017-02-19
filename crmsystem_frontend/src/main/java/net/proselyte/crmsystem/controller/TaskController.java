@@ -32,6 +32,8 @@ public class TaskController {
         model.addAttribute("task", new Task());
         model.addAttribute("listTasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
+//        model.addAttribute("success", "Task " + this.taskService.getName() + " "+ user.getLastName() + " updated successfully");
+
         return "task/tasks";
     }
 
@@ -53,7 +55,8 @@ public class TaskController {
         task.setImplementer(this.userService.getById(userId));
         this.taskService.save(task);
 //        return "welcome";
-        return "/task/tasks";
+        return "redirect:/task/";
+//        return "/task/taskmesseges";
 //        return "redirect:/edittask/${task.getId()}/";
     }
 
@@ -63,7 +66,6 @@ public class TaskController {
         model.addAttribute("user", new User());
         model.addAttribute("listtasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
-//        return "welcome";
         return "task/taskadd";
     }
 

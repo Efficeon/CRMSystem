@@ -29,8 +29,8 @@ public class JpaUserDAOImpl implements UserDAO {
     @Override
     public User getById(UUID id) {
         Query query = this.entityManager.createQuery(
-//                "SELECT user FROM User user WHERE user.id =:id", User.class);
-        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles, user.associatedСompany, user.tasks WHERE user.id=:id");
+                "SELECT user FROM User user WHERE user.id =:id", User.class);
+//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles, user.associatedСompany, user.tasks WHERE user.id=:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 

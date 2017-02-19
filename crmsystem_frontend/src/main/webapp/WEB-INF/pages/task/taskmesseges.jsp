@@ -5,12 +5,20 @@
 <html>
 <head>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-    <title>Welcome</title>
+    <title>Success!</title>
 </head>
 <body>
 
+<div class="generic-container">
+    <div class="alert alert-success lead">
+        ${success}
+    </div>
+
+    <span class="well floatRight">
+        Go to <a href="<c:url value='/' />">start page</a>
+    </span>
+</div>
 <div>
-    <h2>WELCOME</h2>
     <br>
     <br>
     <a href="<c:url value='/task/'/>">All tasks</a>

@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Tasks</title>
+    <title>All tasks list</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
@@ -16,7 +16,10 @@
 </head>
 
 <body>
-<h1>Tasks</h1>
+<p>
+    <h2>* All tasks list *</h2>
+</p>
+
 <br>
 <%--кнопка "Создать задачу". Линк на запрос к TaskController--%>
 <button>
@@ -24,7 +27,9 @@
         <i class="fa fa-plus"></i> Create task</a>
 </button>
 <br>
-
+<br>
+<a href="<c:url value='/'/>">Back to start page</a>
+<br>
 <br>
 <c:if test="${!empty listTasks}">
     <table class="table table-striped table-condensed">
@@ -46,7 +51,7 @@
                 <td>${task.id}</td>
                 <td>${task.name}</td>
                 <td>${task.description}</td>
-                <td>${task.implementer}</td>
+                <td>${task.implementer.getFirstName()}</td>
                 <%--task.responsiblePerson !!! was replaced by task.implementer--%>
                 <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
