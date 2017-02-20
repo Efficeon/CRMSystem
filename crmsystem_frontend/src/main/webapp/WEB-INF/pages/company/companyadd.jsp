@@ -64,23 +64,30 @@
     <c:if test="${empty company.id}">
         <h4 style="color: red">Add a responsible users and tags after adding Company</h4>
     </c:if>
-    <h5>Users</h5>
+
+    <div class="clearfix">
+        <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+    <h5>All users</h5>
     <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
         <c:if test="${!empty listUsers}">
             <c:forEach items="${listUsers}" var="user">
+                <c:if test="${!company.responsibleUser.contains(user)}">
                 <table class="table table-hover table-condensed">
                     <c:if test="${!empty company.id}">
                         <td disabled="true"><a href="<c:url value='/addresponsible/${user.id}/${company.id}/' />"
                                                style="text-decoration: none" />${user.username}</td>
                     </c:if>
                 </table>
+                </c:if>
             </c:forEach>
         </c:if>
     </div>
+    </div>
 
     <!--remove ResponsibleUser -->
+        <div class="clearfix" style="float: left; margin: 0px 0px 0px 10px;">
     <h5>Responsible users</h5>
-    <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+    <div class="panel panel-default clearfix" style="float: left; height: 100px; width: 300px; overflow: auto">
         <c:if test="${!empty company.responsibleUser}">
             <c:forEach items="${company.responsibleUser}" var="user">
                 <table class="table table-hover table-condensed">
@@ -90,47 +97,51 @@
             </c:forEach>
         </c:if>
     </div>
+</div>
+    </div>
 
     <!--linked Tag -->
-    <h5>Tags</h5>
-    <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
-        <c:if test="${!empty company.tags}">
-            <c:forEach items="${company.tags}" var="tag">
-                <table class="table table-hover table-condensed">
-                    <td><a href="<c:url value='/removetag/${tag.id}/${company.id}/' />"
-                           style="text-decoration: none"/>${tag.name} </td>
-                </table>
-            </c:forEach>
-        </c:if>
+    <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+        <h5>Assigned tags</h5>
+        <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+            <c:if test="${!empty company.tags}">
+                <c:forEach items="${company.tags}" var="tag">
+                    <table class="table table-hover table-condensed">
+                        <td><a href="<c:url value='/removetag/${tag.id}/${company.id}/' />"
+                               style="text-decoration: none"/>${tag.name} </td>
+                    </table>
+                </c:forEach>
+            </c:if>
+        </div>
+        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+        </form:form>
     </div>
-    <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-</form:form>
-
-<!--add Tag -->
-
-<form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">
+    <!--add Tag -->
+    <div class="clearfix" style="float: left; margin: 0px 10px 10px 10px;">
+    <form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">
     <form class="form-inline">
-        <h5>Tags</h5>
+        <h5>Select or create a tag</h5>
         <div class="form-group">
-            <spring:bind path="name" >
+            <spring:bind path="name">
                 <c:if test="${empty company.id}">
                     <form:input id="tagInput" disabled="true" type="text" path="name" class="form-inline"
                                 placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
                 <c:if test="${!empty company.id}">
-                    <form:input  id="tagInput" type="text" path="name" class="form-inline"
+                    <form:input cssStyle="width: 255px; height: 30px;" id="tagInput" type="text" path="name" class="form-inline"
                                  placeholder='Tags${name}' autofocus="true"></form:input>
                 </c:if>
             </spring:bind>
             <c:if test="${!empty company.id}">
-                <button type="submit">
+                <button style="height: 30px;" type="submit">
                     <spring:message text="Add"/>
                 </button>
             </c:if>
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
-</form:form>
+    </form:form>
 </div>
+
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>

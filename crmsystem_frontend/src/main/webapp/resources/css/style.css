@@ -1,0 +1,10 @@
+.clearfix:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 10px;
+    clear: both;
+
+}
+
+.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}

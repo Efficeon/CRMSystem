@@ -9,13 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * JPA implmentation of {@link ContactDAO} interface.
  *
- * @author Maxim Sasakin
+ * @author Leonid Dubravsky
  */
 
 @Repository
@@ -28,7 +27,7 @@ public class JpaContactDAOImpl implements ContactDAO {
 
     @Override
     public Contact getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM  Contact contact WHERE contact.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact WHERE contact.id =:id");
         query.setParameter("id", id);
         Contact contact = (Contact) query.getSingleResult();
 
@@ -39,15 +38,22 @@ public class JpaContactDAOImpl implements ContactDAO {
 
     @Override
     public Collection<Contact> getAll() {
-        Collection<Contact> result;
+        List<Contact> result;
 
-        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompany");
         result = query.getResultList();
+        for (Contact contact : result){
+            System.out.println(result);
+        }
 
+        Collections.sort(result, new Comparator<Contact>() {
+            public int compare(Contact o1, Contact o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         for (Contact contact : result) {
             logger.info("Contact list: " + contact);
         }
-
         return result;
     }
 
@@ -55,9 +61,13 @@ public class JpaContactDAOImpl implements ContactDAO {
     public void save(Contact contact) {
 
         if (contact.getId() == null) {
+            contact.setCreateDate(new Date());
+            contact.setUpdateDate(new Date());
             this.entityManager.persist(contact);
             logger.info("Contact successfully saved. Contact details: " + contact);
         } else {
+            contact.setCreateDate(getById(contact.getId()).getCreateDate());
+            contact.setUpdateDate(new Date());
             this.entityManager.merge(contact);
             logger.info("Contact successfully updated. Contact details: " + contact);
         }
@@ -71,15 +81,14 @@ public class JpaContactDAOImpl implements ContactDAO {
     }
 
     @Override
-    public Contact findByCompanyName(String companyName) {
-
-        try {
-            Query query = this.entityManager.createQuery("FROM Contact contact WHERE contact.company=:companyName", Contact.class);
-            query.setParameter("companyName", companyName);
-            Contact contact = (Contact) query.getSingleResult();
-            return contact;
-        } catch (NoResultException e) {
-            return null;
+    public Collection<Contact> getSearchedContacts(String searchLine) {
+        List<Contact> resultSearch;
+        Query query = entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN contact.responsibleUser LEFT JOIN FETCH contact.associatedСompany WHERE contact.name LIKE ?");
+        query.setParameter(0, "%"+searchLine+"%");
+        resultSearch=query.getResultList();
+        for (Contact contact : resultSearch) {
+            logger.info("Search contact list: " + contact);
         }
+        return resultSearch;
     }
 }

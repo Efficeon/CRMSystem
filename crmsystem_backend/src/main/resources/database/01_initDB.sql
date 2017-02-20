@@ -55,19 +55,6 @@ CREATE TABLE IF NOT EXISTS companies_users (
   UNIQUE (company_id, user_id)
 );
 
-CREATE TABLE IF NOT EXISTS contact
-(
-  id              UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
-  company         VARCHAR(255) NOT NULL,
-  responsibleuser VARCHAR(255) NOT NULL,
-  name            VARCHAR(255) NOT NULL,
-  website         VARCHAR(255) NOT NULL,
-  skype           VARCHAR(255) NOT NULL,
-  phone_number    VARCHAR(11) NOT NULL,
-  create_date     TIMESTAMP    NOT NULL,
-  update_date     TIMESTAMP    NOT NULL
-);
-
 -- tags
 CREATE TABLE IF NOT EXISTS tags (
   id                UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -108,4 +95,35 @@ CREATE TABLE IF NOT EXISTS deals_users
 
   FOREIGN KEY (deal_id) REFERENCES deals (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- contacts
+CREATE TABLE IF NOT EXISTS contacts (
+  id              UUID         NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name            VARCHAR(50)  NOT NULL,
+  website         VARCHAR(255) NOT NULL,
+  skype           VARCHAR(255) NOT NULL,
+  phone_number    VARCHAR(11)  NOT NULL,
+  create_date     TIMESTAMP    NOT NULL,
+  update_date     TIMESTAMP
+);
+
+--contact-user
+CREATE TABLE IF NOT EXISTS contact_user
+(
+  contact_id      UUID       NOT NULL,
+  user_id         UUID       NOT NULL,
+
+  FOREIGN KEY (contact_id) REFERENCES contacts (id),
+  FOREIGN KEY (user_id)    REFERENCES users (id)
+);
+
+--contact-user
+CREATE TABLE IF NOT EXISTS contact_company
+(
+  contact_id      UUID       NOT NULL,
+  company_id         UUID       NOT NULL,
+
+  FOREIGN KEY (contact_id) REFERENCES contacts (id),
+  FOREIGN KEY (company_id)    REFERENCES companies (id)
 );

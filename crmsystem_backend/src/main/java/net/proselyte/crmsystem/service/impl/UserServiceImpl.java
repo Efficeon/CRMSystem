@@ -61,11 +61,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Collection getAll() {
         return userDao.getAll();
     }
 
     @Override
+    @Transactional
     public Collection<User> getSearchedUsers(String searchLine) {
         return userDao.getSortedUsers(searchLine);
     }

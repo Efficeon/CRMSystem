@@ -7,7 +7,7 @@
 
 <script src="${contextPath}/resources/js/main.js"></script>
 <script src="${contextPath}/resources/js/search.js"></script>
-
+<link href="${contextPath}/resources/css/style.css" rel="stylesheet">
 <div id="main-wrapper"/>
     <div class="left-sidebar">
         <div class="navbar-toggle"><i class="fa fa-bars"></i></div>
@@ -23,7 +23,7 @@
 
         <ul class="left-navigation">
             <li class="active" >
-            <a href="index.html"><i class="glyphicon glyphicon-home" style="color: darkorange"></i><span>Main Page</span></a></li>
+            <a href="#"><i class="glyphicon glyphicon-home" style="color: darkorange"></i><span>Main Page</span></a></li>
             <li class="parent"><a href="#"><i class="glyphicon glyphicon-user" style="color: darkgreen"></i><span>Users</span></a>
                 <ul class="sub-menu"><li><a href="<c:url value='/users/' />"><i class="glyphicon glyphicon-user" style="color: #ffe170"></i> All Users</a></li></ul>
                 <ul class="sub-menu"><li><a href="<c:url value='/home/' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> My account</a></li></ul>

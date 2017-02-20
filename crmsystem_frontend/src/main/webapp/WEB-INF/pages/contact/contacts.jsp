@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Search</title>
+    <title>Contact</title>
     <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -24,67 +24,56 @@
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
 
 <div class="main-content">
-    <h1>Users</h1>
+    <h1>Contacts</h1>
+    <a href="<c:url value='/contact/add/' />" class="btn btn-lg"><i class="fa fa-plus"></i>
+        Create contact</a>
 
     </br>
-    <c:if test="${!empty listUsers}">
+    </br>
+    <c:if test="${!empty listContacts}">
         <table class="table table-striped table-condensed">
             <tr>
                 <th class="text-center" width="23">ID</th>
                 <th class="text-center" width="120">Name</th>
-                <th class="text-center" width="60">First name</th>
-                <th class="text-center" width="40">Last name</th>
-                <th class="text-center" width="80">User type</th>
-                <th class="text-center" width="80">Email</th>
-                <th class="text-center" width="40">Birthday</th>
-                <th class="text-center" width="50">Registration date</th>
-            </tr>
-            <c:forEach items="${listUsers}" var="user">
-                <tr>
-                    <td>${user.id}</td>
-                    <td>${user.username}</td>
-                    <td>${user.firstName}</td>
-                    <td>${user.lastName}</td>
-                    <td>${user.userType}</td>
-                    <td>${user.email}</td>
-                    <td>${user.birthDate}</td>
-                    <td>${user.registrationDate}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
-
-    <h1>Companies</h1>
-    <c:if test="${!empty listCompanies}">
-        <table class="table table-striped table-condensed">
-            <tr>
-                <th class="text-center" width="23">ID</th>
-                <th class="text-center" width="120">Name</th>
-                <th class="text-center" width="80">Email</th>
                 <th class="text-center" width="80">Web site</th>
-                <th class="text-center" width="60">Address</th>
+                <th class="text-center" width="60">Skype</th>
+                <th class="text-center" width="40">Phone number</th>
+                <th class="text-center" width="40">Associated company</th>
+                <th class="text-center" width="40">Responsible user</th>
                 <th class="text-center" width="40">Created</th>
                 <th class="text-center" width="40">Updated</th>
                 <th class="text-center" width="50">Details</th>
                 <th class="text-center" width="50">Edit</th>
                 <th class="text-center" width="50">Delete</th>
             </tr>
-            <c:forEach items="${listCompanies}" var="associatedСompany">
+            <c:forEach items="${listContacts}" var="contact">
                 <tr>
-                    <td>${associatedСompany.id}</td>
-                    <td>${associatedСompany.name}</td>
-                    <td>${associatedСompany.email}</td>
-                    <td>${associatedСompany.website}</td>
-                    <td>${associatedСompany.address}</td>
-                    <td><fmt:formatDate value="${associatedСompany.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                    <td><fmt:formatDate value="${associatedСompany.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                    <td class="text-center"><a href="<c:url value='/companydata/${associatedСompany.id}/' />"
+                    <td>${contact.id}</td>
+                    <td>${contact.name}</td>
+                    <td>${contact.website}</td>
+                    <td>${contact.skype}</td>
+                    <td>${contact.phoneNumber}</td>
+                    <c:if test="${!(contact.associatedCompany==null)}">
+                    <td>${contact.associatedCompany.name}</td>
+                    </c:if>
+                    <c:if test="${(contact.associatedCompany==null)}">
+                    <td></td>
+                    </c:if>
+                    <c:if test="${!(contact.responsibleUser==null)}">
+                    <td>${contact.responsibleUser.username}</td>
+                    </c:if>
+                    <c:if test="${(contact.responsibleUser==null)}">
+                     <td></td>
+                    </c:if>
+                    <td><fmt:formatDate value="${contact.createDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                    <td><fmt:formatDate value="${contact.updateDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                    <td class="text-center"><a href="<c:url value='/contactdata/${contact.id}/' />"
                                                span class="glyphicon glyphicon glyphicon-file "
                                                style="color: darkblue"/></td>
-                    <td class="text-center"><a href="<c:url value='/editcompany/${associatedСompany.id}/' />"
+                    <td class="text-center"><a href="<c:url value='/editcontact/${contact.id}/' />"
                                                span class="glyphicon glyphicon glyphicon-edit"
                                                style="color: orange"/></td>
-                    <td class="text-center"><a href="<c:url value='/removecompany/${associatedСompany.id}/' />"
+                    <td class="text-center"><a href="<c:url value='/removecontact/${contact.id}/' />"
                                                span class="glyphicon glyphicon-remove" style="color: red"/></td>
                 </tr>
             </c:forEach>

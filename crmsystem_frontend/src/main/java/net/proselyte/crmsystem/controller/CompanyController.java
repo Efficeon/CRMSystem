@@ -1,6 +1,5 @@
 package net.proselyte.crmsystem.controller;
 
-import com.google.gson.Gson;
 import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.model.User;
@@ -11,12 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -171,15 +164,9 @@ public class CompanyController {
                                   @PathVariable("companyId") UUID companyId,
                                   @ModelAttribute Company company,
                                   Model model){
-                      System.out.println(company.getTags());
         company = this.companyService.getById(companyId);
-                      System.out.println(company.getTags());
-                      System.out.println(this.tagService.getById(tagId).getId());
-                      System.out.println(company.getTags());
-                      System.out.println(this.tagService.getById(tagId).getId());
         company.removeTag(this.tagService.getById(tagId));
         this.companyService.save(company);
-                      System.out.println(company.getTags());
         model.addAttribute("tag", new Tag());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
