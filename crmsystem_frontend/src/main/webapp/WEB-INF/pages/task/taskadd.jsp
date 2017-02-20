@@ -25,12 +25,14 @@
     <form class="form-inline">
         <div class="form-group">
 
+            <%--ID--%>
             <%--<c:if test="${!empty task.id}">--%>
                     <%--<form:input  path="id" class="form-group" readonly="true"--%>
-                                 <%--disabled="true" placeholder='ID${null}'/>--%>
+                                 <%--disabled="true" placeholder='ID${task.id}'/>--%>
             <%--</c:if>--%>
 
-            <%--<form:input type="hidden" path="id" id=""/>--%>
+            <%--<form:input type="hidden" path="id" placeholder='ID${task.id}' id="task.id"/>--%>
+
 
 
             <form:input  type="text" path="name" class="form-group"
@@ -39,18 +41,10 @@
                 <form:input  type="text" path="description" class="form-group"
                              placeholder='Description${task.description}' autofocus="true"/>
             <br>
-                <%--<form:select path="${task.implementer.id}">--%>
-                    <%--<form:option value="0" label="Select only one"/>--%>
-                    <%--<form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>--%>
-                <%--</form:select>--%>
-
                 <form:select path="implementer.id">
-                    <form:option value="0" label="Select only one"/>
+                    <form:option value="0" label="Select ..."/>
                     <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
                 </form:select>
-            <%----%>
-                <%--<form:input  type="text" path="implementer" class="form-group"--%>
-                <%--placeholder='Implementer${task.implementer}' autofocus="true"/>--%>
             <br>
             <br>
             <button type="submit" id="taskform">

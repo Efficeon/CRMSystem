@@ -20,4 +20,6 @@ public interface TaskService {
     void save(Task task);
 
     void remove(Task task);
+
+    void edit(Task task);
 }

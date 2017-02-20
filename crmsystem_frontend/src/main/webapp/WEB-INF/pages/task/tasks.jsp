@@ -16,12 +16,8 @@
 </head>
 
 <body>
-<p>
     <h2>* All tasks list *</h2>
-</p>
-
 <br>
-<%--кнопка "Создать задачу". Линк на запрос к TaskController--%>
 <button>
     <a href="<c:url value='/task/add/'/>" class="btn btn-lg" style="color: green">
         <i class="fa fa-plus"></i> Create task</a>

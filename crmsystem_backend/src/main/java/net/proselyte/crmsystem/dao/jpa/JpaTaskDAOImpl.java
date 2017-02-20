@@ -78,5 +78,25 @@ public class JpaTaskDAOImpl implements TaskDAO{
         this.entityManager.remove(this.entityManager.getReference(Task.class, task.getId()));
         logger.info("Task successfully removed. Task details: " + task);
     }
+
+    @Override
+    public void edit(Task task) {
+        Query query = this.entityManager.createQuery(
+                "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
+        query.setParameter("id", task.getId());
+        Task existingTask = (Task) query.getSingleResult();
+
+        existingTask.setName(task.getName());
+        existingTask.setDescription(task.getDescription());
+        existingTask.setImplementer(task.getImplementer());
+        existingTask.setCreated(task.getCreated());
+        existingTask.setUpdated(new Date());
+
+        this.entityManager.merge(existingTask);
+
+
+
+
+    }
 }
 
