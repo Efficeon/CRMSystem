@@ -43,6 +43,12 @@
                              placeholder='Budget${budget}' autofocus="true"></form:input>
               </spring:bind>
 
+            Name
+            <spring:bind path="name">
+                <form:input  type="text" path="name" class="form-group"
+                             placeholder='Name${name}' autofocus="true"></form:input>
+            </spring:bind>
+
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <form:select path="responsibleUser.id">
