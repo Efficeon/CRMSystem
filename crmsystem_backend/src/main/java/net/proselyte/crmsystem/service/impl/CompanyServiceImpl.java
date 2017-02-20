@@ -36,8 +36,8 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     @Transactional
-    public Collection<Company> getSortedCompanies(String name) {
-        return companyDAO.getSortedCompanies(name);
+    public Collection<Company> getSearchedCompanies(String searchLine) {
+        return companyDAO.getSortedCompanies(searchLine);
     }
 
     @Override

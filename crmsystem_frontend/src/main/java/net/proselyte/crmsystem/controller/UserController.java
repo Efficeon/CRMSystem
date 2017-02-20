@@ -1,7 +1,10 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,10 +16,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String welcome() {
         return "user/home";
     }
 
-
+    @RequestMapping(value = "users", method = RequestMethod.GET)
+    public String listUsers(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("listUsers", this.userService.getAll());
+        return "user/users";
+    }
 }

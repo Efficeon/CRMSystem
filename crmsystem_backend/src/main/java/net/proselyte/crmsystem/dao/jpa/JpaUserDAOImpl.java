@@ -10,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -73,7 +74,7 @@ public class JpaUserDAOImpl implements UserDAO {
     public User findByUserName(String username) {
 
         try {
-            Query query = this.entityManager.createQuery("FROM User user WHERE user.username=:name", User.class);
+            Query query = this.entityManager.createQuery("SELECT FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
             System.out.println("--------------get User: " + user);
@@ -82,5 +83,23 @@ public class JpaUserDAOImpl implements UserDAO {
             System.out.println("------------No result exception inside JpaUserDAOimpl");
             return null;
         }
+    }
+
+    @Override
+    public Collection<User> getSortedUsers(String searchLine) {
+        List<User> resultSearch;
+        Query query = entityManager.createQuery(
+                "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles WHERE user.username LIKE ? " +
+                        "OR user.email LIKE ? OR user.firstName LIKE ? OR user.lastName LIKE ?");
+        query.setParameter(0, "%"+searchLine+"%");
+        query.setParameter(1, "%"+searchLine+"%");
+        query.setParameter(2, "%"+searchLine+"%");
+        query.setParameter(3, "%"+searchLine+"%");
+
+        resultSearch=query.getResultList();
+        for (User user : resultSearch) {
+            logger.info("Search users list: " + user);
+        }
+        return resultSearch;
     }
 }

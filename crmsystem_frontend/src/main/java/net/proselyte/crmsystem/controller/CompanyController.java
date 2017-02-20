@@ -186,31 +186,4 @@ public class CompanyController {
         model.addAttribute("company", this.companyService.getById(companyId));
         return "company/companyadd";
     }
-    @RequestMapping(value = "/companySearch/", method = RequestMethod.GET)
-    public @ResponseBody String getTags(@RequestParam("term") String term)  {
-        List<Company> companies = (List<Company>) companyService.getAll();
-        List<String> companyName = new ArrayList<String>();
-        for (Company company: companies){
-            if(company.getName().contains(term)) {
-                companyName.add(company.getName());
-            }
-        }
-        return new Gson().toJson(companyName);
-    }
-
-    @RequestMapping(value="/search/")
-    public String Search(Model model, @RequestParam(value = "name", required = false) String name) {
-        System.out.println(name);
-        List<Company> companies = (List<Company>) companyService.getAll();
-        List<Company> searchCompanies = new LinkedList<>();
-        for (Company company: companies){
-            if(company.getName().contains(name)) {
-                searchCompanies.add(company);
-            }
-        }
-        model.addAttribute("company", new Company());
-        model.addAttribute("listCompanies", searchCompanies);
-
-        return "company/companies";
-    }
 }

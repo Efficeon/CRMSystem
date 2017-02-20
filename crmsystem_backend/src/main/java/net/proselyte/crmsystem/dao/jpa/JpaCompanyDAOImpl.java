@@ -81,17 +81,14 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     }
 
     @Override
-    public Collection<Company> getSortedCompanies(String name) {
-        List<Company> result;
-
-        Query query = entityManager.createQuery(
-                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.name LIKE 'name%'");
-
-        result = query.getResultList();
-
-        for (Company company : result) {
-            logger.info("Company list: " + company);
+    public Collection<Company> getSortedCompanies(String searchLine) {
+        List<Company> resultSearch;
+        Query query = entityManager.createQuery("SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.name LIKE ?");
+            query.setParameter(0, "%"+searchLine+"%");
+            resultSearch=query.getResultList();
+        for (Company company : resultSearch) {
+            logger.info("Search company list: " + company);
         }
-        return result;
+        return resultSearch;
     }
 }

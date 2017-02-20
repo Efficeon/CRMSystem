@@ -9,7 +9,7 @@ import org.hibernate.*;
 
 @Entity
 @Table(name = "deals")
-public class Deal extends BaseEntity {
+public class Deal extends NamedEntity {
 
     @Column(name = "budget")
     private  double budget;
