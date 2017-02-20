@@ -66,8 +66,7 @@ public class DealController {
 
 
     @RequestMapping(value = "deal/add/", method = RequestMethod.POST)
-    public String submitDeal(@ModelAttribute("deal") Deal deal){//, @RequestParam("id") UUID id){
-        //deal.setResponsibleUser(this.userService.getById(id));
+    public String submitDeal(@ModelAttribute("deal") Deal deal){
         this.dealService.save(deal);
         return "redirect:/deal";
     }
