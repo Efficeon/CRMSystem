@@ -59,10 +59,13 @@
                 <form:options items="${listCompanies}" itemValue="id" itemLabel="name"/>
             </form:select>
 
-            <form:select path="responsibleUser.id">
-                <form:option value="${responsibleUser.id}" label="Users"/>
-                <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
-            </form:select>
+            <select id="contactform" name="user" itemValue="id" itemLabel="name" path="responsibleUser.id">
+                <c:forEach items="${listUsers}" var="user" >
+                    <option value="${user.username}">
+                            ${user.username}
+                    </option>
+                </c:forEach>
+            </select>
 
             <button type="submit" id="contactform">
                 <spring:message text="Add"/>

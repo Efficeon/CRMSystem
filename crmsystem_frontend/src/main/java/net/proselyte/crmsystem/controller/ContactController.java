@@ -50,8 +50,11 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact/add/", method = RequestMethod.POST)
-    public String contactSubmit(@ModelAttribute("contact") Contact contact) {
-
+    public String contactSubmit(@ModelAttribute("contact") Contact contact,
+                                @RequestParam(name = "responsibleUser.id", required = false) UUID userId,
+                                @RequestParam(name = "associatedCompany.id", required = false) UUID companyId,) {
+        contact.setResponsibleUser(this.userService.getById(userId));
+        contact.setAssociatedCompany(this.companyService.getById(companyId));
         this.contactService.save(contact);
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
