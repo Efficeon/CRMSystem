@@ -33,6 +33,7 @@
   <table>
     <tr>
       <th width="80">ID</th>
+      <th width="120">NAME</th>
       <th width="120">BUDGET</th>
       <th width="120">CREATED</th>
       <th width="120">UPDATED</th>
@@ -44,6 +45,7 @@
     <c:forEach items="${listDeals}" var="deal">
       <tr align="center">
         <td>${deal.id}</td>
+        <td>${deal.name}</td>
         <td>${deal.budget}</td>
         <td>${deal.created}</td>
         <td>${deal.updated}</td>

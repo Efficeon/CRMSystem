@@ -45,11 +45,17 @@
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-
+            <form:select path="responsibleUser.id">
+                <form:option value="NONE" label="Select responsible user"/>
+                <form:options items="${userList}" itemValue="id" itemLabel="firstName"/>
+            </form:select>
 
             <form:select path="dealStatus.id">
+                <%--<form:option value="NONE" label="Deal Status"/>--%>
                 <form:options items="${dealStatusList}" itemValue="id" itemLabel="name"/>
             </form:select>
+
+
         </td>
     </tr>
 </table>
