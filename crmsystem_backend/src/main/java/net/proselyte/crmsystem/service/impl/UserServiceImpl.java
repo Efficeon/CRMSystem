@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User findByUserName(String username) {
+        System.out.println("FIND BY USER NAME :" + username);
         return userDao.findByUserName(username);
     }
 

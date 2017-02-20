@@ -10,67 +10,62 @@
 
 <html>
 <head>
+    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
+
     <title>Create deal</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
   <br>
 
 </head>
-
 <h1>Deal add</h1>
 <br>
 <br>
+
+<body>
+
+<jsp:include page="../menuPices/navbarLeft.jsp"/>
+
+<form:form id="dealform" method="POST" modelAttribute="deal" >
+
 <table>
-  <tr>
-    <td>
-<%--<form:form>--%>
-<form:form id="dealform" method="POST" modelAttribute="deal">
+    <tr>
+        <td>
+            <c:if test="${!empty deal.budget}">
+              <spring:bind path="id">
+                  <form:input  type="text" path="id" class="form-group" readonly="true"
+                               disabled="true" placeholder='ID${id}'></form:input>
+              </spring:bind>
+            </c:if>
+              Budget
+              <spring:bind path="budget">
+                <form:input  type="text" path="budget" class="form-group"
+                             placeholder='Budget${budget}' autofocus="true"></form:input>
+              </spring:bind>
 
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-      <c:if test="${!empty deal.budget}">
-        <spring:bind path="id">
-          <form:input  type="text" path="id" class="form-group" readonly="true"
-                       disabled="true" placeholder='ID${id}'></form:input>
-        </spring:bind>
-      </c:if>
-      Budget
-      <spring:bind path="budget">
-        <form:input  type="text" path="budget" class="form-group"
-                     placeholder='Budget${budget}' autofocus="true"></form:input>
-      </spring:bind>
+            <form:select path="responsibleUser.id">
+                <form:option value="NONE" label="Select responsible user"/>
+                <form:options items="${userList}" itemValue="id" itemLabel="firstName"/>
+            </form:select>
 
+            <form:select path="dealStatus.id">
+                <%--<form:option value="NONE" label="Deal Status"/>--%>
+                <form:options items="${dealStatusList}" itemValue="id" itemLabel="name"/>
+            </form:select>
+        </td>
+    </tr>
+</table>
 
-      <button type="submit" id="dealform">
+    <button type="submit" id="dealform">
         <spring:message text="Add"/>
-      </button>
+    </button>
 
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-  </form:form>
-
-<br>
-Please select responsible user
-<form:form modelAttribute="selectedUser" method="post" action="/deal/addUser/">
-<form:select path="username">
-  <form:option value="NONE" label="--- Select ---"/>
-  <c:forEach var="theUser" items="${userList}">
-    <form:option value="${theUser}"><c:out value="${theUser.username}"/> </form:option>
-  </c:forEach>
-  <input type="submit" value="addUser">
-  <%--<form:options items="${userList}" itemLabel="username" itemValue="username" />--%>
-</form:select>
 </form:form>
 
-    <br>
-Please select deal status
-<form:form modelAttribute="selectedDealStatus" method="post" action="/deal/addUser/">
-  <%--<input type="submit" value="addDealStatus">--%>
-<form:select path="name">
-  <form:option value="NONE" label="--- Select ---"/>
-  <c:forEach var="theDealStatus" items="${dealStatus}">
-    <form:option value="${theDealStatus}"><c:out value="${theDealStatus.name}"/> </form:option>
-  </c:forEach>
-  <input type="submit" value="Submit">
-</form:select>
-</form:form>
+<script src="${contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>
+
