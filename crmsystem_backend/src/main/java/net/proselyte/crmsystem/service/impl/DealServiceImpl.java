@@ -26,52 +26,31 @@ public class DealServiceImpl implements DealService {
     @Transactional
     public Deal getById(UUID id) {
         Deal tempDeal = this.dealDAO.getById(id);
-        logger.info("Getting deal. Details:" + tempDeal);
+//        logger.info("Getting deal. Details:" + tempDeal);
         return tempDeal;
     }
 
     @Override
     @Transactional
     public Collection<Deal> getAll() {
-
-//        try {
-//
-//            Writer writer = new FileWriter(new File("D:\\DealServiceImpl.txt"));
-//            writer.write("inside dealServiceImpl..\r\n");
-//            writer.flush();
-            Collection<Deal> listDeals = this.dealDAO.getAll();//new ArrayList<>();
-
-
-//            if (listDeals == null) {
-//                writer.write("listDeals = null!\r\n");
-//                listDeals = new ArrayList<>();
-//                writer.flush();
-//                writer.close();
-//            }
-
-            for (Deal deal : listDeals) {
-                logger.info("List deals: " + deal);
-            }
-            return listDeals;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
+        Collection<Deal> listDeals = this.dealDAO.getAll();
+//        for (Deal deal : listDeals) {
+//                logger.info("List deals: " + deal);
 //        }
-
+        return listDeals;
     }
 
     @Override
     @Transactional
     public void save(Deal deal) {
         this.dealDAO.save(deal);
-//        logger.info("Deal saved. Details: " + deal);
     }
 
     @Override
     @Transactional
     public void remove(Deal deal) {
         this.dealDAO.remove(deal);
-        logger.info("Deal removed. Details: " + deal);
+//        logger.info("Deal removed. Details: " + deal);
     }
 
     @Override

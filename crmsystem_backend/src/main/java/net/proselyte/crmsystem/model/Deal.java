@@ -27,7 +27,7 @@ public class Deal extends NamedEntity {
             inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName="id"))
     private User responsibleUser;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dealstatusid")
     private DealStatus dealStatus;
 

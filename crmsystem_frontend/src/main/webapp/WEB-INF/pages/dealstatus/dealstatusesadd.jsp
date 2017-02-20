@@ -9,13 +9,18 @@
 
 <html>
 <head>
+  <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
 
   <a href="<c:url value='/dealstatus/' />" class="btn btn-lg" style="color: green">
     <i class="glyphicon glyphicon-arrow-left"></i> All Deal Statuses</a>
   <title>Create Deal Status</title>
+
 </head>
 
 <body>
+  <jsp:include page="../menuPices/navbarLeft.jsp"/>
+
   <form:form id="dealStatusForm" method="POST" modelAttribute="dealstatus">
   <form class="form-inline">
     <div class="form-group">
@@ -40,5 +45,6 @@
   </form>
   </form:form>
 
+  <script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>
