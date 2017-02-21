@@ -69,22 +69,22 @@
                 <th class="text-center" width="50">Edit</th>
                 <th class="text-center" width="50">Delete</th>
             </tr>
-            <c:forEach items="${listCompanies}" var="associatedСompany">
+            <c:forEach items="${listCompanies}" var="company">
                 <tr>
-                    <td>${associatedСompany.id}</td>
-                    <td>${associatedСompany.name}</td>
-                    <td>${associatedСompany.email}</td>
-                    <td>${associatedСompany.website}</td>
-                    <td>${associatedСompany.address}</td>
-                    <td><fmt:formatDate value="${associatedСompany.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                    <td><fmt:formatDate value="${associatedСompany.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                    <td class="text-center"><a href="<c:url value='/companydata/${associatedСompany.id}/' />"
+                    <td>${company.id}</td>
+                    <td>${company.name}</td>
+                    <td>${company.email}</td>
+                    <td>${company.website}</td>
+                    <td>${company.address}</td>
+                    <td><fmt:formatDate value="${company.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                    <td><fmt:formatDate value="${company.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+                    <td class="text-center"><a href="<c:url value='/companydata/${company.id}/' />"
                                                span class="glyphicon glyphicon glyphicon-file "
                                                style="color: darkblue"/></td>
-                    <td class="text-center"><a href="<c:url value='/editcompany/${associatedСompany.id}/' />"
+                    <td class="text-center"><a href="<c:url value='/editcompany/${company.id}/' />"
                                                span class="glyphicon glyphicon glyphicon-edit"
                                                style="color: orange"/></td>
-                    <td class="text-center"><a href="<c:url value='/removecompany/${associatedСompany.id}/' />"
+                    <td class="text-center"><a href="<c:url value='/removecompany/${company.id}/' />"
                                                span class="glyphicon glyphicon-remove" style="color: red"/></td>
                 </tr>
             </c:forEach>

@@ -6,6 +6,8 @@ package net.proselyte.crmsystem.model;
  * @author Leonid Dubravsky
  */
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -30,15 +32,15 @@ public class Contact extends NamedEntity {
     @Column(name="update_date")
     private Date updateDate;
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinTable(name="contact_company", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
               inverseJoinColumns = @JoinColumn(name="company_id", referencedColumnName="id"))
-    private Company associatedCompany = null;
+    private Company associatedCompany;
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinTable(name="contact_user", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName="id"))
-    private User responsibleUser = null;
+    private User responsibleUser;
 
     public String getWebsite() {
         return website;

@@ -27,7 +27,7 @@ public class JpaContactDAOImpl implements ContactDAO {
 
     @Override
     public Contact getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact WHERE contact.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompany WHERE contact.id =:id");
         query.setParameter("id", id);
         Contact contact = (Contact) query.getSingleResult();
 
@@ -75,9 +75,8 @@ public class JpaContactDAOImpl implements ContactDAO {
 
     @Override
     public void remove(Contact contact) {
-
-        this.entityManager.remove(contact);
-        logger.info("Contact successfully removed. Contact details: " + contact);
+        this.entityManager.remove(this.entityManager.getReference(Contact.class, contact.getId()));
+        logger.info("Company successfully removed. Company details: " + contact);
     }
 
     @Override

@@ -55,17 +55,14 @@
             </spring:bind>
 
             <form:select path="associatedCompany.id">
-                <form:option value="${associatedCompany.id}" label="Companies"/>
+                <form:option value="${associatedCompany.id}" />
                 <form:options items="${listCompanies}" itemValue="id" itemLabel="name"/>
             </form:select>
 
-            <select id="contactform" name="user" itemValue="id" itemLabel="name" path="responsibleUser.id">
-                <c:forEach items="${listUsers}" var="user" >
-                    <option value="${user.username}">
-                            ${user.username}
-                    </option>
-                </c:forEach>
-            </select>
+            <form:select path="responsibleUser.id">
+
+                <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
+            </form:select>
 
             <button type="submit" id="contactform">
                 <spring:message text="Add"/>

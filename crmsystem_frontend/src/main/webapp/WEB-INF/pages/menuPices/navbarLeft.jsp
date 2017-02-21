@@ -24,18 +24,30 @@
         <ul class="left-navigation">
             <li class="active" >
             <a href="#"><i class="glyphicon glyphicon-home" style="color: darkorange"></i><span>Main Page</span></a></li>
-            <li class="parent"><a href="#"><i class="glyphicon glyphicon-user" style="color: darkgreen"></i><span>Users</span></a>
+            <li class="parent"><a href="#"><i class="glyphicon glyphicon-user" style="color: #007e00"></i><span>Users</span></a>
                 <ul class="sub-menu"><li><a href="<c:url value='/users/' />"><i class="glyphicon glyphicon-user" style="color: #ffe170"></i> All Users</a></li></ul>
-                <ul class="sub-menu"><li><a href="<c:url value='/home/' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> My account</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='/home/' />"><i class="glyphicon glyphicon-flag" style="color: #b874ff"></i> My account</a></li></ul>
             </li>
-            <li class="parent"><a href="#"><i class="glyphicon glyphicon-briefcase" style="color: #354fba"></i><span>Companies</span></a>
-                <ul class="sub-menu"><li><a href="<c:url value='/company/' />"><i class="glyphicon glyphicon-credit-card" style="color: #ffa272"></i> All Companies</a></li></ul>
+            <li class="parent"><a href="#"><i class="glyphicon glyphicon-briefcase" style="color: #5774c7"></i><span>Companies</span></a>
+                <ul class="sub-menu"><li><a href="<c:url value='/company/' />"><i class="glyphicon glyphicon-credit-card" style="color: #05c57b"></i> All Companies</a></li></ul>
                 <ul class="sub-menu"><li><a href="<c:url value='/company/add/' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> Create</a></li></ul>
+            </li>
+            <li class="parent"><a href="#"><i class="glyphicon glyphicon-th-list" style="color: #e35c4d"></i><span>Contacts</span></a>
+                <ul class="sub-menu"><li><a href="<c:url value='/contacts/' />"><i class="glyphicon glyphicon glyphicon-edit" style="color: #27b2ff"></i> All Contacts</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='/contact/add/' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> Create</a></li></ul>
+            </li>
+            <li class="parent"><a href="#"><i class="glyphicon glyphicon-check" style="color: #e0cf18"></i><span>Deals</span></a>
+                <ul class="sub-menu"><li><a href="<c:url value='/deal/' />"><i class="glyphicon glyphicon-list-alt" style="color: #56ac6a"></i> All Deals</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='/deal/add/' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> Create</a></li></ul>
+            </li>
+            <li class="parent"><a href="#"><i class="glyphicon glyphicon-eye-open" style="color: #9c94e4"></i><span>Administrator</span></a>
+                <ul class="sub-menu"><li><a href="<c:url value='#' />"><i class="glyphicon glyphicon-user" style="color: #ffe170"></i> Account Management</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='#' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> Create</a></li></ul>
             </li>
         </ul>
     </div>
 
-<nav class="nav" style="background-color: #203745">
+<nav class="nav" style="background-color: #203745;">
     <div class="container-fluid">
 
     <form:form class="navbar-form navbar-left">
