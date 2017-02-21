@@ -46,7 +46,7 @@
       <tr align="center">
         <td>${deal.id}</td>
         <td>${deal.name}</td>
-        <td>${deal.budget}.${deal.budget%100}</td>
+        <td>${deal.budget}</td>
         <td>${deal.created}</td>
         <td>${deal.updated}</td>
         <td>${deal.responsibleUser.firstName}</td>
