@@ -80,7 +80,7 @@ public class JpaTaskDAOImpl implements TaskDAO{
     }
 
     @Override
-    public void edit(Task task) {
+    public Task edit(Task task) {
         Query query = this.entityManager.createQuery(
                 "SELECT task FROM Task as task WHERE task.id=:id", Task.class);
         query.setParameter("id", task.getId());
@@ -91,12 +91,10 @@ public class JpaTaskDAOImpl implements TaskDAO{
         existingTask.setImplementer(task.getImplementer());
         existingTask.setCreated(task.getCreated());
         existingTask.setUpdated(new Date());
-
-        this.entityManager.merge(existingTask);
-
-
-
-
+/**
+ * entityManager.merge() -- вернет Task !!!
+ */
+        return this.entityManager.merge(existingTask);
     }
 }
 

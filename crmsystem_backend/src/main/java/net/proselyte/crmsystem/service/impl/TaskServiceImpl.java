@@ -22,13 +22,13 @@ public class TaskServiceImpl implements TaskService{
     TaskDAO taskDAO;
 
     @Override
-//    @Transactional
+    @Transactional
     public Task getById(UUID id) {
         return taskDAO.getById(id);
     }
 
     @Override
-//    @Transactional
+    @Transactional
     public Collection<Task> getAll() {
         return taskDAO.getAll();
     }
@@ -40,14 +40,14 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-//    @Transactional
+    @Transactional
     public void remove(Task task) {
         taskDAO.remove(task);
     }
 
     @Override
     @Transactional
-    public void edit(Task task) {
-        taskDAO.edit(task);
+    public Task edit(Task task) {
+       return taskDAO.edit(task);
     }
 }

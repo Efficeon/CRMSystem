@@ -21,5 +21,5 @@ public interface TaskService {
 
     void remove(Task task);
 
-    void edit(Task task);
+    Task edit(Task task);
 }

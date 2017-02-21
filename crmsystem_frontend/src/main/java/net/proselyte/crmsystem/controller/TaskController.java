@@ -84,27 +84,32 @@ public class TaskController {
 
 
 
-    @RequestMapping(value = "/edittask/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.GET)
     public String editTask(@PathVariable("id") UUID id,
+//                           @RequestParam("newImplementer") User newImpl,
                            Model model){
 //                                                                  model.addAttribute("user", new User());
-        model.addAttribute("task", this.taskService.getById(id));
-//                                                                  model.addAttribute("listUsers", this.userService.getAll());
-//                                                                  return "task/taskadd";
-      return "taskedit";
+
+
+        /**
+         * получаем старую task из DB по id
+         * formBackingObject
+         */
+        model.addAttribute("task",this.taskService.getById(id));
+        model.addAttribute("listUsers", this.userService.getAll());
+
+        return "task/edittask";
     }
 
-    @RequestMapping(value = "/edittask/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.POST)
     public String editSubmit(@PathVariable("id") UUID id,
-                             @ModelAttribute Task task,
+                             @ModelAttribute("task") Task task,
                              Model model){
-        task.setId(id);
-//                                                                  this.taskService.edit(task);
-        model.addAttribute(id);
+//        task.setId(id);
+        this.taskService.edit(task);
 
-        task.setImplementer(this.taskService.getById(id).getImplementer());
-        this.taskService.save(task);
-//                                                                  return "redirect:/task/";
-        return "taskedited";
+//        task.setImplementer(this.taskService.getById(id).getImplementer());
+        return "redirect:/task/";
+//        return "task/editedtask";
     }
 }

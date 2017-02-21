@@ -40,29 +40,29 @@
                 <%--<form:input type="hidden" path="id" placeholder='ID${task.id}' id="task.id"/>--%>
 
                 <%--<td>--%>
-            <form:label path="id">Id:</form:label>
-            <%--</td>--%>
-                <%--<td>--%>
-            <form:input path="id" disabled="true"/>
+                    <%--<form:label path="task.id">Id:</form:label>--%>
+                    <%--<form:input path="task.id" disabled="true"/>--%>
             <%--</td>--%>
                 <%--</tr>--%>
             <br>
-            <br>
 
             <form:input  type="text" path="name" class="form-group"
-                         placeholder='Name${task.name}' autofocus="true"/>
+                         placeholder='Name${name}' autofocus="true"/>
             <br>
+
             <form:input  type="text" path="description" class="form-group"
-                         placeholder='Description${task.description}' autofocus="true"/>
+                         placeholder='Description${description}' />
             <br>
-            <form:select path="implementer.id">
-                <form:option value="${id}" label="Select ..."/>
+
+
+                    <form:select path="implementer.id" required="true">
+                <%--<form:option value="${implementer.getId()}" label="Which one?" disabled="true" />--%>
                 <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
             </form:select>
             <br>
             <br>
             <button type="submit" id="taskform">
-                <spring:message text="Add task"/>
+                <spring:message text="Edit this task"/>
             </button>
         </div>
 

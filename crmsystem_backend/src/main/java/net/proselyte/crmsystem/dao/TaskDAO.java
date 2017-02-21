@@ -10,5 +10,5 @@ import java.util.UUID;
  * @author Vladimir Vitlitski
  */
 public interface TaskDAO extends GenericDAO<Task, UUID> {
-    void edit(Task task);
+    Task edit(Task task);
 }

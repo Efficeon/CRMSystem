@@ -19,7 +19,7 @@ public class Task extends NamedEntity{
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)      //  targetEntity = User.class
 //    @JoinTable(name="tasks_users", joinColumns = {@JoinColumn (name="task_id", referencedColumnName ="id")},
 //    inverseJoinColumns = {@JoinColumn (name="user_id", referencedColumnName = "id")})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User implementer;
 
 //    переименовать!!!  creationDate
@@ -83,7 +83,7 @@ public class Task extends NamedEntity{
         Task task = (Task) o;
 
         if (!description.equals(task.description)) return false;
-        if (!implementer.equals(task.implementer)) return false;
+//        if (!implementer.equals(task.implementer)) return false;
         if (!created.equals(task.created)) return false;
         return updated.equals(task.updated);
 
@@ -93,7 +93,7 @@ public class Task extends NamedEntity{
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + description.hashCode();
-        result = 31 * result + implementer.hashCode();
+//        result = 31 * result + implementer.hashCode();
         result = 31 * result + created.hashCode();
         result = 31 * result + updated.hashCode();
         return result;
@@ -103,7 +103,7 @@ public class Task extends NamedEntity{
     public String toString() {
         return "Task{" +
                 "description='" + description + '\'' +
-                ", implementer=" + implementer +
+//                ", implementer=" + implementer +
                 ", created=" + created +
                 ", updated=" + updated +
                 '}';
