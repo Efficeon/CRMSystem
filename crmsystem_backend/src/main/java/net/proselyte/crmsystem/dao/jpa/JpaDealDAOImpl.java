@@ -42,10 +42,17 @@ public class JpaDealDAOImpl implements DealDAO {
 
 
     public Collection<Deal> getAll() {
-            List<Deal> result = new ArrayList<>();
-            Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
-            result = query.getResultList();
-            return result;
+        List<Deal> result = new ArrayList<>();
+        Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
+        result = query.getResultList();
+        if(result == null) {
+            System.out.println("RESULT == NULL!!");
+            logger.info("RESULT == NULL!!");
+        }
+        for (Deal deal : result) {
+            logger.info("deal list: " + deal);
+        }
+        return result;
     }
 
     @Override

@@ -40,13 +40,6 @@ public class DealController {
         return "deal/deals";
     }
 
-    @RequestMapping(value = "dealData/{id}", method = RequestMethod.GET)
-    public String dealData(@PathVariable("id") UUID id, Model model){
-        Deal deal = this.dealService.getById(id);
-        model.addAttribute("deal", deal);
-        return "deal/dealData";
-    }
-
     @RequestMapping(value = "removedeal/{id}/")
     public String removeDeal(@PathVariable("id") UUID id){
         this.dealService.remove(this.dealService.getById(id));
@@ -70,6 +63,25 @@ public class DealController {
         this.dealService.save(deal);
         return "redirect:/deal";
     }
+
+    @RequestMapping(value = "/editdeal/{id}", method = RequestMethod.GET)
+    public String editDeal(@PathVariable ("id") UUID id, Model model){
+        System.out.println("ID: " + id);
+        Deal tempdeal = this.dealService.getById(id);
+        model.addAttribute("deal", tempdeal);
+        model.addAttribute("dealStatusList", this.dealStatusService.getAll());
+        model.addAttribute("selectedDealStatus", new DealStatus());
+        model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("user", new User());
+        return "/deal/dealadd";
+    }
+
+    @RequestMapping(value = "/editdeal/{id}/", method = RequestMethod.POST)
+    public String editDeal(@ModelAttribute ("deal") Deal deal){
+        this.dealService.save(deal);
+        return "redirect:/deal/";
+    }
+
 }
 
 

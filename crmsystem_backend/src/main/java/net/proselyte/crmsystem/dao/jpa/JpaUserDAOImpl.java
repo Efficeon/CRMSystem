@@ -74,7 +74,7 @@ public class JpaUserDAOImpl implements UserDAO {
     public User findByUserName(String username) {
 
         try {
-            Query query = this.entityManager.createQuery("SELECT FROM User user WHERE user.username=:name", User.class);
+            Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
             System.out.println("--------------get User: " + user);
