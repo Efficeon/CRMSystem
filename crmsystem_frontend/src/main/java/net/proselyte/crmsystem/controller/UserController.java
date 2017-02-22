@@ -59,6 +59,7 @@ public class UserController {
         return "user/userdata";
     }
 
+
 //    отработка userdata.jsp --- "User details"
 
 //    удаляем user по id
@@ -158,6 +159,37 @@ public class UserController {
 //    public String userSubmit(@ModelAttribute User user){
 //        this.userService.remove(user);
 //        return "redirect:/edituser/"+ user.getId() +"/";
+//    }
+
+//    @RequestMapping(value = "/user/add/", method = RequestMethod.GET)
+//    public String addTask(Model model) {
+//        model.addAttribute("task", new Task());
+//        model.addAttribute("user", new User());
+//        model.addAttribute("listtasks", this.taskService.getAll());
+//        model.addAttribute("listUsers", this.userService.getAll());
+//        return "task/taskadd";
+//    }
+//
+//    /**
+//     * Adds a new task by delegating the processing to taskService.
+//     * Displays a confirmation JSP page
+//     * Добавляет новую персону через PersonService
+//     * Показывает подтверждающую JSP
+//     * @return  the name of the JSP page
+//     */
+//    @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
+//    public String taskSubmit(@RequestParam(name = "implementer.id") UUID userId,
+//                             @ModelAttribute("task") Task task) {
+////        task.setImplementer(this.userService.getById(userId));
+//        this.taskService.save(task);
+//                                                                  return "welcome";
+//                                                                  return "redirect:/task/";
+//                                                                  return "/task/taskmesseges";
+//        return "redirect:/edittask/"+task.getId()+"/";
+//        return "redirect:/task/";
+//        return "redirect:/edittask/";
+//
+//      return "taskadded";
 //    }
 //
 //

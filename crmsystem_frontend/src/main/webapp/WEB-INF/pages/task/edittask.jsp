@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<h2>Edit Task</h2>
+<h2>* Edit the task *</h2>
 <br>
 <br>
 

@@ -1,6 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ page session="false" %>
 
 <html>
 <head>
@@ -9,16 +12,27 @@
 </head>
 <body>
 
-<h2>Edited task</h2>
+<h3>* SUCCESSFUL EDIT *</h3>
+<br>
 
-<p>You have edited a task with id ${id} at <%= new java.util.Date() %></p>
+<h4>You have edited a task with the following parameters:</h4>
+<br>
+<h4>name: </h4>${task.name}
+<br>
+<h4>id: </h4>${task.id}
+<br>
+<h4>at: </h4>${task.updated}
+    <%--<%= new java.util.Date() %>--%>
 
 <br>
+<br>
+<br>
+
 <a href="<c:url value='/task/'/>">All tasks</a>
 <br>
-<a href="<c:url value='/company/'/>">All companies</a>
-<br>
 <a href="<c:url value='/user/'/>">All users</a>
+<br>
+<a href="<c:url value='/company/'/>">All companies</a>
 
 </body>
 </html>

@@ -18,13 +18,18 @@
 <body>
     <h2>* All tasks list *</h2>
 <br>
+<a href="<c:url value='/user/'/>">All users</a>
+<br>
+<a href="<c:url value='/company/'/>">All companies</a>
+<br>
+<br>
+<a href="<c:url value='/'/>">Back to start page</a>
+<br>
+<br>
 <button>
     <a href="<c:url value='/task/add/'/>" class="btn btn-lg" style="color: green">
         <i class="fa fa-plus"></i> Create task</a>
 </button>
-<br>
-<br>
-<a href="<c:url value='/'/>">Back to start page</a>
 <br>
 <br>
 <c:if test="${!empty listTasks}">

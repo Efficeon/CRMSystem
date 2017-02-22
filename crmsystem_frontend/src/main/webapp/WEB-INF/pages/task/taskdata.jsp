@@ -9,8 +9,11 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h2>Task details</h2>
-
+<h2>* The task details *</h2>
+<br>
+<a href="<c:url value='/task/'/>">All tasks</a>
+<br>
+<br>
 <table class="table table-striped">
     <tr>
         <th width="25">ID</th>

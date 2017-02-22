@@ -50,4 +50,12 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
+    <!--ручной режим маппинга-->
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="useDefaultSuffixPattern" value="false" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
 </beans>

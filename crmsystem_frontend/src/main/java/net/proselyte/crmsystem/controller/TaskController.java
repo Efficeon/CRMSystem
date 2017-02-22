@@ -49,11 +49,6 @@ public class TaskController {
         return "redirect:/task/";
     }
 
-    /**
-     * Retrieves the add page
-     * Возвращает страницу Добавления
-     * @return the name of the JSP page
-     */
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)
     public String addTask(Model model) {
         model.addAttribute("task", new Task());
@@ -75,26 +70,22 @@ public class TaskController {
                              @ModelAttribute("task") Task task) {
 //        task.setImplementer(this.userService.getById(userId));
         this.taskService.save(task);
-//                                                                  return "welcome";
-//                                                                  return "redirect:/task/";
-//                                                                  return "/task/taskmesseges";
-        return "redirect:/edittask/"+task.getId()+"/";
+//        return "redirect:/edittask/"+task.getId()+"/";
+        return "redirect:/task/";
+//        return "redirect:/edittask/";
+//
 //      return "taskadded";
     }
 
 
 
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.GET)
-    public String editTask(@PathVariable("id") UUID id,
+//    @RequestMapping(value = "/edittask/", method = RequestMethod.GET)
+    public String editTask(
+            @PathVariable("id") UUID id,
 //                           @RequestParam("newImplementer") User newImpl,
                            Model model){
 //                                                                  model.addAttribute("user", new User());
-
-
-        /**
-         * получаем старую task из DB по id
-         * formBackingObject
-         */
         model.addAttribute("task",this.taskService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
 
@@ -102,14 +93,14 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") UUID id,
-                             @ModelAttribute("task") Task task,
-                             Model model){
+    public String editSubmit(@ModelAttribute("task") Task task){
 //        task.setId(id);
         this.taskService.edit(task);
 
-//        task.setImplementer(this.taskService.getById(id).getImplementer());
-        return "redirect:/task/";
-//        return "task/editedtask";
+//        return "redirect:/task/";
+//        return "redirect:/edited/";
+//        return "/taskedited/";
+//        return "welcome";
+        return "task/editedtask";
     }
 }

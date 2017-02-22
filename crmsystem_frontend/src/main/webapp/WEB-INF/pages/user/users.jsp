@@ -20,14 +20,22 @@
 <%--Отображает список всех задач с детальной информацией и возможностью редактирования--%>
 
 <body>
-<h1>List of Users</h1>
+<h2>The list of users</h2>
+<br>
+<br>
+<a href="<c:url value='/task/'/>">All tasks</a>
+<br>
+<a href="<c:url value='/company/'/>">All companies</a>
+<br>
+<br>
+<a href="<c:url value='/'/>">Back to start page</a>
+<br>
 <br>
 
 <%--<button>--%>
     <%--<a href="<c:url value='/user/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create task</a>--%>
 <%--</button>--%>
 <%--<br>--%>
-<br>
 
 <c:if test="${!empty userList}">
     <table class="table table-striped table-condensed">
@@ -55,11 +63,6 @@
         </c:forEach>
     </table>
 </c:if>
-
-<br>
-<%--<div class="well">--%>
-    <%--<a href="<c:url value='userform' />">Add New User</a>--%>
-<%--</div>--%>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
