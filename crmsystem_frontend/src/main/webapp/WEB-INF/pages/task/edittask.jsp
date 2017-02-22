@@ -50,7 +50,7 @@
                          placeholder='Name${name}' autofocus="true"/>
             <br>
 
-            <form:input  type="text" path="description" class="form-group"
+            <form:input  type="textarea" path="description" class="form-group"
                          placeholder='Description${description}' />
             <br>
 

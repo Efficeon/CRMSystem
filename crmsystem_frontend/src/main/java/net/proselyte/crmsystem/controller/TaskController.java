@@ -71,10 +71,9 @@ public class TaskController {
 //        task.setImplementer(this.userService.getById(userId));
         this.taskService.save(task);
 //        return "redirect:/edittask/"+task.getId()+"/";
-        return "redirect:/task/";
-//        return "redirect:/edittask/";
+//        return "redirect:/task/";
+        return "task/taskadded";
 //
-//      return "taskadded";
     }
 
 

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<h2>Add a task</h2>
+<h2>* Add a task *</h2>
 <br>
 <br>
 
@@ -38,8 +38,10 @@
             <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${task.name}' autofocus="true"/>
             <br>
-                <form:input  type="text" path="description" class="form-group"
-                             placeholder='Description${task.description}' autofocus="true"/>
+
+                <form:input  type="textarea" path="description" class="form-group"
+                placeholder='Description${task.description}'/>
+
             <br>
                 <form:select path="implementer.id">
                     <form:option value="0" label="Select ..."/>

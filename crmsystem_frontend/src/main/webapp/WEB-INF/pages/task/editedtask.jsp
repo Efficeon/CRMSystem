@@ -17,12 +17,13 @@
 
 <h4>You have edited a task with the following parameters:</h4>
 <br>
-<h4>name: </h4>${task.name}
-<br>
 <h4>id: </h4>${task.id}
 <br>
+<h4>name: </h4>${task.name}
+<br>
+<h4>name: </h4>${task.description}
+<br>
 <h4>at: </h4>${task.updated}
-    <%--<%= new java.util.Date() %>--%>
 
 <br>
 <br>

@@ -28,7 +28,7 @@
         <th class="text-center" width="50">e-mail</th>
         <th class="text-center" width="50">First Name</th>
         <th class="text-center" width="50">Last Name</th>
-        <th class="text-center" width="50">Birth date</th>
+        <%--<th class="text-center" width="50">Birth date</th>--%>
         <th class="text-center" width="50">User type</th>
         <th class="text-center" width="50">Registration date</th>
 
@@ -46,7 +46,7 @@
         <td>${user.email}</td>
         <td>${user.firstName}</td>
         <td>${user.lastName}</td>
-        <td>${user.birthDate}</td>
+        <%--<td>${user.birthDate}</td>--%>
         <td>${user.registrationDate}</td>
 
         <td>

@@ -40,10 +40,6 @@ public class UserController {
         return "user/home";
     }
 
-//    отработка users.jsp --- "List of Users"
-
-//    создаем Model для вывода всех пользователей и выводим через view "users.jsp"
-//    промежуточный адрес, предоставляющий заполненную модель с user и userList
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public String listUsers(Model model){
         model.addAttribute("user", new User());
@@ -51,14 +47,16 @@ public class UserController {
         return "user/users";
     }
 
-//    получаем по id конкретный объект, помещаем его в Model,
-//    передаем для последующего отображения во view userdata.jsp --- "User details"
-    @RequestMapping(value = "userdata/${id}", method = RequestMethod.GET)
+    @RequestMapping(value = "userdata/${id}/", method = RequestMethod.GET)
     public String userData(@PathVariable("id") UUID id, Model model){
-        model.addAttribute("user", this.userService.getById(id));
+        User user = this.userService.getById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("tasks",this.taskService.getAll());
+        model.addAttribute("companies", this.companyService.getAll());
+        model.addAttribute("roles", this.roleService.getAll());
         return "user/userdata";
+//        return "userdata";
     }
-
 
 //    отработка userdata.jsp --- "User details"
 
