@@ -1,26 +1,19 @@
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
-
-<!DOCTYPE HTML>
-
 <html>
 <head>
-    <a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: green">
-        <i class="glyphicon glyphicon-arrow-left"></i> All company</a>
-    <title>Company details</title>
+    <title>User details</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
-
 <body>
-<h1>User details</h1>
-
+<h2>* The user details *</h2>
+<br>
+<a href="<c:url value='/user/'/>">All users</a>
+<br>
+<br>
 <table class="table table-striped table-condensed">
     <tr>
         <th class="text-center" width="25">ID</th>

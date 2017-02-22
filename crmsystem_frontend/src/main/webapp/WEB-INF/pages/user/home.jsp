@@ -35,6 +35,14 @@
 
     </c:if>
 
+    <br>
+    <br>
+    <a href="<c:url value='/task/'/>">All tasks</a>
+    <br>
+    <a href="<c:url value='/company/'/>">All companies</a>
+    <br>
+    <a href="<c:url value='/user/'/>">All users</a>
+    <br>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
