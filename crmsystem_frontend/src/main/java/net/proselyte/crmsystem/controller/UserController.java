@@ -40,23 +40,35 @@ public class UserController {
         return "user/home";
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.GET)
+//    @RequestMapping(value = "user", method = RequestMethod.GET)
+//    public String listUsers(Model model) {
+//        model.addAttribute("user", new User());
+//        model.addAttribute("listUsers", this.userService.getAll());
+//        return "user/users";
+//    }
+
+    @RequestMapping(value = "user", method = RequestMethod.GET)
     public String listUsers(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.getAll());
-        return "user/users";
+        model.addAttribute("userList", this.userService.getAll());
+        return "user/users-v";
     }
 
-    @RequestMapping(value = "userdata/${id}/", method = RequestMethod.GET)
-    public String userData(@PathVariable("id") UUID id, Model model){
-        model.addAttribute("user", this.userService.getById(id));
-        model.addAttribute("userList", this.userService.getAll());
-        model.addAttribute("company", this.companyService.getAll());
-        model.addAttribute("task", this.taskService.getAll());
-        model.addAttribute("role", this.roleService.getAll());
-
+//    @RequestMapping(value = "userdata/${id}/", method = RequestMethod.GET)
+//    public String userData(@PathVariable("id") UUID id, Model model){
+//        model.addAttribute("user", this.userService.getById(id));
+//        model.addAttribute("userList", this.userService.getAll());
+//        model.addAttribute("company", this.companyService.getAll());
+//        model.addAttribute("task", this.taskService.getAll());
+//        model.addAttribute("role", this.roleService.getAll());
+//
 //        return "user/userdata";
-        return "user/home";
+//    }
+
+    @RequestMapping(value="userdata/{id}/", method = RequestMethod.GET)
+    public String taskData(@PathVariable("id") UUID id, Model model){
+        model.addAttribute("user", this.userService.getById(id));
+        return "user/userdata";
     }
 
     @RequestMapping(value = "remove_user/${id}/", method = RequestMethod.GET)
