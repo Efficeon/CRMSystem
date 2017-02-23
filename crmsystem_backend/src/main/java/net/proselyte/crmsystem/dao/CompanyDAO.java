@@ -2,6 +2,7 @@ package net.proselyte.crmsystem.dao;
 
 import net.proselyte.crmsystem.model.Company;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -10,4 +11,5 @@ import java.util.UUID;
  * @author Leonid Dubravsky
  */
 public interface CompanyDAO extends GenericDAO<Company, UUID>{
+    public Collection<Company> getSortedCompanies(String searchLine);
 }

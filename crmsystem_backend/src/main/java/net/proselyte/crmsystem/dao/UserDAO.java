@@ -2,6 +2,7 @@ package net.proselyte.crmsystem.dao;
 
 import net.proselyte.crmsystem.model.User;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -12,4 +13,6 @@ import java.util.UUID;
 public interface UserDAO extends GenericDAO<User, UUID> {
 
     User findByUserName(String username);
+
+    public Collection<User> getSortedUsers(String searchLine);
 }

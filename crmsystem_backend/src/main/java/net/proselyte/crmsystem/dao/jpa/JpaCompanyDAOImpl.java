@@ -74,4 +74,16 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         this.entityManager.remove(this.entityManager.getReference(Company.class, company.getId()));
         logger.info("Company successfully removed. Company details: " + company);
     }
+
+    @Override
+    public Collection<Company> getSortedCompanies(String searchLine) {
+        List<Company> resultSearch;
+        Query query = entityManager.createQuery("SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.name LIKE ?");
+            query.setParameter(0, "%"+searchLine+"%");
+            resultSearch=query.getResultList();
+        for (Company company : resultSearch) {
+            logger.info("Search company list: " + company);
+        }
+        return resultSearch;
+    }
 }
