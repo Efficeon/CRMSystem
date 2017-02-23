@@ -53,11 +53,8 @@
                 <td>${task.name}</td>
                 <td>${task.description}</td>
                 <td>${task.implementer.getFirstName()}</td>
-                <%--task.responsiblePerson !!! was replaced by task.implementer--%>
                 <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                <%--ячейки заполняются значениями из заголовков - "по умолчанию"--%>
-                <%----%>
                 <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>"
                                            span class="glyphicon glyphicon glyphicon-file " style="color: darkblue">Details </a></td>
                 <td class="text-center"><a href="<c:url value='/edittask/${task.id}/'/>"

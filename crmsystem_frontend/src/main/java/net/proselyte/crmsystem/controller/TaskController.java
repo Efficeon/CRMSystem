@@ -32,7 +32,6 @@ public class TaskController {
         model.addAttribute("task", new Task());
         model.addAttribute("listTasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
-//        model.addAttribute("success", "Task " + this.taskService.getName() + " "+ user.getLastName() + " updated successfully");
 
         return "task/tasks";
     }
@@ -58,20 +57,10 @@ public class TaskController {
         return "task/taskadd";
     }
 
-    /**
-     * Adds a new task by delegating the processing to taskService.
-     * Displays a confirmation JSP page
-     * Добавляет новую персону через PersonService
-     * Показывает подтверждающую JSP
-     * @return  the name of the JSP page
-     */
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@RequestParam(name = "implementer.id") UUID userId,
                              @ModelAttribute("task") Task task) {
-//        task.setImplementer(this.userService.getById(userId));
         this.taskService.save(task);
-//        return "redirect:/edittask/"+task.getId()+"/";
-//        return "redirect:/task/";
         return "task/taskadded";
 //
     }
@@ -79,12 +68,9 @@ public class TaskController {
 
 
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.GET)
-//    @RequestMapping(value = "/edittask/", method = RequestMethod.GET)
     public String editTask(
             @PathVariable("id") UUID id,
-//                           @RequestParam("newImplementer") User newImpl,
                            Model model){
-//                                                                  model.addAttribute("user", new User());
         model.addAttribute("task",this.taskService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
 
@@ -93,13 +79,8 @@ public class TaskController {
 
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("task") Task task){
-//        task.setId(id);
         this.taskService.edit(task);
 
-//        return "redirect:/task/";
-//        return "redirect:/edited/";
-//        return "/taskedited/";
-//        return "welcome";
         return "task/editedtask";
     }
 }

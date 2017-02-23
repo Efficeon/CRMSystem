@@ -40,10 +40,10 @@ public class UserController {
         return "user/home";
     }
 
-    @RequestMapping(value = "user", method = RequestMethod.GET)
-    public String listUsers(Model model){
+    @RequestMapping(value = "users", method = RequestMethod.GET)
+    public String listUsers(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
         return "user/users";
     }
 

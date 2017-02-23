@@ -6,26 +6,14 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <a href="<c:url value='/company/' />" class="btn btn-lg" style="color: green">
-        <i class="glyphicon glyphicon-arrow-left"></i> All company</a>
-    <title>Create company</title>
+    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script type="text/javascript">
-         $(function() {
-            $('#acInput').autocomplete({
-                source: function (request, response) {
-                    $.getJSON("/tags/", {
-                        term: request.term
-                    }, response);
-                }
-            });
-        });
-    </script>
 </head>
 <br>
 <h1>Company add</h1>
@@ -40,19 +28,18 @@
     <h1>Company edit</h1>
 </c:if>
 <form:form id="companyform" method="POST" modelAttribute="company">
-<form class="form-inline">
-    <div class="form-group">
-
-        <c:if test="${!empty company.name}">
-            <spring:bind path="id">
-                <form:input  type="text" path="id" class="form-group" readonly="true"
-                             disabled="true" placeholder='ID${id}'></form:input>
+    <form class="form-inline">
+        <div class="form-group">
+            <c:if test="${!empty company.id}">
+                <spring:bind path="id">
+                    <form:input  type="text" path="id" class="form-group" readonly="true"
+                                 disabled="true" placeholder='ID${id}'></form:input>
+                </spring:bind>
+            </c:if>
+            <spring:bind path="name">
+                <form:input  type="text" path="name" class="form-group"
+                             placeholder='Name${name}' autofocus="true"></form:input>
             </spring:bind>
-        </c:if>
-        <spring:bind path="name">
-            <form:input  type="text" path="name" class="form-group"
-                         placeholder='Name${name}' autofocus="true"></form:input>
-        </spring:bind>
 
             <spring:bind path="email">
                 <form:input  type="text" path="email" class="form-group"

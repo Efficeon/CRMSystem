@@ -39,11 +39,6 @@
 
                 <%--<form:input type="hidden" path="id" placeholder='ID${task.id}' id="task.id"/>--%>
 
-                <%--<td>--%>
-                    <%--<form:label path="task.id">Id:</form:label>--%>
-                    <%--<form:input path="task.id" disabled="true"/>--%>
-            <%--</td>--%>
-                <%--</tr>--%>
             <br>
 
             <form:input  type="text" path="name" class="form-group"
