@@ -42,9 +42,6 @@ public class JpaContactDAOImpl implements ContactDAO {
 
         Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompany");
         result = query.getResultList();
-        for (Contact contact : result){
-            System.out.println(result);
-        }
 
         Collections.sort(result, new Comparator<Contact>() {
             public int compare(Contact o1, Contact o2) {
@@ -62,7 +59,6 @@ public class JpaContactDAOImpl implements ContactDAO {
 
         if (contact.getId() == null) {
             contact.setCreateDate(new Date());
-            contact.setUpdateDate(new Date());
             this.entityManager.persist(contact);
             logger.info("Contact successfully saved. Contact details: " + contact);
         } else {

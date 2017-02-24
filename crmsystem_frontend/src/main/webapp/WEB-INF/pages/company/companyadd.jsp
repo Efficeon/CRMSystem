@@ -114,8 +114,8 @@
             </c:if>
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-        </form:form>
     </div>
+    </form:form>
     <!--add Tag -->
     <div class="clearfix" style="float: left; margin: 0px 10px 10px 10px;">
     <form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">

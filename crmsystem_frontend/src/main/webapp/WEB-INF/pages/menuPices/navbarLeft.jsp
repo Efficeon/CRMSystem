@@ -42,7 +42,9 @@
             </li>
             <li class="parent"><a href="#"><i class="glyphicon glyphicon-eye-open" style="color: #9c94e4"></i><span>Administrator</span></a>
                 <ul class="sub-menu"><li><a href="<c:url value='#' />"><i class="glyphicon glyphicon-user" style="color: #ffe170"></i> Account Management</a></li></ul>
-                <ul class="sub-menu"><li><a href="<c:url value='#' />"><i class="glyphicon glyphicon-plus" style="color: #8ec9ff"></i> Create</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='#' />"><i class="glyphicon glyphicon-plus" style="color: #ffe170"></i> Create account</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='/dealstatus/' />"><i class="glyphicon glyphicon-tasks" style="color: #787dff"></i> Deal statuses</a></li></ul>
+                <ul class="sub-menu"><li><a href="<c:url value='/dealstatus/add/' />"><i class="glyphicon glyphicon-plus" style="color: #787dff"></i> Create deal status</a></li></ul>
             </li>
         </ul>
     </div>
@@ -61,7 +63,7 @@
                         <ul class="dropdown-menu pull-right">
                             <li><a onClick="javascript:companies()"><i class="glyphicon glyphicon-briefcase" style="color: darkblue"></i><span> Search companies</span></a></li>
                             <li><a onClick="javascript:users()"><i class="glyphicon glyphicon-user" style="color: darkgreen"></i><span> Search users</span></a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-pencil" style="color: darkred"></i><span> Search deals</span></a></li>
+                            <li><a href="javascript:deals()"><i class="glyphicon glyphicon-pencil" style="color: darkred"></i><span> Search deals</span></a></li>
                             <li class="divider"></li>
                             <li><a onClick="javascript:searchAll()"><i class="glyphicon glyphicon-search" style="color: darkorange"></i><span> Search all</span></a></li>
                         </ul>

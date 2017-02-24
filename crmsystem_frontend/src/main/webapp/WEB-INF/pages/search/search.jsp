@@ -90,6 +90,37 @@
             </c:forEach>
         </table>
     </c:if>
+
+    <h1>Deal list</h1>
+    <c:if test="${!empty listDeals}">
+        <table>
+            <tr>
+                <th width="80">ID</th>
+                <th width="120">NAME</th>
+                <th width="120">BUDGET</th>
+                <th width="120">CREATED</th>
+                <th width="120">UPDATED</th>
+                <th width="120">USER ID</th>
+                <th width="120">DEAL STATUS</th>
+                <th width="120">DELETE</th>
+                <th width="120">EDIT</th>
+            </tr>
+            <c:forEach items="${listDeals}" var="deal">
+                <tr align="center">
+                    <td>${deal.id}</td>
+                    <td>${deal.name}</td>
+                    <td>${deal.budget}</td>
+                    <td>${deal.created}</td>
+                    <td>${deal.updated}</td>
+                    <td>${deal.responsibleUser.firstName}</td>
+                    <td>${deal.dealStatus.name}</td>
+                    <td><a href="<c:url value='/removedeal/${deal.id}/'/>">Delete</a></td>
+
+                    <td><a href="<c:url value='/editdeal/${deal.id}/'/>">Edit</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
 </div>
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

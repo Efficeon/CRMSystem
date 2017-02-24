@@ -64,6 +64,6 @@ public class DealServiceImpl implements DealService {
     @Override
     @Transactional
     public Collection<Deal> getSearchedDeals(String searchLine) {
-        return dealDAO.getSortedDeals(searchLine);
+        return dealDAO.getSearchedDeals(searchLine);
     }
 }

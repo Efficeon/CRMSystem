@@ -14,6 +14,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -54,13 +55,7 @@
                              placeholder='Phone number${phoneNumber}' autofocus="true"></form:input>
             </spring:bind>
 
-            <form:select path="associatedCompany.id">
-                <form:option value="${associatedCompany.id}" />
-                <form:options items="${listCompanies}" itemValue="id" itemLabel="name"/>
-            </form:select>
-
-            <form:select path="responsibleUser.id">
-
+            <form:select path="responsibleUser.id" style="width: 80px; height: 26px;">
                 <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
             </form:select>
 
@@ -71,8 +66,61 @@
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
 </form:form>
-    <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/resources/js/main.js"></script>
+</div>
+
+<div style="margin: 10px 10px 10px 10px;">
+    <c:if test="${empty contact.id}">
+        <h4 style="color: red">Add company after adding Cotact</h4>
+    </c:if>
+    <form:form method="POST" modelAttribute="contact" action="/editcontact1/${contact.id}">
+        <form class="form-inline">
+            <h5>Select a company</h5>
+            <div class="form-group">
+                <select class="s-example-basic-single" name="company">
+                    <c:forEach items="${listCompanies}" var="company">
+                        <option value="${company.id}">
+                                ${company.name}
+                        </option>
+                    </c:forEach>
+                </select>
+
+                <button class="selectpicker" style="height: 30px;" type="submit">
+                        <spring:message text="Add"/>
+                </button>
+            </div>
+            <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+            </form>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".js-example-basic-single").select2();
+            });
+        </script>
+
+        <select class="js-example-basic-single">
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+            <c:forEach items="${listCompanies}" var="company">
+                <option value="${company.id}">
+                        ${company.name}
+                </option>
+            </c:forEach>
+        </select>
+    </form:form>
+    <form action="/editcontact1/${contact.id}/${company.id}" method="post">
+        <p> <select class="js-example-basic-single">
+            <option value="AL">Alabama</option>
+            <option value="WY">Wyoming</option>
+            <c:forEach items="${listCompanies}" var="company">
+                <option value="${company.id}">
+                        ${company.name}
+                </option>
+            </c:forEach>
+        </select></p>
+        <p><input type="submit" value="Отправить"></p>
+    </form>
+</div>
+
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>

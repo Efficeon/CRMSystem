@@ -50,16 +50,7 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact/add/", method = RequestMethod.POST)
-    public String contactSubmit(@ModelAttribute("contact") Contact contact,
-                                @PathVariable(name = "responsibleUser.id", required = false) UUID userId,
-                                @PathVariable(name = "associatedCompany.id", required = false) UUID companyId) {
-        if (userId != null){
-            contact.setResponsibleUser(this.userService.getById(userId));
-        }
-        if (companyId != null){
-            contact.setAssociatedCompany(this.companyService.getById(companyId));
-
-        }
+    public String contactSubmit(@ModelAttribute("contact") Contact contact){
         this.contactService.save(contact);
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
@@ -74,6 +65,21 @@ public class ContactController {
         return "contact/contactadd";
     }
 
+    @RequestMapping(value = "/editcontact1/{companyId}/", method = RequestMethod.POST)
+    public String associatedcompanySubmit(
+            @RequestParam(value = "companyId", required = false) UUID companyId,
+            @RequestParam(value = "contactId", required = false) UUID contactId,
+                                          @ModelAttribute Contact contact,
+                                          @ModelAttribute Company company) {
+        System.out.println(contact.getName());
+        System.out.println(company.getName());
+        System.out.println(companyId);
+        System.out.println(contactId);
+        contact.setAssociatedCompany(company);
+        this.contactService.save(contact);
+        return "redirect:/editcontact/"+contact.getId()+"/";
+    }
+
     @RequestMapping(value = "/editcontact/{id}")
     public String editContact(@PathVariable("id") UUID id, Model model){
         model.addAttribute("contact", this.contactService.getById(id));
@@ -84,14 +90,26 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/editcontact/{id}", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") UUID id,
-                             @RequestParam(name = "responsibleUser.id", required = false) UUID userId,
-                             @RequestParam(name = "associatedCompany.id", required = false) UUID companyId,
-                             @ModelAttribute Contact contact){
-        contact.setId(id);
-        contact.setResponsibleUser(this.userService.getById(userId));
-        contact.setAssociatedCompany(this.companyService.getById(companyId));
+    public String editSubmit(@PathVariable("id") UUID id, @ModelAttribute Contact contact){
         this.contactService.save(contact);
         return "redirect:/contacts/";
+    }
+
+    @RequestMapping(value = "/contactAdd/{id}/", method = RequestMethod.POST)
+    public String editSubmit(@PathVariable("id") UUID id,
+                             @RequestParam(value = "associatedCompany", required = false) UUID associatedCompany,
+                             Model model){
+        Contact contact= this.contactService.getById(id);
+        contact.setAssociatedCompany(this.companyService.getById(associatedCompany));
+        this.contactService.save(contact);
+        return "redirect:/contacts/";
+    }
+
+    public String SearchUsers(@RequestParam(value = "searchLine", required = false) String searchLine,
+                              Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("listUsers", this.userService.getSearchedUsers(searchLine));
+
+        return "user/users";
     }
 }

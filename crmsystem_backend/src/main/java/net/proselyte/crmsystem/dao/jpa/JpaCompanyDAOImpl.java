@@ -63,7 +63,6 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     public void save(Company company) {
         if (company.getId() == null) {
             company.setCreated(new Date());
-            company.setUpdated(new Date());
             this.entityManager.persist(company);
             logger.info("Company successfully saved. Company details: " + company);
         } else {

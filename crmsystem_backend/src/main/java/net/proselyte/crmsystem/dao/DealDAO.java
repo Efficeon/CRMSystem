@@ -14,5 +14,5 @@ import java.util.UUID;
 public interface DealDAO extends GenericDAO<Deal, UUID> {
     Deal findByResponsibleUser(UUID id);
 
-    public Collection<Deal> getSortedDeals(String searchLine);
+    public Collection<Deal> getSearchedDeals(String searchLine);
 }
