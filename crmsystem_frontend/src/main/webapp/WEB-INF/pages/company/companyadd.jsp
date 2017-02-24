@@ -25,7 +25,7 @@
 <c:if test="${!empty company.id}">
     <h1>Company edit</h1>
 </c:if>
-<form:form id="companyform" method="POST" modelAttribute="company">
+<form:form id="companyform" method="POST" modelAttribute="company" action="/company/add/${company.id}">
     <form class="form-inline">
         <div class="form-group">
             <c:if test="${!empty company.id}">
@@ -115,7 +115,7 @@
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </div>
-    </form:form>
+    <!--</form:form>-->
     <!--add Tag -->
     <div class="clearfix" style="float: left; margin: 0px 10px 10px 10px;">
     <form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">

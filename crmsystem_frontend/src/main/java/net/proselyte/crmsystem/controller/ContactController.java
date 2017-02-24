@@ -55,61 +55,62 @@ public class ContactController {
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
 
-    @RequestMapping(value = "/contact/add/", method = RequestMethod.GET)
-    public String addContact(Model model) {
-        model.addAttribute("contact", new Contact());
-        model.addAttribute("listUsers", this.userService.getAll());
-        model.addAttribute("listCompanies", this.companyService.getAll());
-        model.addAttribute("user", new User());
-        model.addAttribute("tag", new Company());
-        return "contact/contactadd";
-    }
-
-    @RequestMapping(value = "/editcontact1/{companyId}/", method = RequestMethod.POST)
-    public String associatedcompanySubmit(
-            @RequestParam(value = "companyId", required = false) UUID companyId,
-            @RequestParam(value = "contactId", required = false) UUID contactId,
-                                          @ModelAttribute Contact contact,
-                                          @ModelAttribute Company company) {
-        System.out.println(contact.getName());
-        System.out.println(company.getName());
-        System.out.println(companyId);
-        System.out.println(contactId);
-        contact.setAssociatedCompany(company);
+    @RequestMapping(value = "/contact/add/{contactId}", method = RequestMethod.POST)
+    public String companySubmit(@ModelAttribute("contact") Contact contact,
+                                @PathVariable("contactId") UUID contactId){
+        contact.setId(contactId);
+        contact.setAssociatedCompany(this.contactService.getById(contactId).getAssociatedCompany());
         this.contactService.save(contact);
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
 
-    @RequestMapping(value = "/editcontact/{id}")
+    @RequestMapping(value = "/contact/add/", method = RequestMethod.GET)
+    public String addContact(Model model) {
+        model.addAttribute("listCompanies", this.companyService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("contact", new Contact());
+        model.addAttribute("user", new User());
+        return "contact/contactadd";
+    }
+
+    @RequestMapping(value = "/editcontact/{id}", method = RequestMethod.GET)
     public String editContact(@PathVariable("id") UUID id, Model model){
         model.addAttribute("contact", this.contactService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listCompanies", this.companyService.getAll());
         model.addAttribute("company", new Company());
+        model.addAttribute("user", new User());
         return "contact/contactadd";
     }
 
-    @RequestMapping(value = "/editcontact/{id}", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") UUID id, @ModelAttribute Contact contact){
+    @RequestMapping(value = "/addAssociatedCompany/{companyId}/{contactId}/", method = RequestMethod.GET)
+    public String addTag(@PathVariable("companyId") UUID companyId,
+                         @PathVariable("contactId") UUID contactId,
+                         @ModelAttribute("contact") Contact contact,
+                         Model model) {
+        contact = this.contactService.getById(contactId);
+        contact.setAssociatedCompany(this.companyService.getById(companyId));
         this.contactService.save(contact);
-        return "redirect:/contacts/";
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listCompanies", this.companyService.getAll());
+        model.addAttribute("contact", contact);
+        model.addAttribute("company", new Company());
+        return "redirect:/editcontact/"+contact.getId()+"/";
     }
 
-    @RequestMapping(value = "/contactAdd/{id}/", method = RequestMethod.POST)
-    public String editSubmit(@PathVariable("id") UUID id,
-                             @RequestParam(value = "associatedCompany", required = false) UUID associatedCompany,
-                             Model model){
-        Contact contact= this.contactService.getById(id);
-        contact.setAssociatedCompany(this.companyService.getById(associatedCompany));
+    @RequestMapping(value = "/associatedCompany/remove/{contactId}/", method = RequestMethod.GET)
+    public String removeResponsibleUser(@PathVariable("contactId") UUID contactId,
+                                        @ModelAttribute("contact") Contact contact,
+                                        Model model){
+        contact = this.contactService.getById(contactId);
+        contact.removessociatedCompany();
         this.contactService.save(contact);
-        return "redirect:/contacts/";
-    }
-
-    public String SearchUsers(@RequestParam(value = "searchLine", required = false) String searchLine,
-                              Model model) {
+        model.addAttribute("contact", this.contactService.getById(contactId));
+        model.addAttribute("listCompanies", this.companyService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("company", new Company());
         model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.getSearchedUsers(searchLine));
 
-        return "user/users";
+        return "redirect:/editcontact/"+contact.getId()+"/";
     }
 }

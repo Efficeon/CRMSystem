@@ -26,7 +26,8 @@
     <c:if test="${!empty contact.id}">
     <h1>Contact edit</h1>
     </c:if>
-    <form:form id="contactform" method="POST" modelAttribute="contact">
+
+    <form:form id="contactform" method="POST" modelAttribute="contact" action="/contact/add/${contact.id}">
     <form class="form-inline">
         <div class="form-group">
             <c:if test="${!empty contact.id}">
@@ -46,7 +47,7 @@
             </spring:bind>
 
             <spring:bind path="skype">
-                <form:input  type="text" path="skype" class="form-group"
+                <form:input   type="text" path="skype" class="form-group"
                              placeholder='Skype${skype}' autofocus="true"></form:input>
             </spring:bind>
 
@@ -55,69 +56,56 @@
                              placeholder='Phone number${phoneNumber}' autofocus="true"></form:input>
             </spring:bind>
 
-            <form:select path="responsibleUser.id" style="width: 80px; height: 26px;">
+            <form:select path="responsibleUser.id"  style="width: 80px; height: 26px;">
+                <form:option value="" label="${pageContext.request.userPrincipal.name}"/>
                 <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
             </form:select>
 
-            <button type="submit" id="contactform">
+            <button type="submit" id="dealform">
                 <spring:message text="Add"/>
             </button>
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
-</form:form>
-</div>
 
-<div style="margin: 10px 10px 10px 10px;">
-    <c:if test="${empty contact.id}">
-        <h4 style="color: red">Add company after adding Cotact</h4>
-    </c:if>
-    <form:form method="POST" modelAttribute="contact" action="/editcontact1/${contact.id}">
-        <form class="form-inline">
-            <h5>Select a company</h5>
-            <div class="form-group">
-                <select class="s-example-basic-single" name="company">
-                    <c:forEach items="${listCompanies}" var="company">
-                        <option value="${company.id}">
-                                ${company.name}
-                        </option>
-                    </c:forEach>
-                </select>
+        <!--add associated company -->
+        <c:if test="${empty contact.id}">
+            <h4 style="color: red">Add associated companies after adding contact</h4>
+        </c:if>
 
-                <button class="selectpicker" style="height: 30px;" type="submit">
-                        <spring:message text="Add"/>
-                </button>
+        <div class="clearfix">
+            <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+                <h5>All companies</h5>
+                <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty listCompanies}">
+                        <c:forEach items="${listCompanies}" var="company">
+                            <c:if test="${!contact.associatedCompany.equals(company)}">
+                                <table class="table table-hover table-condensed">
+                                    <c:if test="${!empty contact.id}">
+                                        <td disabled="true"><a href="<c:url value='/addAssociatedCompany/${company.id}/${contact.id}/' />"
+                                                               style="text-decoration: none" />${company.name}</td>
+                                    </c:if>
+                                </table>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                </div>
             </div>
-            <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-            </form>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $(".js-example-basic-single").select2();
-            });
-        </script>
 
-        <select class="js-example-basic-single">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-            <c:forEach items="${listCompanies}" var="company">
-                <option value="${company.id}">
-                        ${company.name}
-                </option>
-            </c:forEach>
-        </select>
+            <!--remove associated company -->
+            <div class="clearfix" style="float: left; margin: 0px 0px 0px 10px;">
+                <h5>Associated company</h5>
+                <div class="panel panel-default clearfix" style="float: left; height: 44px; width: 300px; overflow: auto">
+                    <c:if test="${!empty contact.associatedCompany}">
+                        <table class="table table-hover table-condensed">
+                            <td><a href="<c:url value='/associatedCompany/remove/${contact.id}/' />"
+                                   style="text-decoration: none"/>${contact.associatedCompany.name} </td>
+                        </table>
+                    </c:if>
+                </div>
+            </div>
+        </div>
     </form:form>
-    <form action="/editcontact1/${contact.id}/${company.id}" method="post">
-        <p> <select class="js-example-basic-single">
-            <option value="AL">Alabama</option>
-            <option value="WY">Wyoming</option>
-            <c:forEach items="${listCompanies}" var="company">
-                <option value="${company.id}">
-                        ${company.name}
-                </option>
-            </c:forEach>
-        </select></p>
-        <p><input type="submit" value="Отправить"></p>
-    </form>
 </div>
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

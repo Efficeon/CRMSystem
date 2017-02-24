@@ -111,8 +111,8 @@ CREATE TABLE IF NOT EXISTS contacts (
 --contact-user
 CREATE TABLE IF NOT EXISTS contact_user
 (
-  contact_id      UUID       NOT NULL,
-  user_id         UUID       NOT NULL,
+  contact_id      UUID     NOT NULL,
+  user_id         UUID     NOT NULL,
 
   FOREIGN KEY (contact_id) REFERENCES contacts (id),
   FOREIGN KEY (user_id)    REFERENCES users (id)
@@ -121,9 +121,9 @@ CREATE TABLE IF NOT EXISTS contact_user
 --contact-user
 CREATE TABLE IF NOT EXISTS contact_company
 (
-  contact_id      UUID       NOT NULL,
-  company_id         UUID       NOT NULL,
+  contact_id      UUID     NOT NULL,
+  company_id      UUID     NOT NULL,
 
   FOREIGN KEY (contact_id) REFERENCES contacts (id),
-  FOREIGN KEY (company_id)    REFERENCES companies (id)
+  FOREIGN KEY (company_id) REFERENCES companies (id)
 );

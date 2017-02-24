@@ -28,7 +28,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     @Override
     public Company getById(UUID id) {
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
+                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser LEFT JOIN  FETCH company.tags WHERE company.id =:id");
 
         query.setParameter("id", id);
         Company company = (Company) query.getSingleResult();
@@ -43,7 +43,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         List<Company> result;
 
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser");
+                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser LEFT JOIN  FETCH company.tags");
 
         result = query.getResultList();
 
@@ -82,7 +82,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     @Override
     public Collection<Company> getSearchedCompanies(String searchLine) {
         List<Company> resultSearch;
-        Query query = entityManager.createQuery("SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.name LIKE ?");
+        Query query = entityManager.createQuery("SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser LEFT JOIN  FETCH company.tags WHERE company.name LIKE ?");
             query.setParameter(0, "%"+searchLine+"%");
             resultSearch=query.getResultList();
         for (Company company : resultSearch) {
