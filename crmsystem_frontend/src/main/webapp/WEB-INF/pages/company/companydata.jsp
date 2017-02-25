@@ -19,6 +19,7 @@
 </head>
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
+<div class="main-content">
 <h1>Company details</h1>
 
 <table class="table table-striped table-condensed">
@@ -59,7 +60,7 @@
                                    span class="glyphicon glyphicon-remove" style="color: red" /></td>
     </tr>
 </table>
-
+</div>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>

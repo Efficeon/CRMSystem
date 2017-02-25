@@ -19,7 +19,7 @@
 
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
-<div style="margin: 10px 10px 10px 10px;">
+<div class="main-content">
     <c:if test="${empty contact.id}">
     <h1>Contact add</h1>
     </c:if>

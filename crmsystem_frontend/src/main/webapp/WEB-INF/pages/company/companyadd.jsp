@@ -18,7 +18,7 @@
 
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
-<div style="margin: 10px 10px 10px 10px;">
+<div class="main-content">
 <c:if test="${empty company.id}">
         <h1>Company add</h1>
 </c:if>
@@ -141,7 +141,6 @@
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
     </form:form>
 </div>
-
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>
