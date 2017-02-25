@@ -40,39 +40,10 @@ public class UserController {
         return "user/home";
     }
 
-    @RequestMapping(value = "user", method = RequestMethod.GET)
-    public String listUsers(Model model){
+    @RequestMapping(value = "users", method = RequestMethod.GET)
+    public String listUsers(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
         return "user/users";
     }
-
-    @RequestMapping(value = "userdata/${id}/", method = RequestMethod.GET)
-    public String userData(@PathVariable("id") UUID id, Model model){
-        model.addAttribute("user", this.userService.getById(id));
-        model.addAttribute("userList", this.userService.getAll());
-        model.addAttribute("company", this.companyService.getAll());
-        model.addAttribute("task", this.taskService.getAll());
-        model.addAttribute("role", this.roleService.getAll());
-
-//        return "user/userdata";
-        return "user/home";
-    }
-
-    @RequestMapping(value = "remove_user/${id}/", method = RequestMethod.GET)
-    public String removeUser(@PathVariable("id") UUID id){
-        this.userService.remove(userService.getById(id));
-        return "redirect:/user/";
-    }
-
-//      работаем с ссылочными данными, связанными с другими сущностями
-
-//    Roles
-
-
-//    Companies
-
-
-//    Tasks
-
 }
