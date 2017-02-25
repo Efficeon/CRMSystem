@@ -16,14 +16,10 @@
 </head>
 
 <body>
-    <h2>* All tasks list *</h2>
-<br>
-<a href="<c:url value='/user/'/>">All users</a>
-<br>
-<a href="<c:url value='/company/'/>">All companies</a>
-<br>
-<br>
-<a href="<c:url value='/'/>">Back to start page</a>
+    <h2>All tasks list</h2>
+    <a href="<c:url value='/home/' />" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+    <a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: firebrick">All users</a>
+    <a href="<c:url value='/company/'/>" class="btn btn-lg" style="color: grey">All companies</a>
 <br>
 <br>
 <button>
@@ -56,21 +52,20 @@
                 <%--task.responsiblePerson !!! was replaced by task.implementer--%>
                 <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                 <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                <%--ячейки заполняются значениями из заголовков - "по умолчанию"--%>
-                <%----%>
                 <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>"
-                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue">Details </a></td>
+                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue"></a></td>
                 <td class="text-center"><a href="<c:url value='/edittask/${task.id}/'/>"
-                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a></td>
+                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange"></a></td>
                 <td class="text-center"><a href="<c:url value='/removetask/${task.id}/' />"
-                                           span class="glyphicon glyphicon-remove" style="color: red">Delete</a></td>
+                                           span class="glyphicon glyphicon-remove" style="color: red"></a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 
+<a href="<c:url value='/home/' />" class="btn btn-lg" style="color: royalblue">Back to home page</a>
 <br>
-<a href="<c:url value='/'/>">Back to start page</a>
+<br>
 <br>
 
     <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>

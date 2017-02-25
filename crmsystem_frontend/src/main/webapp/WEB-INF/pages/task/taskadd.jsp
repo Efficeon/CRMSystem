@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<h2>* Add a task *</h2>
+<h2>Add a task</h2>
 <br>
 <br>
 
@@ -70,7 +70,7 @@
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
 <br>
-<a href="<c:url value='/'/>">Back to start page</a>
+<a href="<c:url value='/home/'/>">Back to home page</a>
 <br>
 
 </body>

@@ -13,9 +13,9 @@
 </head>
 
 <body>
-<h2>* The user details *</h2>
-<br>
-<a href="<c:url value='/user/'/>">All users</a>
+<h2>The user details</h2>
+<a href="<c:url value='/home/' />" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+<a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: firebrick">All users</a>
 <br>
 <br>
 <table class="table table-striped table-condensed">
@@ -57,43 +57,32 @@
             </table>
         </td>
 
-
         <td class="text-center">
             <table>
-                <c:forEach items="${compamyList}" var="company">
+                <c:forEach items="${user.companies}" var="company">
                     <tr>
-                        <td><a href="/companydata/${company.id}"/>${company.name}</td>
+                        <td class="text-center"><a href="<c:url value='/companydata/${company.id}/'/>">${company.name}</a></td>
                     </tr>
                 </c:forEach>
             </table>
         </td>
 
-        <%--<td class="text-center">--%>
-            <%--<table>--%>
-                <%--<c:forEach items="${user.tasks}" var="task">--%>
-                    <%--<tr>--%>
-                        <%--<td class="text-center" <a href="/taskdata/${task.id}"> ${task.name}</a></td>--%>
-                    <%--</tr>--%>
-                <%--</c:forEach>--%>
-            <%--</table>--%>
-        <%--</td>--%>
-
         <td class="text-center">
             <table>
                 <c:forEach items="${user.tasks}" var="task">
                     <tr>
-                        <td class="text-center" <a href="/taskdata/?id=<c:out value='${task.id}'/>">${task.name}</a></td>
+                        <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>">${task.name}</a></td>
                     </tr>
                 </c:forEach>
             </table>
         </td>
 
         <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
-                                   class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a>
+                                   class="glyphicon glyphicon glyphicon-edit" style="color: orange"></a>
         </td>
 
         <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/'/>"
-                                   class="glyphicon glyphicon-remove" style="color: red">Delete</a>
+                                   class="glyphicon glyphicon-remove" style="color: red"></a>
         </td>
     </tr>
     </c:forEach>

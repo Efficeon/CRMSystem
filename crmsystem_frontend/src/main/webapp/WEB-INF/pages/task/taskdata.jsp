@@ -9,9 +9,9 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h2>* The task details *</h2>
+<h2>The task details</h2>
 <br>
-<a href="<c:url value='/task/'/>">All tasks</a>
+<a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: firebrick">* All tasks</a>
 <br>
 <br>
 <table class="table table-striped">
@@ -31,7 +31,7 @@
         <td>${task.implementer.firstName}</td>
         <td>${task.created}</td>
         <td>${task.updated}</td>
-        <td><a href="<c:url value='/removetask/${task.id}/'/>">Delete</a></td>
+        <td><a href="<c:url value='/removetask/${task.id}/'/>"></a></td>
     </tr>
 </table>
 

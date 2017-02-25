@@ -49,7 +49,7 @@ public class User extends BaseEntity {
     private Set<Role> roles;
 
     @ManyToMany(mappedBy = "responsibleUser", fetch=FetchType.EAGER)
-    private Set<Company> associatedСompany;
+    private Set<Company> companies;
 
     @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, orphanRemoval = true, fetch=FetchType.EAGER)      // cascade, orphanremove
     private Set<Task> tasks;
@@ -140,12 +140,12 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    public Set<Company> getAssociatedСompany() {
-        return associatedСompany;
+    public Set<Company> getCompanies() {
+        return companies;
     }
 
-    public void setAssociatedСompany(Set<Company> associatedСompany) {
-        this.associatedСompany = associatedСompany;
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 
     public Set<Task> getTasks() {

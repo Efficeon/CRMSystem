@@ -13,16 +13,12 @@
 
 <body>
 <h2>The list of users</h2>
+<a href="<c:url value='/home/' />" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+<a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: firebrick">All tasks</a>
+<a href="<c:url value='/company/'/>" class="btn btn-lg" style="color: grey">All companies</a>
 <br>
 <br>
-<a href="/task/">All tasks</a>
-<br>
-<a href="/company/">All companies</a>
-<br>
-<br>
-<a href="/">Back to start page</a>
-<br>
-<br>
+
 <table class="table table-striped table-condensed">
     <tr>
         <th class="text-center" width="25">ID</th>
@@ -50,7 +46,7 @@
         <td class="text-center">
             <a href="/userdata/${user.id}/"
                span class="glyphicon glyphicon glyphicon-file "
-               style="color: darkblue">Details</a>
+               style="color: darkblue"></a>
         </td>
     </tr>
     </c:forEach>

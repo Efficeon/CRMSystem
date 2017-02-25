@@ -57,7 +57,8 @@
 </c:if>
 
 <br>
-<a href="<c:url value='/'/>">Back to start page</a>
+<a href="<c:url value='/home/'/>" class="btn btn-lg" style="color: green">
+    <i class="glyphicon glyphicon-arrow-left"></i> Back to home page</a>
 <br>
 
 <body>

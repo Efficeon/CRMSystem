@@ -37,11 +37,11 @@
 
     <br>
     <br>
-    <a href="<c:url value='/task/'/>">All tasks</a>
+    <a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: firebrick">* All users</a>
     <br>
-    <a href="<c:url value='/company/'/>">All companies</a>
+    <a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: firebrick">* All tasks</a>
     <br>
-    <a href="<c:url value='/user/'/>">All users</a>
+    <a href="<c:url value='/company/'/>" class="btn btn-lg" style="color: grey">* All companies</a>
     <br>
 </div>
 
