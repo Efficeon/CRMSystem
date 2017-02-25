@@ -17,6 +17,7 @@
 </head>
 <br>
 <h1>Company add</h1>
+
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
 <div style="margin: 10px 10px 10px 10px;">
