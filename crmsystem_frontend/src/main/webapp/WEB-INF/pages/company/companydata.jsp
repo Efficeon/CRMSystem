@@ -13,9 +13,13 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
+<div class="main-content">
 <h1>Company details</h1>
 
 <table class="table table-striped table-condensed">
@@ -56,9 +60,8 @@
                                    span class="glyphicon glyphicon-remove" style="color: red" /></td>
     </tr>
 </table>
-
+</div>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>
 </body>

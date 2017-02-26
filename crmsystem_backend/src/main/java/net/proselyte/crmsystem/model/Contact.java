@@ -1,20 +1,19 @@
 package net.proselyte.crmsystem.model;
 
+/**
+ * Simple JavaBean domain object that represents a Contact.
+ *
+ * @author Leonid Dubravsky
+ */
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="contact")
-public class Contact extends BaseEntity {
-
-    @Column(name="company")
-    private String company;
-
-    @Column(name="responsibleUser")
-    private String responsibleUsery;
-
-    @Column(name="name")
-    private String name;
+@Table(name="contacts")
+public class Contact extends NamedEntity {
 
     @Column(name="website")
     private String website;
@@ -33,29 +32,15 @@ public class Contact extends BaseEntity {
     @Column(name="update_date")
     private Date updateDate;
 
-    public String getCompany() {
-        return company;
-    }
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinTable(name="contact_company", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
+              inverseJoinColumns = @JoinColumn(name="company_id", referencedColumnName="id"))
+    private Company associatedCompany;
 
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getResponsibleUsery() {
-        return responsibleUsery;
-    }
-
-    public void setResponsibleUsery(String responsibleUsery) {
-        this.responsibleUsery = responsibleUsery;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinTable(name="contact_user", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName="id"))
+    private User responsibleUser;
 
     public String getWebsite() {
         return website;
@@ -97,48 +82,23 @@ public class Contact extends BaseEntity {
         this.updateDate = updateDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Contact contact = (Contact) o;
-
-        if (company != null ? !company.equals(contact.company) : contact.company != null) return false;
-        if (responsibleUsery != null ? !responsibleUsery.equals(contact.responsibleUsery) : contact.responsibleUsery != null)
-            return false;
-        if (name != null ? !name.equals(contact.name) : contact.name != null) return false;
-        if (website != null ? !website.equals(contact.website) : contact.website != null) return false;
-        if (skype != null ? !skype.equals(contact.skype) : contact.skype != null) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(contact.phoneNumber) : contact.phoneNumber != null) return false;
-        if (createDate != null ? !createDate.equals(contact.createDate) : contact.createDate != null) return false;
-        return updateDate != null ? updateDate.equals(contact.updateDate) : contact.updateDate == null;
+    public Company getAssociatedCompany() {
+        return associatedCompany;
     }
 
-    /*@Override
-    public int hashCode() {
-        int result = company != null ? company.hashCode() : 0;
-        result = 31 * result + (responsibleUsery != null ? responsibleUsery.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (website != null ? website.hashCode() : 0);
-        result = 31 * result + (skype != null ? skype.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
-        result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
-        return result;
+    public void setAssociatedCompany(Company associatedСompany) {
+        this.associatedCompany = associatedСompany;
     }
 
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "company='" + company + '\'' +
-                ", responsibleUsery='" + responsibleUsery + '\'' +
-                ", name='" + name + '\'' +
-                ", website='" + website + '\'' +
-                ", skype='" + skype + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                '}';
-    }*/
+    public void removessociatedCompany() {
+        this.associatedCompany=null;
+    }
+
+    public User getResponsibleUser() {
+        return responsibleUser;
+    }
+
+    public void setResponsibleUser(User responsibleUser) {
+        this.responsibleUser = responsibleUser;
+    }
 }

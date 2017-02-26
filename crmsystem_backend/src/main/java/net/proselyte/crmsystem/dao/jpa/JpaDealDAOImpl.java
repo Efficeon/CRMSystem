@@ -13,6 +13,7 @@ import java.sql.*;
 //import java.sql.Date;
 import java.util.*;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * JPA implementation of {@link net.proselyte.crmsystem.dao.DealDAO} interface.
@@ -88,17 +89,21 @@ public class JpaDealDAOImpl implements DealDAO {
     }
 
     @Override
-    public Collection<Deal> getSortedDeals(String searchLine) {
+    public Collection<Deal> getSearchedDeals(String searchLine) {
         List<Deal> resultSearch;
-        Query query = entityManager.createQuery(
-                "SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.name LIKE ? " +
-                        "OR deal.budget LIKE ?");
-        query.setParameter(0, "%"+searchLine+"%");
-        query.setParameter(1, "%"+searchLine+"%");
-
-        resultSearch=query.getResultList();
+        boolean match;
+        Query query;
+        if ((match = Pattern.matches("[0-9]+([,.][0-9]{1,2})?", searchLine)) == true) {
+            query = entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.budget = ?");
+            query.setParameter(0, Double.parseDouble(searchLine));
+            resultSearch = query.getResultList();
+        } else {
+            query = entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.name LIKE ?");
+            query.setParameter(0, "%"+searchLine+"%");
+            resultSearch=query.getResultList();
+        }
         for (Deal deal : resultSearch) {
-            logger.info("Search deals list: " + deal);
+            logger.info("Search deal list: " + deal);
         }
         return resultSearch;
     }

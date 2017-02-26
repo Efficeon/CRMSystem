@@ -26,7 +26,7 @@
         <div class="main-content">
             <h1>Companies</h1>
              <a href="<c:url value='/company/add/' />" class="btn btn-lg"><i class="fa fa-plus"></i>
-                Create company</a>
+                Create Company</a>
 
             </br>
             </br>
