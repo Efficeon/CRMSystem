@@ -38,8 +38,11 @@ public class Company extends NamedEntity{
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "companies_tags", joinColumns = {@JoinColumn(name = "company_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
+              inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
+
+    @OneToOne(mappedBy = "associatedCompany")
+    private Contact contact;
 
     public Company() {
         this.created = new Date();
@@ -115,5 +118,13 @@ public class Company extends NamedEntity{
 
     public void setTags(Tag tag){
         this.tags.add(tag);
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

@@ -60,12 +60,12 @@
         <td><fmt:formatDate value="${contact.updateDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td class="text-center"><a href="<c:url value='/contactdata/${contact.id}/' />"
                                    span class="glyphicon glyphicon glyphicon-file "
-                                   style="color: darkblue"/></td>
+                                   style="color: darkblue"></a></td>
         <td class="text-center"><a href="<c:url value='/editcontact/${contact.id}/' />"
                                    span class="glyphicon glyphicon glyphicon-edit"
-                                   style="color: orange"/></td>
+                                   style="color: orange"></a></td>
         <td class="text-center"><a href="<c:url value='/removecontact/${contact.id}/' />"
-                                   span class="glyphicon glyphicon-remove" style="color: red"/></td>
+                                   span class="glyphicon glyphicon-remove" style="color: red"></a></td>
     </tr>
 </table>
 </div>

@@ -38,6 +38,7 @@
                         <th class="text-center" width="80">Email</th>
                         <th class="text-center" width="80">Web site</th>
                         <th class="text-center" width="60">Address</th>
+                        <th class="text-center" width="60">Contact</th>
                         <th class="text-center" width="40">Created</th>
                         <th class="text-center" width="40">Updated</th>
                         <th class="text-center" width="50">Details</th>
@@ -51,6 +52,7 @@
                             <td>${company.email}</td>
                             <td>${company.website}</td>
                             <td>${company.address}</td>
+                            <td>${company.contact.name}</td>
                             <td><fmt:formatDate value="${company.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                             <td><fmt:formatDate value="${company.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                             <td class="text-center"><a href="<c:url value='/companydata/${company.id}/' />"

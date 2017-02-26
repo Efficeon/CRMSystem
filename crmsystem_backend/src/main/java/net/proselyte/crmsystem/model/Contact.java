@@ -90,7 +90,7 @@ public class Contact extends NamedEntity {
         this.associatedCompany = associatedСompany;
     }
 
-    public void removessociatedCompany() {
+    public void removeAssociatedCompany() {
         this.associatedCompany=null;
     }
 

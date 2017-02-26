@@ -103,7 +103,7 @@ public class ContactController {
                                         @ModelAttribute("contact") Contact contact,
                                         Model model){
         contact = this.contactService.getById(contactId);
-        contact.removessociatedCompany();
+        contact.removeAssociatedCompany();
         this.contactService.save(contact);
         model.addAttribute("contact", this.contactService.getById(contactId));
         model.addAttribute("listCompanies", this.companyService.getAll());

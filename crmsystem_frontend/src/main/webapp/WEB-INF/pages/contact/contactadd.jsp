@@ -56,12 +56,12 @@
                              placeholder='Phone number${phoneNumber}' autofocus="true"></form:input>
             </spring:bind>
 
-            <form:select path="responsibleUser.id"  style="width: 80px; height: 26px;">
+            <form:select path="responsibleUser.id"  style="width: 80px; height: 27px;">
                 <form:option value="" label="${pageContext.request.userPrincipal.name}"/>
                 <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
             </form:select>
 
-            <button type="submit" id="dealform">
+            <button type="submit" id="dealform" >
                 <spring:message text="Add"/>
             </button>
         </div>
