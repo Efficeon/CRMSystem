@@ -42,6 +42,7 @@
       <th width="80">ID</th>
       <th width="120">NAME</th>
       <th width="120">BUDGET</th>
+      <th width="120">ASSOCIATED CONTACT</th>
       <th width="120">CREATED</th>
       <th width="120">UPDATED</th>
       <th width="120">USER ID</th>
@@ -54,6 +55,11 @@
         <td>${deal.id}</td>
         <td>${deal.name}</td>
         <td>${deal.budget}</td>
+        <td><c:forEach items="${deal.associatedContact}" var="contact">
+          <table>
+            <td>${contact.name}</td>
+          </table>
+        </c:forEach></td>
         <td>${deal.created}</td>
         <td>${deal.updated}</td>
         <td>${deal.responsibleUser.firstName}</td>

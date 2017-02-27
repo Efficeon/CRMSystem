@@ -44,10 +44,10 @@
         <td>${contact.website}</td>
         <td>${contact.skype}</td>
         <td>${contact.phoneNumber}</td>
-        <c:if test="${!(contact.associatedCompany==null)}">
-            <td>${contact.associatedCompany.name}</td>
+        <c:if test="${!(contact.associatedCompanies==null)}">
+            <td>${contact.associatedCompanies.name}</td>
         </c:if>
-        <c:if test="${(contact.associatedCompany==null)}">
+        <c:if test="${(contact.associatedCompanies==null)}">
             <td></td>
         </c:if>
         <c:if test="${!(contact.responsibleUser==null)}">

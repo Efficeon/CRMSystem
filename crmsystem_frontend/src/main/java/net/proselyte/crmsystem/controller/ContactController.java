@@ -1,10 +1,9 @@
 package net.proselyte.crmsystem.controller;
 
-import net.proselyte.crmsystem.model.Company;
-import net.proselyte.crmsystem.model.Contact;
-import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.model.*;
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.ContactService;
+import net.proselyte.crmsystem.service.DealService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +28,9 @@ public class ContactController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DealService dealService;
 
     @RequestMapping(value = "contacts", method = RequestMethod.GET)
     public String listContact(Model model) {
@@ -59,7 +61,8 @@ public class ContactController {
     public String companySubmit(@ModelAttribute("contact") Contact contact,
                                 @PathVariable("contactId") UUID contactId){
         contact.setId(contactId);
-        contact.setAssociatedCompany(this.contactService.getById(contactId).getAssociatedCompany());
+        contact.setAssociatedCompanies(this.contactService.getById(contactId).getAssociatedCompanies());
+        contact.setAssociatedDeals(this.contactService.getById(contactId).getAssociatedDeal());
         this.contactService.save(contact);
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
@@ -67,6 +70,7 @@ public class ContactController {
     @RequestMapping(value = "/contact/add/", method = RequestMethod.GET)
     public String addContact(Model model) {
         model.addAttribute("listCompanies", this.companyService.getAll());
+        model.addAttribute("listDeals", this.dealService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("contact", new Contact());
         model.addAttribute("user", new User());
@@ -77,8 +81,8 @@ public class ContactController {
     public String editContact(@PathVariable("id") UUID id, Model model){
         model.addAttribute("contact", this.contactService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listDeals", this.dealService.getAll());
         model.addAttribute("listCompanies", this.companyService.getAll());
-        model.addAttribute("company", new Company());
         model.addAttribute("user", new User());
         return "contact/contactadd";
     }
@@ -89,26 +93,65 @@ public class ContactController {
                          @ModelAttribute("contact") Contact contact,
                          Model model) {
         contact = this.contactService.getById(contactId);
-        contact.setAssociatedCompany(this.companyService.getById(companyId));
+        contact.setAssociatedCompanies(this.companyService.getById(companyId));
         this.contactService.save(contact);
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listDeals", this.dealService.getAll());
         model.addAttribute("listCompanies", this.companyService.getAll());
-        model.addAttribute("contact", contact);
-        model.addAttribute("company", new Company());
+        model.addAttribute("contact", this.contactService.getById(contactId));
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
 
-    @RequestMapping(value = "/associatedCompany/remove/{contactId}/", method = RequestMethod.GET)
+    @RequestMapping(value = "/associatedCompany/remove/{companyId}/{contactId}/", method = RequestMethod.GET)
     public String removeResponsibleUser(@PathVariable("contactId") UUID contactId,
+                                        @PathVariable("companyId") UUID companyId,
                                         @ModelAttribute("contact") Contact contact,
+                                        @ModelAttribute("company") Company company,
                                         Model model){
         contact = this.contactService.getById(contactId);
-        contact.removeAssociatedCompany();
+        contact.removeAssociatedCompany(this.companyService.getById(companyId));
         this.contactService.save(contact);
         model.addAttribute("contact", this.contactService.getById(contactId));
         model.addAttribute("listCompanies", this.companyService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
-        model.addAttribute("company", new Company());
+        model.addAttribute("listDeals", this.dealService.getAll());
+        model.addAttribute("user", new User());
+
+        return "redirect:/editcontact/"+contact.getId()+"/";
+    }
+
+
+    @RequestMapping(value = "/associatedDeal/add/{dealId}/{contactId}/", method = RequestMethod.GET)
+    public String addAssociatedContact(@PathVariable("contactId") UUID contactId,
+                                       @PathVariable("dealId") UUID dealId,
+                                       @ModelAttribute("deal") Deal deal,
+                                       @ModelAttribute("contact") Contact contact,
+                                       Model model){
+        contact = this.contactService.getById(contactId);
+        contact.setAssociatedDeal(this.dealService.getById(dealId));
+        this.contactService.save(contact);
+        model.addAttribute("contact", this.contactService.getById(contactId));
+        model.addAttribute("listCompanies", this.companyService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listDeals", this.dealService.getAll());
+        model.addAttribute("user", new User());
+
+        return "redirect:/editcontact/"+contact.getId()+"/";
+    }
+
+    @RequestMapping(value = "/associatedDeal/remove/{dealId}/{contactId}//", method = RequestMethod.GET)
+    public String removeAssociatedContact(@PathVariable("contactId") UUID contactId,
+                                          @PathVariable("dealId") UUID dealId,
+                                          @ModelAttribute("deal") Deal deal,
+                                          @ModelAttribute("Contact") Contact contact,
+                                          Model model) {
+        contact = this.contactService.getById(contactId);
+        contact.removeAssociatedDeal(this.dealService.getById(dealId));
+        this.contactService.save(contact);
+        model.addAttribute("contact", this.contactService.getById(contactId));
+        model.addAttribute("listCompanies", this.companyService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listDeals", this.dealService.getAll());
         model.addAttribute("user", new User());
 
         return "redirect:/editcontact/"+contact.getId()+"/";

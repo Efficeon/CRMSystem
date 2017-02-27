@@ -5,11 +5,9 @@ package net.proselyte.crmsystem.model;
  *
  * @author Leonid Dubravsky
  */
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="contacts")
@@ -32,10 +30,15 @@ public class Contact extends NamedEntity {
     @Column(name="update_date")
     private Date updateDate;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name="contact_company", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
               inverseJoinColumns = @JoinColumn(name="company_id", referencedColumnName="id"))
-    private Company associatedCompany;
+    private Set<Company> associatedCompanies;
+
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name="contact_deal", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="deal_id", referencedColumnName="id"))
+    private Set<Deal> associatedDeal;
 
     @OneToOne(fetch=FetchType.LAZY)
     @JoinTable(name="contact_user", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
@@ -82,16 +85,40 @@ public class Contact extends NamedEntity {
         this.updateDate = updateDate;
     }
 
-    public Company getAssociatedCompany() {
-        return associatedCompany;
+    public Set<Company> getAssociatedCompanies() {
+            return associatedCompanies;
     }
 
-    public void setAssociatedCompany(Company associatedСompany) {
-        this.associatedCompany = associatedСompany;
+    public void setAssociatedCompanies(Set<Company> associatedCompany) {
+        this.associatedCompanies = associatedCompany;
     }
 
-    public void removeAssociatedCompany() {
-        this.associatedCompany=null;
+    public void setAssociatedCompanies(Company company) {
+        this.associatedCompanies.add(company);
+    }
+
+    public Set<Deal> getAssociatedDeal() {
+        return associatedDeal;
+    }
+
+    public void setAssociatedDeals(Set<Deal> associatedDeal) {
+        this.associatedDeal = associatedDeal;
+    }
+
+    public void setAssociatedDeal(Deal associatedDeal) {
+        this.associatedDeal.add(associatedDeal);
+    }
+
+    public void removeAssociatedDeal(Deal deal) {
+        this.associatedDeal.remove(deal);
+    }
+
+    public void removeAssociatedCompanies() {
+        this.associatedCompanies = null;
+    }
+
+    public void removeAssociatedCompany(Company company) {
+        this.associatedCompanies.remove(company);
     }
 
     public User getResponsibleUser() {

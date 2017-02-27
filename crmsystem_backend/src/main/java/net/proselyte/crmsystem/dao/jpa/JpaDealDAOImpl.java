@@ -31,7 +31,7 @@ public class JpaDealDAOImpl implements DealDAO {
 
 
     public Deal getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal LEFT JOIN FETCH deal.responsibleUser LEFT JOIN FETCH deal.associatedContact WHERE deal.id =:id");
         //"SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
         query.setParameter("id", id);
 
@@ -44,7 +44,7 @@ public class JpaDealDAOImpl implements DealDAO {
 
     public Collection<Deal> getAll() {
         List<Deal> result = new ArrayList<>();
-        Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser LEFT JOIN FETCH deal.associatedContact");
         result = query.getResultList();
         if(result == null) {
             System.out.println("RESULT == NULL!!");
@@ -94,11 +94,11 @@ public class JpaDealDAOImpl implements DealDAO {
         boolean match;
         Query query;
         if ((match = Pattern.matches("[0-9]+([,.][0-9]{1,2})?", searchLine)) == true) {
-            query = entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.budget = ?");
+            query = entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser LEFT JOIN FETCH deal.associatedContact WHERE deal.budget = ?");
             query.setParameter(0, Double.parseDouble(searchLine));
             resultSearch = query.getResultList();
         } else {
-            query = entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser WHERE deal.name LIKE ?");
+            query = entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser LEFT JOIN FETCH deal.associatedContact WHERE deal.name LIKE ?");
             query.setParameter(0, "%"+searchLine+"%");
             resultSearch=query.getResultList();
         }

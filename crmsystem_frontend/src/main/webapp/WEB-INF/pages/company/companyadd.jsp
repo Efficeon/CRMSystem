@@ -60,11 +60,56 @@
         </div>
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
-    <!--add ResponsibleUser -->
-    <c:if test="${empty company.id}">
-        <h4 style="color: red">Add a responsible users and tags after adding Company</h4>
-    </c:if>
 
+    <c:if test="${empty company.id}">
+        <h4 style="color: red">Add responsible users tags or contacts after adding Company</h4>
+    </c:if>
+    <!--linked Tag -->
+    <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+        <h5>Assigned tags</h5>
+        <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+            <c:if test="${!empty company.tags}">
+                <c:forEach items="${company.tags}" var="tag">
+                    <table class="table table-hover table-condensed">
+                        <td><a href="<c:url value='/removetag/${tag.id}/${company.id}/' />"
+                               style="text-decoration: none"/>${tag.name} </td>
+                    </table>
+                </c:forEach>
+            </c:if>
+        </div>
+        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+    </div>
+    <!--</form:form>-->
+
+    <!--add Tag -->
+    <div class="clearfix">
+    <div class="clearfix" style="float: left; margin: 0px 10px 10px 10px;">
+        <form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">
+            <form class="form-inline">
+                <h5>Select or create a tag</h5>
+                <div class="form-group">
+                    <spring:bind path="name">
+                        <c:if test="${empty company.id}">
+                            <form:input cssStyle="width: 300px; height: 30px;" id="tagInput" disabled="true" type="text" path="name" class="form-inline"
+                                        placeholder='Tags${name}' autofocus="true"></form:input>
+                        </c:if>
+                        <c:if test="${!empty company.id}">
+                            <form:input cssStyle="width: 255px; height: 30px;" id="tagInput" type="text" path="name" class="form-inline"
+                                        placeholder='Tags${name}' autofocus="true"></form:input>
+                        </c:if>
+                    </spring:bind>
+                    <c:if test="${!empty company.id}">
+                        <button style="height: 30px;" type="submit">
+                            <spring:message text="Add"/>
+                        </button>
+                    </c:if>
+                </div>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
+        </form:form>
+    </div>
+        </div>
+
+    <!--add ResponsibleUser -->
     <div class="clearfix">
         <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
     <h5>All users</h5>
@@ -100,47 +145,44 @@
 </div>
     </div>
 
-    <!--linked Tag -->
-    <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
-        <h5>Assigned tags</h5>
-        <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
-            <c:if test="${!empty company.tags}">
-                <c:forEach items="${company.tags}" var="tag">
-                    <table class="table table-hover table-condensed">
-                        <td><a href="<c:url value='/removetag/${tag.id}/${company.id}/' />"
-                               style="text-decoration: none"/>${tag.name} </td>
-                    </table>
-                </c:forEach>
-            </c:if>
+    <!--add Contacts -->
+    <div class="clearfix">
+        <div class="clearfix">
+            <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+                <h5>All contacts</h5>
+                <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty listContacts}">
+                        <c:forEach items="${listContacts}" var="contact">
+                            <c:if test="${!company.associatedContacts.contains(contact)}">
+                                <table class="table table-hover table-condensed">
+                                    <c:if test="${!empty company.id}">
+                                        <td disabled="true"><a href="<c:url value='/addAssociatedContact/${contact.id}/${company.id}/' />"
+                                                               style="text-decoration: none" />${contact.name}</td>
+                                    </c:if>
+                                </table>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                </div>
+            </div>
+
+            <!--remove associated contact -->
+            <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+                <h5>Associated Contacts</h5>
+                <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty company.associatedContacts}">
+                        <c:forEach items="${company.associatedContacts}" var="contact">
+                            <table class="table table-hover table-condensed">
+                                <td><a href="<c:url value='/removeAssociatedContact/${contact.id}/${company.id}/' />"
+                                       style="text-decoration: none"/>${contact.name} </td>
+                            </table>
+                        </c:forEach>
+                    </c:if>
+                </div>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+            </div>
         </div>
-        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-    </div>
-    <!--</form:form>-->
-    <!--add Tag -->
-    <div class="clearfix" style="float: left; margin: 0px 10px 10px 10px;">
-    <form:form method="POST" modelAttribute="tag" action="/tagCreate/${company.id}/">
-    <form class="form-inline">
-        <h5>Select or create a tag</h5>
-        <div class="form-group">
-            <spring:bind path="name">
-                <c:if test="${empty company.id}">
-                    <form:input id="tagInput" disabled="true" type="text" path="name" class="form-inline"
-                                placeholder='Tags${name}' autofocus="true"></form:input>
-                </c:if>
-                <c:if test="${!empty company.id}">
-                    <form:input cssStyle="width: 255px; height: 30px;" id="tagInput" type="text" path="name" class="form-inline"
-                                 placeholder='Tags${name}' autofocus="true"></form:input>
-                </c:if>
-            </spring:bind>
-            <c:if test="${!empty company.id}">
-                <button style="height: 30px;" type="submit">
-                    <spring:message text="Add"/>
-                </button>
-            </c:if>
-        </div>
-        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/></form>
-    </form:form>
-</div>
+
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>

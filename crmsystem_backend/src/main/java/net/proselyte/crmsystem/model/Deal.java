@@ -5,8 +5,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-import org.hibernate.*;
-
 @Entity
 @Table(name = "deals")
 public class Deal extends NamedEntity {
@@ -30,6 +28,11 @@ public class Deal extends NamedEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dealstatusid")
     private DealStatus dealStatus;
+
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name="contact_deal", joinColumns = @JoinColumn(name="deal_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"))
+    private Set<Contact> associatedContact;
 
     public double getBudget() {
         return budget;
@@ -72,5 +75,21 @@ public class Deal extends NamedEntity {
 //        if(!dealStatus.getDeals().contains(this)){
 //            dealStatus.addDeal(this);
 //        }
+    }
+
+    public Set<Contact> getAssociatedContact() {
+        return associatedContact;
+    }
+
+    public void setAssocitedContacts(Set<Contact> contact) {
+        this.associatedContact = contact;
+    }
+
+    public void setAssociatedContact(Contact contact) {
+        this.associatedContact.add(contact);
+    }
+
+    public void removeAssociatedContact(Contact contact) {
+        this.associatedContact.remove(contact);
     }
 }

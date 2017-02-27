@@ -33,7 +33,6 @@
             <c:if test="${!empty listCompanies}">
                 <table class="table table-striped table-condensed">
                     <tr>
-                        <th class="text-center" width="23">ID</th>
                         <th class="text-center" width="120">Name</th>
                         <th class="text-center" width="80">Email</th>
                         <th class="text-center" width="80">Web site</th>
@@ -47,12 +46,15 @@
                     </tr>
                     <c:forEach items="${listCompanies}" var="company">
                         <tr>
-                            <td>${company.id}</td>
                             <td>${company.name}</td>
                             <td>${company.email}</td>
                             <td>${company.website}</td>
                             <td>${company.address}</td>
-                            <td>${company.contact.name}</td>
+                            <td><c:forEach items="${company.associatedContacts}" var="contact">
+                                <table>
+                                    <td>${contact.name}</td>
+                                </table>
+                            </c:forEach></td>
                             <td><fmt:formatDate value="${company.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                             <td><fmt:formatDate value="${company.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
                             <td class="text-center"><a href="<c:url value='/companydata/${company.id}/' />"
