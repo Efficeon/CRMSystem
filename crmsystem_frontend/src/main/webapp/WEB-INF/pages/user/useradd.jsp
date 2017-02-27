@@ -35,17 +35,9 @@
 
             <form:select path="responsiblePerson">
                 <form:option value="0" label="Select only one"/>
-                <%--server получит user.id, client увидит username--%>
                 <form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />
             </form:select>
 
-                <%--кнопка подтверждения команды на внесение/изменение данных по задаче--%>
-                <%--можно заменить следующим кодом:
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="Save Changes"/>
-                    </td>
-                </tr>--%>
             <button type="submit">
                 <spring:message text="Add"/>
             </button>
@@ -54,7 +46,6 @@
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
 
-    <%--кнопка перехода на страницу "tasks.jsp" - отображение актуального списка всех задач  --%>
     <button type="button">
         <a href="<c:url value='/task/' />">Complete</a>
     </button>

@@ -1,5 +1,6 @@
 package net.proselyte.crmsystem.controller;
 
+import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.RoleService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -41,13 +44,6 @@ public class UserController {
         return "user/home";
     }
 
-//    @RequestMapping(value = "user", method = RequestMethod.GET)
-//    public String listUsers(Model model) {
-//        model.addAttribute("user", new User());
-//        model.addAttribute("listUsers", this.userService.getAll());
-//        return "user/users";
-//    }
-
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public String listUsers(Model model) {
         model.addAttribute("user", new User());
@@ -58,18 +54,6 @@ public class UserController {
 
         return "user/users-v";
     }
-
-//  @RequestMapping(value = "userdata/${id}/", method = RequestMethod.GET)
-//  public String userData(@PathVariable("id") UUID id, Model model){
-//      model.addAttribute("user", this.userService.getById(id));
-
-//      model.addAttribute("userList", this.userService.getAll());
-//      model.addAttribute("company", this.companyService.getAll());
-//      model.addAttribute("task", this.taskService.getAll());
-//      model.addAttribute("role", this.roleService.getAll());
-//
-//      return "user/userdata";
-//   }
 
     @RequestMapping(value = "userdata/{id}/", method = RequestMethod.GET)
     public String taskData(@PathVariable("id") UUID id,
@@ -89,12 +73,35 @@ public class UserController {
         return "redirect:/user/";
     }
 
-//    работаем с ссылочными данными, связанными с другими сущностями
 
-//    Roles
 
-//    Companies
 
-//    Tasks
 
+    @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.GET)
+//    @RequestMapping(value = "/edittask/", method = RequestMethod.GET)
+    public String editUser(@PathVariable("id") UUID id,
+//                           @RequestParam("newImplementer") User newImpl,
+            Model model){
+//                                                                  model.addAttribute("user", new User());
+        model.addAttribute("user",this.userService.getById(id));
+        model.addAttribute("setCompanies", this.companyService.getAll());
+        model.addAttribute("listTasks", this.taskService.getAll());
+        model.addAttribute("listRoles", this.roleService.getAll());
+        Set<Company> companies = new HashSet<>();
+        companies.add(this.companyService.);
+
+        return "user/edituser";ser
+    }
+
+    @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.POST)
+    public String editSubmit(@ModelAttribute("user") User user){
+//        task.setId(id);
+        this.userService.edit(user);
+
+//        return "redirect:/task/";
+//        return "redirect:/edited/";
+//        return "/taskedited/";
+//        return "welcome";
+        return "user/editeduser";
+    }
 }

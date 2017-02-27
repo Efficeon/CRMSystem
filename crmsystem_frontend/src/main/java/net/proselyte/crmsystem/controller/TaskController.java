@@ -37,16 +37,32 @@ public class TaskController {
         return "task/tasks";
     }
 
-    @RequestMapping(value="taskdata/{id}/", method = RequestMethod.GET)
+    @RequestMapping(value="/taskdata/{id}/", method = RequestMethod.GET)
     public String taskData(@PathVariable("id") UUID id, Model model){
         model.addAttribute("task", this.taskService.getById(id));
         return "task/taskdata";
     }
 
-    @RequestMapping("removetask/{id}/")
+
+
+//    @RequestMapping(value = "remove/{id}/", method = RequestMethod.POST)
+//    public String removeTask(@PathVariable("id") UUID id){
+//        this.taskService.remove(this.taskService.getById(id));
+//        return "welcome";
+//    }
+
+
+//    @RequestMapping(value = "removetask/{id}/", method = RequestMethod.GET)
+//    public String removeTask(@PathVariable("id") UUID id,
+//                             Model model){
+//        model.addAttribute("task", this.taskService.getById(id));
+//        return "task/confirmation";
+//    }
+//
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
     public String removeTask(@PathVariable("id") UUID id){
-        this.taskService.remove(taskService.getById(id));
-        return "redirect:/task/";
+        this.taskService.remove(this.taskService.getById(id));
+        return "redirect:/task";
     }
 
     @RequestMapping(value = "/task/add/", method = RequestMethod.GET)

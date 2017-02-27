@@ -80,4 +80,20 @@ public class JpaUserDAOImpl implements UserDAO {
             return null;
         }
     }
+
+    @Override
+    public User edit(User user) {
+        Query query = this.entityManager.createQuery(
+                "SELECT user FROM User as user WHERE user.id=:id", User.class);
+        query.setParameter("id", user.getId());
+        User existingUser = (User) query.getSingleResult();
+
+//        existingUser.setUserType(user.getUserType());
+//        existingUser.setAssociatedCompany(user.getAssociatedCompany());
+//        existingUser.setTasks(user.getTasks());
+/**
+ * entityManager.merge() -- вернет Task !!!
+ */
+        return this.entityManager.merge(existingUser);
+    }
 }

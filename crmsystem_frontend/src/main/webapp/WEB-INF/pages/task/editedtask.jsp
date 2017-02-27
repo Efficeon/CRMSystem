@@ -29,11 +29,9 @@
 <br>
 <br>
 
-<a href="<c:url value='/task/'/>">All tasks</a>
+<a href="/task/" class="btn btn-lg" style="color: firebrick">All tasks</a>
 <br>
-<a href="<c:url value='/user/'/>">All users</a>
-<br>
-<a href="<c:url value='/company/'/>">All companies</a>
+<a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
 
 </body>
 </html>

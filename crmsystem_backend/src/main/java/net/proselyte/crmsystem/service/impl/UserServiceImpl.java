@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
     public Collection getAll() {
         return userDao.getAll();
     }
+
+    @Override
+    @Transactional
+    public User edit(User user) {
+        return userDao.edit(user); }
 }

@@ -22,4 +22,6 @@ public interface UserService {
     User getById(UUID id);
 
     Collection getAll();
+
+    User edit(User user);
 }

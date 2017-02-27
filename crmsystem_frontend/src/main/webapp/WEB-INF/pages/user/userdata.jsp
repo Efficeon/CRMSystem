@@ -37,7 +37,6 @@
         <th class="text-center" width="40">Delete</th>
     </tr>
 
-    <c:forEach items="${userList}" var="user">
     <tr>
         <td class="text-center">${user.id}</td>
         <td class="text-center">${user.username}</td>
@@ -59,7 +58,7 @@
 
         <td class="text-center">
             <table>
-                <c:forEach items="${user.companies}" var="company">
+                <c:forEach items="${user.associatedCompany}" var="company">
                     <tr>
                         <td class="text-center"><a href="<c:url value='/companydata/${company.id}/'/>">${company.name}</a></td>
                     </tr>
@@ -71,7 +70,7 @@
             <table>
                 <c:forEach items="${user.tasks}" var="task">
                     <tr>
-                        <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>">${task.name}</a></td>
+                        <td class="text-left"><a href="<c:url value='/taskdata/${task.id}/'/>">${task.name}</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -85,8 +84,6 @@
                                    class="glyphicon glyphicon-remove" style="color: red"></a>
         </td>
     </tr>
-    </c:forEach>
-
 </table>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
