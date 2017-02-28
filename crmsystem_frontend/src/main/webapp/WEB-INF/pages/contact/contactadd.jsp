@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
+
 <html>
 <head>
     <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <csrf disabled="true"/>
 </head>
 
 <body>
@@ -143,6 +145,16 @@
             </div>
         </div>
     </form:form>
+
+    <form method="POST" action="uploadFile" enctype="multipart/form-data">
+        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
+        File to upload: <input type="file" name="file"><br />
+
+        <input type="submit" value="Upload">
+        Press here to upload the file!
+    </form>
+
 </div>
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

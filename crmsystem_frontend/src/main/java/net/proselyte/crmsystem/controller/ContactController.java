@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.*;
+
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.ContactService;
 import net.proselyte.crmsystem.service.DealService;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.UUID;
 
 /**
@@ -156,4 +160,41 @@ public class ContactController {
 
         return "redirect:/editcontact/"+contact.getId()+"/";
     }
-}
+
+        @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+        @ResponseBody
+        public String uploadFile(@RequestParam("file") MultipartFile file) {// имена параметров (тут - "file") - из формы JSP.
+
+            String name = null;
+
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+
+                    name = file.getOriginalFilename();
+
+                    String rootPath = "C:\\path\\";  //try also "C:\path\"
+                    File dir = new File(rootPath + File.separator + "loadFiles");
+
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+
+                    File uploadedFile = new File(dir.getAbsolutePath() + File.separator + name);
+
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+                    stream.write(bytes);
+                    stream.flush();
+                    stream.close();
+
+                    return "You successfully uploaded file=" + name;
+
+                } catch (Exception e) {
+                    return "You failed to upload " + name + " => " + e.getMessage();
+                }
+            } else {
+                return "You failed to upload " + name + " because the file was empty.";
+            }
+        }
+
+    }
