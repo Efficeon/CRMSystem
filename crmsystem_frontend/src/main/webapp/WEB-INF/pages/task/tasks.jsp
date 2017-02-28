@@ -24,14 +24,14 @@
 <br>
 <button>
     <a href="<c:url value='/task/add/'/>" class="btn btn-lg" style="color: green">
-        <i class="fa fa-plus"></i> Create task</a>
+        <i class="fa fa-plus"></i> Create new task</a>
 </button>
 <br>
 <br>
 <c:if test="${!empty listTasks}">
     <table class="table table-striped table-condensed">
         <tr>
-            <th class="text-left"  width="150">ID</th>
+            <th class="text-center"  width="150">ID</th>
             <th class="text-center" width="120">Name</th>
             <th class="text-center" width="80">Responsible person</th>
             <th class="text-center" width="50">Created</th>
@@ -41,8 +41,8 @@
         <c:forEach items="${listTasks}" var="task">
             <tr>
                 <td class="text-left"  width="350">${task.id}</td>
-                <td class="text-center"  width="200">${task.name}</td>
-                <td class="text-center"  width="300">${task.implementer.getFirstName()} ${task.implementer.getLastName()}</td>
+                <td class="text-left"  width="200">${task.name}</td>
+                <td class="text-left"  width="300">${task.implementer.getFirstName()} ${task.implementer.getLastName()}</td>
                 <td class="text-center"  width="150"><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy"/></td>
                 <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>"
                                            class="glyphicon glyphicon glyphicon-file " style="color: darkblue"> Details</a></td>

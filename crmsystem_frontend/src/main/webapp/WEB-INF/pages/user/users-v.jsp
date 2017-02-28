@@ -18,7 +18,12 @@
 <a href="<c:url value='/company/'/>" class="btn btn-lg" style="color: grey">All companies</a>
 <br>
 <br>
-
+<button>
+<a href="<c:url value='/user/add/'/>" class="btn btn-lg" style="color: green">
+    <i class="fa fa-plus"></i> Create new user</a>
+</button>
+<br>
+<br>
 <table class="table table-striped table-condensed">
     <tr>
         <th class="text-center" width="25">ID</th>
@@ -30,8 +35,8 @@
     </tr>
     <c:forEach items="${userList}" var="user">
     <tr>
-        <td class="text-center">${user.id}</td>
-        <td class="text-center">${user.username}</td>
+        <td class="text-left">${user.id}</td>
+        <td class="text-left">${user.username}</td>
         <td class="text-center">${user.email}</td>
         <td class="text-center">
             <table>
@@ -46,7 +51,7 @@
         <td class="text-center">
             <a href="/userdata/${user.id}/"
                span class="glyphicon glyphicon glyphicon-file "
-               style="color: darkblue"></a>
+               style="color: darkblue">Details</a>
         </td>
     </tr>
     </c:forEach>

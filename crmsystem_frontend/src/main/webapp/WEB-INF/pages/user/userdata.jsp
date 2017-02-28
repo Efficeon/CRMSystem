@@ -28,8 +28,9 @@
         <%--<th class="text-center" width="50">Birth date</th>--%>
         <%--<th class="text-center" width="50">User type</th>--%>
         <th class="text-center" width="50">Registration date</th>
+        <th class="text-center" width="50">Type</th>
 
-        <th class="text-center" width="50">Roles</th>
+        <%--<th class="text-center" width="50">Roles</th>--%>
         <th class="text-center" width="50">Associated companies</th>
         <th class="text-center" width="50">Related tasks</th>
 
@@ -45,20 +46,21 @@
         <td class="text-center">${user.lastName}</td>
         <%--<td>${user.birthDate}</td>--%>
         <td class="text-center">${user.registrationDate}</td>
+        <td class="text-center">${user.userType}</td>
+
+        <%--<td class="text-center">--%>
+            <%--<table>--%>
+                <%--<c:forEach items="${user.roles}" var="role">--%>
+                    <%--<tr>--%>
+                        <%--<td class="text-center">${role.name}</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
+        <%--</td>--%>
 
         <td class="text-center">
             <table>
-                <c:forEach items="${user.roles}" var="role">
-                    <tr>
-                        <td class="text-center">${role.name}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </td>
-
-        <td class="text-center">
-            <table>
-                <c:forEach items="${user.associatedCompany}" var="company">
+                <c:forEach items="${user.companies}" var="company">
                     <tr>
                         <td class="text-center"><a href="<c:url value='/companydata/${company.id}/'/>">${company.name}</a></td>
                     </tr>

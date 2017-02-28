@@ -69,7 +69,7 @@ public class TaskController {
     public String addTask(Model model) {
         model.addAttribute("task", new Task());
         model.addAttribute("user", new User());
-        model.addAttribute("listtasks", this.taskService.getAll());
+        model.addAttribute("listTasks", this.taskService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
         return "task/taskadd";
     }
@@ -98,7 +98,6 @@ public class TaskController {
 //    @RequestMapping(value = "/edittask/", method = RequestMethod.GET)
     public String editTask(
             @PathVariable("id") UUID id,
-//                           @RequestParam("newImplementer") User newImpl,
                            Model model){
 //                                                                  model.addAttribute("user", new User());
         model.addAttribute("task",this.taskService.getById(id));

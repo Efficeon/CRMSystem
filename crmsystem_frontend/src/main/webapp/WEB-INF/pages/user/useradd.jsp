@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
@@ -15,46 +15,58 @@
 </head>
 
 <body>
-<h1>Add or Edit User</h1>
+<h1>Add new user</h1>
 <br>
 <br>
-<form:form method="POST" modelAttribute="task">
+<form:form method="POST" modelAttribute="user">
     <form class="form-inline">
         <div class="form-group">
 
-            <c:if test="${!empty task.id}">
+            <form:input type="text" path="username" class="form-group"
+                        placeholder='username${username}' autofocus="true"/>
+            <br>
+            <form:input type="text" path="password" class="form-group"
+                        placeholder='password${password}' />
+            <br>
+            <%--<form:input type="text" path="confirmPassword" class="form-group"--%>
+                        <%--placeholder='confirmPassword${confirmPassword}' />--%>
+            <%--<br>--%>
+            <form:input type="text" path="email" class="form-group"
+                        placeholder='email${email}'/>
+            <br>
+            <form:input type="text" path="firstName" class="form-group"
+                        placeholder='first name${firstName}'/>
+            <br>
+            <form:input type="text" path="lastName" class="form-group"
+                        placeholder='last name${lastName}'/>
+            <br>
+            <%--<form:input type="text" path="type" class="form-group"--%>
+                        <%--placeholder='user type${type}'/>--%>
 
-                <form:input  type="text" path="id" class="form-group" readonly="true"
-                             disabled="true" placeholder='ID${id}'/>
-            </c:if>
-            <form:input  type="text" path="name" class="form-group"
-                         placeholder='Name${name}' autofocus="true"/>
 
-            <form:input  type="text" path="description" class="form-group"
-                         placeholder='Description${description}' autofocus="true"/>
+                <%--<form:select path="responsiblePerson">--%>
+                <%--<form:option value="0" label="Select only one"/>--%>
+                <%--<form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />--%>
+                <%--</form:select>--%>
 
-            <form:select path="responsiblePerson">
-                <form:option value="0" label="Select only one"/>
-                <form:options items="${listUsers}" itemValue="user.id" itemLabel="username" />
-            </form:select>
-
+            <br>
             <button type="submit">
                 <spring:message text="Add"/>
             </button>
         </div>
 
-        <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
-
-    <button type="button">
-        <a href="<c:url value='/task/' />">Complete</a>
-    </button>
 </form:form>
+
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
-</br>
-
+<br>
+<a href="/user/" class="btn btn-lg" style="color: firebrick">All users</a>
+<br>
+<a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+<br>
+<br>
 </body>
 </html>

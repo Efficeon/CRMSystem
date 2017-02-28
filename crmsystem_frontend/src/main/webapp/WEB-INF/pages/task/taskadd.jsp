@@ -27,31 +27,29 @@
                 placeholder='Description${task.description}'/>
             <br>
                 <form:select path="implementer.id">
-                    <form:option value="0" label="Select ..."/>
+                    <form:option value="0" label="Select responsible person"/>
                     <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
                 </form:select>
             <br>
             <br>
             <button type="submit" id="taskform">
-                <spring:message text="Add task"/>
+                <spring:message text="Add"/>
             </button>
         </div>
 
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
-    <br>
-    <br>
 </form:form>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
 <br>
 <a href="/task/" class="btn btn-lg" style="color: firebrick">All tasks</a>
 <br>
 <a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
-<br><br>
+<br>
+<br>
 
 </body>
 </html>
