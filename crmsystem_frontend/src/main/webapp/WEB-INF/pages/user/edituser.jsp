@@ -76,8 +76,8 @@
                 </tr>
                 </table>
                 <br>
-                <button type="submit" id="userform" style="color: orangered">
-                    <spring:message text="Edit this user"/>
+                <button type="submit" id="userform" style="color: green">
+                    <spring:message text="Edit this user" />
                 </button>
         </div>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

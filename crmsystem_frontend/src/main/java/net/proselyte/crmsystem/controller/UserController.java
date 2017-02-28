@@ -49,8 +49,6 @@ public class UserController {
         return "user/users-v";
     }
 
-
-
     @RequestMapping(value = "/user/add/", method = RequestMethod.GET)
     public String addUser(Model model) {
         model.addAttribute("user", new User());
@@ -68,10 +66,7 @@ public class UserController {
                              ) {
         this.userService.save(user);
         return "task/useradded";
-//
     }
-
-
 
     @RequestMapping(value = "userdata/{id}/", method = RequestMethod.GET)
     public String taskData(@PathVariable("id") UUID id,
@@ -85,15 +80,11 @@ public class UserController {
         return "user/userdata";
     }
 
-    @RequestMapping(value = "remove_user/${id}/", method = RequestMethod.GET)
+    @RequestMapping(value = "remove_user/${id}/", method = RequestMethod.POST)
     public String removeUser(@PathVariable("id") UUID id) {
         this.userService.remove(userService.getById(id));
-        return "redirect:/user/";
+        return "welcome";
     }
-
-
-
-
 
     @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.GET)
     public String editUser(@PathVariable("id") UUID id,
@@ -102,19 +93,12 @@ public class UserController {
         model.addAttribute("companyList", this.companyService.getAll());
         model.addAttribute("taskList", this.taskService.getAll());
         model.addAttribute("roleList", this.roleService.getAll());
-//        companies.add(this.companyService.);
-
         return "user/edituser";
     }
 
     @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("user") User user){
-//        task.setId(id);
         this.userService.edit(user);
-
-//        return "redirect:/task/";
-//        return "redirect:/edited/";
-//        return "/taskedited/";
 //        return "welcome";
         return "user/editeduser";
     }

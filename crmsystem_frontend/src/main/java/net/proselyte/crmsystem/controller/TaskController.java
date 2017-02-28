@@ -74,13 +74,6 @@ public class TaskController {
         return "task/taskadd";
     }
 
-    /**
-     * Adds a new task by delegating the processing to taskService.
-     * Displays a confirmation JSP page
-     * Добавляет новую персону через PersonService
-     * Показывает подтверждающую JSP
-     * @return  the name of the JSP page
-     */
     @RequestMapping(value = "/task/add/", method = RequestMethod.POST)
     public String taskSubmit(@RequestParam(name = "implementer.id") UUID userId,
                              @ModelAttribute("task") Task task) {
@@ -89,17 +82,11 @@ public class TaskController {
 //        return "redirect:/edittask/"+task.getId()+"/";
 //        return "redirect:/task/";
         return "task/taskadded";
-//
     }
 
-
-
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.GET)
-//    @RequestMapping(value = "/edittask/", method = RequestMethod.GET)
-    public String editTask(
-            @PathVariable("id") UUID id,
+    public String editTask(@PathVariable("id") UUID id,
                            Model model){
-//                                                                  model.addAttribute("user", new User());
         model.addAttribute("task",this.taskService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
 
@@ -108,12 +95,8 @@ public class TaskController {
 
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("task") Task task){
-//        task.setId(id);
         this.taskService.edit(task);
 
-//        return "redirect:/task/";
-//        return "redirect:/edited/";
-//        return "/taskedited/";
 //        return "welcome";
         return "task/editedtask";
     }

@@ -88,9 +88,13 @@ public class JpaUserDAOImpl implements UserDAO {
         query.setParameter("id", user.getId());
         User existingUser = (User) query.getSingleResult();
 
-//        existingUser.setUserType(user.getUserType());
-//        existingUser.setAssociatedCompany(user.getAssociatedCompany());
-//        existingUser.setTasks(user.getTasks());
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setCompanies(user.getCompanies());
+        existingUser.setTasks(user.getTasks());
+        existingUser.setRoles(user.getRoles());
 /**
  * entityManager.merge() -- вернет Task !!!
  */

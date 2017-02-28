@@ -21,7 +21,7 @@
 <br>
 <h4>name: </h4>${task.name}
 <br>
-<h4>name: </h4>${task.description}
+<h4>description: </h4>${task.description}
 <br>
 <h4>at: </h4>${task.updated}
 
