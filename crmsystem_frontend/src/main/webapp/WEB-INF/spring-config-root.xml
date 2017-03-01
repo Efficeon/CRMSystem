@@ -11,6 +11,8 @@
 
     <import resource="spring-config-security.xml"/>
 
+    <import resource="springWebMultipartContext.xml"/>
+
     <!--<import resource="mvc-dispatcher-servlet.xml"/>-->
 
     <context:component-scan base-package="net.proselyte.crmsystem.*"/>

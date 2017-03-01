@@ -6,6 +6,7 @@ package net.proselyte.crmsystem.model;
  * @author Leonid Dubravsky
  */
 import javax.persistence.*;
+import java.io.File;
 import java.util.Date;
 import java.util.Set;
 
@@ -44,6 +45,9 @@ public class Contact extends NamedEntity {
     @JoinTable(name="contact_user", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName="id"))
     private User responsibleUser;
+
+    @Column(name="file")
+    private File file;
 
     public String getWebsite() {
         return website;
@@ -127,5 +131,13 @@ public class Contact extends NamedEntity {
 
     public void setResponsibleUser(User responsibleUser) {
         this.responsibleUser = responsibleUser;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }
