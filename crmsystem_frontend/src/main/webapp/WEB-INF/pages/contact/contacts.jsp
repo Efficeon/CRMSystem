@@ -39,6 +39,7 @@
                 <th class="text-center" width="60">Skype</th>
                 <th class="text-center" width="40">Phone number</th>
                 <th class="text-center" width="40">Associated company</th>
+                <th class="text-center" width="40">Associated deal</th>
                 <th class="text-center" width="40">Responsible user</th>
                 <th class="text-center" width="40">Created</th>
                 <th class="text-center" width="40">Updated</th>
@@ -53,12 +54,16 @@
                     <td>${contact.website}</td>
                     <td>${contact.skype}</td>
                     <td>${contact.phoneNumber}</td>
-                    <c:if test="${!(contact.associatedCompany==null)}">
-                    <td>${contact.associatedCompany.name}</td>
-                    </c:if>
-                    <c:if test="${(contact.associatedCompany==null)}">
-                    <td></td>
-                    </c:if>
+                    <td><c:forEach items="${contact.associatedCompanies}" var="company">
+                        <table>
+                            <td>${company.name}</td>
+                        </table>
+                    </c:forEach></td>
+                    <td><c:forEach items="${contact.associatedDeal}" var="deal">
+                        <table>
+                            <td>${deal.name}</td>
+                        </table>
+                    </c:forEach></td>
                     <c:if test="${!(contact.responsibleUser==null)}">
                     <td>${contact.responsibleUser.username}</td>
                     </c:if>

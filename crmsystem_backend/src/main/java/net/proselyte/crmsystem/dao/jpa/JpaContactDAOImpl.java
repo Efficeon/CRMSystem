@@ -27,7 +27,7 @@ public class JpaContactDAOImpl implements ContactDAO {
 
     @Override
     public Contact getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompany WHERE contact.id =:id");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompanies LEFT JOIN FETCH contact.associatedDeal LEFT JOIN FETCH contact.associatedCompanies WHERE contact.id =:id");
         query.setParameter("id", id);
         Contact contact = (Contact) query.getSingleResult();
 
@@ -40,7 +40,7 @@ public class JpaContactDAOImpl implements ContactDAO {
     public Collection<Contact> getAll() {
         List<Contact> result;
 
-        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompany");
+        Query query = this.entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompanies LEFT JOIN FETCH contact.associatedDeal LEFT JOIN FETCH contact.associatedCompanies ");
         result = query.getResultList();
 
         Collections.sort(result, new Comparator<Contact>() {
@@ -78,7 +78,7 @@ public class JpaContactDAOImpl implements ContactDAO {
     @Override
     public Collection<Contact> getSearchedContacts(String searchLine) {
         List<Contact> resultSearch;
-        Query query = entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN contact.responsibleUser LEFT JOIN FETCH contact.associatedСompany WHERE contact.name LIKE ?");
+        Query query = entityManager.createQuery("SELECT DISTINCT contact FROM Contact contact LEFT JOIN FETCH contact.responsibleUser LEFT JOIN FETCH contact.associatedCompanies LEFT JOIN FETCH contact.associatedDeal LEFT JOIN FETCH contact.associatedCompanies WHERE contact.name LIKE ?");
         query.setParameter(0, "%"+searchLine+"%");
         resultSearch=query.getResultList();
         for (Contact contact : resultSearch) {

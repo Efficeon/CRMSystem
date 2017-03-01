@@ -4,6 +4,7 @@ import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.CompanyService;
+import net.proselyte.crmsystem.service.ContactService;
 import net.proselyte.crmsystem.service.TagService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class CompanyController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private ContactService contactService;
 
     @RequestMapping(value = "company", method = RequestMethod.GET)
     public String listCompanies(Model model) {
@@ -61,6 +65,7 @@ public class CompanyController {
                                 @PathVariable("companyId") UUID companyId){
         company.setId(companyId);
         company.setResponsibleUser(this.companyService.getById(companyId).getResponsibleUser());
+        company.setAssociatedContacts(this.companyService.getById(companyId).getAssociatedContacts());
         company.setTags(this.companyService.getById(companyId).getTags());
         this.companyService.save(company);
         return "redirect:/editcompany/"+company.getId()+"/";
@@ -68,6 +73,7 @@ public class CompanyController {
 
     @RequestMapping(value = "/company/add/", method = RequestMethod.GET)
     public String addCompany(Model model) {
+        model.addAttribute("listContacts", this.contactService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("company", new Company());
@@ -79,6 +85,7 @@ public class CompanyController {
     @RequestMapping(value = "/editcompany/{id}", method = RequestMethod.GET)
     public String editCompany(@PathVariable("id") UUID id,
                               Model model){
+        model.addAttribute("listContacts", this.contactService.getAll());
         model.addAttribute("company", this.companyService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
@@ -94,7 +101,7 @@ public class CompanyController {
         company = this.companyService.getById(companyId);
         company.setResponsibleUser(this.userService.getById(userId));
         this.companyService.save(company);
-        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listContacts", this.contactService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
         model.addAttribute("tag", new Tag());
@@ -112,6 +119,37 @@ public class CompanyController {
         model.addAttribute("tag", new Tag());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listContacts", this.contactService.getAll());
+        model.addAttribute("company", this.companyService.getById(companyId));
+        return "redirect:/editcompany/"+company.getId()+"/";
+    }
+
+    @RequestMapping(value = "/addAssociatedContact/{contactId}/{companyId}/", method = RequestMethod.GET)
+    public String addAssociatedContact(@PathVariable("contactId") UUID contactId,
+                                     @PathVariable("companyId") UUID companyId,
+                                     @ModelAttribute("company") Company company,
+                                     Model model){
+        company = this.companyService.getById(companyId);
+        company.setAssociatedContact(this.contactService.getById(contactId));
+        this.companyService.save(company);
+        model.addAttribute("listContacts", this.contactService.getAll());
+        model.addAttribute("listTags", this.tagService.getAll());
+        model.addAttribute("company", this.companyService.getById(companyId));
+        model.addAttribute("tag", new Tag());
+        return "redirect:/editcompany/"+company.getId()+"/";
+    }
+
+    @RequestMapping(value = "/removeAssociatedContact/{contactId}/{companyId}/", method = RequestMethod.GET)
+     public String removeAssociatedContact(@PathVariable("contactId") UUID contactId,
+                                  @PathVariable("companyId") UUID companyId,
+                                  @ModelAttribute("company") Company company,
+                                  Model model){
+        company = this.companyService.getById(companyId);
+        company.removeAssociatedContact(this.contactService.getById(contactId));
+        this.companyService.save(company);
+        model.addAttribute("listTags", this.tagService.getAll());
+        model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listContacts", this.contactService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
         return "redirect:/editcompany/"+company.getId()+"/";
     }
@@ -144,6 +182,7 @@ public class CompanyController {
         model.addAttribute("tag", new Tag());
         model.addAttribute("listTags", this.tagService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
+        model.addAttribute("listContacts", this.contactService.getAll());
         model.addAttribute("company", this.companyService.getById(companyId));
         return "redirect:/editcompany/"+company.getId()+"/";
     }

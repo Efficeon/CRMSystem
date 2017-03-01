@@ -71,6 +71,46 @@
     </button>
 
 </form:form>
+    <c:if test="${empty contact.id}">
+    <h4 style="color: red">Add associated contacts after adding deal</h4>
+    </c:if>
+    <!--add Contacts -->
+    <div class="clearfix">
+        <div class="clearfix">
+            <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+                <h5>All contacts</h5>
+                <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty contactsList}">
+                        <c:forEach items="${contactsList}" var="contact">
+                            <c:if test="${!deal.associatedContact.contains(contact)}">
+                                <table class="table table-hover table-condensed">
+                                    <c:if test="${!empty deal.id}">
+                                        <td disabled="true"><a href="<c:url value='/associatedContact/add/${contact.id}/${deal.id}/' />"
+                                                               style="text-decoration: none" />${contact.name}</td>
+                                    </c:if>
+                                </table>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                </div>
+            </div>
+
+            <!--remove associated contact -->
+            <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+                <h5>Associated Contacts</h5>
+                <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty deal.associatedContact}">
+                        <c:forEach items="${deal.associatedContact}" var="contact">
+                            <table class="table table-hover table-condensed">
+                                <td><a href="<c:url value='/associatedContact/remove/${contact.id}/${deal.id}/' />"
+                                       style="text-decoration: none"/>${contact.name} </td>
+                            </table>
+                        </c:forEach>
+                    </c:if>
+                </div>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+            </div>
+        </div>
 </div>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>

@@ -127,3 +127,13 @@ CREATE TABLE IF NOT EXISTS contact_company
   FOREIGN KEY (contact_id) REFERENCES contacts (id),
   FOREIGN KEY (company_id) REFERENCES companies (id)
 );
+
+--contact-deal
+CREATE TABLE IF NOT EXISTS contact_deal
+(
+  contact_id      UUID     NOT NULL,
+  deal_id      UUID     NOT NULL,
+
+  FOREIGN KEY (contact_id) REFERENCES contacts (id),
+  FOREIGN KEY (deal_id) REFERENCES deals (id)
+);

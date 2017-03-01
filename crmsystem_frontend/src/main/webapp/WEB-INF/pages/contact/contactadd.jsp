@@ -56,12 +56,12 @@
                              placeholder='Phone number${phoneNumber}' autofocus="true"></form:input>
             </spring:bind>
 
-            <form:select path="responsibleUser.id"  style="width: 80px; height: 26px;">
+            <form:select path="responsibleUser.id"  style="width: 80px; height: 27px;">
                 <form:option value="" label="${pageContext.request.userPrincipal.name}"/>
                 <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
             </form:select>
 
-            <button type="submit" id="dealform">
+            <button type="submit" id="dealform" >
                 <spring:message text="Add"/>
             </button>
         </div>
@@ -70,7 +70,7 @@
 
         <!--add associated company -->
         <c:if test="${empty contact.id}">
-            <h4 style="color: red">Add associated companies after adding contact</h4>
+            <h4 style="color: red">Add associated companies and deals after adding contact</h4>
         </c:if>
 
         <div class="clearfix">
@@ -79,7 +79,7 @@
                 <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
                     <c:if test="${!empty listCompanies}">
                         <c:forEach items="${listCompanies}" var="company">
-                            <c:if test="${!contact.associatedCompany.equals(company)}">
+                            <c:if test="${!contact.associatedCompanies.contains(company)}">
                                 <table class="table table-hover table-condensed">
                                     <c:if test="${!empty contact.id}">
                                         <td disabled="true"><a href="<c:url value='/addAssociatedCompany/${company.id}/${contact.id}/' />"
@@ -93,14 +93,51 @@
             </div>
 
             <!--remove associated company -->
-            <div class="clearfix" style="float: left; margin: 0px 0px 0px 10px;">
-                <h5>Associated company</h5>
-                <div class="panel panel-default clearfix" style="float: left; height: 44px; width: 300px; overflow: auto">
-                    <c:if test="${!empty contact.associatedCompany}">
+        <div class="clearfix" style="float: left; margin: 0px 0px 0px 10px;">
+            <h5>Associated companies</h5>
+            <div class="panel panel-default clearfix" style="float: left; height: 100px; width: 300px; overflow: auto">
+                <c:if test="${!empty contact.associatedCompanies}">
+                    <c:forEach items="${contact.associatedCompanies}" var="company">
                         <table class="table table-hover table-condensed">
-                            <td><a href="<c:url value='/associatedCompany/remove/${contact.id}/' />"
-                                   style="text-decoration: none"/>${contact.associatedCompany.name} </td>
+                            <td><a href="<c:url value='/associatedCompany/remove/${company.id}/${contact.id}/' />"
+                                   style="text-decoration: none"/>${company.name} </td>
                         </table>
+                    </c:forEach>
+                </c:if>
+            </div>
+        </div>
+    </div>
+        <!--add associated deals -->
+        <div class="clearfix">
+            <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
+                <h5>All deals</h5>
+                <div class="panel panel-default" style="height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty listDeals}">
+                        <c:forEach items="${listDeals}" var="deal">
+                            <c:if test="${!contact.associatedDeal.contains(deal)}">
+                               <table class="table table-hover table-condensed">
+                                   <c:if test="${!empty contact.id}">
+                                    <td disabled="true"><a href="<c:url value='/associatedDeal/add/${deal.id}/${contact.id}/' />"
+                                     style="text-decoration: none" />${deal.name}</td>
+                                       </c:if>
+                                </table>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                </div>
+            </div>
+
+            <!--remove associated deals -->
+            <div class="clearfix" style="float: left; margin: 0px 0px 0px 10px;">
+                <h5>Associated deals</h5>
+                <div class="panel panel-default clearfix" style="float: left; height: 100px; width: 300px; overflow: auto">
+                    <c:if test="${!empty contact.associatedDeal}">
+                        <c:forEach items="${contact.associatedDeal}" var="deal">
+                            <table class="table table-hover table-condensed">
+                                <td><a href="<c:url value='/associatedDeal/remove/${deal.id}/${contact.id}/' />"
+                                       style="text-decoration: none"/>${deal.name} </td>
+                            </table>
+                        </c:forEach>
                     </c:if>
                 </div>
             </div>
