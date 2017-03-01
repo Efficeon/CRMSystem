@@ -28,7 +28,7 @@
             <br>
                 <form:select path="implementer.id">
                     <form:option value="0" label="Select responsible person"/>
-                    <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
+                    <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
                 </form:select>
             <br>
             <br>
