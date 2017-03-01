@@ -1,20 +1,18 @@
 package net.proselyte.crmsystem.controller;
 
+import net.proselyte.crmsystem.model.Contact;
 import net.proselyte.crmsystem.model.Deal;
 import net.proselyte.crmsystem.model.DealStatus;
 import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.service.ContactService;
 import net.proselyte.crmsystem.service.DealService;
 import net.proselyte.crmsystem.service.DealStatusService;
 import net.proselyte.crmsystem.service.UserService;
-import net.proselyte.crmsystem.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
 import java.util.*;
 
 /**
@@ -33,6 +31,9 @@ public class DealController {
     @Autowired
     private DealStatusService dealStatusService;
 
+    @Autowired
+    private ContactService contactService;
+
     @RequestMapping(value = "deal", method = RequestMethod.GET)
     public String listDeals(Model model){
         model.addAttribute("deal", new Deal());
@@ -48,15 +49,14 @@ public class DealController {
 
     @RequestMapping(value = "/deal/add/", method = RequestMethod.GET)
     public String addDeal(Model model) {
-        Deal tempdeal = new Deal();
-        model.addAttribute("deal", tempdeal);
+        model.addAttribute("deal", new Deal());
         model.addAttribute("userList", this.userService.getAll());
         model.addAttribute("user", new User());
         model.addAttribute("dealStatusList", this.dealStatusService.getAll());
         model.addAttribute("selectedDealStatus", new DealStatus());
+        model.addAttribute("contactsList", this.contactService.getAll());
         return "deal/dealadd";
     }
-
 
     @RequestMapping(value = "deal/add/", method = RequestMethod.POST)
     public String submitDeal(@ModelAttribute("deal") Deal deal){
@@ -66,20 +66,57 @@ public class DealController {
 
     @RequestMapping(value = "/editdeal/{id}", method = RequestMethod.GET)
     public String editDeal(@PathVariable ("id") UUID id, Model model){
-        System.out.println("ID: " + id);
         Deal tempdeal = this.dealService.getById(id);
         model.addAttribute("deal", tempdeal);
         model.addAttribute("dealStatusList", this.dealStatusService.getAll());
         model.addAttribute("selectedDealStatus", new DealStatus());
         model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("contactsList", this.contactService.getAll());
         model.addAttribute("user", new User());
         return "/deal/dealadd";
     }
 
     @RequestMapping(value = "/editdeal/{id}/", method = RequestMethod.POST)
-    public String editDeal(@ModelAttribute ("deal") Deal deal){
+    public String editDeal(@ModelAttribute ("deal") Deal deal,
+                           @PathVariable ("id") UUID id){
+        deal.setAssocitedContacts(this.dealService.getById(id).getAssociatedContact());
         this.dealService.save(deal);
         return "redirect:/deal/";
+    }
+
+    @RequestMapping(value = "/associatedContact/add/{contactId}/{dealId}/", method = RequestMethod.GET)
+    public String addAssociatedContact(@PathVariable("contactId") UUID contactId,
+                                       @PathVariable("dealId") UUID dealId,
+                                       @ModelAttribute("deal") Deal deal,
+                                       Model model){
+        deal = this.dealService.getById(dealId);
+        deal.setAssociatedContact(this.contactService.getById(contactId));
+        this.dealService.save(deal);
+
+        model.addAttribute("deal", new Deal());
+        model.addAttribute("dealStatusList", this.dealStatusService.getAll());
+        model.addAttribute("selectedDealStatus", new DealStatus());
+        model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("contactsList", this.contactService.getAll());
+        model.addAttribute("user", new User());
+        return "redirect:/editdeal/"+ deal.getId() + "/";
+    }
+
+    @RequestMapping(value = "/associatedContact/remove/{contactId}/{dealId}/", method = RequestMethod.GET)
+    public String removeAssociatedContact(@PathVariable("contactId") UUID contactId,
+                                          @PathVariable("dealId") UUID dealId,
+                                          @ModelAttribute("deal") Deal deal,
+                                          Model model) {
+        deal = this.dealService.getById(dealId);
+        deal.removeAssociatedContact(this.contactService.getById(contactId));
+        this.dealService.save(deal);
+        model.addAttribute("deal", new Deal());
+        model.addAttribute("dealStatusList", this.dealStatusService.getAll());
+        model.addAttribute("selectedDealStatus", new DealStatus());
+        model.addAttribute("userList", this.userService.getAll());
+        model.addAttribute("contactsList", this.contactService.getAll());
+        model.addAttribute("user", new User());
+        return "redirect:/editdeal/" + deal.getId() + "/";
     }
 
 }

@@ -41,20 +41,24 @@ public class SearchController {
     String getTags(@RequestParam("term") String term)  {
         List<Company> companies = (List<Company>) companyService.getSearchedCompanies(term);
         List<User> users = (List<User>) userService.getSearchedUsers(term);
-
+        List<Deal> deals = (List<Deal>) dealService.getSearchedDeals(term);
         List<String> itemsFound = new ArrayList<String>();
         for (Company company: companies){
-                itemsFound.add(company.getName());
+            itemsFound.add(company.getName());
         }
         for (User user: users){
             itemsFound.add(user.getUsername());
+        }
+        for (Deal deal: deals){
+            itemsFound.add(deal.getName());
         }
 
         return new Gson().toJson(itemsFound);
     }
 
     @RequestMapping(value="/search/companies/")
-    public String SearchCompanies(Model model, @RequestParam(value = "searchLine", required = false) String searchLine) {
+    public String SearchCompanies(@RequestParam(value = "searchLine", required = false) String searchLine,
+                                  Model model) {
         model.addAttribute("company", new Company());
         model.addAttribute("listCompanies", this.companyService.getSearchedCompanies(searchLine));
 
@@ -62,7 +66,8 @@ public class SearchController {
     }
 
     @RequestMapping(value="/search/users/")
-    public String SearchUsers(Model model, @RequestParam(value = "searchLine", required = false) String searchLine) {
+    public String SearchUsers(@RequestParam(value = "searchLine", required = false) String searchLine,
+                              Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("listUsers", this.userService.getSearchedUsers(searchLine));
 
@@ -70,7 +75,8 @@ public class SearchController {
     }
 
     @RequestMapping(value="/search/deals/")
-    public String SearchDeals(Model model, @RequestParam(value = "searchLine", required = false) String searchLine) {
+    public String SearchDeals(@RequestParam(value = "searchLine", required = false) String searchLine,
+                              Model model) {
         model.addAttribute("deal", new Deal());
         model.addAttribute("listDeals", this.dealService.getSearchedDeals(searchLine));
 
@@ -78,12 +84,16 @@ public class SearchController {
     }
 
     @RequestMapping(value="/search/all/")
-    public String SearchAll(Model model, @RequestParam(value = "searchLine", required = false) String searchLine) {
+    public String SearchAll(@RequestParam(value = "searchLine", required = false) String searchLine,
+                            Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("listUsers", this.userService.getSearchedUsers(searchLine));
 
         model.addAttribute("company", new Company());
         model.addAttribute("listCompanies", this.companyService.getSearchedCompanies(searchLine));
+
+        model.addAttribute("deal", new Deal());
+        model.addAttribute("listDeals", this.dealService.getSearchedDeals(searchLine));
         return "search/search";
     }
 }

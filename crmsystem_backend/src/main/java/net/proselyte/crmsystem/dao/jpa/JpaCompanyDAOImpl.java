@@ -28,7 +28,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     @Override
     public Company getById(UUID id) {
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
+                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser LEFT JOIN FETCH company.associatedContacts WHERE company.id =:id");
 
         query.setParameter("id", id);
         Company company = (Company) query.getSingleResult();
@@ -43,7 +43,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
         List<Company> result;
 
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser");
+                "SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser LEFT JOIN FETCH company.tags LEFT JOIN FETCH company.associatedContacts ");
 
         result = query.getResultList();
 
@@ -63,7 +63,6 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     public void save(Company company) {
         if (company.getId() == null) {
             company.setCreated(new Date());
-            company.setUpdated(new Date());
             this.entityManager.persist(company);
             logger.info("Company successfully saved. Company details: " + company);
         } else {
@@ -81,9 +80,9 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
     }
 
     @Override
-    public Collection<Company> getSortedCompanies(String searchLine) {
+    public Collection<Company> getSearchedCompanies(String searchLine) {
         List<Company> resultSearch;
-        Query query = entityManager.createQuery("SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.name LIKE ?");
+        Query query = entityManager.createQuery("SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser LEFT JOIN FETCH company.tags LEFT JOIN FETCH company.associatedContacts WHERE company.name LIKE ?");
             query.setParameter(0, "%"+searchLine+"%");
             resultSearch=query.getResultList();
         for (Company company : resultSearch) {

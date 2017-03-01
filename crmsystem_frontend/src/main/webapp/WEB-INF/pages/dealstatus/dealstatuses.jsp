@@ -48,14 +48,19 @@
   </style>
 
   <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js" ></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
+
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
-
-
-
+<div class="main-content">
 <h1>List of Deal Statuses</h1>
 
 <br>
@@ -82,7 +87,9 @@
     </c:forEach>
   </table>
 </c:if>
+</div>
 
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>
