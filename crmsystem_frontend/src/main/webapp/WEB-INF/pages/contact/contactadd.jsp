@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
+
 <html>
 <head>
     <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
@@ -15,6 +16,10 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <csrf disabled="true"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 
 <body>
@@ -27,7 +32,7 @@
     <h1>Contact edit</h1>
     </c:if>
 
-    <form:form id="contactform" method="POST" modelAttribute="contact" action="/contact/add/${contact.id}">
+    <form:form id="contactform" method="POST" modelAttribute="contact" action="/contact/add/${contact.id}" >
     <form class="form-inline">
         <div class="form-group">
             <c:if test="${!empty contact.id}">
@@ -93,7 +98,7 @@
             </div>
 
             <!--remove associated company -->
-        <div class="clearfix" style="float: left; margin: 0px 0px 0px 10px;">
+        <div class="clearfix" style="float: left; margin: 0px 30px 0px 10px;">
             <h5>Associated companies</h5>
             <div class="panel panel-default clearfix" style="float: left; height: 100px; width: 300px; overflow: auto">
                 <c:if test="${!empty contact.associatedCompanies}">
@@ -107,6 +112,7 @@
             </div>
         </div>
     </div>
+
         <!--add associated deals -->
         <div class="clearfix">
             <div class="clearfix" style="float: left; margin: 0px 10px 0px 0px;">
@@ -143,6 +149,15 @@
             </div>
         </div>
     </form:form>
+    <form:form method="POST" action="/uploadFile/${contact.id}" enctype="multipart/form-data">
+        File to upload: <input type="file" name="file"><br />
+        <input type="submit" value="Upload">
+        Press here to upload the file!
+    </form:form>
+
+    <td><a href="<c:url value='/download/${contact.id}' />"
+           style="text-decoration: none"/>${contact.file.name} </td>
+
 </div>
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

@@ -1,15 +1,22 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.*;
+
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.ContactService;
 import net.proselyte.crmsystem.service.DealService;
 import net.proselyte.crmsystem.service.UserService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 /**
@@ -155,5 +162,52 @@ public class ContactController {
         model.addAttribute("user", new User());
 
         return "redirect:/editcontact/"+contact.getId()+"/";
+    }
+
+        @RequestMapping(value = "/uploadFile/{contactId}", method = RequestMethod.POST)
+        public String uploadFile(@PathVariable("contactId") UUID contactId,
+                @RequestParam("file") MultipartFile file) {// имена параметров (тут - "file") - из формы JSP.
+            Contact contact = this.contactService.getById(contactId);
+            String name = null;
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+                    name = file.getOriginalFilename();
+                    File uploadedFile = new File(name);
+                    contact.setFile(uploadedFile);
+                    this.contactService.save(contact);
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+                    stream.write(bytes);
+                    stream.flush();
+                    stream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return "redirect:/editcontact/"+contact.getId()+"/";
+        }
+
+    @RequestMapping(value="/download/{contactId}", method=RequestMethod.GET)
+    public void getDownload(@PathVariable("contactId") UUID contactId,
+                            HttpServletResponse response) {
+        Contact contact = this.contactService.getById(contactId);
+        File file = contact.getFile();
+        InputStream myStream = null;
+        try {
+            myStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // Get your file stream from wherever.
+        // Set the content type and attachment header.
+        response.addHeader("Content-disposition", "attachment;filename=\"" + file.getName().toString() + "\"");
+        response.setContentType("txt/plain");
+        // Copy the stream to the response's output stream.
+        try {
+            IOUtils.copy(myStream, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
