@@ -51,7 +51,7 @@ public class User extends BaseEntity {
     @ManyToMany(mappedBy = "responsibleUser", fetch=FetchType.EAGER)
     private Set<Company> companies;
 
-    @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, orphanRemoval = true, fetch=FetchType.EAGER)      // cascade, orphanremove
+    @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, /*orphanRemoval = true,*/ fetch=FetchType.EAGER)
     private Set<Task> tasks;
 
     @PrePersist

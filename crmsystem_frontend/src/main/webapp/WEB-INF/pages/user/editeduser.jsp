@@ -11,75 +11,73 @@
     <title>Edited task</title>
 </head>
 <body>
-
-<h3>* SUCCESSFUL EDIT *</h3>
 <br>
-
-<h4>You have edited user with the following parameters:</h4>
+<h3 class="text-center" style="color: darkgreen">You have edited user with the following parameters:</h3>
+<br>
 <br>
 <table>
     <tr>
-        <td><b>ID:</b></td>
-        <td>${user.id}</td>
+        <td class="text-left"><b>ID:</b></td>
+        <td class="text-right" style="color: darkgreen">${user.id}</td>
     </tr>
     <tr>
-        <td><b>username:</b></td>
-        <td>${user.username}</td>
+        <td class="text-left"><b>username:</b></td>
+        <td class="text-right" style="color: darkgreen">${user.username}</td>
     </tr>
     <tr>
-        <td><b>email:</b></td>
-        <td>${user.email}</td>
+        <td class="text-left"><b>email:</b></td>
+        <td class="text-right" style="color: darkgreen">${user.email}</td>
     </tr>
     <tr>
-        <td><b>First name:</b></td>
-        <td>${user.firstName}</td>
+        <td class="text-left"><b>First name:</b></td>
+        <td class="text-right" style="color: darkgreen">${user.firstName}</td>
     </tr>
     <tr>
-        <td><b>Last name:</b></td>
-        <td>${user.lastName}</td>
+        <td class="text-left"><b>Last name:</b></td>
+        <td class="text-right" style="color: darkgreen">${user.lastName}</td>
     </tr>
-    <tr>
-        <td><b>Associated companies:</b></td>
-        <td>
-            <table>
-                <c:forEach items="${user.companies}" var="company">
-                    <tr>
-                        <td class="text-center">${company.name}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td><b>Tasks:</b></td>
-        <td>
-            <table>
-                <c:forEach items="${user.tasks}" var="task">
-                    <tr>
-                        <td class="text-center">${task.name}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td><b>Roles:</b></td>
-        <td>
-            <table>
-                <c:forEach items="${user.roles}" var="role">
-                    <tr>
-                        <td class="text-center">${role.name}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </td>
-    </tr>
+    <%--<tr>--%>
+        <%--<td><b>Associated companies:</b></td>--%>
+        <%--<td>--%>
+            <%--<table>--%>
+                <%--<c:forEach items="${user.companies}" var="company">--%>
+                    <%--<tr>--%>
+                        <%--<td class="text-center">${company.name}</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
+        <%--</td>--%>
+    <%--</tr>--%>
+    <%--<tr>--%>
+        <%--<td><b>Tasks:</b></td>--%>
+        <%--<td>--%>
+            <%--<table>--%>
+                <%--<c:forEach items="${user.tasks}" var="task">--%>
+                    <%--<tr>--%>
+                        <%--<td class="text-center">${task.name}</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
+        <%--</td>--%>
+    <%--</tr>--%>
+    <%--<tr>--%>
+        <%--<td><b>Roles:</b></td>--%>
+        <%--<td>--%>
+            <%--<table>--%>
+                <%--<c:forEach items="${user.roles}" var="role">--%>
+                    <%--<tr>--%>
+                        <%--<td class="text-center">${role.name}</td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
+        <%--</td>--%>
+    <%--</tr>--%>
 
 
 </table>
 <br>
 <br>
-<a href="/task/" class="btn btn-lg" style="color: firebrick">All tasks</a>
+<a href="/user/" class="btn btn-lg" style="color: firebrick">All users</a>
 <br>
 <a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
 

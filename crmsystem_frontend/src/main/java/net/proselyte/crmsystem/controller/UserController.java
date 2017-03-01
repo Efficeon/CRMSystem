@@ -95,8 +95,8 @@ public class UserController {
 
     @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("user") User user){
-//        this.userService.edit(user);
-        this.userService.save(user);
+        this.userService.edit(user);
+//        this.userService.save(user);
         return "user/editeduser";
     }
 }

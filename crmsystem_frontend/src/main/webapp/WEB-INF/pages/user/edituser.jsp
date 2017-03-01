@@ -44,42 +44,54 @@
                     <td><form:input type="text" path="lastName" class="form-group"
                                                                   placeholder='last name${user.lastName}'/></td>
                 </tr>
-
-                    <%--<form:input  path="userType" class="form-group"--%>
-                    <%--placeholder='The type of user${userType}' autofocus="true" />--%>
                 <tr>
-                    <td class="text-left" width="150"><b>Companies:</b></td>
-                    <td><form:select path="companies" required="true" multiple="true" items="${companyList}" itemValue="id" itemLabel="name" class="form-control input-sm" />
-                        <%--<form:select path="companies" required="true" multiple="true">--%>
-                        <%--<form:option value="0" label="--Select one or more--" disabled="true"/>--%>
-                        <%--<form:options items="${companyList}" itemValue="id" itemLabel="name"/>--%>
-                    <%--</form:select></td>--%>
-                    <td class="text-center" style="color: grey"><i>Select one or more items</i>
-                        <br><i>Please, scroll</i></td>
+                    <td class="text-left" width="150"><b>New password:</b></td>
+                    <td><form:input type="text" path="password" class="form-group"
+                                    placeholder='0'/></td>
                 </tr>
                 <tr>
-                    <td class="text-left" width="150"><b>Tasks:</b></td>
-                    <td><form:select path="tasks" required="true" multiple="true" items="${taskList}" itemValue="id" itemLabel="name" class="form-control input-sm" />
-                        <%--<form:select path="tasks" required="true" multiple="true">--%>
-                        <%--<form:option value="0" label="--Select one or more--" disabled="true"/>--%>
-                        <%--<form:options items="${taskList}" itemValue="id" itemLabel="name"/>--%>
-                    <%--</form:select>--%>
-                    </td>
-                    <td class="text-center" style="color: grey"><i>Select one or more items</i>
-                        <br><i>Please, scroll</i></td>
+                    <td class="text-left" width="150"><b>Confirm password:</b></td>
+                    <td><form:input type="text" path="confirmPassword" class="form-group"
+                                    placeholder='confirm'/></td>
                 </tr>
-                <tr></tr>
-                <tr>
-                    <td class="text-left" width="150"><b>Roles:</b></td>
-                    <td><form:select path="roles" required="true" multiple="true" items="${roleList}" itemValue="id" itemLabel="name" class="form-control input-sm" />
-                            <%--<form:select path="roles" required="true" multiple="true">--%>
-                            <%--<form:option value="0" label="--Select one or more--" disabled="true"/>--%>
-                            <%--<form:options items="${roleList}" itemValue="id" itemLabel="name"/>--%>
-                            <%--</form:select>--%>
-                    </td>
-                    <td class="text-center" style="color: grey"><i>Select one or more items</i>
-                        <br><i>Please, scroll</i></td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td class="text-left" width="150"><b>User type:</b></td>--%>
+                    <%--<td><form:input path="userType" class="form-group"--%>
+                                    <%--placeholder='The type of user${user.userType}'/></td>--%>
+                <%--</tr>--%>
+                <%--<tr>--%>
+                    <%--<td class="text-left" width="150"><b>Companies:</b></td>--%>
+                    <%--<td><form:select path="companies" required="true" multiple="true" items="${companyList}" itemValue="id" itemLabel="name" class="form-control input-sm" />--%>
+                        <%--&lt;%&ndash;<form:select path="companies" required="true" multiple="true">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<form:option value="0" label="--Select one or more--" disabled="true"/>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<form:options items="${companyList}" itemValue="id" itemLabel="name"/>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</form:select></td>&ndash;%&gt;--%>
+                    <%--<td class="text-center" style="color: grey"><i>Select one or more items</i>--%>
+                        <%--<br><i>Please, scroll</i></td>--%>
+                <%--</tr>--%>
+                <%--<tr>--%>
+                    <%--<td class="text-left" width="150"><b>Tasks:</b></td>--%>
+                    <%--<td><form:select path="tasks" required="true" multiple="true" items="${taskList}" itemValue="id" itemLabel="name" class="form-control input-sm" />--%>
+                        <%--&lt;%&ndash;<form:select path="tasks" required="true" multiple="true">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<form:option value="0" label="--Select one or more--" disabled="true"/>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<form:options items="${taskList}" itemValue="id" itemLabel="name"/>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</form:select>&ndash;%&gt;--%>
+                    <%--</td>--%>
+                    <%--<td class="text-center" style="color: grey"><i>Select one or more items</i>--%>
+                        <%--<br><i>Please, scroll</i></td>--%>
+                <%--</tr>--%>
+                <%--<tr></tr>--%>
+                <%--<tr>--%>
+                    <%--<td class="text-left" width="150"><b>Roles:</b></td>--%>
+                    <%--<td><form:select path="roles" required="true" multiple="true" items="${roleList}" itemValue="id" itemLabel="name" class="form-control input-sm" />--%>
+                            <%--&lt;%&ndash;<form:select path="roles" required="true" multiple="true">&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<form:option value="0" label="--Select one or more--" disabled="true"/>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<form:options items="${roleList}" itemValue="id" itemLabel="name"/>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</form:select>&ndash;%&gt;--%>
+                    <%--</td>--%>
+                    <%--<td class="text-center" style="color: grey"><i>Select one or more items</i>--%>
+                        <%--<br><i>Please, scroll</i></td>--%>
+                <%--</tr>--%>
                 </table>
                 <br>
                 <button type="submit" id="userform" style="color: green">

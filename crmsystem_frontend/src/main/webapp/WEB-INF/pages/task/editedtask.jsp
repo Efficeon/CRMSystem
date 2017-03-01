@@ -21,16 +21,20 @@
         <td class="text-right" style="color: darkgreen">${task.id}</td>
     </tr>
     <tr>
-        <td class="text-left"><b>username:</b></td>
+        <td class="text-left"><b>Task name:</b></td>
         <td class="text-right" style="color: darkgreen">${task.name}</td>
     </tr>
     <tr>
-        <td class="text-left"><b>email:</b></td>
+        <td class="text-left"><b>Description:</b></td>
         <td class="text-right" style="color: darkgreen">${task.description}</td>
     </tr>
     <tr>
-        <td class="text-left"><b>First name:</b></td>
+        <td class="text-left"><b>Updated:</b></td>
         <td class="text-right" style="color: darkgreen">${task.updated}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Responsible user:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.implementer.lastName}</td>
     </tr>
 </table>
 <br>
