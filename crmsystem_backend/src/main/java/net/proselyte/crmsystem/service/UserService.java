@@ -23,5 +23,7 @@ public interface UserService {
 
     Collection getAll();
 
+    User edit(User user);
+
     Collection<User> getSearchedUsers(String searchLine);
 }

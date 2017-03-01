@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void save(User user) {
+
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
         roles.add(roleDao.findByName("ROLE_USER"));
@@ -72,6 +73,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public User edit(User user) {
+        return userDao.edit(user); }
+
+    @Override
+    @Transactional
     public Collection<User> getSearchedUsers(String searchLine) {
         return userDao.getSortedUsers(searchLine);
     }

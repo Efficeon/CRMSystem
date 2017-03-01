@@ -49,12 +49,11 @@ public class User extends BaseEntity {
     private Set<Role> roles;
 
     @ManyToMany(mappedBy = "responsibleUser", fetch=FetchType.EAGER)
-    private Set<Company> associatedСompany;
+    private Set<Company> companies;
 
-    @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, orphanRemoval = true, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, /*orphanRemoval = true,*/ fetch=FetchType.EAGER)
     private Set<Task> tasks;
 
-//    автогенерация registrationDate, при создании нового объекта
     @PrePersist
     public void getDate() {
         registrationDate = new Date();
@@ -140,12 +139,12 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    public Set<Company> getAssociatedСompany() {
-        return associatedСompany;
+    public Set<Company> getCompanies() {
+        return companies;
     }
 
-    public void setAssociatedСompany(Set<Company> associatedСompany) {
-        this.associatedСompany = associatedСompany;
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 
     public Set<Task> getTasks() {
@@ -165,6 +164,31 @@ public class User extends BaseEntity {
         if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
         return getUsername() != null ? getUsername().equals(that.getUsername()) : that.getUsername() == null;
     }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        User user = (User) o;
+//
+//        return (getId().equals(user.getId()));
+//
+//        if (!email.equals(user.email)) return false;
+//        if (userType != null ? !userType.equals(user.userType) : user.userType != null) return false;
+//        if (!username.equals(user.username)) return false;
+//        if (!firstName.equals(user.firstName)) return false;
+//        if (!lastName.equals(user.lastName)) return false;
+//        if (!password.equals(user.password)) return false;
+//        if (confirmPassword != null ? !confirmPassword.equals(user.confirmPassword) : user.confirmPassword != null)
+//            return false;
+//        if (!registrationDate.equals(user.registrationDate)) return false;
+//        if (birthDate != null ? !birthDate.equals(user.birthDate) : user.birthDate != null) return false;
+//        if (roles != null ? !roles.equals(user.roles) : user.roles != null) return false;
+//        if (companies != null ? !companies.equals(user.companies) : user.companies != null) return false;
+//        return tasks != null ? tasks.equals(user.tasks) : user.tasks == null;
+//
+//    }
 
     @Override
     public int hashCode() {
@@ -181,7 +205,7 @@ public class User extends BaseEntity {
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", userType='" + userType + '\'' +
+//                ", userType='" + userType + '\'' +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

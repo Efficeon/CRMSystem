@@ -68,7 +68,8 @@
         </div>
 
 <br>
-<a href="<c:url value='/'/>">Back to start page</a>
+<a href="<c:url value='/home/'/>" class="btn btn-lg" style="color: green">
+    <i class="glyphicon glyphicon-arrow-left"></i> Back to home page</a>
 <br>
 <%--<script src="/WEB-INF/pages/js/bootstrap.min.js"></script>--%>
     <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>--%>

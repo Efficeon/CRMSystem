@@ -16,63 +16,45 @@
 </head>
 
 <body>
-    <h2>* All tasks list *</h2>
-<br>
-<a href="<c:url value='/user/'/>">All users</a>
-<br>
-<a href="<c:url value='/company/'/>">All companies</a>
-<br>
-<br>
-<a href="<c:url value='/'/>">Back to start page</a>
+    <h2>All tasks list</h2>
+    <a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+    <a href="/user/" class="btn btn-lg" style="color: firebrick">All users</a>
+    <a href="/company/" class="btn btn-lg" style="color: grey">All companies</a>
 <br>
 <br>
 <button>
     <a href="<c:url value='/task/add/'/>" class="btn btn-lg" style="color: green">
-        <i class="fa fa-plus"></i> Create task</a>
+        <i class="fa fa-plus"></i> Create new task</a>
 </button>
 <br>
 <br>
 <c:if test="${!empty listTasks}">
     <table class="table table-striped table-condensed">
         <tr>
-            <th class="text-center" width="25">ID</th>
+            <th class="text-center"  width="150">ID</th>
             <th class="text-center" width="120">Name</th>
-            <th class="text-center" width="200">Description</th>
             <th class="text-center" width="80">Responsible person</th>
             <th class="text-center" width="50">Created</th>
-            <th class="text-center" width="50">Updated</th>
-
             <th class="text-center" width="50">Details</th>
-            <th class="text-center" width="50">Edit</th>
-            <th class="text-center" width="50">Delete</th>
         </tr>
 
         <c:forEach items="${listTasks}" var="task">
             <tr>
-                <td>${task.id}</td>
-                <td>${task.name}</td>
-                <td>${task.description}</td>
-                <td>${task.implementer.getFirstName()}</td>
-                <%--task.responsiblePerson !!! was replaced by task.implementer--%>
-                <td><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                <td><fmt:formatDate value="${task.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-                <%--ячейки заполняются значениями из заголовков - "по умолчанию"--%>
-                <%----%>
+                <td class="text-left"  width="350">${task.id}</td>
+                <td class="text-left"  width="200">${task.name}</td>
+                <td class="text-left"  width="300">${task.implementer.getFirstName()} ${task.implementer.getLastName()}</td>
+                <td class="text-center"  width="150"><fmt:formatDate value="${task.created}" pattern="d-MM-yyyy"/></td>
                 <td class="text-center"><a href="<c:url value='/taskdata/${task.id}/'/>"
-                                           span class="glyphicon glyphicon glyphicon-file " style="color: darkblue">Details </a></td>
-                <td class="text-center"><a href="<c:url value='/edittask/${task.id}/'/>"
-                                           span class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a></td>
-                <td class="text-center"><a href="<c:url value='/removetask/${task.id}/' />"
-                                           span class="glyphicon glyphicon-remove" style="color: red">Delete</a></td>
+                                           class="glyphicon glyphicon glyphicon-file " style="color: darkblue"> Details</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 
+<a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
 <br>
-<a href="<c:url value='/'/>">Back to start page</a>
 <br>
-
+<br>
     <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

@@ -11,29 +11,39 @@
     <title>Edited task</title>
 </head>
 <body>
+<br>
+<h3 class="text-center" style="color: darkgreen">You have edited task with the following parameters:</h3>
+<br>
+<br>
+<table>
+    <tr>
+        <td class="text-left"><b>ID:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.id}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Task name:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.name}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Description:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.description}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Updated:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.updated}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>Responsible user:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.implementer.lastName}</td>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<a href="/task/" class="btn btn-lg" style="color: firebrick">All tasks</a>
+<br>
+<a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
 
-<h3>* SUCCESSFUL EDIT *</h3>
-<br>
-
-<h4>You have edited a task with the following parameters:</h4>
-<br>
-<h4>id: </h4>${task.id}
-<br>
-<h4>name: </h4>${task.name}
-<br>
-<h4>name: </h4>${task.description}
-<br>
-<h4>at: </h4>${task.updated}
-
-<br>
-<br>
-<br>
-
-<a href="<c:url value='/task/'/>">All tasks</a>
-<br>
-<a href="<c:url value='/user/'/>">All users</a>
-<br>
-<a href="<c:url value='/company/'/>">All companies</a>
 
 </body>
 </html>

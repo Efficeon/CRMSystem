@@ -13,9 +13,9 @@
 </head>
 
 <body>
-<h2>* The user details *</h2>
-<br>
-<a href="<c:url value='/user/'/>">All users</a>
+<h2>The user details</h2>
+<a href="<c:url value='/home/' />" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+<a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: firebrick">All users</a>
 <br>
 <br>
 <table class="table table-striped table-condensed">
@@ -28,8 +28,9 @@
         <%--<th class="text-center" width="50">Birth date</th>--%>
         <%--<th class="text-center" width="50">User type</th>--%>
         <th class="text-center" width="50">Registration date</th>
+        <th class="text-center" width="50">Type</th>
 
-        <th class="text-center" width="50">Roles</th>
+        <%--<th class="text-center" width="50">Roles</th>--%>
         <th class="text-center" width="50">Associated companies</th>
         <th class="text-center" width="50">Related tasks</th>
 
@@ -37,67 +38,54 @@
         <th class="text-center" width="40">Delete</th>
     </tr>
 
-    <c:forEach items="${userList}" var="user">
-        <tr>
-            <td class="text-center">${user.id}</td>
-            <td class="text-center">${user.username}</td>
-            <td class="text-center">${user.email}</td>
-            <td class="text-center">${user.firstName}</td>
-            <td class="text-center">${user.lastName}</td>
-                <%--<td>${user.birthDate}</td>--%>
-            <td class="text-center">${user.registrationDate}</td>
+    <tr>
+        <td class="text-center">${user.id}</td>
+        <td class="text-center">${user.username}</td>
+        <td class="text-center">${user.email}</td>
+        <td class="text-center">${user.firstName}</td>
+        <td class="text-center">${user.lastName}</td>
+        <%--<td>${user.birthDate}</td>--%>
+        <td class="text-center">${user.registrationDate}</td>
+        <td class="text-center">${user.userType}</td>
 
-            <td class="text-center">
-                <table>
-                    <c:forEach items="${user.roles}" var="role">
-                        <tr>
-                            <td class="text-center">${role.name}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </td>
-
-
-            <td class="text-center">
-                <table>
-                    <c:forEach items="${compamyList}" var="company">
-                        <tr>
-                            <td><a href="/companydata/${company.id}"/>${company.name}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </td>
-
-                <%--<td class="text-center">--%>
-                <%--<table>--%>
-                <%--<c:forEach items="${user.tasks}" var="task">--%>
-                <%--<tr>--%>
-                <%--<td class="text-center" <a href="/taskdata/${task.id}"> ${task.name}</a></td>--%>
-                <%--</tr>--%>
+        <%--<td class="text-center">--%>
+            <%--<table>--%>
+                <%--<c:forEach items="${user.roles}" var="role">--%>
+                    <%--<tr>--%>
+                        <%--<td class="text-center">${role.name}</td>--%>
+                    <%--</tr>--%>
                 <%--</c:forEach>--%>
-                <%--</table>--%>
-                <%--</td>--%>
+            <%--</table>--%>
+        <%--</td>--%>
 
-            <td class="text-center">
-                <table>
-                    <c:forEach items="${user.tasks}" var="task">
-                        <tr>
-                            <td class="text-center" <a href="/taskdata/?id=<c:out value='${task.id}'/>">${task.name}</a></td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </td>
+        <td class="text-center">
+            <table>
+                <c:forEach items="${user.companies}" var="company">
+                    <tr>
+                        <td class="text-center"><a href="<c:url value='/companydata/${company.id}/'/>">${company.name}</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </td>
 
-            <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
-                                       class="glyphicon glyphicon glyphicon-edit" style="color: orange">Edit</a>
-            </td>
+        <td class="text-center">
+            <table>
+                <c:forEach items="${user.tasks}" var="task">
+                    <tr>
+                        <td class="text-left"><a href="<c:url value='/taskdata/${task.id}/'/>">${task.name}</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </td>
 
-            <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/'/>"
-                                       class="glyphicon glyphicon-remove" style="color: red">Delete</a>
-            </td>
-        </tr>
-    </c:forEach>
+        <td class="text-center"><a href="<c:url value='/edituser/${user.id}/' />"
+                                   class="glyphicon glyphicon glyphicon-edit" style="color: orange"></a>
+        </td>
 
+        <td class="text-center"><a href="<c:url value='/remove_user/${user.id}/'/>"
+                                   class="glyphicon glyphicon-remove" style="color: red"></a>
+        </td>
+    </tr>
 </table>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>

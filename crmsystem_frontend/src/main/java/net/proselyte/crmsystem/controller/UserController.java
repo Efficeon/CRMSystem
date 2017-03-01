@@ -8,6 +8,7 @@ import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +50,7 @@ public class UserController {
 //    }
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
-
-    public String listUsers(Model model)
-    {
+    public String listUsers(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("userList", this.userService.getAll());
         model.addAttribute("roleList", this.roleService.getAll());
@@ -61,23 +60,26 @@ public class UserController {
         return "user/users-v";
     }
 
+    @RequestMapping(value = "/user/add/", method = RequestMethod.GET)
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("listRoles", this.roleService.getAll());
+        model.addAttribute("listTasks", this.taskService.getAll());
+        model.addAttribute("listCompanies", this.companyService.getAll());
 
-//@RequestMapping(value = "userdata/${id}/", method = RequestMethod.GET)
-//public String userData(@PathVariable("id") UUID id, Model model){
-//model.addAttribute("user", this.userService.getById(id));
+        return "user/useradd";
+    }
 
-//model.addAttribute("userList", this.userService.getAll());
-//model.addAttribute("company", this.companyService.getAll());
-//model.addAttribute("task", this.taskService.getAll());
-//model.addAttribute("role", this.roleService.getAll());
-//
-//return "user/userdata";
-//}
+    @RequestMapping(value = "/user/add/", method = RequestMethod.POST)
+    public String taskSubmit(@ModelAttribute("user") User user) {
+        this.userService.save(user);
+        return "user/useradded";
+    }
 
-    @RequestMapping(value="userdata/{id}/", method = RequestMethod.GET)
+    @RequestMapping(value = "userdata/{id}/", method = RequestMethod.GET)
     public String taskData(@PathVariable("id") UUID id,
                            @ModelAttribute("user") User user,
-                           Model model){
+                           Model model) {
         model.addAttribute("user", this.userService.getById(id));
         model.addAttribute("userList", this.userService.getAll());
         model.addAttribute("roleList", this.roleService.getAll());
@@ -86,21 +88,26 @@ public class UserController {
         return "user/userdata";
     }
 
-    @RequestMapping(value = "remove_user/${id}/", method = RequestMethod.GET)
-    public String removeUser(@PathVariable("id") UUID id){ this.userService.remove(userService.getById(id));
-        return "redirect:/user/";
+    @RequestMapping(value = "/remove_user/{id}/", method = RequestMethod.GET)
+    public String removeUser(@PathVariable("id") UUID id) {
+        this.userService.remove(userService.getById(id));
+        return "user/removeduser";
     }
-//    работаем с ссылочными данными, связанными с другими сущностями
 
+    @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.GET)
+    public String editUser(@PathVariable("id") UUID id,
+                            Model model){
+        model.addAttribute("user",this.userService.getById(id));
+        model.addAttribute("companyList", this.companyService.getAll());
+        model.addAttribute("taskList", this.taskService.getAll());
+        model.addAttribute("roleList", this.roleService.getAll());
+        return "user/edituser";
+    }
 
-//    Roles
-
-
-
-//    Companies
-
-
-
-//    Tasks
-
+    @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.POST)
+    public String editSubmit(@ModelAttribute("user") User user){
+        this.userService.edit(user);
+//        this.userService.save(user);
+        return "user/editeduser";
+    }
 }

@@ -13,14 +13,15 @@
 
 <body>
 <h2>The list of users</h2>
+<a href="<c:url value='/home/' />" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+<a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: firebrick">All tasks</a>
+<a href="<c:url value='/company/'/>" class="btn btn-lg" style="color: grey">All companies</a>
 <br>
 <br>
-<a href="/task/">All tasks</a>
-<br>
-<a href="/company/">All companies</a>
-<br>
-<br>
-<a href="/">Back to start page</a>
+<button>
+<a href="<c:url value='/user/add/'/>" class="btn btn-lg" style="color: green">
+    <i class="fa fa-plus"></i> Create new user</a>
+</button>
 <br>
 <br>
 <table class="table table-striped table-condensed">
@@ -33,29 +34,27 @@
         <th class="text-center" width="50">User details</th>
     </tr>
     <c:forEach items="${userList}" var="user">
-        <tr>
-            <td class="text-center">${user.id}</td>
-            <td class="text-center">${user.username}</td>
-            <td class="text-center">${user.email}</td>
-            <td class="text-center">
-                <table>
-                    <c:forEach items="${user.roles}" var="role">
-                        <tr>
-                            <td>${role.name}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </td>
-            <td class="text-center">${user.registrationDate}</td>
-            <td class="text-center">
-                <a href="/userdata/${user.id}/"
-                   span class="glyphicon glyphicon glyphicon-file "
-                   style="color: darkblue">Details</a>
-            </td>
-        </tr>
+    <tr>
+        <td class="text-left">${user.id}</td>
+        <td class="text-left">${user.username}</td>
+        <td class="text-center">${user.email}</td>
+        <td class="text-center">
+            <table>
+                <c:forEach items="${user.roles}" var="role">
+                    <tr>
+                        <td>${role.name}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </td>
+        <td class="text-center">${user.registrationDate}</td>
+        <td class="text-center">
+            <a href="/userdata/${user.id}/"
+               span class="glyphicon glyphicon glyphicon-file "
+               style="color: darkblue">Details</a>
+        </td>
+    </tr>
     </c:forEach>
-
-
 </table>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

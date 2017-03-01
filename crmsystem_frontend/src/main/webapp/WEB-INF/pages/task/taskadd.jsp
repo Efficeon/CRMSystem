@@ -6,9 +6,6 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <%--<a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: green">--%>
-        <%--<i class="glyphicon glyphicon-arrow-left"></i>--%>
-        <%--</a>--%>
     <title>Create task</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
@@ -16,61 +13,42 @@
 </head>
 
 <body>
-<h2>* Add a task *</h2>
+<h2>Add a task</h2>
 <br>
 <br>
-
-
 <form:form id="taskform" method="POST" modelAttribute="task">
     <form class="form-inline">
         <div class="form-group">
 
-            <%--ID--%>
-            <%--<c:if test="${!empty task.id}">--%>
-                    <%--<form:input  path="id" class="form-group" readonly="true"--%>
-                                 <%--disabled="true" placeholder='ID${task.id}'/>--%>
-            <%--</c:if>--%>
-
-            <%--<form:input type="hidden" path="id" placeholder='ID${task.id}' id="task.id"/>--%>
-
-
-
             <form:input  type="text" path="name" class="form-group"
                              placeholder='Name${task.name}' autofocus="true"/>
             <br>
-
                 <form:input  type="textarea" path="description" class="form-group"
                 placeholder='Description${task.description}'/>
-
             <br>
                 <form:select path="implementer.id">
-                    <form:option value="0" label="Select ..."/>
-                    <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
+                    <form:option value="0" label="Select responsible person"/>
+                    <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
                 </form:select>
             <br>
             <br>
             <button type="submit" id="taskform">
-                <spring:message text="Add task"/>
+                <spring:message text="Add"/>
             </button>
         </div>
 
         <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
     </form>
-
-    <br>
-    <br>
-    <button type="button">
-    <a href="<c:url value='/task/'/>">All tasks list</a>
-    </button>
-
 </form:form>
 
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
 <br>
-<a href="<c:url value='/'/>">Back to start page</a>
+<a href="/task/" class="btn btn-lg" style="color: firebrick">All tasks</a>
+<br>
+<a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+<br>
 <br>
 
 </body>
