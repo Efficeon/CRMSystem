@@ -54,7 +54,6 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, orphanRemoval = true, fetch=FetchType.EAGER)      // cascade, orphanremove
     private Set<Task> tasks;
 
-//    автогенерация registrationDate, при создании нового объекта
     @PrePersist
     public void getDate() {
         registrationDate = new Date();
@@ -140,14 +139,6 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-//    public Set<Company> getAssociatedCompany() {
-//        return associatedCompany;
-//    }
-
-//    public void setAssociatedCompany(Set<Company> associatedCompany) {
-//        this.associatedCompany = associatedCompany;
-//    }
-
     public Set<Company> getCompanies() {
         return companies;
     }
@@ -164,16 +155,25 @@ public class User extends BaseEntity {
         this.tasks = tasks;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
-
-        return (getId().equals(user.getId()));
-
+        User that = (User) o;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        return getUsername() != null ? getUsername().equals(that.getUsername()) : that.getUsername() == null;
+    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        User user = (User) o;
+//
+//        return (getId().equals(user.getId()));
+//
 //        if (!email.equals(user.email)) return false;
 //        if (userType != null ? !userType.equals(user.userType) : user.userType != null) return false;
 //        if (!username.equals(user.username)) return false;
@@ -187,18 +187,17 @@ public class User extends BaseEntity {
 //        if (roles != null ? !roles.equals(user.roles) : user.roles != null) return false;
 //        if (companies != null ? !companies.equals(user.companies) : user.companies != null) return false;
 //        return tasks != null ? tasks.equals(user.tasks) : user.tasks == null;
-
-    }
+//
+//    }
 
     @Override
     public int hashCode() {
-        int result = email.hashCode();
+        int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (userType != null ? userType.hashCode() : 0);
-        result = 31 * result + username.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + registrationDate.hashCode();
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 

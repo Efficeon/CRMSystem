@@ -9,8 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+
 
 /**
  * JPA implmentation of {@link UserDAO} interface.
@@ -30,7 +32,7 @@ public class JpaUserDAOImpl implements UserDAO {
     public User getById(UUID id) {
         Query query = this.entityManager.createQuery(
                 "SELECT user FROM User user WHERE user.id =:id", User.class);
-//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles, user.associatedСompany, user.tasks WHERE user.id=:id");
+//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
@@ -38,12 +40,14 @@ public class JpaUserDAOImpl implements UserDAO {
         return user;
     }
 
-    @Override
-    public List<User> getAll() {
-        List<User> result;
+
+        @Override
+    public Collection<User> getAll() {
+        Collection<User> result;
 
         Query query = this.entityManager.createQuery("SELECT user FROM User user", User.class);
-        result = query.getResultList();
+//            "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
+            result = query.getResultList();
 
         for (User user : result) {
             logger.info("User list: " + user);
@@ -75,8 +79,10 @@ public class JpaUserDAOImpl implements UserDAO {
             Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
+            System.out.println("--------------get User: " + user);
             return user;
         } catch (NoResultException e) {
+            System.out.println("------------No result exception inside JpaUserDAOimpl");
             return null;
         }
     }
@@ -99,5 +105,24 @@ public class JpaUserDAOImpl implements UserDAO {
  * entityManager.merge() -- вернет Task !!!
  */
         return this.entityManager.merge(existingUser);
+    }
+
+
+    @Override
+    public Collection<User> getSortedUsers(String searchLine) {
+        List<User> resultSearch;
+        Query query = entityManager.createQuery(
+                "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles WHERE user.username LIKE ? " +
+                        "OR user.email LIKE ? OR user.firstName LIKE ? OR user.lastName LIKE ?");
+        query.setParameter(0, "%"+searchLine+"%");
+        query.setParameter(1, "%"+searchLine+"%");
+        query.setParameter(2, "%"+searchLine+"%");
+        query.setParameter(3, "%"+searchLine+"%");
+
+        resultSearch=query.getResultList();
+        for (User user : resultSearch) {
+            logger.info("Search users list: " + user);
+        }
+        return resultSearch;
     }
 }
