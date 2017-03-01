@@ -54,6 +54,8 @@
                         <%--<form:option value="0" label="--Select one or more--" disabled="true"/>--%>
                         <%--<form:options items="${companyList}" itemValue="id" itemLabel="name"/>--%>
                     <%--</form:select></td>--%>
+                    <td class="text-center" style="color: grey"><i>Select one or more items</i>
+                        <br><i>Please, scroll</i></td>
                 </tr>
                 <tr>
                     <td class="text-left" width="150"><b>Tasks:</b></td>
@@ -63,6 +65,8 @@
                         <%--<form:options items="${taskList}" itemValue="id" itemLabel="name"/>--%>
                     <%--</form:select>--%>
                     </td>
+                    <td class="text-center" style="color: grey"><i>Select one or more items</i>
+                        <br><i>Please, scroll</i></td>
                 </tr>
                 <tr></tr>
                 <tr>
@@ -73,6 +77,8 @@
                             <%--<form:options items="${roleList}" itemValue="id" itemLabel="name"/>--%>
                             <%--</form:select>--%>
                     </td>
+                    <td class="text-center" style="color: grey"><i>Select one or more items</i>
+                        <br><i>Please, scroll</i></td>
                 </tr>
                 </table>
                 <br>
