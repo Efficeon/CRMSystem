@@ -105,7 +105,8 @@ CREATE TABLE IF NOT EXISTS contacts (
   skype           VARCHAR(255) NOT NULL,
   phone_number    VARCHAR(11)  NOT NULL,
   create_date     TIMESTAMP    NOT NULL,
-  update_date     TIMESTAMP
+  update_date     TIMESTAMP,
+  file            BYTEA
 );
 
 --contact-user
