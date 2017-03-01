@@ -6,9 +6,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <a href="<c:url value='/task/' />" class="btn btn-lg" style="color: green">
-        <i class="glyphicon glyphicon-arrow-left"></i> All tasks</a>
-    <title>Create company</title>
+    <title>Add new user</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">

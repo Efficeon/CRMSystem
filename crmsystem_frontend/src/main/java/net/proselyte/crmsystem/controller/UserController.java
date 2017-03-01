@@ -52,7 +52,6 @@ public class UserController {
     @RequestMapping(value = "/user/add/", method = RequestMethod.GET)
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-//        model.addAttribute("task", new Task());
         model.addAttribute("listRoles", this.roleService.getAll());
         model.addAttribute("listTasks", this.taskService.getAll());
         model.addAttribute("listCompanies", this.companyService.getAll());
@@ -61,11 +60,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/add/", method = RequestMethod.POST)
-    public String taskSubmit(@ModelAttribute("user") User user
-//                             @RequestParam(name = "user.id") UUID userId,
-                             ) {
+    public String taskSubmit(@ModelAttribute("user") User user) {
         this.userService.save(user);
-        return "task/useradded";
+        return "user/useradded";
     }
 
     @RequestMapping(value = "userdata/{id}/", method = RequestMethod.GET)
@@ -80,10 +77,10 @@ public class UserController {
         return "user/userdata";
     }
 
-    @RequestMapping(value = "remove_user/${id}/", method = RequestMethod.POST)
+    @RequestMapping(value = "/remove_user/{id}/", method = RequestMethod.GET)
     public String removeUser(@PathVariable("id") UUID id) {
         this.userService.remove(userService.getById(id));
-        return "welcome";
+        return "user/removeduser";
     }
 
     @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.GET)
@@ -98,8 +95,8 @@ public class UserController {
 
     @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("user") User user){
-        this.userService.edit(user);
-//        return "welcome";
+//        this.userService.edit(user);
+        this.userService.save(user);
         return "user/editeduser";
     }
 }

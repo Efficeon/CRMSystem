@@ -53,18 +53,18 @@ public class JpaUserDAOImpl implements UserDAO {
 
     @Override
     public void save(User user) {
-        if (user.getId() == null) {
+//        if (user.getId() == null) {
             this.entityManager.persist(user);
             logger.info("User successfully saved. User details: " + user);
-        } else {
-            this.entityManager.merge(user);
-            logger.info("User successfully updated. User details: " + user);
-        }
+//        } else {
+//            this.entityManager.merge(user);
+//            logger.info("User successfully updated. User details: " + user);
+//        }
     }
 
     @Override
     public void remove(User user) {
-        this.entityManager.remove(user);
+        this.entityManager.remove(this.entityManager.getReference(User.class, user.getId()));
         logger.info("User successfully removed. User details: " + user);
     }
 

@@ -30,7 +30,7 @@
             <br>
             <form:select path="implementer.id" required="true">
                 <%--<form:option value="${implementer.getId()}" label="Which one?" disabled="true" />--%>
-                <form:options items="${listUsers}" itemValue="id" itemLabel="firstName"/>
+                <form:options items="${listUsers}" itemValue="id" itemLabel="username"/>
             </form:select>
             <br>
             <br>

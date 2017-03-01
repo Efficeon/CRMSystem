@@ -15,7 +15,7 @@
 <h3>* SUCCESSFUL EDIT *</h3>
 <br>
 
-<h4>You have edited a user with the following parameters:</h4>
+<h4>You have edited user with the following parameters:</h4>
 <br>
 <table>
     <tr>

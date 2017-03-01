@@ -11,27 +11,35 @@
     <title>Edited task</title>
 </head>
 <body>
-
-<h3>* SUCCESSFUL EDIT *</h3>
 <br>
-
-<h4>You have edited a task with the following parameters:</h4>
-<br>
-<h4>id: </h4>${task.id}
-<br>
-<h4>name: </h4>${task.name}
-<br>
-<h4>description: </h4>${task.description}
-<br>
-<h4>at: </h4>${task.updated}
-
+<h3 class="text-center" style="color: darkgreen">You have edited task with the following parameters:</h3>
 <br>
 <br>
+<table>
+    <tr>
+        <td class="text-left"><b>ID:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.id}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>username:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.name}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>email:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.description}</td>
+    </tr>
+    <tr>
+        <td class="text-left"><b>First name:</b></td>
+        <td class="text-right" style="color: darkgreen">${task.updated}</td>
+    </tr>
+</table>
 <br>
-
+<br>
+<br>
 <a href="/task/" class="btn btn-lg" style="color: firebrick">All tasks</a>
 <br>
 <a href="/home/" class="btn btn-lg" style="color: royalblue">Back to home page</a>
+
 
 </body>
 </html>
