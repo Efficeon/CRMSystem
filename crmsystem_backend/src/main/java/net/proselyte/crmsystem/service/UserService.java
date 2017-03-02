@@ -15,11 +15,15 @@ public interface UserService {
 
     void save(User user);
 
+    void remove(User user);
+
     User findByUserName(String username);
 
     User getById(UUID id);
 
     Collection getAll();
+
+    User edit(User user);
 
     Collection<User> getSearchedUsers(String searchLine);
 }

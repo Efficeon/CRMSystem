@@ -23,13 +23,13 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
+
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
 <div class="container">
 
     <a href="<%=request.getContextPath()%>?languageVar=en"><spring:message code="general.EN"/></a>
     <a href="<%=request.getContextPath()%>?languageVar=ru"><spring:message code="general.RU"/></a>
-
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -43,6 +43,14 @@
 
     </c:if>
 
+    <br>
+    <br>
+    <a href="<c:url value='/user/'/>" class="btn btn-lg" style="color: firebrick">* All users</a>
+    <br>
+    <a href="<c:url value='/task/'/>" class="btn btn-lg" style="color: firebrick">* All tasks</a>
+    <br>
+    <a href="<c:url value='/company/'/>" class="btn btn-lg" style="color: grey">* All companies</a>
+    <br>
 </div>
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
