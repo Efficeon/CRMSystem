@@ -17,7 +17,9 @@ import java.util.UUID;
 /**
  * JPA implmentation of {@link UserDAO} interface.
  *
- * @author Eugene Suleimanov
+ * @author Eugene Suleimanov,
+ * @author Vladimir Vitlitskiy
+ *
  */
 
 @Repository

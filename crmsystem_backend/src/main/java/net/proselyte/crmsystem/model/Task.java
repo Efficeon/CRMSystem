@@ -7,6 +7,7 @@ import java.util.Date;
  * Simple JavaBean domain object that represents a Task.
  *
  * @author Vladimir Vitlitski
+ *
  */
 
 @Entity
@@ -84,7 +85,6 @@ public class Task extends NamedEntity{
         if (implementer != null ? !implementer.equals(task.implementer) : task.implementer != null) return false;
         if (!created.equals(task.created)) return false;
         return updated.equals(task.updated);
-
     }
 
     @Override

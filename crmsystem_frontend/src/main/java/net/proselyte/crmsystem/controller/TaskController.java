@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * Controller for {@link Task}'s pages.
  *
- * @author Vladimir Vitlitski
+ * @author Vladimir Vitlitskiy
  */
 
 @Controller
@@ -68,14 +68,12 @@ public class TaskController {
                            Model model){
         model.addAttribute("task",this.taskService.getById(id));
         model.addAttribute("listUsers", this.userService.getAll());
-
         return "task/edittask";
     }
 
     @RequestMapping(value = "/edittask/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("task") Task task){
         this.taskService.edit(task);
-
         return "task/editedtask";
     }
 }

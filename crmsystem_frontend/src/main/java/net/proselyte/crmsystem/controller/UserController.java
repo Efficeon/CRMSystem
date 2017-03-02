@@ -8,12 +8,6 @@ import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +18,9 @@ import java.util.UUID;
 /**
  * Controller for {@link User}'s pages
  *
- * @author Eugene Suleimanov
+ * @author Eugene Suleimanov,
+ * @author Vladimir Vitlitskiy
+ *
  */
 
 @Controller
@@ -47,13 +43,6 @@ public class UserController {
         return "user/home";
     }
 
-//    @RequestMapping(value = "users", method = RequestMethod.GET)
-//    public String listUsers(Model model) {
-//        model.addAttribute("user", new User());
-//        model.addAttribute("listUsers", this.userService.getAll());
-//        return "user/users";
-//    }
-
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public String listUsers(Model model) {
         model.addAttribute("user", new User());
@@ -61,7 +50,6 @@ public class UserController {
         model.addAttribute("roleList", this.roleService.getAll());
         model.addAttribute("taskList", this.taskService.getAll());
         model.addAttribute("companyList", this.companyService.getAll());
-
         return "user/users-v";
     }
 
@@ -71,7 +59,6 @@ public class UserController {
         model.addAttribute("listRoles", this.roleService.getAll());
         model.addAttribute("listTasks", this.taskService.getAll());
         model.addAttribute("listCompanies", this.companyService.getAll());
-
         return "user/useradd";
     }
 

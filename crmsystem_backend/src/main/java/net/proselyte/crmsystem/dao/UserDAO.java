@@ -8,7 +8,9 @@ import java.util.UUID;
 /**
  * Extension of {@link GenericDAO} interface for class {@link User}.
  *
- * @author Eugene Suleimanov
+ * @author Eugene Suleimanov,
+ * @author Vladimir Vitlitskiy
+ *
  */
 public interface UserDAO extends GenericDAO<User, UUID> {
 
