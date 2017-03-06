@@ -23,7 +23,7 @@ import java.util.*;
 public class DealController {
 
     @Autowired
-    DealService dealService;
+    private DealService dealService;
 
     @Autowired
     private UserService userService;
