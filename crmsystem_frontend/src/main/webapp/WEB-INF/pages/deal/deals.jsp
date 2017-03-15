@@ -38,7 +38,9 @@
   <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
   <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <title>Deals</title>
+  <script src="amcharts/plugins/dataloader/dataloader.min.js" type="text/javascript"></script>
+
+  <title>Deals</title>
 
 </head>
 
@@ -103,7 +105,6 @@
       "categoryField": "Date",
       "dataLoader": {
         "url": "/dealDataJson",
-        "contentType": 'application/json',
         "format": "json",
       },
       "valueAxes": [{
