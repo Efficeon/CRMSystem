@@ -38,7 +38,7 @@
   <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
   <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-  <script src="amcharts/plugins/dataloader/dataloader.min.js" type="text/javascript"></script>
+  <script src="http://amcharts/plugins/dataloader/dataloader.min.js" type="text/javascript"></script>
   <title>Deals</title>
 
 </head>
