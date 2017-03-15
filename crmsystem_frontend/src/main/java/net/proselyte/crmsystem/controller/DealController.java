@@ -120,7 +120,7 @@ public class DealController {
         return "redirect:/editdeal/" + deal.getId() + "/";
     }
 
-    @RequestMapping(value = "/dealDataJson", method = RequestMethod.GET /*, headers = {"content-type=application/json"}*/)
+    @RequestMapping(value = "/dealDataJson", method = RequestMethod.GET , headers = {"content-type=application/json"})
     public @ResponseBody
     String getDealDataJson()  {
         List<Deal> deals = (List<Deal>) this.dealService.getAll();
