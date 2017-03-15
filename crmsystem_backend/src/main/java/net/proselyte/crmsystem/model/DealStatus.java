@@ -3,6 +3,8 @@ package net.proselyte.crmsystem.model;
 
 import javax.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.proselyte.crmsystem.model.Deal;
 
 /**
@@ -18,6 +20,7 @@ import net.proselyte.crmsystem.model.Deal;
 public class DealStatus extends NamedEntity{
 
     @OneToMany(mappedBy = "dealStatus")
+    @JsonIgnore
     private List<Deal> dealList;
 
     void addDeal(Deal deal){

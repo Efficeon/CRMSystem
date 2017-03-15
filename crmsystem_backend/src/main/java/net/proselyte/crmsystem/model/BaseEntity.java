@@ -1,5 +1,6 @@
 package net.proselyte.crmsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -21,6 +22,7 @@ public class BaseEntity {
     @GenericGenerator(name = "uuid-gen", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "uuid-gen")
     @Type(type="pg-uuid")
+    @JsonIgnore
     private UUID id;
 
     public UUID getId() {

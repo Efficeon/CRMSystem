@@ -1,6 +1,6 @@
 package net.proselyte.crmsystem.controller;
 
-import net.proselyte.crmsystem.model.Contact;
+import com.google.gson.Gson;
 import net.proselyte.crmsystem.model.Deal;
 import net.proselyte.crmsystem.model.DealStatus;
 import net.proselyte.crmsystem.model.User;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -79,7 +80,7 @@ public class DealController {
     @RequestMapping(value = "/editdeal/{id}/", method = RequestMethod.POST)
     public String editDeal(@ModelAttribute ("deal") Deal deal,
                            @PathVariable ("id") UUID id){
-        deal.setAssocitedContacts(this.dealService.getById(id).getAssociatedContact());
+        deal.setAssociatedContacts(this.dealService.getById(id).getAssociatedContact());
         this.dealService.save(deal);
         return "redirect:/deal/";
     }
@@ -119,6 +120,23 @@ public class DealController {
         return "redirect:/editdeal/" + deal.getId() + "/";
     }
 
+    @RequestMapping(value = "/dealDataJson", method = RequestMethod.GET /*, headers = {"content-type=application/json"}*/)
+    public @ResponseBody
+    String getDealDataJson()  {
+        List<Deal> deals = (List<Deal>) this.dealService.getAll();
+        List<String> itemsFound = new ArrayList<String>();
+        List<Deal> dealsTemp = new ArrayList<Deal>();
+        for (Deal deal : deals){
+            deal.setResponsibleUser(null);
+            deal.setAssociatedContacts(null);
+            deal.setDealStatus(null);
+            deal.setName(null);
+            deal.setId(null);
+            dealsTemp.add(deal);
+        }
+        System.out.println(dealsTemp);
+        return new Gson().toJson(dealsTemp);
+    }
 }
 
 
