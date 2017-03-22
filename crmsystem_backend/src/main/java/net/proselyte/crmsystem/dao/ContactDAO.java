@@ -2,7 +2,6 @@ package net.proselyte.crmsystem.dao;
 
 
 import net.proselyte.crmsystem.model.Contact;
-
 import java.util.Collection;
 import java.util.UUID;
 

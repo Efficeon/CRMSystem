@@ -1,8 +1,6 @@
 package net.proselyte.crmsystem.dao;
 
 import net.proselyte.crmsystem.model.Deal;
-
-
 import java.util.Collection;
 import java.util.UUID;
 
@@ -15,4 +13,6 @@ public interface DealDAO extends GenericDAO<Deal, UUID> {
     Deal findByResponsibleUser(UUID id);
 
     public Collection<Deal> getSearchedDeals(String searchLine);
+
+    public Collection<Deal> findByStatus(String dealStatus);
 }

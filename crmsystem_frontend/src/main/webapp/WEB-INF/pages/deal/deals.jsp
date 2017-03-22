@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -22,7 +22,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js" ></script>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <title>Deals</title>
+  <title>Deals</title>
 
 </head>
 
@@ -30,29 +30,27 @@
 
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
 <div class="main-content">
-<h1>Deal list</h1>
-
+<h3>Deal list</h3>
 <br>
 <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
+<a href="<c:url value='/dealsChart/' />" class="btn btn-lg" style="color: #787dff"><i class="glyphicon glyphicon-signal"></i> Deals chart</a>
 <br>
 
 <c:if test="${!empty listDeals}">
-  <table>
+  <table class="table table-striped table-condensed">
     <tr>
-      <th width="80">ID</th>
-      <th width="120">NAME</th>
-      <th width="120">BUDGET</th>
-      <th width="120">ASSOCIATED CONTACT</th>
-      <th width="120">CREATED</th>
-      <th width="120">UPDATED</th>
-      <th width="120">USER ID</th>
-      <th width="120">DEAL STATUS</th>
-      <th width="120">DELETE</th>
-      <th width="120">EDIT</th>
+      <th class="text-center" width="120">Name</th>
+      <th class="text-center" width="60">Budget</th>
+      <th class="text-center" width="120">Associated contact</th>
+      <th class="text-center" width="120">Responsible user</th>
+      <th class="text-center" width="120">Created</th>
+      <th class="text-center" width="120">Updated</th>
+      <th class="text-center" width="80">Deal status</th>
+      <th class="text-center" width="120">Edit</th>
+      <th class="text-center" width="120">Delete</th>
     </tr>
     <c:forEach items="${listDeals}" var="deal">
       <tr align="center">
-        <td>${deal.id}</td>
         <td>${deal.name}</td>
         <td>${deal.budget}</td>
         <td><c:forEach items="${deal.associatedContact}" var="contact">
@@ -60,13 +58,15 @@
             <td>${contact.name}</td>
           </table>
         </c:forEach></td>
-        <td>${deal.created}</td>
-        <td>${deal.updated}</td>
         <td>${deal.responsibleUser.firstName}</td>
+        <td><fmt:formatDate value="${deal.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
+        <td><fmt:formatDate value="${deal.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td>${deal.dealStatus.name}</td>
-        <td><a href="<c:url value='/removedeal/${deal.id}/'/>">Delete</a></td>
-
-        <td><a href="<c:url value='/editdeal/${deal.id}/'/>">Edit</a></td>
+        <td class="text-center"><a href="<c:url value='/editdeal/${deal.id}/'/>"
+                                   span class="glyphicon glyphicon-edit" style="color: orange"/></td>
+        <td class="text-center"><a href="<c:url value='/removedeal/${deal.id}/' />"
+                                   span class="glyphicon glyphicon-remove"
+                                   style="color: red"/></td>
       </tr>
     </c:forEach>
   </table>

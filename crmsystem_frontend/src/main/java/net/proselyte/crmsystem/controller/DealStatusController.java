@@ -24,10 +24,10 @@ import java.util.UUID;
 public class DealStatusController {
 
     @Autowired
-    DealStatusService dealStatusService;
+    private DealStatusService dealStatusService;
 
     @Autowired
-    DealService dealService;
+    private DealService dealService;
 
     @RequestMapping(value = "dealstatus", method = RequestMethod.GET)
     public String listDealStatus(Model model){

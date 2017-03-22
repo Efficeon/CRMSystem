@@ -8,7 +8,6 @@ import net.proselyte.crmsystem.service.DealService;
 import net.proselyte.crmsystem.service.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URLEncoder;
 import java.util.UUID;
 
 /**
@@ -70,6 +68,7 @@ public class ContactController {
         contact.setId(contactId);
         contact.setAssociatedCompanies(this.contactService.getById(contactId).getAssociatedCompanies());
         contact.setAssociatedDeals(this.contactService.getById(contactId).getAssociatedDeal());
+        contact.setFile(this.contactService.getById(contactId).getFile());
         this.contactService.save(contact);
         return "redirect:/editcontact/"+contact.getId()+"/";
     }

@@ -1,16 +1,18 @@
 package net.proselyte.crmsystem.model;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * Model class {@link net.proselyte.crmsystem.model.Deal}.
+ *
+ * @author Serhiy Zamikhovskyy
+ */
+
 @Entity
 @Table(name = "deals")
 public class Deal extends NamedEntity {
-
-    @Column(name = "budget")
-    private  double budget;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created")
@@ -19,6 +21,9 @@ public class Deal extends NamedEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated")
     private Date updated;
+
+    @Column(name = "budget")
+    private  double budget;
 
     @OneToOne(fetch=FetchType.LAZY)
     @JoinTable(name="deals_users", joinColumns = @JoinColumn(name="deal_id", referencedColumnName="id"),
@@ -72,16 +77,13 @@ public class Deal extends NamedEntity {
 
     public void setDealStatus(DealStatus dealStatus) {
         this.dealStatus = dealStatus;
-//        if(!dealStatus.getDeals().contains(this)){
-//            dealStatus.addDeal(this);
-//        }
     }
 
     public Set<Contact> getAssociatedContact() {
         return associatedContact;
     }
 
-    public void setAssocitedContacts(Set<Contact> contact) {
+    public void setAssociatedContacts(Set<Contact> contact) {
         this.associatedContact = contact;
     }
 
