@@ -23,5 +23,7 @@ public interface DealService {
 
     public Deal findByResponsibleUser(UUID id);
 
+    public Collection<Deal> findByStatus(String dealStatus);
+
     Collection<Deal> getSearchedDeals(String searchLine);
 }

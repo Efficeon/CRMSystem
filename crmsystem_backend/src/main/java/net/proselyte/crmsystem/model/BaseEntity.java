@@ -22,7 +22,6 @@ public class BaseEntity {
     @GenericGenerator(name = "uuid-gen", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "uuid-gen")
     @Type(type="pg-uuid")
-    @JsonIgnore
     private UUID id;
 
     public UUID getId() {

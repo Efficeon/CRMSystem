@@ -1,7 +1,6 @@
 package net.proselyte.crmsystem.dao;
 
 import net.proselyte.crmsystem.model.User;
-
 import java.util.Collection;
 import java.util.UUID;
 

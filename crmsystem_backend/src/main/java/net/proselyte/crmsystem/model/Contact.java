@@ -31,7 +31,7 @@ public class Contact extends NamedEntity {
     @Column(name="update_date")
     private Date updateDate;
 
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="contact_company", joinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"),
               inverseJoinColumns = @JoinColumn(name="company_id", referencedColumnName="id"))
     private Set<Company> associatedCompanies;

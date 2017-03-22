@@ -1,11 +1,7 @@
 package net.proselyte.crmsystem.model;
 
-
 import javax.persistence.*;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import net.proselyte.crmsystem.model.Deal;
 
 /**
  * Model class {@link net.proselyte.crmsystem.model.DealStatus}.
@@ -13,14 +9,11 @@ import net.proselyte.crmsystem.model.Deal;
  * @author Serhiy Zamikhovskyy
  */
 
-
-
 @Entity
 @Table(name = "dealstatus")
 public class DealStatus extends NamedEntity{
 
-    @OneToMany(mappedBy = "dealStatus")
-    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dealStatus")
     private List<Deal> dealList;
 
     void addDeal(Deal deal){

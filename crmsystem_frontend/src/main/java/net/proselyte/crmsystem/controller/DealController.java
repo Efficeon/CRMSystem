@@ -1,6 +1,5 @@
 package net.proselyte.crmsystem.controller;
 
-import com.google.gson.Gson;
 import net.proselyte.crmsystem.model.Deal;
 import net.proselyte.crmsystem.model.DealStatus;
 import net.proselyte.crmsystem.model.User;
@@ -120,23 +119,27 @@ public class DealController {
         return "redirect:/editdeal/" + deal.getId() + "/";
     }
 
-    @RequestMapping(value = "/dealDataJson", method = RequestMethod.GET/*, headers = {"content-type=application/json"}*/)
+    @RequestMapping(value = "/dealDataJson", method = RequestMethod.GET)
     public @ResponseBody
     String getDealDataJson()  {
-        List<Deal> deals = (List<Deal>) this.dealService.getAll();
-        List<String> itemsFound = new ArrayList<String>();
-        List<Deal> dealsTemp = new ArrayList<Deal>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm");
+        List<Deal> deals = (List<Deal>) this.dealService.findByStatus("done");
+        Collections.sort(deals, new Comparator<Deal>() {
+            public int compare(Deal o1, Deal o2) {
+                return dateFormat.format(o1.getUpdated()).compareTo(dateFormat.format(o2.getUpdated()));
+            }
+        });
+        String dataJson = "[";
         for (Deal deal : deals){
-            deal.setResponsibleUser(null);
-            deal.setAssociatedContacts(null);
-            deal.setDealStatus(null);
-            deal.setName(null);
-            deal.setId(null);
-            dealsTemp.add(deal);
+            dataJson = dataJson + "{\"created\":\"" + dateFormat.format(deal.getUpdated())
+                                + "\",\"budget\":" + deal.getBudget() + "},";
         }
-        System.out.println(dealsTemp);
-        return new Gson().toJson(dealsTemp);
+        dataJson = dataJson.substring(0, dataJson.length()-1) + "]";
+        return dataJson;
+    }
+
+    @RequestMapping(value = "/dealsChart", method = RequestMethod.GET)
+    public String dealsChart(){
+        return "deal/chartDoneDeals";
     }
 }
-
-

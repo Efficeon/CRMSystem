@@ -4,7 +4,6 @@ import net.proselyte.crmsystem.dao.UserDAO;
 import net.proselyte.crmsystem.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;

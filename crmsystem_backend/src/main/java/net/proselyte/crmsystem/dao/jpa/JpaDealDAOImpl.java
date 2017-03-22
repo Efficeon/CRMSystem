@@ -7,10 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.io.*;
 import java.lang.Override;
-import java.sql.*;
-//import java.sql.Date;
 import java.util.*;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -60,6 +57,7 @@ public class JpaDealDAOImpl implements DealDAO {
     public void save(Deal deal) {
         if (deal.getId() == null) {
             deal.setCreated(new Date());
+            deal.setUpdated(new Date());
             this.entityManager.persist(deal);
             logger.info("Deal successfully saved. Deal details: " + deal);
         } else {
@@ -86,6 +84,19 @@ public class JpaDealDAOImpl implements DealDAO {
         logger.info("Deal successfully loaded. Deal details: " + deal);
 
         return deal;
+    }
+
+    @Override
+    public Collection<Deal> findByStatus(String name){
+        Query query = this.entityManager.createQuery("SELECT deal FROM  Deal deal LEFT JOIN FETCH deal.dealStatus WHERE deal.dealStatus.name =:name");
+        query.setParameter("name", name);
+        List<Deal> result = new ArrayList<>();
+        result = query.getResultList();
+
+        for (Deal deal : result) {
+            logger.info("Deal successfully loaded. Deal details: " + deal);
+        }
+        return result;
     }
 
     @Override

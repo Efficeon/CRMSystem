@@ -3,7 +3,6 @@ package net.proselyte.crmsystem.dao.jpa;
 import net.proselyte.crmsystem.dao.CompanyDAO;
 import net.proselyte.crmsystem.model.Company;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;

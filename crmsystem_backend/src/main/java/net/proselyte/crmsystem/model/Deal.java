@@ -1,12 +1,14 @@
 package net.proselyte.crmsystem.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
+
+/**
+ * Model class {@link net.proselyte.crmsystem.model.Deal}.
+ *
+ * @author Serhiy Zamikhovskyy
+ */
 
 @Entity
 @Table(name = "deals")
@@ -75,9 +77,6 @@ public class Deal extends NamedEntity {
 
     public void setDealStatus(DealStatus dealStatus) {
         this.dealStatus = dealStatus;
-//        if(!dealStatus.getDeals().contains(this)){
-//            dealStatus.addDeal(this);
-//        }
     }
 
     public Set<Contact> getAssociatedContact() {

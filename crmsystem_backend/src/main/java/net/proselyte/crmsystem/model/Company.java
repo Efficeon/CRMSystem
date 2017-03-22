@@ -41,7 +41,7 @@ public class Company extends NamedEntity{
               inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
 
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="contact_company", joinColumns = @JoinColumn(name="company_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"))
     private Set<Contact> associatedContacts;
