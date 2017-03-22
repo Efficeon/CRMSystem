@@ -2,13 +2,12 @@ package net.proselyte.crmsystem.dao.jpa;
 
 import net.proselyte.crmsystem.dao.CompanyDAO;
 import net.proselyte.crmsystem.model.Company;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.*;
-
-import org.apache.log4j.Logger;
 
 /**
  * JPA implementation of {@link CompanyDAO} interface.
@@ -46,11 +45,7 @@ public class JpaCompanyDAOImpl implements CompanyDAO{
 
         result = query.getResultList();
 
-        Collections.sort(result, new Comparator<Company>() {
-            public int compare(Company o1, Company o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        Collections.sort(result, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
         for (Company company : result) {
             logger.info("Company list: " + company);

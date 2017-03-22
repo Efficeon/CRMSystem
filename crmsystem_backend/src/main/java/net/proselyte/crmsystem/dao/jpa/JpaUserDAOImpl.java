@@ -12,10 +12,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+
 /**
  * JPA implmentation of {@link UserDAO} interface.
  *
- * @author Eugene Suleimanov
+ * @author Eugene Suleimanov,
+ * @author Vladimir Vitlitskiy
+ *
  */
 
 @Repository
@@ -28,44 +31,46 @@ public class JpaUserDAOImpl implements UserDAO {
 
     @Override
     public User getById(UUID id) {
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
+        Query query = this.entityManager.createQuery(
+                "SELECT user FROM User user WHERE user.id =:id", User.class);
+//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
 
         logger.info("User successfully loaded. User details: " + user);
-
         return user;
     }
 
-    @Override
+
+        @Override
     public Collection<User> getAll() {
         Collection<User> result;
 
-        Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
-        result = query.getResultList();
+        Query query = this.entityManager.createQuery("SELECT user FROM User user", User.class);
+//            "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
+            result = query.getResultList();
 
         for (User user : result) {
             logger.info("User list: " + user);
         }
-
         return result;
     }
 
     @Override
     public void save(User user) {
-        if (user.getId() == null) {
+//        if (user.getId() == null) {
             this.entityManager.persist(user);
             logger.info("User successfully saved. User details: " + user);
-        } else {
-            this.entityManager.merge(user);
-            logger.info("User successfully updated. User details: " + user);
-        }
+//        } else {
+//            this.entityManager.merge(user);
+//            logger.info("User successfully updated. User details: " + user);
+//        }
     }
 
     @Override
     public void remove(User user) {
-        this.entityManager.remove(user);
+        this.entityManager.remove(this.entityManager.getReference(User.class, user.getId()));
         logger.info("User successfully removed. User details: " + user);
     }
 
@@ -83,6 +88,27 @@ public class JpaUserDAOImpl implements UserDAO {
             return null;
         }
     }
+
+    @Override
+    public User edit(User user) {
+        Query query = this.entityManager.createQuery(
+                "SELECT user FROM User as user WHERE user.id=:id", User.class);
+        query.setParameter("id", user.getId());
+        User existingUser = (User) query.getSingleResult();
+
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setCompanies(user.getCompanies());
+        existingUser.setTasks(user.getTasks());
+        existingUser.setRoles(user.getRoles());
+/**
+ * entityManager.merge() -- вернет Task !!!
+ */
+        return this.entityManager.merge(existingUser);
+    }
+
 
     @Override
     public Collection<User> getSortedUsers(String searchLine) {
