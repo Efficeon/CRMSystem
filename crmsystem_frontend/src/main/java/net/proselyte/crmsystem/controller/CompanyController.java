@@ -94,7 +94,6 @@ public class CompanyController {
         return "company/companyadd";
     }
 
-
     @RequestMapping(value = "/editcompany/{id}", method = RequestMethod.POST)
     public String editSubmit(@PathVariable("id") UUID id,
                              @ModelAttribute Company company) {
@@ -105,7 +104,7 @@ public class CompanyController {
     }
 
 
-    //  вносим определенного respUser (по id) в Set<User> определенной компании (по id)
+//  вносим определенного respUser (по id) в Set<User> определенной компании (по id)
 //  помещаем эти данные в Model
     @RequestMapping(value = "/addresponsible/{userId}/{companyId}/", method = RequestMethod.GET)
     public String addResponsibleUser(@PathVariable("userId") UUID userId,

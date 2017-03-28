@@ -26,7 +26,6 @@ public class DealServiceImpl implements DealService {
     @Transactional
     public Deal getById(UUID id) {
         Deal tempDeal = this.dealDAO.getById(id);
-//        logger.info("Getting deal. Details:" + tempDeal);
         return tempDeal;
     }
 
@@ -34,9 +33,6 @@ public class DealServiceImpl implements DealService {
     @Transactional
     public Collection<Deal> getAll() {
         Collection<Deal> listDeals = this.dealDAO.getAll();
-//        for (Deal deal : listDeals) {
-//                logger.info("List deals: " + deal);
-//        }
         return listDeals;
     }
 
@@ -62,6 +58,7 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
+    @Transactional
     public Collection<Deal> findByStatus(String dealStatus) {
         return dealDAO.findByStatus(dealStatus);
     }

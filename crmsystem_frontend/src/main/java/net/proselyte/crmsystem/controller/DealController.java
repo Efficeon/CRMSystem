@@ -1,12 +1,7 @@
 package net.proselyte.crmsystem.controller;
 
-import net.proselyte.crmsystem.model.Deal;
-import net.proselyte.crmsystem.model.DealStatus;
-import net.proselyte.crmsystem.model.User;
-import net.proselyte.crmsystem.service.ContactService;
-import net.proselyte.crmsystem.service.DealService;
-import net.proselyte.crmsystem.service.DealStatusService;
-import net.proselyte.crmsystem.service.UserService;
+import net.proselyte.crmsystem.model.*;
+import net.proselyte.crmsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +29,9 @@ public class DealController {
     @Autowired
     private ContactService contactService;
 
+    @Autowired
+    private CommentService commentService;
+
     @RequestMapping(value = "deal", method = RequestMethod.GET)
     public String listDeals(Model model){
         model.addAttribute("deal", new Deal());
@@ -41,8 +39,16 @@ public class DealController {
         return "deal/deals";
     }
 
+    @RequestMapping(value = "dealdata/{id}/", method = RequestMethod.GET)
+    public String companyData(@PathVariable("id") UUID id, Model model) {
+        model.addAttribute("deal", this.dealService.getById(id));
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("commentsList", this.commentService.getForEntity(id));
+        return "deal/dealdata";
+    }
+
     @RequestMapping(value = "removedeal/{id}/")
-    public String removeDeal(@PathVariable("id") UUID id){
+    public String removeDeal(@PathVariable("id") UUID id) {
         this.dealService.remove(this.dealService.getById(id));
         return "redirect:/deal";
     }

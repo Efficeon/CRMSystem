@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.dao.jpa;
 
 import net.proselyte.crmsystem.dao.DealDAO;
+import net.proselyte.crmsystem.model.Comment;
 import net.proselyte.crmsystem.model.Deal;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -29,7 +30,6 @@ public class JpaDealDAOImpl implements DealDAO {
 
     public Deal getById(UUID id) {
         Query query = this.entityManager.createQuery("SELECT DISTINCT  deal FROM  Deal deal LEFT JOIN FETCH deal.responsibleUser LEFT JOIN FETCH deal.associatedContact WHERE deal.id =:id");
-        //"SELECT DISTINCT company FROM Company company LEFT JOIN FETCH company.responsibleUser WHERE company.id =:id");
         query.setParameter("id", id);
 
         Deal deal = (Deal) query.getSingleResult();

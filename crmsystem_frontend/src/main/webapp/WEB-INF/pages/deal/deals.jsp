@@ -46,6 +46,7 @@
       <th class="text-center" width="120">Created</th>
       <th class="text-center" width="120">Updated</th>
       <th class="text-center" width="80">Deal status</th>
+      <th class="text-center" width="50">Details</th>
       <th class="text-center" width="120">Edit</th>
       <th class="text-center" width="120">Delete</th>
     </tr>
@@ -62,6 +63,9 @@
         <td><fmt:formatDate value="${deal.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td><fmt:formatDate value="${deal.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td>${deal.dealStatus.name}</td>
+        <td class="text-center"><a href="<c:url value='/dealdata/${deal.id}/' />"
+                                   span class="glyphicon glyphicon glyphicon-file "
+                                   style="color: darkblue"/></td>
         <td class="text-center"><a href="<c:url value='/editdeal/${deal.id}/'/>"
                                    span class="glyphicon glyphicon-edit" style="color: orange"/></td>
         <td class="text-center"><a href="<c:url value='/removedeal/${deal.id}/' />"
