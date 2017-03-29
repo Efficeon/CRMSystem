@@ -62,16 +62,13 @@
 
     <!---------------create new comment----------------------->
 <form:form id="commentform" method="POST" modelAttribute="comment" action="/commentadd/${deal.id}/${pageContext.request.userPrincipal.name}" >
-    <spring:bind path="text" >
-        <form:input type="textarea" path="text" class="form" size="137%" rows="4" placeholder='Add a comment...${text}' autofocus="true"/>
-    </spring:bind>
+    <textarea name="text" rows="5" path="text" class="form" cols="50" placeholder='Add a comment...${text}' class="text"></textarea><br>
     <br>
-    <button type="submit" id="commentform" style="float: right">
+    <button type="submit" id="commentform" style="float: left">
         <spring:message text="Submit"/>
     </button>
     <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </form:form>
-
     <!---------------Show comments 1st level on the cycle----------------------->
 
 <c:forEach items="${commentsList}" var="comment1st">
@@ -85,10 +82,7 @@
         <hr width=100%" align="right" style="color: red">
         <div id="hide-me" class="collapse">
             <form:form id="replycomment1" method="POST" modelAttribute="comment" action="/replycomment/${deal.id}/${comment1st.id}/${pageContext.request.userPrincipal.name}/${comment1st.author.username}/">
-                <spring:bind path="text" >
-                    <form:input type="textarea" path="text" class="form" size="137%" rows="4" placeholder='Add a comment...${text}'/>
-                </spring:bind>
-
+                <textarea name="text" rows="5" path="text" class="form" cols="50" placeholder='Add a comment...${text}' class="text"></textarea><br>
                 <button type="submit" id="replycomment1" style="float: left">
                     <spring:message text="Submit"/>
                 </button><br>
@@ -113,10 +107,7 @@
                     <div id="hide-me" class="collapse">
                         <form:form id="replycomment2" method="POST" modelAttribute="comment"
                                    action="/replycomment/${deal.id}/${comment2nd.id}/${pageContext.request.userPrincipal.name}/${comment2nd.author.username}/">
-                            <spring:bind path="text" >
-                                <form:input type="textarea" path="text" class="form" size="137%" rows="4" placeholder='Add a comment...${text}' autofocus="true"/>
-                            </spring:bind>
-
+                            <textarea name="text" rows="5" path="text" class="form" cols="50" placeholder='Add a comment...${text}' class="text"></textarea><br>
                             <button type="submit" id="replycomment2" style="float: right">
                                 <spring:message text="Submit"/>
                             </button>
@@ -131,6 +122,8 @@
 </c:forEach>
 
 </div>
+<script type="text/javascript" src="${contextPath}/resources/js/comment.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/JsHttpRequest.js"></script>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/comments.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
