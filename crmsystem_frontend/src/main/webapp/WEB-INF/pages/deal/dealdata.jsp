@@ -78,52 +78,22 @@
         ${comment1st.text}
 
         <!---------------Hiding button and field for answering----------------------->
-        <button class="show" data-toggle="collapse" data-target="#hide-me">Reply 1st</button>
-        <hr width=100%" align="right" style="color: red">
-        <div id="hide-me" class="collapse">
-            <form:form id="replycomment1" method="POST" modelAttribute="comment" action="/replycomment/${deal.id}/${comment1st.id}/${pageContext.request.userPrincipal.name}/${comment1st.author.username}/">
-                <textarea name="text" rows="5" path="text" class="form" cols="50" placeholder='Add a comment...${text}' class="text"></textarea><br>
-                <button type="submit" id="replycomment1" style="float: left">
-                    <spring:message text="Submit"/>
-                </button><br>
-                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-            </form:form>
-        </div>
+    <a href="javascript:void(0);" onclick="toggleDiv('mydiv'+ID);">Reply</a>
+    <div id="mydiv" style="display:none;">
+        <form:form id="replycomment1" method="POST" modelAttribute="comment" action="/replycomment/${deal.id}/${comment1st.id}/${pageContext.request.userPrincipal.name}/${comment1st.author.username}/">
+          <textarea name="text" rows="5" path="text" class="form" cols="50" placeholder='Add a comment...${text}' class="text"></textarea><br>
+          <button type="submit" id="replycomment1" style="float: left">
+            <spring:message text="Submit"/>
+          </button><br>
+          <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+        </form:form>
+    </div>
 
-        <!---------------Show comments 2nd level on a cycle----------------------->
-        <c:forEach items="${commentsList}" var="comment2nd">
-            <table><tr><td>
-            <c:if test="${comment2nd.primaryCommentID == comment1st.id}">
-                <div class="form-group" style="float: left; margin: 10px 0px 10px 50px;">
-                    <a style="color: red">${comment2nd.author.username}</a>
-                    <fmt:formatDate value="${comment2nd.getUpdated()}" pattern="HH:mm:ss, d-MM-yyyy"/>
-                    <a style="color: #787dff">to ${comment1st.author.username}</a>
-                    <fmt:formatDate value="${comment1st.getUpdated()}" pattern="HH:mm:ss, d-MM-yyyy"/>
-                    <br>${comment2nd.text}<br>
 
-                    <!---------------Hiding button and field for answering----------------------->
-                    <button class="show" data-toggle="collapse" data-target="#hide-me">Reply2</button>
-                    <hr width=100%" align="right" style="color: red">
-                    <div id="hide-me" class="collapse">
-                        <form:form id="replycomment2" method="POST" modelAttribute="comment"
-                                   action="/replycomment/${deal.id}/${comment2nd.id}/${pageContext.request.userPrincipal.name}/${comment2nd.author.username}/">
-                            <textarea name="text" rows="5" path="text" class="form" cols="50" placeholder='Add a comment...${text}' class="text"></textarea><br>
-                            <button type="submit" id="replycomment2" style="float: right">
-                                <spring:message text="Submit"/>
-                            </button>
-                            <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-                        </form:form>
-                    </div>
-                </div>
-               </c:if>
-            </td></tr></table>
-        </c:forEach>
 </c:if>
 </c:forEach>
 
 </div>
-<script type="text/javascript" src="${contextPath}/resources/js/comment.js"></script>
-<script type="text/javascript" src="${contextPath}/resources/js/JsHttpRequest.js"></script>
 <script src="/WEB-INF/pages/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/comments.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
