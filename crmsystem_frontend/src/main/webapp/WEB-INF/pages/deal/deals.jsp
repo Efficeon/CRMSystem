@@ -13,6 +13,7 @@
   <meta name="author" content="">
 
   <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+
   <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +23,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js" ></script>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
     <title>Deals</title>
 
 </head>
@@ -29,11 +31,15 @@
 <body>
 
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
-<div class="main-content">
+
+
+<div id="pdfReady" class="main-content">
 <h1>Deal list</h1>
 
 <br>
+  <div id="buttonNoPrint">
 <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
+  </div>
 <br>
 
 <c:if test="${!empty listDeals}">
@@ -74,6 +80,15 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 </div>
+
+<div id="buttonNoPrint">
+<input type="submit" value="Print" onclick="window.print();" style="margin-left: 23px"/>
+</div>
+
+
+
+
+
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>
 </body>

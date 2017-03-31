@@ -2,3 +2,37 @@
 @import "blocks/general.less";
 @import "blocks/main-content.less";
 @import "blocks/top-nav.less";
+
+@media print
+{
+  @page {
+    margin: 0;
+  }
+
+
+  a[href]:after {
+    content: none !important;
+  }
+
+  #pager,
+  form, #left-sidebar, #buttonNoPrint,
+  .no-print
+  {
+    display: none !important;
+    height: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 2px solid black;
+  }
+
+
+  .no-print, .no-print *{
+    display: none !important;
+    height: 0;
+  }
+}
