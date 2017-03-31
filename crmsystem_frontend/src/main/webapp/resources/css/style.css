@@ -6,6 +6,11 @@
     clear: both;
 
 }
+#chartdiv {
+    width	: 90%;
+    height	: 500px;
+}
+
 
 .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
 

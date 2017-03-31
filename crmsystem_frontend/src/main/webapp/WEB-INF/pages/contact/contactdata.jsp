@@ -34,7 +34,6 @@
         <th class="text-center" width="40">Responsible user</th>
         <th class="text-center" width="40">Created</th>
         <th class="text-center" width="40">Updated</th>
-        <th class="text-center" width="50">Details</th>
         <th class="text-center" width="50">Edit</th>
         <th class="text-center" width="50">Delete</th>
     </tr>
@@ -45,7 +44,11 @@
         <td>${contact.skype}</td>
         <td>${contact.phoneNumber}</td>
         <c:if test="${!(contact.associatedCompanies==null)}">
-            <td>${contact.associatedCompanies.name}</td>
+            <td><c:forEach items="${contact.associatedCompanies}" var="contact">
+                <table>
+                    <td>${contact.name}</td>
+                </table>
+            </c:forEach></td>
         </c:if>
         <c:if test="${(contact.associatedCompanies==null)}">
             <td></td>
@@ -58,9 +61,7 @@
         </c:if>
         <td><fmt:formatDate value="${contact.createDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td><fmt:formatDate value="${contact.updateDate}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
-        <td class="text-center"><a href="<c:url value='/contactdata/${contact.id}/' />"
-                                   span class="glyphicon glyphicon glyphicon-file "
-                                   style="color: darkblue"></a></td>
+
         <td class="text-center"><a href="<c:url value='/editcontact/${contact.id}/' />"
                                    span class="glyphicon glyphicon glyphicon-edit"
                                    style="color: orange"></a></td>

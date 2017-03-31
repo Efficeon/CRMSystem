@@ -1,11 +1,9 @@
 package net.proselyte.crmsystem.dao.jpa;
 
 import net.proselyte.crmsystem.dao.DealStatusDAO;
-import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.DealStatus;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;

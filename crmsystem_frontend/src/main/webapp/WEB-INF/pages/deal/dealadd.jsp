@@ -62,7 +62,7 @@
     </button>
 
 </form:form>
-    <c:if test="${empty contact.id}">
+    <c:if test="${empty deal.id}">
     <h4 style="color: red">Add associated contacts after adding deal</h4>
     </c:if>
     <!--add Contacts -->

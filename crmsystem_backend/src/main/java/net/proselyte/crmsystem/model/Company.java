@@ -31,7 +31,7 @@ public class Company extends NamedEntity{
     @Column(name = "updated")
     private Date updated;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "companies_users", joinColumns = {@JoinColumn(name = "company_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private Set<User> responsibleUser;
@@ -41,7 +41,7 @@ public class Company extends NamedEntity{
               inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
 
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="contact_company", joinColumns = @JoinColumn(name="company_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="contact_id", referencedColumnName="id"))
     private Set<Contact> associatedContacts;

@@ -20,7 +20,6 @@
 </head>
 
 <body>
-
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
 
         <div class="main-content">

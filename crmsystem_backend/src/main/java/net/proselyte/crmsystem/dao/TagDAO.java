@@ -1,7 +1,6 @@
 package net.proselyte.crmsystem.dao;
 
 import net.proselyte.crmsystem.model.Tag;
-
 import java.util.UUID;
 
 /**

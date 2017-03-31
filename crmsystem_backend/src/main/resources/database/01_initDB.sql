@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- users
 CREATE TABLE IF NOT EXISTS users (
-  id                UUID       NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id                UUID         NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
   email             VARCHAR(255) NOT NULL,
   usertype          VARCHAR(50)  NOT NULL,
   username          VARCHAR(50)  NOT NULL,
@@ -31,6 +31,18 @@ CREATE TABLE IF NOT EXISTS user_roles (
   FOREIGN KEY (role_id) REFERENCES roles (id),
 
   UNIQUE (user_id, role_id)
+);
+
+-- tasks
+CREATE TABLE IF NOT EXISTS tasks(
+  id          UUID      NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name        VARCHAR(50) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  user_id     UUID NOT NULL,
+  created     TIMESTAMP NOT NULL,
+  updated     TIMESTAMP NOT NULL,
+
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 -- companies

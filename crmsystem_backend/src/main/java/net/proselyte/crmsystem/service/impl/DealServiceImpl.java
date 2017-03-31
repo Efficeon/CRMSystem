@@ -62,6 +62,11 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
+    public Collection<Deal> findByStatus(String dealStatus) {
+        return dealDAO.findByStatus(dealStatus);
+    }
+
+    @Override
     @Transactional
     public Collection<Deal> getSearchedDeals(String searchLine) {
         return dealDAO.getSearchedDeals(searchLine);

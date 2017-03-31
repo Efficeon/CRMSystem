@@ -8,6 +8,7 @@ import java.util.Set;
  * Simple JavaBean domain object that represents a User.
  *
  * @author Eugene Suleimanov
+ *
  */
 
 @Entity
@@ -43,13 +44,16 @@ public class User extends BaseEntity {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    @ManyToMany(mappedBy = "responsibleUser")
-    private Set<Company> associatedСompany;
+    @ManyToMany(mappedBy = "responsibleUser", fetch=FetchType.EAGER)
+    private Set<Company> companies;
+
+    @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, /*orphanRemoval = true,*/ fetch=FetchType.EAGER)
+    private Set<Task> tasks;
 
     @PrePersist
     public void getDate() {
@@ -136,12 +140,20 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
-    public Set<Company> getAssociatedСompany() {
-        return associatedСompany;
+    public Set<Company> getCompanies() {
+        return companies;
     }
 
-    public void setAssociatedСompany(Set<Company> associatedСompany) {
-        this.associatedСompany = associatedСompany;
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
@@ -163,5 +175,20 @@ public class User extends BaseEntity {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+//                ", userType='" + userType + '\'' +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
