@@ -32,13 +32,7 @@
 <table>
     <tr>
         <td>
-            <%--<c:if test="${!empty deal.budget}">--%>
-              <%--<spring:bind path="id">--%>
-                  <%--<form:input  type="text" path="id" class="form-group" readonly="true"--%>
-                               <%--disabled="true" placeholder='ID${id}'></form:input>--%>
-              <%--</spring:bind>--%>
-            <%--</c:if>--%>
-              Budget
+               Budget
               <spring:bind path="budget">
                 <form:input  type="text" path="budget" class="form-group"
                              placeholder='Budget${budget}' autofocus="true"></form:input>
@@ -52,15 +46,12 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <form:select path="responsibleUser.id">
-                <%--<form:option value="NONE" label="Select responsible user"/>--%>
                 <form:options items="${userList}" itemValue="id" itemLabel="firstName"/>
             </form:select>
 
             <form:select path="dealStatus.id">
-                <%--<form:option value="NONE" label="Deal Status"/>--%>
                 <form:options items="${dealStatusList}" itemValue="id" itemLabel="name"/>
             </form:select>
-
 
         </td>
     </tr>

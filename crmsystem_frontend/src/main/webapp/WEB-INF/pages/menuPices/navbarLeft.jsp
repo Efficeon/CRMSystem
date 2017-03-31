@@ -8,8 +8,9 @@
 <script src="${contextPath}/resources/js/main.js"></script>
 <script src="${contextPath}/resources/js/search.js"></script>
 <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
+
 <div id="main-wrapper"/>
-    <div class="left-sidebar">
+    <div id="left-sidebar" class="left-sidebar">
         <div class="navbar-toggle"><i class="fa fa-bars"></i></div>
         <div class="nav-block">
             <div class="menu-content">
