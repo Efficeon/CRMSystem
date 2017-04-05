@@ -29,24 +29,12 @@
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
 
-
-<script type="text/javascript">
-    function showMe (box) {
-        var vis = (box.checked) ? "block" : "none";
-        document.getElementById('div1').style.display = vis;
-    }
-</script>
-<input type="checkbox" name="multi_note" value="1" onclick="showMe(this)">
-
-
 <div id="div1" style="display:block; display:none;">
     <input type=text>
 </div>
 
-
 <div class="main-content">
     <h3>Deals chart (status - done)</h3>
-
     <div id="chartdiv"></div>
 </div>
 

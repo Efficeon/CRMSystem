@@ -29,8 +29,6 @@
     <a href="<c:url value='/contact/add/' />" class="btn btn-lg"><i class="fa fa-plus"></i>
         Create contact</a>
     </div>
-
-    </br>
     </br>
     <c:if test="${!empty listContacts}">
         <table class="table table-striped table-condensed">
@@ -86,10 +84,6 @@
             </c:forEach>
         </table>
     </c:if>
-</div>
-
-<div id="buttonNoPrint">
-    <input type="submit" value="Print" onclick="window.print();" style="margin-left: 23px"/>
 </div>
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>

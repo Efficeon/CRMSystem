@@ -34,9 +34,9 @@
 <h3>Deal list</h3>
 <br>
   <div id="buttonNoPrint">
-    <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
+    <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: #56ac6a"><i class="fa fa-plus"></i> Create deal</a>
     <a href="<c:url value='/dealsChart/' />" class="btn btn-lg" style="color: #787dff"><i class="glyphicon glyphicon-signal"></i> Deals chart</a>
-    <a value="Print" onclick="window.print();" class="btn btn-lg" style="color: #ff6e0c"><i class="glyphicon glyphicon-print"></i> Print</a></div>
+  </div>
   <br>
 
 <c:if test="${!empty listDeals}">

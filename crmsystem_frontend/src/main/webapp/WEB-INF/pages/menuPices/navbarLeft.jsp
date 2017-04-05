@@ -76,6 +76,7 @@
 
         <form class="navbar-form navbar-right">
             <div class style="color: #66afe9">
+                <a value="Print" onclick="window.print();" style="color: #ff6e0c"><i class="glyphicon glyphicon-print"></i> Print</a>
             <a href="<%=request.getContextPath()%>?languageVar=en"><spring:message code="general.EN"/></a>
             <a href="<%=request.getContextPath()%>?languageVar=ru"><spring:message code="general.RU"/></a>
             </div>

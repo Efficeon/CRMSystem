@@ -53,10 +53,6 @@
     </c:if>
 </div>
 
-<div id="buttonNoPrint">
-    <input type="submit" value="Print" onclick="window.print();" style="margin-left: 23px"/>
-</div>
-
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>
 </body>

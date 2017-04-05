@@ -67,7 +67,6 @@ public class CommentController {
     public String editSubmit(@ModelAttribute("comment") Comment comment,
                              @PathVariable("commentId") UUID commentId,
                              @PathVariable("dealId") UUID dealId) {
-        System.out.println("TEST COMMENT");
         Comment tempComment = this.commentService.getById(commentId);
         tempComment.setText(comment.getText());
         this.commentService.save(tempComment);
