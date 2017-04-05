@@ -42,6 +42,13 @@ public class CommentController {
         return "redirect:/dealdata/"+ dealId + "/";
     }
 
+    @RequestMapping(value = "removecomment/{commentId}/{dealId}")
+    public String removeDeal(@PathVariable("commentId") UUID commentId,
+                             @PathVariable("dealId") UUID dealId) {
+        this.commentService.remove(this.commentService.getById(commentId));
+        return "redirect:/dealdata/"+ dealId + "/";
+    }
+
     @RequestMapping(value = "replycomment/{dealId}/{commentId}/{authorName}/{recipientName}", method = RequestMethod.POST)
     public String replyComment(@PathVariable("dealId") UUID dealId,
                                @PathVariable("commentId") UUID commentId,
@@ -56,21 +63,9 @@ public class CommentController {
         return "redirect:/dealdata/"+ dealId + "/";
     }
 
-    @RequestMapping(value = "/editcomment/{dealId}/{commentId}", method = RequestMethod.GET)
-    public String editCompany(@PathVariable("commentId") UUID commentId,
-                              @PathVariable("dealId") UUID dealId,
-                              Model model) {
-        model.addAttribute("deal", this.dealService.getById(dealId));
-        model.addAttribute("listComments", this.commentService.getForEntity(dealId));
-        model.addAttribute("comment", this.commentService.getById(commentId));
-        return "company/companyadd";
-    }
-
-    @RequestMapping(value = "/editcomment/{dealId}/{commentId}/{authorName}/{recipientName}/", method = RequestMethod.POST)
+    @RequestMapping(value = "/editcomment/{dealId}/{commentId}", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("comment") Comment comment,
                              @PathVariable("commentId") UUID commentId,
-                             @PathVariable("authorName") String authorName,
-                             @PathVariable("recipientName") String recipientName,
                              @PathVariable("dealId") UUID dealId) {
         System.out.println("TEST COMMENT");
         Comment tempComment = this.commentService.getById(commentId);

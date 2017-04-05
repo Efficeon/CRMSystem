@@ -61,3 +61,7 @@ html {
     padding-bottom: .25rem;
     border-bottom: 1px solid rgba(34,36,38,.15);
 }
+
+.commentblock {
+    padding-left: 30px;
+}

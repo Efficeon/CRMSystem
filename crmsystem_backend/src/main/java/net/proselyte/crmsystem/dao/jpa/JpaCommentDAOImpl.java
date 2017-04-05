@@ -61,7 +61,7 @@ public class JpaCommentDAOImpl implements CommentDAO{
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm");
         Collections.sort(result, new Comparator<Comment>() {
             public int compare(Comment o1, Comment o2) {
-                return dateFormat.format(o1.getUpdated()).compareTo(dateFormat.format(o2.getUpdated()));
+                return dateFormat.format(o2.getUpdated()).compareTo(dateFormat.format(o1.getUpdated()));
             }
         });
         for (Comment comment : result) {
