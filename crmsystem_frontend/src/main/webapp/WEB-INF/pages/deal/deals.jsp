@@ -23,37 +23,21 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js" ></script>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<<<<<<< HEAD
-
-    <title>Deals</title>
-=======
   <title>Deals</title>
->>>>>>> master
 
 </head>
 
 <body>
 
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
-<<<<<<< HEAD
-
-
 <div id="pdfReady" class="main-content">
-<h1>Deal list</h1>
-
-
-<div class="main-content">
 <h3>Deal list</h3>
-
 <br>
   <div id="buttonNoPrint">
-<a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: green"><i class="fa fa-plus"></i> Create deal</a>
-
+    <a href="<c:url value='/deal/add/' />" class="btn btn-lg" style="color: #56ac6a"><i class="fa fa-plus"></i> Create deal</a>
+    <a href="<c:url value='/dealsChart/' />" class="btn btn-lg" style="color: #787dff"><i class="glyphicon glyphicon-signal"></i> Deals chart</a>
   </div>
-
-<a href="<c:url value='/dealsChart/' />" class="btn btn-lg" style="color: #787dff"><i class="glyphicon glyphicon-signal"></i> Deals chart</a>
-
-<br>
+  <br>
 
 <c:if test="${!empty listDeals}">
   <table class="table table-striped table-condensed">
@@ -65,6 +49,7 @@
       <th class="text-center" width="120">Created</th>
       <th class="text-center" width="120">Updated</th>
       <th class="text-center" width="80">Deal status</th>
+      <th class="text-center" width="50">Details</th>
       <th class="text-center" width="120">Edit</th>
       <th class="text-center" width="120">Delete</th>
     </tr>
@@ -81,6 +66,9 @@
         <td><fmt:formatDate value="${deal.created}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td><fmt:formatDate value="${deal.updated}" pattern="d-MM-yyyy, HH:mm:ss"/></td>
         <td>${deal.dealStatus.name}</td>
+        <td class="text-center"><a href="<c:url value='/dealdata/${deal.id}/' />"
+                                   span class="glyphicon glyphicon glyphicon-file "
+                                   style="color: darkblue"/></td>
         <td class="text-center"><a href="<c:url value='/editdeal/${deal.id}/'/>"
                                    span class="glyphicon glyphicon-edit" style="color: orange"/></td>
         <td class="text-center"><a href="<c:url value='/removedeal/${deal.id}/' />"
@@ -95,12 +83,9 @@
 </div>
 
 <div id="buttonNoPrint">
-<input type="submit" value="Print" onclick="window.print();" style="margin-left: 23px"/>
+
+
 </div>
-
-
-
-
 
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/main.js"></script>

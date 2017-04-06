@@ -144,9 +144,25 @@ CREATE TABLE IF NOT EXISTS contact_company
 --contact-deal
 CREATE TABLE IF NOT EXISTS contact_deal
 (
-  contact_id      UUID     NOT NULL,
+  contact_id   UUID     NOT NULL,
   deal_id      UUID     NOT NULL,
 
   FOREIGN KEY (contact_id) REFERENCES contacts (id),
   FOREIGN KEY (deal_id) REFERENCES deals (id)
 );
+
+--comments
+CREATE TABLE IF NOT EXISTS comments(
+  id                 UUID          NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+  entityID           UUID          NOT NULL uuid_generate_v4(),
+  primaryCommentID   UUID          NOT NULL uuid_generate_v4(),
+  TEXT               VARCHAR(500)  NOT NULL,
+  user_id            UUID          NOT NULL,
+  recipient_id       UUID,
+  created            TIMESTAMP     NOT NULL,
+  updated            TIMESTAMP     NOT NULL,
+
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+

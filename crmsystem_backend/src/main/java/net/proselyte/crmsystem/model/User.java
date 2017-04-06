@@ -55,6 +55,9 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "implementer", cascade = CascadeType.MERGE, /*orphanRemoval = true,*/ fetch=FetchType.EAGER)
     private Set<Task> tasks;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+    private Set<Comment> comments;
+
     @PrePersist
     public void getDate() {
         registrationDate = new Date();
@@ -155,6 +158,20 @@ public class User extends BaseEntity {
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public void remove(Comment comment) { this.comments.remove(comment); }
 
     @Override
     public boolean equals(Object o) {

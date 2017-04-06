@@ -28,11 +28,16 @@
 
 <body>
 <jsp:include page="../menuPices/navbarLeft.jsp"/>
+
+<div id="div1" style="display:block; display:none;">
+    <input type=text>
+</div>
+
 <div class="main-content">
     <h3>Deals chart (status - done)</h3>
-
     <div id="chartdiv"></div>
 </div>
+
 <script src="http://amcharts/plugins/dataloader/dataloader.min.js" type="text/javascript"></script>
 <script src="${contextPath}/resources/js/chartDeal.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
