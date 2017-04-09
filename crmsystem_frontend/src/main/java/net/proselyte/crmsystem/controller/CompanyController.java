@@ -3,10 +3,7 @@ package net.proselyte.crmsystem.controller;
 import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.model.User;
-import net.proselyte.crmsystem.service.CompanyService;
-import net.proselyte.crmsystem.service.ContactService;
-import net.proselyte.crmsystem.service.TagService;
-import net.proselyte.crmsystem.service.UserService;
+import net.proselyte.crmsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +32,9 @@ public class CompanyController {
 
     @Autowired
     private ContactService contactService;
+
+    @Autowired
+    private MailerService mailerService;
 
     @RequestMapping(value = "company", method = RequestMethod.GET)
     public String listCompanies(Model model) {

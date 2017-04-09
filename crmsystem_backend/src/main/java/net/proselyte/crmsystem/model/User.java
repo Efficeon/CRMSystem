@@ -1,5 +1,7 @@
 package net.proselyte.crmsystem.model;
 
+import org.springframework.beans.factory.annotation.Configurable;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -35,6 +37,9 @@ public class User extends BaseEntity {
 
     @Transient
     private String confirmPassword;
+
+    @Column(name = "status")
+    private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "registration_date")
@@ -117,6 +122,14 @@ public class User extends BaseEntity {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getRegistrationDate() {
