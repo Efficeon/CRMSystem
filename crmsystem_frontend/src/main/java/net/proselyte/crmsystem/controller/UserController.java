@@ -6,6 +6,9 @@ import net.proselyte.crmsystem.service.RoleService;
 import net.proselyte.crmsystem.service.TaskService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +43,18 @@ public class UserController {
 
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String welcome() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        User user = userService.findByUserName(username);
+        if (!user.getStatus().equals("ACTIVE")){
+            return "redirect:/login?logout";
+        }
         return "user/home";
     }
 
