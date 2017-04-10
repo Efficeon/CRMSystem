@@ -44,6 +44,7 @@ public class UserController {
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String welcome() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.setAuthenticated(false);
         Object principal = authentication.getPrincipal();
         String username;
         if (principal instanceof UserDetails) {
@@ -53,7 +54,8 @@ public class UserController {
         }
         User user = userService.findByUserName(username);
         if (!user.getStatus().equals("ACTIVE")){
-            return "redirect:/login?logout";
+            SecurityContextHolder.clearContext();
+            return "redirect:/login?error";
         }
         return "user/home";
     }
