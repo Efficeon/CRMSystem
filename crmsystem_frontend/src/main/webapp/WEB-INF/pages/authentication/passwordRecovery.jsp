@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User verifier</title>
+    <title>Password recovery</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -28,15 +28,17 @@
     <a href="<%=request.getContextPath()%>?languageVar=en"><spring:message code="general.EN"/></a>
     <a href="<%=request.getContextPath()%>?languageVar=ru"><spring:message code="general.RU"/></a>
 
-    <h3>User verifier</h3>
+    <h3>Password recovery</h3>
 
-    <input type="text" id="input" class="form-control" placeholder="Enter the verification code..."autofocus="true">
+            <input id="passrecover" type="text" class="form-control" placeholder='Enter your E-mail...'
+                        autofocus="true">
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="javascript:userid()">
-        <spring:message code="verifier.buttons.verifier"/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="javascript:recoverypass()">
+        <spring:message code="passwordrecovery.button"/>
     </button>
 </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
+

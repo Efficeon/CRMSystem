@@ -37,11 +37,19 @@ public class JpaUserDAOImpl implements UserDAO {
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
-
         logger.info("User successfully loaded. User details: " + user);
         return user;
     }
 
+    @Override
+    public User getByEmail(String email) {
+        Query query = this.entityManager.createQuery(
+                "SELECT user FROM User user WHERE user.email =:email", User.class);
+            query.setParameter("email", email);
+            User user = (User) query.getSingleResult();
+            logger.info("User successfully loaded. User details: " + user);
+            return user;
+    }
 
         @Override
     public Collection<User> getAll() {

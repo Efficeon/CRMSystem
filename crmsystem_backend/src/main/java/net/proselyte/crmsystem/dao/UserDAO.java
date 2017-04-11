@@ -17,5 +17,7 @@ public interface UserDAO extends GenericDAO<User, UUID> {
 
     User edit(User user);
 
-    public Collection<User> getSortedUsers(String searchLine);
+    Collection<User> getSortedUsers(String searchLine);
+
+    User getByEmail(String email);
 }

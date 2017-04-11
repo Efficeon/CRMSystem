@@ -26,4 +26,6 @@ public interface UserService {
     User edit(User user);
 
     Collection<User> getSearchedUsers(String searchLine);
+
+    User getByEmail(String email);
 }
