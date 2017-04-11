@@ -42,3 +42,8 @@ function userid(){
     var d = document.getElementById('input').value;
     window.location='/userVerifier/'+d;
 }
+
+function recoverypass(){
+    var d = document.getElementById('passrecover').value;
+    window.location='/passwordRecovery/'+d;
+}

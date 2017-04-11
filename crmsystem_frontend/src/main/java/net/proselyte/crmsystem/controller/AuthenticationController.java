@@ -39,6 +39,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String authorization(Model model) {
         model.addAttribute("userForm", new User());
+        String pass = securityService.generatePassword();
         return "authentication/signUp";
     }
 
@@ -53,7 +54,7 @@ public class AuthenticationController {
 
         userService.save(userForm);
         userForm.setId(this.userService.findByUserName(userForm.getUsername()).getId());
-        String testEmail = "Hello, "+userForm.getUsername()+"\n" +
+        String email = "Hello, "+userForm.getUsername()+"\n" +
                 "\n" +
                 "To verify your account, please click on the link http://localhost:8088/userVerifier/"+userForm.getId()+ "\n" +
                 "or enter the following code: "+userForm.getId()+" on the verification page CRMSystem http://localhost:8088/userVerifier/.\n" +
@@ -61,7 +62,7 @@ public class AuthenticationController {
                 "With respect,\n" +
                 "Administrator of CRMSystem.";
         String subjectEmail = "Registration in the CRM system";
-        mailerService.sendMail(userForm.getEmail(), testEmail, subjectEmail);
+        mailerService.sendMail(userForm.getEmail(), email, subjectEmail);
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
 
         return "authentication/login";
@@ -99,6 +100,35 @@ public class AuthenticationController {
             model.addAttribute("message", "Logged out successfully.");
         }
 
+        return "authentication/login";
+    }
+
+    @RequestMapping(value = "/passwordRecovery", method = RequestMethod.GET)
+    public String generateNewPassword(){
+        return "authentication/passwordRecovery";
+    }
+
+    @RequestMapping(value = "/passwordRecovery/{email:.+}", method = RequestMethod.GET)
+    public String generateNewPassword(@PathVariable("email") String email){
+        User user;
+        String password = securityService.generatePassword();
+        try {
+            user = userService.getByEmail(email);
+        } catch (NoResultException e){
+            return "authentication/login";
+        }
+
+        user.setPassword(password);
+        userService.save(user);
+
+        String textEmail = "Hello, "+user.getUsername()+"\n" +
+                "\n" +
+                "your new password in CRMSystem: " + password + "\n" +
+                "\n" +
+                "You must change the password after you log in!\n" +
+                "Administrator of CRMSystem.";
+        String subjectEmail = "Password recovery in the CRMSystem";
+        mailerService.sendMail(user.getEmail(), textEmail, subjectEmail);
         return "authentication/login";
     }
 }

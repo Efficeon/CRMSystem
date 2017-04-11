@@ -46,6 +46,11 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     <spring:message code="login.buttons.login"/>
                 </button>
+
+                <a href="/passwordRecovery" class="btn btn-lg btn-primary btn-block">
+                    <spring:message code="passwordrecovery.button"/>
+                </a>
+
                 <h4 class="text-center"><a href="${contextPath}/signUp">
                     <spring:message code="login.link.createAnAccount"/>
                 </a></h4>

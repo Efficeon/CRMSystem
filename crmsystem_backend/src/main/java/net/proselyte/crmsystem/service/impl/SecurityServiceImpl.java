@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 
 /**
  * Implementation of {@link SecurityService} interface
@@ -50,5 +52,22 @@ public class SecurityServiceImpl implements SecurityService {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             logger.debug(String.format("Successfully %s auto logged in", username));
         }
+    }
+
+    @Override
+    public String generatePassword(){
+        String charsCaps="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String Chars="abcdefghijklmnopqrstuvwxyz";
+        String nums="0123456789";
+        String symbols="!@#$%^&*()_+-=.,/';:?><~*/-+";
+        String passSymbols=charsCaps + Chars + nums +symbols;
+        Random rnd=new Random();
+        char[] password=new char[8];
+        int index=0;
+        for(int i=0; i<8;i++){
+            password[i]=passSymbols.charAt(rnd.nextInt(passSymbols.length()));
+        }
+        String pass = String.valueOf(password);
+        return pass;
     }
 }
