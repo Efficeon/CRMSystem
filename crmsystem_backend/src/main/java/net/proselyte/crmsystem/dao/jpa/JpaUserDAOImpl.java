@@ -46,7 +46,14 @@ public class JpaUserDAOImpl implements UserDAO {
         Query query = this.entityManager.createQuery(
                 "SELECT user FROM User user WHERE user.email =:email", User.class);
             query.setParameter("email", email);
-            User user = (User) query.getSingleResult();
+            User user;
+               try {
+                   user = (User) query.getSingleResult();
+               } catch (NoResultException e){
+                   logger.info("User not found. User details(email): " + email);
+                   user =null;
+               }
+
             logger.info("User successfully loaded. User details: " + user);
             return user;
     }

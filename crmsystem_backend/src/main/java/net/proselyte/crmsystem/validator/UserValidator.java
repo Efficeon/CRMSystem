@@ -84,7 +84,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("confirmPassword", "key.different.userForm.password");
         }
 
-        if (!checkEmailWithRegExp(user.getEmail())){
+        if ((!checkEmailWithRegExp(user.getEmail())) || (userService.getByEmail(user.getEmail())!=null)){
             user.setEmail("");
             errors.rejectValue
                     ("email", "key.not.correctly.email",null);
