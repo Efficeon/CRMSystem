@@ -37,3 +37,8 @@ function searchAll(){
     var d = document.getElementById('acInput').value;
     window.location='/search/all/?searchLine='+d;
 }
+
+function userid(){
+    var d = document.getElementById('input').value;
+    window.location='/userVerifier/'+d;
+}
