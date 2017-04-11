@@ -112,8 +112,10 @@ public class AuthenticationController {
     public String generateNewPassword(@PathVariable("email") String email){
         User user;
         String password = securityService.generatePassword();
+
         try {
             user = userService.getByEmail(email);
+                if (user==null){return "authentication/login";}
         } catch (NoResultException e){
             return "authentication/login";
         }
