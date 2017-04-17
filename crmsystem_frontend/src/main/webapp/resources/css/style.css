@@ -70,3 +70,80 @@ html {
 
 .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
 
+.block-left{width:20%;height:565px;overflow:auto;float:left;}
+.block-right{width:80%;height:560px;overflow:auto;}
+
+#contentMessage0{
+    border:1px solid #827bbf;
+    width: 99%;
+    height: 99.4%;
+    overflow: auto;
+    margin: 2px;
+}
+#contentMessage1{
+    border:1px solid #827bbf;
+    width: 99%;
+    height: 98.5%;
+    overflow: auto;
+    margin: 2px;
+}
+#contentMessage2{
+    border:1px solid #827bbf;
+    width: 99%;
+    height:70%;
+    overflow: auto;
+    margin: 2px;
+}
+#contentMessage4{
+    border:1px solid #827bbf;
+    width: 100%;
+    height:100%;
+    overflow: auto;
+
+}
+#contentMessage3{
+    border:1px solid #827bbf;
+    width: 99%;
+    height:29%;
+    overflow: auto;
+    margin: 2px;
+}
+
+.messageFrame{
+    margin: 4px;
+    padding: 4px;
+    background: #e3e3e3; /* Фоновый цвет блока */
+    width:450px; /* Ширина блока */
+    height: auto; /* Высота блока */
+    border:1px solid #777; /* Ширина вид и цвет рамки */
+    -webkit-border-radius:10px; /* Safari, Chrome */
+    -moz-border-radius:10px; /* Firefox */
+}
+.messageFrame2{
+    margin-left: 49%;
+    margin-top: 4px;
+    margin-bottom: 4px;;
+    padding: 4px;
+    background: #bcacff; /* Фоновый цвет блока */
+    width:450px; /* Ширина блока */
+    height: auto; /* Высота блока */
+    border:1px solid #777; /* Ширина вид и цвет рамки */
+    -webkit-border-radius:10px; /* Safari, Chrome */
+    -moz-border-radius:10px; /* Firefox */
+}
+
+.form-message {
+    width: 100%;
+    height: 120px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+
+}
+

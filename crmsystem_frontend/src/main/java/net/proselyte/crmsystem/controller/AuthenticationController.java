@@ -21,6 +21,7 @@ import java.util.UUID;
  * Controller for pages connected with authentication (registration, forgot password, etc.)
  *
  * @author Eugene Suleimanov
+ * @author Leonid Dubravsky
  */
 
 @Controller
@@ -33,13 +34,13 @@ public class AuthenticationController {
 
     @Autowired
     private  SecurityService securityService;
+
     @Autowired
     private MailerService mailerService;
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public String authorization(Model model) {
         model.addAttribute("userForm", new User());
-        String pass = securityService.generatePassword();
         return "authentication/signUp";
     }
 
@@ -115,9 +116,9 @@ public class AuthenticationController {
 
         try {
             user = userService.getByEmail(email);
-                if (user==null){return "authentication/login";}
+                if (user==null){return "redirect:/login";}
         } catch (NoResultException e){
-            return "authentication/login";
+            return "redirect:/login";
         }
 
         user.setPassword(password);
@@ -131,6 +132,6 @@ public class AuthenticationController {
                 "Administrator of CRMSystem.";
         String subjectEmail = "Password recovery in the CRMSystem";
         mailerService.sendMail(user.getEmail(), textEmail, subjectEmail);
-        return "authentication/login";
+        return "redirect:/login";
     }
 }

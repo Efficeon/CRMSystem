@@ -1,7 +1,5 @@
 package net.proselyte.crmsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
@@ -16,7 +14,6 @@ import javax.persistence.MappedSuperclass;
 public class NamedEntity extends BaseEntity {
 
     @Column(name = "name")
-    @JsonIgnore
     private String name;
 
     public String getName() {

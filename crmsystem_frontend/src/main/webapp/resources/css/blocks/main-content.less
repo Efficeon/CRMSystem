@@ -80,6 +80,11 @@
   background: none repeat scroll 0 0 #203745;
   border-left: 2px solid;
 }
+
+.messager > a {
+  background: none repeat scroll 0 0 #203745;
+}
+
 .left-navigation li a {
   border-top: 1px solid rgba(224, 207, 24, 0.04);
   color: rgba(255, 255, 255, 0.6);
@@ -167,4 +172,15 @@
 #menu-main a:hover,
 #menu-main a:focus {
   background: none #D0812D;
+}
+
+@keyframes tel{
+  50%{transform:rotate(15deg)}
+  100%{transform:rotate(-15deg)}
+}
+
+.mess-anim{
+  animation-name: tel;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
 }

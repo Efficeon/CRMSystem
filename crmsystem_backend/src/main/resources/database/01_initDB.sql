@@ -166,4 +166,15 @@ CREATE TABLE IF NOT EXISTS comments(
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
+--comments
+CREATE TABLE IF NOT EXISTS messages(
+  id                 UUID          NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+  TEXT               VARCHAR(500)  NOT NULL,
+  author_id          UUID          NOT NULL,
+  recipient_id       UUID          NOT NULL,
+  created            TIMESTAMP     NOT NULL,
+  status             BOOLEAN       NOT NULL,
+
+  FOREIGN KEY (author_id) REFERENCES users (id)
+);
 

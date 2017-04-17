@@ -47,3 +47,4 @@ function recoverypass(){
     var d = document.getElementById('passrecover').value;
     window.location='/passwordRecovery/'+d;
 }
+

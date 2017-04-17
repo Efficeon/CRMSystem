@@ -27,7 +27,7 @@ public class JpaUserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static Logger logger = Logger.getLogger(JpaRoleDAOImpl.class);
+    private final static Logger logger = Logger.getLogger(JpaUserDAOImpl.class);
 
     @Override
     public User getById(UUID id) {
@@ -96,7 +96,6 @@ public class JpaUserDAOImpl implements UserDAO {
             Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
-            System.out.println("--------------get User: " + user);
             return user;
         } catch (NoResultException e) {
             System.out.println("------------No result exception inside JpaUserDAOimpl");

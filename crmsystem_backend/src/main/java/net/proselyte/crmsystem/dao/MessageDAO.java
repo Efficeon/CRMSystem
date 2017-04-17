@@ -1,4 +1,4 @@
-package net.proselyte.crmsystem.service;
+package net.proselyte.crmsystem.dao;
 
 import net.proselyte.crmsystem.model.Message;
 
@@ -6,20 +6,12 @@ import java.util.Collection;
 import java.util.UUID;
 
 /**
- * Service for messaging.
+ * Extension of {@link GenericDAO} interface for class {@link Message}.
  *
  * @author Leonid Dubravsky
  */
 
-public interface MessageService {
-
-    Message getById(UUID id);
-
-    Collection<Message> getAll();
-
-    void save(Message message);
-
-    void remove(Message message);
+public interface MessageDAO extends GenericDAO<Message, UUID>{
 
     public Collection<Message> getForAuthor(UUID id);
 
