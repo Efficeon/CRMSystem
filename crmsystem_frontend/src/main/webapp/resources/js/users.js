@@ -1,12 +1,12 @@
 function show() {
     $.ajax({
-        url:"/message/newMessages/",
+        url:"/message/listUsers/",
         dataType:'html',
         data: {ajax:true},
         type:'GET',
         success:function(html){
-            $('#activeButton').html(html);
+            $('#contentMessage1').html(html);
         }
     });
 }
-setInterval(show , 3000);
+setInterval(show , 2000);

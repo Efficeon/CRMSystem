@@ -84,14 +84,11 @@ public class JpaMessageDAOImpl implements MessageDAO{
     @Override
     public Collection<Message> getNewMessage(String recipient) {
         List<Message> resultSearch;
-        Boolean status = true;
         Query queryForAuthor = entityManager.createQuery(
                 "SELECT DISTINCT message FROM Message message " +
                 "WHERE message.recipient.username=:recipient AND message.status=true", Message.class);
         queryForAuthor.setParameter("recipient", recipient);
         resultSearch=queryForAuthor.getResultList();
-        System.out.println("STATUS !!!");
-        System.out.println(resultSearch);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm");
         Collections.sort(resultSearch, new Comparator<Message>() {
             public int compare(Message o1, Message o2) {
@@ -100,6 +97,7 @@ public class JpaMessageDAOImpl implements MessageDAO{
         });
 
         for (Message message : resultSearch) {
+            System.out.println(message.getRecipient()+" "+message.isStatus());
             logger.info("Search new message list: " + message);
         }
         return resultSearch;

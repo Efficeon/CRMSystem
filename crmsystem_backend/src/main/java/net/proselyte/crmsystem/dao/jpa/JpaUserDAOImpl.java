@@ -3,14 +3,15 @@ package net.proselyte.crmsystem.dao.jpa;
 import net.proselyte.crmsystem.dao.UserDAO;
 import net.proselyte.crmsystem.model.User;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -63,7 +64,6 @@ public class JpaUserDAOImpl implements UserDAO {
         Collection<User> result;
 
         Query query = this.entityManager.createQuery("SELECT user FROM User user", User.class);
-//            "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
             result = query.getResultList();
 
         for (User user : result) {
@@ -140,5 +140,21 @@ public class JpaUserDAOImpl implements UserDAO {
             logger.info("Search users list: " + user);
         }
         return resultSearch;
+    }
+
+    @Override
+    public User getPrincipalUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.setAuthenticated(false);
+        Object principal = authentication.getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        User user = findByUserName(username);
+
+        return user;
     }
 }

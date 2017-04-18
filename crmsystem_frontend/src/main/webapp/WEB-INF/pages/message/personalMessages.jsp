@@ -16,10 +16,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+    <link type="text/css" href="${contextPath}/resources/css/style.less" rel="stylesheet/less" />
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
     <script src="${contextPath}/resources/js/messages.js"></script>
+    <script src="${contextPath}/resources/js/users.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -41,15 +42,13 @@
 <div id="main-content"></div>
 <div class="block-left" style="color: #1b6d85">
     <div id="contentMessage1">
-        <c:forEach items="${userList}" var="user">
-            <a href="/message/personalMessages/${pageContext.request.userPrincipal.name}/${user.username}" style="text-decoration: none"> ${user.username}</a><br>
-        </c:forEach>
+        <!--Insert block "fragmentUsers"-->
     </div>
 </div>
 
 <div class="block-right">
     <div id="contentMessage2">
-        <!--Insert block "fragment"-->
+        <!--Insert block "fragmentDialogue"-->
     </div>
     <div id="contentMessage3">
         <form:form id="messageform" method="POST" modelAttribute="message" action="/messageSend/">

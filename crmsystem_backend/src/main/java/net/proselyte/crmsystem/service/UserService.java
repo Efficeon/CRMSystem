@@ -28,4 +28,6 @@ public interface UserService {
     Collection<User> getSearchedUsers(String searchLine);
 
     User getByEmail(String email);
+
+    public User getPrincipalUser();
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * Controller for {@link Message}'s pages
@@ -43,13 +44,20 @@ public class MessageController {
                                    @PathVariable("recipient") String recipient,
                                    HttpServletRequest request,
                                    Model model) {
+        ArrayList<Message> messageList = (ArrayList<Message>) this.messageService.getDialogue(author, recipient);
+        for (Message message : messageList){
+            if (message.getRecipient().equals(userService.findByUserName(author))){
+                message.setStatus(false);
+                messageService.save(message);
+            }
+        }
         request.getSession().setAttribute("author", author);
         request.getSession().setAttribute("recipient", recipient);
         model.addAttribute("message", new Message());
         model.addAttribute("userList", this.userService.getAll());
         model.addAttribute("recipient", this.userService.findByUserName(recipient));
-        model.addAttribute("messageList", this.messageService.getDialogue(author, recipient));
-        System.out.println("LIST "+this.messageService.getDialogue(author, recipient));
+        model.addAttribute("messageList", messageList);
+
         return "message/personalMessages";
     }
 
@@ -68,27 +76,40 @@ public class MessageController {
     @RequestMapping(value = "/message/personalMessages/", method = RequestMethod.GET)
     public String personalMessages(HttpServletRequest request,
                                    Model model) {
-        User userAuthor = userService.findByUserName((String)request.getSession().getAttribute("author"));
         User userRecipient = userService.findByUserName((String)request.getSession().getAttribute("recipient"));
-        model.addAttribute("messageList", this.messageService.getDialogue(userAuthor.getUsername(), userRecipient.getUsername()));
-        return "message/fragment";
+        ArrayList<Message> messageList = (ArrayList<Message>) this.messageService.getDialogue(userService.getPrincipalUser().getUsername(), userRecipient.getUsername());
+
+        model.addAttribute("messageList", messageList);
+        return "message/fragmentDialogue";
     }
 
     @RequestMapping(value = "/message/newMessages/", method = RequestMethod.GET)
     public String newMessages(Model model) {
-        System.out.println("BUTTON");
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.setAuthenticated(false);
-        Object principal = authentication.getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
+        model.addAttribute("messageList", this.messageService.getNewMessage(userService.getPrincipalUser().getUsername()));
+        System.out.println(this.messageService.getNewMessage(userService.getPrincipalUser().getUsername()));
+        System.out.println(this.messageService.getNewMessage(userService.getPrincipalUser().getUsername())==null);
+        for (Message message : this.messageService.getNewMessage(userService.getPrincipalUser().getUsername())) {
+            System.out.println(message.getRecipient()+" "+message.isStatus());
         }
-        User user = userService.findByUserName(username);
-        model.addAttribute("messageList", this.messageService.getNewMessage(user.getUsername()));
         return "message/buttonMessages";
+    }
+
+    @RequestMapping(value = "/message/listUsers/", method = RequestMethod.GET)
+    public String listUsers(Model model) {
+        Set<Message> newMessage = new LinkedHashSet<>(this.messageService.getNewMessage(userService.getPrincipalUser().getUsername()));
+        Set<User> usersWithNewMessages = new LinkedHashSet<>();
+        List<User> usersWithoutNewMessages = (List<User>) userService.getAll();
+        for (Message message : newMessage){
+                usersWithNewMessages.add(message.getAuthor());
+        }
+
+        for (User tempUser : usersWithNewMessages){
+            usersWithoutNewMessages.remove(tempUser);
+        }
+        usersWithoutNewMessages.remove(userService.getPrincipalUser());
+        Collections.sort(usersWithoutNewMessages, (o1, o2) -> o1.getUsername().compareTo(o2.getUsername()));
+        model.addAttribute("newMessageUsers", usersWithNewMessages);
+        model.addAttribute("listUsers", usersWithoutNewMessages);
+        return "message/fragmentUsers";
     }
 }

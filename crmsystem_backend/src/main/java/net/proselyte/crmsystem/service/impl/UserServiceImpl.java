@@ -88,4 +88,10 @@ public class UserServiceImpl implements UserService {
     public Collection<User> getSearchedUsers(String searchLine) {
         return userDao.getSortedUsers(searchLine);
     }
+
+    @Override
+    @Transactional
+    public User getPrincipalUser(){
+        return userDao.getPrincipalUser();
+    }
 }

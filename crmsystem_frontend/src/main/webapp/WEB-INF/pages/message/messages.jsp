@@ -13,16 +13,19 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less"/>
+
+    <link rel="stylesheet/less" type="text/css" href="${contextPath}/resources/css/style.less"/>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
-    <script src="${contextPath}/WEB-INF/pages/message/messages.js"></script>
+    <script src="${contextPath}/resources/js/messages.js"></script>
+    <script src="${contextPath}/resources/js/users.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.0/less.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js" ></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js" ></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
     <title>Message</title>
@@ -32,9 +35,7 @@
 
 <div class="block-left" style="color: #1b6d85">
      <div id="contentMessage1">
-        <c:forEach items="${userList}" var="user">
-            <a href="/message/personalMessages/${pageContext.request.userPrincipal.name}/${user.username}" style="text-decoration: none"> ${user.username}</a><br>
-        </c:forEach>
+         <!--Insert block "fragmentUsers"-->
      </div>
 </div>
 
