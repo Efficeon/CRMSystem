@@ -19,6 +19,7 @@
         <intercept-url pattern="/editcontact/" access="hasRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/contact" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/dealdata" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+        <intercept-url pattern="/personalMessages" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <form-login login-page="/login" default-target-url="/home" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
 

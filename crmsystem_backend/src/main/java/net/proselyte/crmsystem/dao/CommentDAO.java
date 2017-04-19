@@ -6,7 +6,9 @@ import java.util.Collection;
 import java.util.UUID;
 
 /**
- * Created by lion on 25.03.17.
+ * Extension of {@link GenericDAO} interface for class {@link Comment}.
+ *
+ * @author Leonid Dubravsky
  */
 public interface CommentDAO extends GenericDAO<Comment, UUID>{
 

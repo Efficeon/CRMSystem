@@ -3,14 +3,15 @@ package net.proselyte.crmsystem.dao.jpa;
 import net.proselyte.crmsystem.dao.UserDAO;
 import net.proselyte.crmsystem.model.User;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -27,13 +28,12 @@ public class JpaUserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static Logger logger = Logger.getLogger(JpaRoleDAOImpl.class);
+    private final static Logger logger = Logger.getLogger(JpaUserDAOImpl.class);
 
     @Override
     public User getById(UUID id) {
         Query query = this.entityManager.createQuery(
                 "SELECT user FROM User user WHERE user.id =:id", User.class);
-//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
@@ -63,7 +63,6 @@ public class JpaUserDAOImpl implements UserDAO {
         Collection<User> result;
 
         Query query = this.entityManager.createQuery("SELECT user FROM User user", User.class);
-//            "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles");
             result = query.getResultList();
 
         for (User user : result) {
@@ -96,10 +95,9 @@ public class JpaUserDAOImpl implements UserDAO {
             Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
             User user = (User) query.getSingleResult();
-            System.out.println("--------------get User: " + user);
             return user;
         } catch (NoResultException e) {
-            System.out.println("------------No result exception inside JpaUserDAOimpl");
+            System.out.println("No result exception inside JpaUserDAOimpl(method findByUserName)");
             return null;
         }
     }
@@ -141,5 +139,21 @@ public class JpaUserDAOImpl implements UserDAO {
             logger.info("Search users list: " + user);
         }
         return resultSearch;
+    }
+
+    @Override
+    public User getPrincipalUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = null;
+        authentication.setAuthenticated(false);
+            Object principal = authentication.getPrincipal();
+            String username;
+            if (principal instanceof UserDetails) {
+                username = ((UserDetails) principal).getUsername();
+            } else {
+                username = principal.toString();
+            }
+            user = findByUserName(username);
+        return user;
     }
 }

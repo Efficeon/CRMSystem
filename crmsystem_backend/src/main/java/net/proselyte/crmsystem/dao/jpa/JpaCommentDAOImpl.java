@@ -23,7 +23,7 @@ public class JpaCommentDAOImpl implements CommentDAO{
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static Logger logger = Logger.getLogger(JpaCompanyDAOImpl.class);
+    private final static Logger logger = Logger.getLogger(JpaCommentDAOImpl.class);
 
     @Override
     public Comment getById(UUID id) {
