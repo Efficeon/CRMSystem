@@ -44,7 +44,6 @@ public class JpaDealDAOImpl implements DealDAO {
         Query query = this.entityManager.createQuery("SELECT DISTINCT deal FROM Deal deal LEFT JOIN FETCH deal.responsibleUser LEFT JOIN FETCH deal.associatedContact");
         result = query.getResultList();
         if(result == null) {
-            System.out.println("RESULT == NULL!!");
             logger.info("RESULT == NULL!!");
         }
         for (Deal deal : result) {

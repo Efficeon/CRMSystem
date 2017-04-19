@@ -19,7 +19,7 @@
 <div id="contentMessage4">
     <c:if test="${messageList != null}">
         <c:forEach items="${messageList}" var="message">
-            <c:if test="${message.getAuthor().getUsername() == pageContext.request.userPrincipal.name}">
+            <c:if test="${message.getAuthor().getUsername() != pageContext.request.userPrincipal.name}">
                 <div class="messageFrame">
                     <div style="font-weight: bold">
                         <a style="color: #ff5f61; font-size: small;">${message.getAuthor().getUsername()}</a>
@@ -28,8 +28,8 @@
                     <p>${message.getText()}</p>
                 </div>
             </c:if>
-            <c:if test="${message.getAuthor().getUsername() != pageContext.request.userPrincipal.name}">
-                <div class="messageFrame2">
+            <c:if test="${message.getAuthor().getUsername() == pageContext.request.userPrincipal.name}">
+            <div class="messageFrame2">
                     <div style="font-weight: bold; font-size: small;">
                         <a style="color: #9e26ff; font-size: small;">${message.getAuthor().getUsername()}</a>
                         <fmt:formatDate value="${message.getCreated()}" pattern="HH:mm:ss, d-MM-yyyy"/>

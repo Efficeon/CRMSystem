@@ -5,9 +5,6 @@ import net.proselyte.crmsystem.model.User;
 import net.proselyte.crmsystem.service.MessageService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,7 +48,6 @@ public class MessageController {
                 messageService.save(message);
             }
         }
-        request.getSession().setAttribute("author", author);
         request.getSession().setAttribute("recipient", recipient);
         model.addAttribute("message", new Message());
         model.addAttribute("userList", this.userService.getAll());
@@ -64,7 +60,7 @@ public class MessageController {
     @RequestMapping(value = "/messageSend/", method = RequestMethod.POST)
     public String sendMessage(@ModelAttribute ("message") Message message,
                               HttpServletRequest request){
-        User userAuthor = userService.findByUserName((String)request.getSession().getAttribute("author"));
+        User userAuthor = userService.getPrincipalUser();
         User userRecipient = userService.findByUserName((String)request.getSession().getAttribute("recipient"));
         message.setAuthor(userAuthor);
         message.setRecipient(userRecipient);
@@ -78,7 +74,6 @@ public class MessageController {
                                    Model model) {
         User userRecipient = userService.findByUserName((String)request.getSession().getAttribute("recipient"));
         ArrayList<Message> messageList = (ArrayList<Message>) this.messageService.getDialogue(userService.getPrincipalUser().getUsername(), userRecipient.getUsername());
-
         model.addAttribute("messageList", messageList);
         return "message/fragmentDialogue";
     }
@@ -86,11 +81,6 @@ public class MessageController {
     @RequestMapping(value = "/message/newMessages/", method = RequestMethod.GET)
     public String newMessages(Model model) {
         model.addAttribute("messageList", this.messageService.getNewMessage(userService.getPrincipalUser().getUsername()));
-        System.out.println(this.messageService.getNewMessage(userService.getPrincipalUser().getUsername()));
-        System.out.println(this.messageService.getNewMessage(userService.getPrincipalUser().getUsername())==null);
-        for (Message message : this.messageService.getNewMessage(userService.getPrincipalUser().getUsername())) {
-            System.out.println(message.getRecipient()+" "+message.isStatus());
-        }
         return "message/buttonMessages";
     }
 
@@ -100,7 +90,7 @@ public class MessageController {
         Set<User> usersWithNewMessages = new LinkedHashSet<>();
         List<User> usersWithoutNewMessages = (List<User>) userService.getAll();
         for (Message message : newMessage){
-                usersWithNewMessages.add(message.getAuthor());
+            usersWithNewMessages.add(message.getAuthor());
         }
 
         for (User tempUser : usersWithNewMessages){

@@ -52,21 +52,13 @@ public class JpaMessageDAOImpl implements MessageDAO{
 
     @Override
     public Collection<Message> getDialogue(String author, String recipient) {
-        List<Message> resultSearchAuthor;
-        Query queryForAuthor = entityManager.createQuery("SELECT DISTINCT message FROM Message message WHERE message.author.username=:author AND message.recipient.username=:recipient", Message.class);
+        List<Message> resultSearch;
+        Query queryForAuthor = entityManager.createQuery("SELECT DISTINCT message FROM Message message " +
+                "WHERE message.author.username=:author AND message.recipient.username=:recipient OR " +
+                "message.author.username=:recipient AND message.recipient.username=:author", Message.class);
         queryForAuthor.setParameter("author", author);
         queryForAuthor.setParameter("recipient", recipient);
-        resultSearchAuthor=queryForAuthor.getResultList();
-
-        List<Message> resultSearchRecipient;
-        Query queryForRecipient = entityManager.createQuery("SELECT DISTINCT message FROM Message message WHERE message.author.username=:author AND message.recipient.username=:recipient", Message.class);
-        queryForRecipient.setParameter("author", recipient);
-        queryForRecipient.setParameter("recipient", author);
-        resultSearchRecipient=queryForRecipient.getResultList();
-
-        List<Message> resultSearch = new ArrayList<>();
-        resultSearch.addAll(resultSearchAuthor);
-        resultSearch.addAll(resultSearchRecipient);
+        resultSearch=queryForAuthor.getResultList();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm");
         Collections.sort(resultSearch, new Comparator<Message>() {
@@ -75,9 +67,7 @@ public class JpaMessageDAOImpl implements MessageDAO{
             }
         });
 
-        for (Message message : resultSearch) {
-            logger.info("Search message list: " + message);
-        }
+        for (Message message : resultSearch) { logger.info("Search message list: " + message); }
         return resultSearch;
     }
 
@@ -97,7 +87,6 @@ public class JpaMessageDAOImpl implements MessageDAO{
         });
 
         for (Message message : resultSearch) {
-            System.out.println(message.getRecipient()+" "+message.isStatus());
             logger.info("Search new message list: " + message);
         }
         return resultSearch;

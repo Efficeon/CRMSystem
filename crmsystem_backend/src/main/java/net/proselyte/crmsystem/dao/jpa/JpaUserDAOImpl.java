@@ -34,7 +34,6 @@ public class JpaUserDAOImpl implements UserDAO {
     public User getById(UUID id) {
         Query query = this.entityManager.createQuery(
                 "SELECT user FROM User user WHERE user.id =:id", User.class);
-//        "SELECT DISTINCT user FROM  User user LEFT JOIN FETCH user.roles WHERE user.id =:id");
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
@@ -98,7 +97,7 @@ public class JpaUserDAOImpl implements UserDAO {
             User user = (User) query.getSingleResult();
             return user;
         } catch (NoResultException e) {
-            System.out.println("------------No result exception inside JpaUserDAOimpl");
+            System.out.println("No result exception inside JpaUserDAOimpl(method findByUserName)");
             return null;
         }
     }
@@ -145,16 +144,16 @@ public class JpaUserDAOImpl implements UserDAO {
     @Override
     public User getPrincipalUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = null;
         authentication.setAuthenticated(false);
-        Object principal = authentication.getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        User user = findByUserName(username);
-
+            Object principal = authentication.getPrincipal();
+            String username;
+            if (principal instanceof UserDetails) {
+                username = ((UserDetails) principal).getUsername();
+            } else {
+                username = principal.toString();
+            }
+            user = findByUserName(username);
         return user;
     }
 }

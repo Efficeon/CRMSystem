@@ -6,9 +6,7 @@ import net.proselyte.crmsystem.service.RoleService;
 import net.proselyte.crmsystem.service.TaskService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,16 +41,7 @@ public class UserController {
 
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String welcome() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.setAuthenticated(false);
-        Object principal = authentication.getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        User user = userService.findByUserName(username);
+        User user = userService.findByUserName(userService.getPrincipalUser().getUsername());
         if (!user.getStatus().equals("ACTIVE")){
             SecurityContextHolder.clearContext();
             return "redirect:/login?error";
@@ -116,7 +105,6 @@ public class UserController {
     @RequestMapping(value = "/edituser/{id}/", method = RequestMethod.POST)
     public String editSubmit(@ModelAttribute("user") User user){
         this.userService.edit(user);
-//        this.userService.save(user);
         return "user/editeduser";
     }
 }
