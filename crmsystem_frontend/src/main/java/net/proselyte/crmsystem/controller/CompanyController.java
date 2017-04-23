@@ -3,6 +3,7 @@ package net.proselyte.crmsystem.controller;
 import net.proselyte.crmsystem.model.Company;
 import net.proselyte.crmsystem.model.Tag;
 import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.model.UserStatus;
 import net.proselyte.crmsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,6 +75,7 @@ public class CompanyController {
         model.addAttribute("listContacts", this.contactService.getAll());
         model.addAttribute("listUsers", this.userService.getAll());
         model.addAttribute("listTags", this.tagService.getAll());
+        model.addAttribute("userStatus", UserStatus.values());
         model.addAttribute("company", new Company());
         model.addAttribute("user", new User());
         model.addAttribute("tag", new Tag());

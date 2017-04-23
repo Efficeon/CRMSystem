@@ -60,6 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUserNameForAdmin(String username) {
+        return userDao.findByUserNameForAdmin(username);
+    }
+
+    @Override
     @Transactional
     public User getById(UUID id) {
         return userDao.getById(id);
@@ -86,7 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Collection<User> getSearchedUsers(String searchLine) {
-        return userDao.getSortedUsers(searchLine);
+        return userDao.getSearchedUsers(searchLine);
     }
 
     @Override

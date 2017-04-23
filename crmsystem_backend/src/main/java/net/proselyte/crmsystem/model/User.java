@@ -38,9 +38,6 @@ public class User extends BaseEntity {
     @Transient
     private String confirmPassword;
 
-    @Column(name = "status")
-    private String status;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "registration_date")
     private Date registrationDate;
@@ -62,6 +59,10 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
     private Set<Comment> comments;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
+    private UserStatus status;
 
     @PrePersist
     public void getDate() {
@@ -124,14 +125,6 @@ public class User extends BaseEntity {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Date getRegistrationDate() {
         return registrationDate;
     }
@@ -178,6 +171,14 @@ public class User extends BaseEntity {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     public void setComment(Comment comment) {

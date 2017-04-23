@@ -70,7 +70,6 @@ public class JpaDealDAOImpl implements DealDAO {
     @Override
     public void remove(Deal deal) {
         this.entityManager.remove(this.entityManager.getReference(Deal.class, deal.getId()));
-//        this.entityManager.remove(this.entityManager.getReference(DealStatus.class, entity.getId()));
         logger.info("Deal successfully removed. Deal details: " + deal);
     }
 
