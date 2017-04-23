@@ -55,7 +55,6 @@ public class JpaTagDAOImpl implements TagDAO{
 
         Query query = entityManager.createQuery(
                 "SELECT DISTINCT tag FROM  Tag tag  LEFT JOIN FETCH tag.linkedCompanies");
-
         result = query.getResultList();
 
         Collections.sort(result, new Comparator<Tag>() {

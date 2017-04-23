@@ -65,7 +65,7 @@ public class UserValidator implements Validator {
                             String.valueOf(env.getProperty("key.max.count.characters.username"))}, null);
         }
 
-        if (userService.findByUserName(user.getUsername()) != null) {
+        if (userService.findByUserNameForAdmin(user.getUsername()) != null) {
             errors.rejectValue("username", "key.duplicate.userForm.username");
         }
 

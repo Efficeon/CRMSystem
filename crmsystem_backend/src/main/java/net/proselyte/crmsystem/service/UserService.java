@@ -19,6 +19,8 @@ public interface UserService {
 
     User findByUserName(String username);
 
+    User findByUserNameForAdmin(String username);
+
     User getById(UUID id);
 
     Collection getAll();

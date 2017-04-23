@@ -2,11 +2,9 @@ package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.Comment;
 import net.proselyte.crmsystem.service.CommentService;
-import net.proselyte.crmsystem.service.DealService;
 import net.proselyte.crmsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +25,6 @@ public class CommentController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private DealService dealService;
 
     @RequestMapping(value = "commentadd/{dealId}/{authorName}", method = RequestMethod.POST)
     public String commentAdd(@PathVariable("dealId") UUID dealId,

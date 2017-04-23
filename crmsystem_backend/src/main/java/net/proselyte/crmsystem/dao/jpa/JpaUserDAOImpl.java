@@ -2,6 +2,7 @@ package net.proselyte.crmsystem.dao.jpa;
 
 import net.proselyte.crmsystem.dao.UserDAO;
 import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.model.UserStatus;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,7 +34,7 @@ public class JpaUserDAOImpl implements UserDAO {
     @Override
     public User getById(UUID id) {
         Query query = this.entityManager.createQuery(
-                "SELECT user FROM User user WHERE user.id =:id", User.class);
+                "SELECT DISTINCT user FROM User user WHERE user.id =:id", User.class);
         query.setParameter("id", id);
         User user = (User) query.getSingleResult();
 
@@ -44,8 +45,9 @@ public class JpaUserDAOImpl implements UserDAO {
     @Override
     public User getByEmail(String email) {
         Query query = this.entityManager.createQuery(
-                "SELECT user FROM User user WHERE user.email =:email", User.class);
-            query.setParameter("email", email);
+                "SELECT DISTINCT user FROM User user WHERE user.status NOT LIKE ? AND user.email LIKE ?", User.class);
+            query.setParameter(0, UserStatus.REMOVED);
+            query.setParameter(1, email);
             User user;
                try {
                    user = (User) query.getSingleResult();
@@ -58,11 +60,13 @@ public class JpaUserDAOImpl implements UserDAO {
             return user;
     }
 
-        @Override
+    @Override
     public Collection<User> getAll() {
         Collection<User> result;
 
-        Query query = this.entityManager.createQuery("SELECT user FROM User user", User.class);
+        Query query = this.entityManager.createQuery(
+                "SELECT DISTINCT user FROM User user WHERE user.status NOT LIKE ?", User.class);
+            query.setParameter(0, UserStatus.REMOVED);
             result = query.getResultList();
 
         for (User user : result) {
@@ -89,11 +93,26 @@ public class JpaUserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findByUserName(String username) {
-
+    public User findByUserNameForAdmin(String username) {
         try {
-            Query query = this.entityManager.createQuery("SELECT user FROM User user WHERE user.username=:name", User.class);
+            Query query = this.entityManager.createQuery(
+                    "SELECT DISTINCT user FROM User user WHERE user.username=:name", User.class);
             query.setParameter("name", username);
+            User user = (User) query.getSingleResult();
+            return user;
+        } catch (NoResultException e) {
+            System.out.println("No result exception inside JpaUserDAOimpl(method findByUserName)");
+            return null;
+        }
+    }
+
+    @Override
+    public User findByUserName(String username) {
+        try {
+            Query query = this.entityManager.createQuery("SELECT DISTINCT user FROM User user " +
+                    "WHERE user.username LIKE ? AND user.status NOT LIKE ?", User.class);
+            query.setParameter(0, username);
+            query.setParameter(1, UserStatus.REMOVED);
             User user = (User) query.getSingleResult();
             return user;
         } catch (NoResultException e) {
@@ -122,17 +141,18 @@ public class JpaUserDAOImpl implements UserDAO {
         return this.entityManager.merge(existingUser);
     }
 
-
     @Override
-    public Collection<User> getSortedUsers(String searchLine) {
+    public Collection<User> getSearchedUsers(String searchLine) {
         List<User> resultSearch;
         Query query = entityManager.createQuery(
-                "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles WHERE user.username LIKE ? " +
-                        "OR user.email LIKE ? OR user.firstName LIKE ? OR user.lastName LIKE ?");
-        query.setParameter(0, "%"+searchLine+"%");
+                "SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.roles " +
+                        "WHERE user.status NOT LIKE ? AND (user.username LIKE ? OR user.email LIKE ? " +
+                        "OR user.firstName LIKE ? OR user.lastName LIKE ?)");
+        query.setParameter(0, UserStatus.REMOVED);
         query.setParameter(1, "%"+searchLine+"%");
         query.setParameter(2, "%"+searchLine+"%");
         query.setParameter(3, "%"+searchLine+"%");
+        query.setParameter(4, "%"+searchLine+"%");
 
         resultSearch=query.getResultList();
         for (User user : resultSearch) {

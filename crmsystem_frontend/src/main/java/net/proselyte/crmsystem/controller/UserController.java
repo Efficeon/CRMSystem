@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.model.UserStatus;
 import net.proselyte.crmsystem.service.CompanyService;
 import net.proselyte.crmsystem.service.RoleService;
 import net.proselyte.crmsystem.service.TaskService;
@@ -42,7 +43,7 @@ public class UserController {
     @RequestMapping(value = {"home"}, method = RequestMethod.GET)
     public String welcome() {
         User user = userService.findByUserName(userService.getPrincipalUser().getUsername());
-        if (!user.getStatus().equals("ACTIVE")){
+        if (!user.getStatus().equals(UserStatus.ACTIVE)){
             SecurityContextHolder.clearContext();
             return "redirect:/login?error";
         }

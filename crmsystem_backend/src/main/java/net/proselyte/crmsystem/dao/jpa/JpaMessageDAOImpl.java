@@ -115,7 +115,7 @@ public class JpaMessageDAOImpl implements MessageDAO{
     public Collection<Message> getForAuthor(UUID id) {
         List<Message> resultSearch;
         Query query = entityManager.createQuery("SELECT DISTINCT message FROM Message message WHERE message.author.id=:id");
-        query.setParameter(0, id);
+        query.setParameter("id", id);
         resultSearch=query.getResultList();
         for (Message message : resultSearch) {
             logger.info("Search message list: " + message);
@@ -127,7 +127,7 @@ public class JpaMessageDAOImpl implements MessageDAO{
     public Collection<Message> getForRecipient(UUID id) {
         List<Message> resultSearch;
         Query query = entityManager.createQuery("SELECT DISTINCT message FROM Message message WHERE message.recipient.id=:id");
-        query.setParameter(0, id);
+        query.setParameter("id", id);
         resultSearch=query.getResultList();
         for (Message message : resultSearch) {
             logger.info("Search message list: " + message);

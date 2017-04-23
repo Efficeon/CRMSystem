@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userDao.findByUserName(username);
+        User user = userDao.findByUserNameForAdmin(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
@@ -39,6 +39,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         return new org.springframework.security.core.userdetails.User(
-                user.getUsername(), user.getPassword(), grantedAuthorities);
+            user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

@@ -1,6 +1,7 @@
 package net.proselyte.crmsystem.controller;
 
 import net.proselyte.crmsystem.model.User;
+import net.proselyte.crmsystem.model.UserStatus;
 import net.proselyte.crmsystem.service.MailerService;
 import net.proselyte.crmsystem.service.SecurityService;
 import net.proselyte.crmsystem.service.UserService;
@@ -47,7 +48,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm,
                                BindingResult bindingResult) {
-        userForm.setStatus("LOCKED");
+        userForm.setStatus(UserStatus.BANNED);
         userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
             return "authentication/signUp";
@@ -86,7 +87,7 @@ public class AuthenticationController {
         } catch (IllegalArgumentException e){
             return "redirect:/userVerifier/";
         }
-        user.setStatus("ACTIVE");
+        user.setStatus(UserStatus.ACTIVE);
             this.userService.save(user);
             return "user/home";
     }
